@@ -1,16 +1,5 @@
 # Dominion Rules Reference
 
-Concise rules for Dominion (Donald X. Vaccarino; Rio Grande Games), current
-through **Rising Sun** (2024). Card
-wording follows current (second) editions and Dominion Online. A card's text
-always overrides these general rules.
-
-## Goal
-
-Players start with identical small decks and build them during the game by
-buying cards from a shared Supply. When the game ends, whoever has the most
-victory points (VP) in their deck, plus any VP tokens, wins.
-
 ## Components and setup
 
 - **Supply**: the piles players can buy from. It holds the Basic cards plus
@@ -26,11 +15,10 @@ victory points (VP) in their deck, plus any VP tokens, wins.
 - **Starting deck**: 7 Copper and 3 Estates, shuffled. Each player draws 5.
 - **Trash**: one shared, face-up pile. Trashed cards leave the game.
 - **Setup text**: text below a card's dividing line that begins "Setup:"
-  changes setup, e.g. by adding piles or setting cards aside.
-- **Landscape cards**: horizontal non-card rules objects such as Events,
-  Landmarks, Projects, Ways, Allies, Traits and Prophecies. Random setups
-  usually add 0–2 of them. Allies and Prophecies are added when their
-  enabling cards (Liaisons, Omens) are present.
+  changes setup, e.g. Young Witch's Bane pile or Druid's Boons.
+- **Landscapes**: Events, Landmarks, Projects, Ways, Allies, Traits and
+  Prophecies are rules objects, not cards. Allies come with Liaisons and
+  Prophecies with Omens.
 
 ## Turn structure
 
@@ -101,13 +89,11 @@ Voyage, Seize the Day etc. can't follow another extra turn.
 
 ## Card types
 
+Action, Treasure, Victory, Curse and Attack work as their names say. The
+others:
+
 | Type | Behavior |
 | --- | --- |
-| Action | Played in the Action phase, using an Action |
-| Treasure | Played in the Buy phase for $ (some have other effects) |
-| Victory | Worth VP at game end. Usually dead in hand |
-| Curse | −1 VP |
-| Attack | Action that harms other players |
 | Reaction | Can be revealed or used in response to a stated trigger, e.g. an Attack or a gain |
 | Duration | Has effects on later turns. Stays in play until the Clean-up of the last turn it does something |
 | Night | Played in the Night phase |
@@ -132,29 +118,3 @@ Count VP on every card you own, wherever it is: deck, hand, discard, in play,
 set aside, mats or Exile. Add VP tokens and Landmark scoring. The highest
 total wins. If tied, the tied player who took fewer turns wins. If still
 tied, they share the win.
-
-## Promos and special setups
-
-- Promos include Black Market (its own deck of unused Kingdom cards), Envoy,
-  Stash, Walled Village, Governor, Prince, Summon, Sauna/Avanto, Dismantle,
-  Church, Captain and Marchland.
-- Card setup rules override the defaults. Examples: Young Witch's Bane, Way
-  of the Mouse's set-aside card, Druid's Boons, Obelisk's chosen pile, and
-  Approaching Army's added Attack pile.
-
-## Edition notes
-
-Second editions removed these cards. They still appear in older games and
-in Dominion Online.
-
-- Base: Adventurer, Chancellor, Feast, Spy, Thief, Woodcutter.
-- Intrigue: Coppersmith, Great Hall, Saboteur, Scout, Secret Chamber, Tribute.
-- Seaside: Ambassador, Embargo, Explorer, Ghost Ship, Navigator, Pearl Diver,
-  Pirate Ship, Sea Hag.
-- Prosperity: Contraband, Counting House, Goons, Loan, Mountebank, Royal
-  Seal, Talisman, Trade Route, Venture.
-- Hinterlands: Cache, Duchess, Embassy, Farming Village, Ill-Gotten Gains,
-  Mandarin, Noble Brigand, Nomad Camp, Oracle, Silk Road.
-- Cornucopia & Guilds: Fortune Teller, Harvest, Horse Traders, Tournament
-  (and its Prizes: Bag of Gold, Diadem, Followers, Princess, Trusty Steed),
-  Doctor, Masterpiece, Taxman.

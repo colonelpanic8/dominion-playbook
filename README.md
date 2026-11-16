@@ -10,7 +10,7 @@ files shared by Claude Code and OpenAI Codex.
 | --- | --- |
 | `context/rules.md` | Core rules and edge cases, through Rising Sun |
 | `context/strategy.md` | Strategy fundamentals: deck composition, reliability, deck control, payload, archetypes, openings, endgame |
-| `context/card-power.md` | Card power levels, their sources and how to read them |
+| `context/card-power.md` | Card ratings and how to read them |
 | `context/combos.md` | Known game-deciding two-card combos and how to counter them |
 | `AGENTS.md` | Repository instructions, loaded at start: the always-on guidance and what to read when |
 | `CLAUDE.md` | `@AGENTS.md`, so Claude Code loads the same instructions |

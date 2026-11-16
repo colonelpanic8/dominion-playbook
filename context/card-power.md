@@ -1,15 +1,26 @@
 # Card Power Levels
 
-How strong cards are relative to each other, and where that knowledge comes
-from. Ratings describe a card's strength in an average kingdom. A specific
-kingdom always matters more: a low-rated card can be the key to a board, and
-a top card can be useless in it.
+There are community ratings of every kingdom card and landscape. Look up
+the board's cards with
 
-Use ratings to guide your thinking, not to decide for you. Read the card
-and work out what it does on the board first, then look it up. A rating is
-the community's average over every kingdom: a good prior and a poor
-verdict. On one board a card's value can swing by more than the whole
-scale. Gardens rates −1.7 and is the whole plan on some boards.
+    python3 data/card-ratings.py Remake "King's Court"
+
+It matches exact names, ignoring case, and suggests close names for a miss.
+Naming half of a split pile also shows the whole pile's rating.
+
+- Kingdom cards: the median is about 0, the top 10% is above 3.3 and the
+  bottom 10% below −3. The extremes are about +6.9 and −7.8. Landscapes
+  are on their own scale.
+- Treat cards within about one point of each other as tied.
+- Ratings come mostly from 2-player play. Attacks and junkers gain value
+  with more players.
+
+## Reading them
+
+A rating is a card's average strength over every kingdom: a good prior and
+a poor verdict. On one board a card's value can swing by more than the
+whole scale. Gardens rates −1.7 and is the whole plan on some boards. Work
+out what a card does on the board first, then look it up.
 
 The useful part is the gap between the rating and your view. Treat each
 large gap as a question about combinations:
@@ -22,80 +33,16 @@ large gap as a question about combinations:
   right.
 - **Cards a few points apart**: the ratings don't separate them. What each
   does with the rest of the board decides.
+- **A card the board has changed**: a Trait on its pile, a Way, a cost
+  reducer, or a partner that supplies the one thing it lacks can make it a
+  different card. Rate what it does on this board.
 
 A rating alone is never the reason to take or skip a card.
 
-## Primary source: Dominion Card Glicko
+## Commonly misjudged
 
-A live community rating system by the Dominion Strategy community. Raters
-choose the stronger card in random pairs, and the votes feed a Glicko-style
-rating. Ratings are on one scale across costs, and landscapes are rated
-separately. Look up the board's cards with
-
-    python3 data/card-ratings.py Remake "King's Court"
-
-It matches exact names, ignoring case, and suggests close names for a
-miss. Naming half of a split pile also shows the whole pile's rating. The
-data is `data/card-ratings.jsonl`, one card per line.
-
-- Scale for kingdom cards: the median is about 0, the top 10% is above 3.3
-  and the bottom 10% is below −3. The extremes are about +6.9 and −7.8.
-- Ratings carry about ±0.7 of uncertainty, so treat cards within about one
-  point of each other as tied. That is uncertainty in the average, not how
-  much a card swings between boards, which is far more.
-- Coverage: kingdom cards and landscapes through Rising Sun. Arcana is not
-  rated yet. First-edition cards are listed separately, with rough ratings.
-- Look ratings up rather than relying on memory.
-
-## Secondary sources
-
-- **Woodcutter analysis** (markus): win-rate statistics from hundreds of
-  thousands of logged games between strong players on Dominion Online,
-  2018 to post-Allies. It's empirical, but confounded by who buys what and
-  when. <https://docs.google.com/spreadsheets/d/1M2L7hcY3sbA33OwuZhgPYJWVlMFgJYBdK8cnkbJHmbo>
-- **Qvist rankings** (2011–2018): yearly community polls ranking cards
-  within each cost. They're historically important, but stale and missing
-  every set from Nocturne on. The Dominion Strategy wiki has them under
-  "List of Cards by Qvist Rankings".
-- **ThunderDominion**: rankings from the Dominion Discord since 2018.
-- **Dominion Strategy wiki and forum** (wiki.dominionstrategy.com,
-  forum.dominionstrategy.com): per-card articles with strategy and synergy
-  notes. These are the best qualitative source. The wiki blocks some
-  automated fetchers.
-- **Simulators** (Geronimoo's, Dominiate): trust their win rates only when
-  both bots aim at the same end condition and neither tries for more than
-  one Province per turn, e.g. Big Money or a slog against Big Money.
-  Otherwise the results mostly show which bot was easier to write, since
-  bots don't adapt to the opponent
-  ([Horton](https://adamhorton.com/flog/dominion-the-dangers-of-simulation/)).
-- Avoid casual tier lists (TierMaker, listicles), which come from tiny
-  samples.
-
-## Commonly misjudged effects
-
-Comparing community ratings before and after a set has been played shows
-consistent mistakes (Horton's first-impressions and revisited articles):
-
-- **Underrated**: gaining a card without spending an Action (Cobbler,
-  Ironworks), Villagers or Coffers you get when gaining a card (Lackeys,
-  Silk Merchant), plain consistency (Star Chart, Merchant Camp), Silver and
-  Gold, and mandatory trashing that looks like a drawback (Cathedral).
-- **Overrated**: huge effects that don't matter on most boards
-  (Capitalism), and cards that "do lots of things" without doing one thing
-  well (Rope).
-- When the community disagrees sharply about a card, treat its rating as
-  unreliable.
-- **A card the board has changed**: a rating describes the printed card on
-  an average board. A Trait on its pile, a Way, a cost reducer, or a partner
-  that supplies the one thing it lacks can make it a different card. Rate
-  what it does on this board.
-
-## Caveats
-
-- These ratings reflect experienced online play, which is mostly
-  2-player. Attacks and junkers gain value with more players.
-- Second editions changed some cards. Check that a rating matches the card
-  text you're playing.
-- Ratings measure average impact, not a card's role. Judge a kingdom's
-  cards by what they do *in that kingdom*, and use these numbers only as
-  priors.
+- **Underrated**: gaining a card without spending an Action, Villagers or
+  Coffers you get when gaining a card, plain consistency, Silver and Gold,
+  and mandatory trashing that looks like a drawback.
+- **Overrated**: huge effects that don't matter on most boards, and cards
+  that do lots of things without doing one thing well.

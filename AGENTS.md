@@ -8,10 +8,6 @@ same files.
 
 - Card text overrides general rules. When a question hinges on exact card
   wording, quote or ask for the card text rather than reciting it from memory.
-- Use second-edition / Dominion Online wording, and mark first-edition-only
-  cards as such.
-- Arcana (announced 2026) isn't fully documented yet. Flag anything about it
-  as unconfirmed.
 
 ## What to read when
 
