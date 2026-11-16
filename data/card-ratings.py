@@ -33,8 +33,9 @@ for query in sys.argv[1:]:
             continue
         shown.add(id(r))
         print(f"| {r['name']} | {r['rating']:.1f} | {r['rank']}/{r['of']} | {r['kind']} | {r['edition']} |")
-print("\nAverages over all kingdoms. On one board a card can be worth far more or")
-print("less; judge the board first (context/card-power.md).")
+print("\nAverages over all kingdoms: a prior, not a verdict. Where one differs a lot")
+print("from your view, ask what usually makes the card strong or weak and what on")
+print("this board changes that (context/card-power.md).")
 if missing:
     print()
 for query in missing:

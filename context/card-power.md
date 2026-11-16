@@ -5,16 +5,25 @@ from. Ratings describe a card's strength in an average kingdom. A specific
 kingdom always matters more: a low-rated card can be the key to a board, and
 a top card can be useless in it.
 
-Use ratings as a check, not as a starting point. Read the card and work out
-what it does on the board first. Then compare your view with the rating, and
-explain any large gap. A low rating is never a reason to skip a card.
+Use ratings to guide your thinking, not to decide for you. Read the card
+and work out what it does on the board first, then look it up. A rating is
+the community's average over every kingdom: a good prior and a poor
+verdict. On one board a card's value can swing by more than the whole
+scale. Gardens rates −1.7 and is the whole plan on some boards.
 
-Don't take the numbers too seriously. A rating averages a card's value over
-every kingdom, and its value on one board can swing by more than the whole
-scale: the same card decides one game and is skipped in the next. Gardens
-rates −1.7 and is the whole plan on some boards. So a gap of a few points
-between two cards says little about this board. What the other cards on it
-supply says much more.
+The useful part is the gap between the rating and your view. Treat each
+large gap as a question about combinations:
+
+- **A high-rated card you're passing on**: what usually makes it strong
+  (its trashing, its +Buy, its attack), and what on this board makes that
+  matter less, or does it better? If you can't name it, look again.
+- **A low-rated card you want**: what on this board lifts it? Name the
+  card or landscape it works with. If nothing does, the rating is probably
+  right.
+- **Cards a few points apart**: the ratings don't separate them. What each
+  does with the rest of the board decides.
+
+A rating alone is never the reason to take or skip a card.
 
 ## Primary source: Dominion Card Glicko
 
