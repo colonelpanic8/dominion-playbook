@@ -30,13 +30,24 @@ seats). Its result is your first full view.
 
 ## 2. Make the plan
 
-Before answering the first decision, run `kingdom-analysis` on the kingdom
-in the first view, every step of it, the sweep of every card included. The
-`CARDS` block has the text of every card. The first decision looks routine
-(a $3 or $4 buy), and that is when the plan gets skipped; the opening is
-where the plan matters most. Write the analysis and the plan out in your
-reply before you answer, not only in private reasoning, which you may not see
-again. Keep the result as a short game plan, about ten lines:
+Before answering the first decision, do these in order, every game:
+
+1. Look up the ratings of every Kingdom card and landscape on the board, all
+   in one command:
+
+       python3 data/card-ratings.py "Card One" "Card Two" ...
+
+   If you can't run it, say so in the plan; don't guess ratings from memory.
+2. Run `kingdom-analysis` on the kingdom in the first view, every step of
+   it, the sweep of every card included, comparing your view with the
+   ratings from step 1 where the skill says to. The `CARDS` block has the
+   text of every card.
+3. Write the analysis and the plan out in your reply before you answer, not
+   only in private reasoning, which you may not see again.
+
+The first decision looks routine (a $3 or $4 buy), and that is when the
+plan gets skipped; the opening is where the plan matters most. Keep the
+result as a short game plan, about ten lines:
 
 - the plan and the reason it beats Big Money here;
 - the opening for each split;
