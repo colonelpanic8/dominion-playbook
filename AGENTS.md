@@ -26,8 +26,9 @@ Before doing any Dominion work, read all of these in full:
   above. `context/rules.md` is the canonical rules reference, and other
   files should point to it, not restate the rules.
 - `data/`: data agents query rather than read whole.
-  `data/card-ratings.md` is generated from the Card Glicko sheet by
-  `just refresh-power`. Don't edit it by hand.
+  `data/card-ratings.jsonl` is generated from the Card Glicko sheet by
+  `just refresh-power`. Don't edit it by hand. `data/card-ratings.py`
+  looks cards up in it.
 - `skills/<name>/SKILL.md`: optional, task-specific workflows (YAML
   frontmatter with `name` and `description`, then instructions). Supporting
   material goes in `skills/<name>/references/`.

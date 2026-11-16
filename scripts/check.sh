@@ -32,6 +32,8 @@ for skill in skills/*/; do
   done < <(grep -o '`references/[^`]*`' "$file" | tr -d '`' || true)
 done
 
+python3 data/card-ratings.py Chapel | grep -q '^| Chapel |' || err "data/card-ratings.py can't look up Chapel"
+
 schema=protocol/agent-view.schema.json
 check-jsonschema --check-metaschema "$schema" >/dev/null || err "$schema is not a valid JSON Schema"
 check-jsonschema --schemafile "$schema" protocol/examples/view.json >/dev/null \
