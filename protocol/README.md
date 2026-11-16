@@ -23,7 +23,7 @@ the seat could remember: a player who watched every move and forgot nothing.
 | `seat`, `spectating` | Your seat index (from 0, in turn order), or `null` and `true` for a spectator. |
 | `turn` | `number` (the active player's turn count), `player`, `activePlayer` (name), `yourTurn`, `phase` (`start`, `action`, `buy`, `night`, `cleanup`, `end` or `null` if unknown), `actions`, `buys`, `coins`, `potions`, the active player's `debt`, `controller` (who decides for this turn when it isn't its player: Possession) and `extra` (the card that granted an extra turn). |
 | `you`, `opponents` | Player views (below). `opponents` are in turn order starting to your left. |
-| `supply`, `nonSupply` | Piles: `card` (name, or the randomizer of a mixed pile), `count`, `top` (the visible top card when it differs from `card`), optional `members` (possible card names in a split or mixed pile, including depleted members; no remaining counts or current order), `cost` of the top card now, `types`, `kingdom`, `hidden` (face down: no card visible), `tokens` (`embargo`, `tradeRoute`, `vp`, `debt`, and players' Adventures tokens), `traits`. |
+| `supply`, `nonSupply` | Piles: `card` (name, or the randomizer of a mixed pile), `count`, `top` (the visible top card when it differs from `card`), optional `members` (possible card names, including depleted members), optional `structure` (the public initial setup recipe; see below), `cost` of the top card now, `types`, `kingdom`, `hidden` (face down: no card visible), `tokens` (`embargo`, `tradeRoute`, `vp`, `debt`, and players' Adventures tokens), `traits`. |
 | `landscapes` | Events, Landmarks, Projects, Ways, Allies, Traits, Prophecies: `kind`, `cost`, `vp` on a Landmark, `suns` left on a Prophecy and whether it is `active`, `owners` (players with a cube on a Project). |
 | `trash` | A zone (below). |
 | `uncertain` | Groups of cards spread over more than one player's zones (or a pile or the trash); see Knowledge. |
@@ -35,6 +35,24 @@ the seat could remember: a player who watched every move and forgot nothing.
 | `counters` | Anything else, by name (a fallback for producers). |
 | `decision` | Your open decision, or `null`. |
 | `sinceLastDecision` | Log entries since you last answered: `{seq, type, player?, card?, text}`. `seq` is the entry's position in the game log; `type` is kebab-case (`turn-start`, `played`, `bought`, `gained`, `trashed`, `discarded`, `top-decked`, `revealed`, `revealed-hand`, `drew`, `shuffled`, `received`, `moved`, ...); `text` is a readable line. |
+
+### Pile structure
+
+`structure` describes a pile's initial setup, independently of its current `top` and
+total `count`. It has `kind` and `cards`, a list of `{card, count}` groups:
+
+- `stacked`: consecutive groups, initially top to bottom (two-card splits and Castles).
+- `rotating`: consecutive groups, initially top to bottom. Rotation moves the top card
+  and the consecutive copies directly under it to the bottom; it is not an automatic
+  step each turn. Card effects may also rotate other Supply piles.
+- `shuffled`: an unordered pool shuffled at setup. Optional `sampleSize` means a random
+  sample without replacement from that pool (Ruins), whose chosen counts are hidden.
+
+These are public setup facts, including depleted members, never the current hidden
+order or remaining counts by card. For shuffled piles without `sampleSize`, the
+initial composition is known but the order is not (Knights, Loot). A producer should
+omit `structure` when the setup recipe is unavailable rather than infer it from hidden
+cards. Only the top card of a Supply pile can be bought or gained.
 
 ### Player views
 
