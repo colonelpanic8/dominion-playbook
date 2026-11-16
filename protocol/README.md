@@ -31,7 +31,7 @@ the seat could remember: a player who watched every move and forgot nothing.
 | `artifacts` | Each Artifact and its `holder`. |
 | `lasting` | Effects that outlive their play: `card`, `owner`, `until` (`end-of-turn`, `start-of-turn` of `untilPlayer`, or `removed`), the visible `cards` it holds or keeps in play, and a `count` it keeps. |
 | `extraTurns` | Extra turns waiting, next first. |
-| `notes` | Public state a card keeps that the fields above don't cover (Young Witch's Bane, Obelisk's pile, VP on Landmarks, ...): `source`, and as applicable `player`, `pile`, `card`, `count`. |
+| `notes` | Public state a card keeps that the fields above don't cover (Young Witch's Bane, Obelisk's pile, VP on Landmarks, ...): `source`, and as applicable `player`, `pile`, `card`, `count`. Optional `setup` identifies a setup relationship: `set-aside`, `bane`, `extra-pile`, `chosen-pile`, or `deck` (public unordered contents, not deck order). Untagged notes describe ordinary state or come from a producer that does not provide setup roles. |
 | `counters` | Anything else, by name (a fallback for producers). |
 | `decision` | Your open decision, or `null`. |
 | `sinceLastDecision` | Log entries since you last answered: `{seq, type, player?, card?, text}`. `seq` is the entry's position in the game log; `type` is kebab-case (`turn-start`, `played`, `bought`, `gained`, `trashed`, `discarded`, `top-decked`, `revealed`, `revealed-hand`, `drew`, `shuffled`, `received`, `moved`, ...); `text` is a readable line. |
