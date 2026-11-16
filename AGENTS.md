@@ -11,7 +11,6 @@ Before doing any Dominion work, read all of these in full:
 - Rules reference: @context/rules.md
 - Strategy basics: @context/strategy.md
 - Card power levels and where they come from: @context/card-power.md
-- Card strength ratings: @context/card-ratings.md
 - Known game-deciding combos: @context/combos.md
 
 - Card text overrides general rules. When a question hinges on exact card
@@ -26,7 +25,8 @@ Before doing any Dominion work, read all of these in full:
 - `context/`: mandatory context. Every file here is linked from the section
   above. `context/rules.md` is the canonical rules reference, and other
   files should point to it, not restate the rules.
-- `context/card-ratings.md` is generated from the Card Glicko sheet by
+- `data/`: data agents query rather than read whole.
+  `data/card-ratings.md` is generated from the Card Glicko sheet by
   `just refresh-power`. Don't edit it by hand.
 - `skills/<name>/SKILL.md`: optional, task-specific workflows (YAML
   frontmatter with `name` and `description`, then instructions). Supporting

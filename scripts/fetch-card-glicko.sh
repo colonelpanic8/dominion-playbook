@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Regenerate context/card-ratings.md from the community Dominion Card Glicko
+# Regenerate data/card-ratings.md from the community Dominion Card Glicko
 # ratings (markus et al.).
 set -euo pipefail
 cd "$(dirname "$0")/.."
@@ -22,5 +22,5 @@ for name in "${!tabs[@]}"; do
   curl -fsSL "https://docs.google.com/spreadsheets/d/$sheet/export?format=csv&gid=${tabs[$name]}" -o "$tmp/$name.csv"
 done
 
-python3 scripts/render-card-ratings.py "$tmp" "$(date -u +%Y-%m-%d)" > context/card-ratings.md.tmp
-mv context/card-ratings.md.tmp context/card-ratings.md
+python3 scripts/render-card-ratings.py "$tmp" "$(date -u +%Y-%m-%d)" > data/card-ratings.md.tmp
+mv data/card-ratings.md.tmp data/card-ratings.md

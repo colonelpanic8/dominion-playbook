@@ -14,7 +14,14 @@ explain any large gap. A low rating is never a reason to skip a card.
 A live community rating system by the Dominion Strategy community. Raters
 choose the stronger card in random pairs, and the votes feed a Glicko-style
 rating. Ratings are on one scale across costs, and landscapes are rated
-separately. The ratings themselves are in `context/card-ratings.md`.
+separately. The ratings are in `data/card-ratings.md`, one card per table
+row. Look up only the board's cards, each anchored by the pipes on both
+sides so a name matches only itself:
+
+    grep -i -e "^| Remake |" -e "^| King's Court |" data/card-ratings.md
+
+A split pile has a row for each half and one for the pile (e.g.
+`Encampment/Plunder`). Don't read the whole file.
 
 - Scale for kingdom cards: the median is about 0, the top 10% is above 3.3
   and the bottom 10% is below −3. The extremes are about +6.9 and −7.8.
@@ -22,7 +29,7 @@ separately. The ratings themselves are in `context/card-ratings.md`.
   point of each other as tied.
 - Coverage: kingdom cards and landscapes through Rising Sun. Arcana is not
   rated yet. First-edition cards are listed separately, with rough ratings.
-- Look ratings up there rather than relying on memory.
+- Look ratings up in the file rather than relying on memory.
 
 ## Secondary sources
 

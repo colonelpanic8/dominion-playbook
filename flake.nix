@@ -17,6 +17,7 @@
       packages.default = pkgs.runCommand "dominion-playbook" {} ''
         mkdir -p $out/share/dominion-playbook
         cp -r ${./context} $out/share/dominion-playbook/context
+        cp -r ${./data} $out/share/dominion-playbook/data
         cp -r ${./skills} $out/share/dominion-playbook/skills
         cp -r ${./protocol} $out/share/dominion-playbook/protocol
       '';
