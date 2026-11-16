@@ -38,11 +38,3 @@ large gap as a question about combinations:
   different card. Rate what it does on this board.
 
 A rating alone is never the reason to take or skip a card.
-
-## Commonly misjudged
-
-- **Underrated**: gaining a card without spending an Action, Villagers or
-  Coffers you get when gaining a card, plain consistency, Silver and Gold,
-  and mandatory trashing that looks like a drawback.
-- **Overrated**: huge effects that don't matter on most boards, and cards
-  that do lots of things without doing one thing well.
