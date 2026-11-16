@@ -38,9 +38,8 @@ Before doing any Dominion work, read all of these in full:
   dominion-engine. Change the schema here first; producers (dominion-engine's
   `just sync-protocol`, dominion-navigator) vendor it. Keep it producer- and
   provider-neutral.
-- `evals/`: test sets for the skills and context. `evals/kotw/` compares
-  blind kingdom analyses with Reddit Kingdom of the Week threads. An agent
-  being evaluated must not read anything under `evals/`.
+- Evals live in [dominion-bench](https://github.com/colonelpanic8/dominion-bench),
+  not here: kingdoms with answer keys built from expert analysis.
 - `.agents/skills` (Codex) and `.claude/skills` (Claude Code) are both
   symlinks to `skills/`. Never put files in them directly.
 - `CLAUDE.md` is a symlink to this file.
@@ -62,10 +61,11 @@ Before doing any Dominion work, read all of these in full:
 
 ## Writing skills and context
 
-Working guidelines from one round of `evals/kotw/` and four dominion-bench
-runs of 16 kingdoms (`results/2026-11-11-opus-5-5-0c0c5b7` there). One
-rewrite they led to scored 0.56 against 0.53 and 0.49 for the rules before
-it, which is inside the run-to-run noise, so treat them as hypotheses:
+Working guidelines from one round of Kingdom of the Week checks and four
+dominion-bench runs of 16 kingdoms (`results/2026-11-11-opus-5-5-0c0c5b7`
+there). One rewrite they led to scored 0.56 against 0.53 and 0.49 for the
+rules before it, which is inside the run-to-run noise, so treat them as
+hypotheses:
 
 - Put the questions that narrow the search first, then a cheap sweep over
   everything the narrowing skipped. A focused search alone misses the
@@ -105,8 +105,8 @@ it, which is inside the run-to-run noise, so treat them as hypotheses:
   before and after the rewrite.
 - Card names used as examples steer analyses of boards that contain them.
   Prefer a general statement plus one example.
-- `evals/kotw/` is for occasional checks, not every edit. A blind run costs
-  roughly 100k tokens and five minutes per kingdom.
+- dominion-bench runs are for occasional checks, not every edit. A blind
+  run costs roughly 100k tokens and five minutes per kingdom.
 
 ## Checks
 
