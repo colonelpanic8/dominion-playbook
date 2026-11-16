@@ -6,10 +6,13 @@ description: Analyze a Dominion kingdom before the game starts and recommend a p
 # Kingdom analysis
 
 Turn a kingdom into a recommended plan, an opening for each split the
-starting deck can produce, and the risks to watch. Rely on the repo context
-(`context/rules.md`, `context/strategy.md`, `context/card-power.md` and
-`context/combos.md`). This skill adds the procedure. Once the game starts,
-use the `play-turn` skill for each decision.
+starting deck can produce, and the risks to watch. First read
+`context/strategy.md` and `context/combos.md`, each whole and once, unless
+you already have in this task: the steps below cite their sections. Read
+`context/card-power.md` before the ratings check in step 4, and
+`context/rules.md` when a rule decides something. This skill adds the
+procedure. Once the game starts, use the `play-turn` skill for each
+decision.
 
 Defaults, unless the user says otherwise:
 

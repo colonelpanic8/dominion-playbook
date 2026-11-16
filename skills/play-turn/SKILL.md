@@ -10,8 +10,9 @@ before each decision, in proportion to what the decision can change:
 nothing for routine moves such as playing Treasures, a line or two for an
 Action play, and a worked check for every buy or gain (step 6). Writing it
 out is how the plan gets applied, so don't cut it to keep output short.
-Rely on the repo context, especially `context/strategy.md` for the plan and
-the endgame.
+The sections cited below are in `context/strategy.md`, which `play-game`
+has you read before the first decision. If you haven't read it in this game,
+read it whole now, once; don't re-read it each turn.
 
 Decide one play at a time. Work out what the hand could do, then look at
 the state again after anything that draws, reveals or asks for a choice.

@@ -4,14 +4,7 @@ Agent context and skills for the deck-building card game Dominion. This repo
 targets Claude (Claude Code) and OpenAI (Codex) agents, and both share the
 same files.
 
-## Required context
-
-Before doing any Dominion work, read all of these in full:
-
-- Rules reference: @context/rules.md
-- Strategy basics: @context/strategy.md
-- Card power levels and where they come from: @context/card-power.md
-- Known game-deciding combos: @context/combos.md
+## Always
 
 - Card text overrides general rules. When a question hinges on exact card
   wording, quote or ask for the card text rather than reciting it from memory.
@@ -20,11 +13,30 @@ Before doing any Dominion work, read all of these in full:
 - Arcana (announced 2026) isn't fully documented yet. Flag anything about it
   as unconfirmed.
 
+## What to read when
+
+Nothing else is loaded for you. Read each of these whole, once, when a task
+first needs it, and don't read it again in the same task unless a specific
+question sends you back to it. The skills say which file and section each
+step needs.
+
+- `context/strategy.md`: strategy fundamentals. Read it before analysing a
+  kingdom or planning a game.
+- `context/combos.md`: known game-deciding combos. Read it with
+  `context/strategy.md` when analysing a kingdom.
+- `context/card-power.md`: what the community ratings mean and how to look
+  them up. Read it before using them.
+- `context/rules.md`: the rules reference. Read it when a question turns on a
+  rule you aren't sure of (timing, triggers, setup, how the game ends).
+- `data/card-ratings.jsonl`: never read whole. Look cards up with
+  `python3 data/card-ratings.py "Card One" "Card Two"`.
+
 ## Layout
 
-- `context/`: mandatory context. Every file here is linked from the section
-  above. `context/rules.md` is the canonical rules reference, and other
-  files should point to it, not restate the rules.
+- `context/`: reference material agents read when a task needs it. Every
+  file here is listed under "What to read when". `context/rules.md` is the
+  canonical rules reference, and other files should point to it, not
+  restate the rules.
 - `data/`: data agents query rather than read whole.
   `data/card-ratings.jsonl` is generated from the Card Glicko sheet by
   `just refresh-power`. Don't edit it by hand. `data/card-ratings.py`
@@ -43,16 +55,21 @@ Before doing any Dominion work, read all of these in full:
   not here: kingdoms with answer keys built from expert analysis.
 - `.agents/skills` (Codex) and `.claude/skills` (Claude Code) are both
   symlinks to `skills/`. Never put files in them directly.
-- `CLAUDE.md` is a symlink to this file.
+- `CLAUDE.md` holds only `@AGENTS.md`, so Claude Code loads this file. It
+  is the repo's only include.
 
 ## Invariants
 
 - Keep content provider-neutral. Don't use tool names, slash commands or
   frontmatter fields that only one agent understands, unless they are optional
-  extras the other agent safely ignores. The `@path` line under "Required
-  context" is one: Claude Code inlines the file, and Codex reads it as a path.
-- Material every Dominion task needs goes in `context/` and is linked here.
-  Use a skill only for a workflow that some tasks need.
+  extras the other agent safely ignores.
+- No includes (`@path`) or other loader features in shared files: Codex has
+  none, and reference material should be read when it's needed, not loaded
+  at every start. `CLAUDE.md` is the one exception.
+- Keep this file short: every agent loads it at start. Reference material
+  goes in `context/` and is listed under "What to read when"; a skill names
+  the file and section at the step that needs it. Use a skill only for a
+  workflow that some tasks need.
 - Keep a skill's `name` equal to its directory name. Write descriptions that
   say when to use the skill, since that is what triggers it.
 - Keep the rules reference concise: mechanics and edge cases, not card
@@ -111,7 +128,7 @@ hypotheses:
 
 ## Checks
 
-`just check` validates the shared symlinks, the context links and skill
-frontmatter, the protocol schema (and that the example view matches it), and
+`just check` validates the shared symlinks and `CLAUDE.md`, that every
+context file is listed here and nothing uses an include, skill frontmatter, the protocol schema (and that the example view matches it), and
 checks Nix formatting. Run it inside the dev shell
 (`direnv allow`, or `nix develop -c just check`).

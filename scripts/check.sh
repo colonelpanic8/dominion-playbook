@@ -9,14 +9,18 @@ err() { echo "error: $*" >&2; fail=1; }
 for link in .agents/skills .claude/skills; do
   [[ "$(readlink "$link")" == "../skills" ]] || err "$link must be a symlink to ../skills"
 done
-[[ "$(readlink CLAUDE.md)" == "AGENTS.md" ]] || err "CLAUDE.md must be a symlink to AGENTS.md"
+[[ -f CLAUDE.md && ! -L CLAUDE.md && "$(cat CLAUDE.md)" == "@AGENTS.md" ]] \
+  || err "CLAUDE.md must be a regular file holding only @AGENTS.md"
 
 for ctx in context/*; do
-  grep -qF "@$ctx" AGENTS.md || err "$ctx is not linked from AGENTS.md as @$ctx"
+  grep -qF "\`$ctx\`" AGENTS.md || err "$ctx is not listed in AGENTS.md"
 done
 while IFS= read -r ref; do
-  [[ -e "$ref" ]] || err "AGENTS.md links missing file $ref"
-done < <(grep -o '@context/[^[:space:]`]*' AGENTS.md | cut -c2- || true)
+  [[ -e "$ref" ]] || err "AGENTS.md lists missing file $ref"
+done < <(grep -o '`context/[^`]*`' AGENTS.md | tr -d '`' || true)
+while IFS= read -r hit; do
+  err "include outside CLAUDE.md: $hit"
+done < <(grep -rnE '(^|[[:space:]])@(context|data|skills|protocol)/' --include='*.md' . | grep -v '^./CLAUDE.md:' || true)
 
 for skill in skills/*/; do
   dir=$(basename "$skill")

@@ -38,11 +38,17 @@ Before answering the first decision, do these in order, every game:
        python3 data/card-ratings.py "Card One" "Card Two" ...
 
    If you can't run it, say so in the plan; don't guess ratings from memory.
-2. Run `kingdom-analysis` on the kingdom in the first view, every step of
+   `context/card-power.md` says how to read the numbers.
+2. Read `context/strategy.md` and `context/combos.md`, each whole and once,
+   and `context/card-power.md` if you haven't yet. Read `context/rules.md`
+   too if a card on the board turns on a rule you aren't sure of. Don't
+   read them again later in the game unless a specific question sends you
+   back to one.
+3. Run `kingdom-analysis` on the kingdom in the first view, every step of
    it, the sweep of every card included, comparing your view with the
    ratings from step 1 where the skill says to. The `CARDS` block has the
    text of every card.
-3. Write the analysis and the plan out in your reply before you answer, not
+4. Write the analysis and the plan out in your reply before you answer, not
    only in private reasoning, which you may not see again.
 
 The first decision looks routine (a $3 or $4 buy), and that is when the

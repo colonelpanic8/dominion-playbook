@@ -12,7 +12,8 @@ files shared by Claude Code and OpenAI Codex.
 | `context/strategy.md` | Strategy fundamentals: deck composition, reliability, deck control, payload, archetypes, openings, endgame |
 | `context/card-power.md` | Card power levels, their sources and how to read them |
 | `context/combos.md` | Known game-deciding two-card combos and how to counter them |
-| `AGENTS.md` / `CLAUDE.md` | Repository instructions that load the context (one file, symlinked) |
+| `AGENTS.md` | Repository instructions, loaded at start: the always-on guidance and what to read when |
+| `CLAUDE.md` | `@AGENTS.md`, so Claude Code loads the same instructions |
 | `skills/kingdom-analysis/` | Skill: analyze a kingdom before the game and recommend a plan and opening |
 | `skills/play-turn/` | Skill: recommend play order, buys and attack responses for a turn in progress |
 | `skills/play-game/` | Skill: play a whole game as one seat through a `dominion` MCP server |
@@ -21,9 +22,10 @@ files shared by Claude Code and OpenAI Codex.
 
 ## How agents load it
 
-- **Context**: `AGENTS.md` requires reading every file in `context/`.
-  Claude Code inlines them automatically through `@context/...` imports.
-  Codex reads them when following the instruction.
+- **Instructions**: agents load `AGENTS.md` at start (Claude Code through
+  `CLAUDE.md`). It stays short and lists the files in `context/`, which
+  agents read when a task needs them; the skills name the file and section
+  at the step that needs it. Nothing is included automatically.
 - **Skills**: Codex finds them through `.agents/skills` and Claude Code
   through `.claude/skills`. Both point to `skills/`.
 - **Outside this repo**: `packages.default` installs the context, data, skills
