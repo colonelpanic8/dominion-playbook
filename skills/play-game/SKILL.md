@@ -41,8 +41,11 @@ short game plan, about ten lines:
   gone"), and what it needs first. This is a direction, not an order of
   buys: each gain is judged from the deck's composition at the time, and draws, prices and the opponent will call for changes;
 - when you start greening;
-- what to watch for: the opponent's possible attacks or plan, and key or
-  contested piles.
+- the parts of the plan the analysis was unsure of, and for each the
+  options and what decides between them, by when;
+- the signals that would change the plan (the opponent's attacks or plan,
+  your pace, key or contested piles), each with when it shows and the
+  response.
 
 The plan is the only thing you carry between decisions. If the game is past
 its opening when you join, still write the plan, from the current view.
@@ -107,18 +110,23 @@ Mechanics:
 
 Check the plan against the view, in a line or two, at each of these moments:
 
-- the first turn after each of your reshuffles (`play-turn`, "Review the
-  plan at each reshuffle");
+- the first turn after each of your reshuffles (`play-turn`, "Check in
+  on the position");
 - the opponent's opening is visible (after their second turn), and whenever
   they start buying something new;
 - your deck starts drawing itself, so it is time to switch to payload;
+- the deck stalls or misses an important price: check whether this was
+  an unlucky hand or a composition problem;
 - a pile you or they need runs low;
+- a branch's decider or a signal from the plan shows up: choose the
+  branch then, not later;
 - someone buys the first Victory card.
 
-At the review on the first turn after a reshuffle, write the whole plan out
-again, updated, even if nothing changed. In a long game the plan you made at
-the start is far behind you, and the copy you just wrote is the one you will
-follow. When the plan changes, say what changed and why.
+Use `play-turn`'s short check-in for position, the deck's current bottleneck
+and the response. Combine it with the gain check when they coincide. If
+nothing changed, a line confirming that is enough. Rewrite the compact
+plan after a material change, or when the previous version is too far
+back to follow reliably; say what changed and why.
 
 ## 5. Finish and review
 
@@ -135,9 +143,11 @@ Keep the report short. Don't write lessons into the repository unless asked.
 
 ## Talking to the operator during play
 
-Keep reports short: the plan once it is made, any change to it, and the
-result. That limit is on reports, not on reasoning. The reasoning that
-section 3 asks for is written as you go, and stays as long as the decision
-needs. If the server breaks (errors that aren't about your answer, a
+Keep reports short: the plan once it is made, brief position check-ins,
+any change to the plan, and the result. Share the check-in where the
+operator can see it, without repeating the underlying gain checks. That
+limit is on reports, not on reasoning. The reasoning that section 3 asks
+for is written as you go, and stays as long as the decision needs. If the
+server breaks (errors that aren't about your answer, a
 game that stops advancing), stop and report what you called and what came
 back, rather than guessing around it.

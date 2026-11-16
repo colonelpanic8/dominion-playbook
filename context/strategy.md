@@ -671,7 +671,44 @@ you draw for the rest of the game.
   number of gains often matters more than money.
 - Colony games last longer and favor engines and Platinum economies.
 
+## Who's ahead
+
+The score counts points already taken. The decks decide the points still
+to come. Early on almost all the points are still to come, so the score
+says little: the player who greened first is often behind. Being ahead
+means expecting more points by the time the game ends: the score plus
+each deck's share of what's left.
+
+- **Clocks**: when each deck reaches full output (draws its deck, or hits
+  $8 with a Buy reliably), and how many points per turn it makes once it
+  does. Compare them with "How fast decks are".
+- **Projected split**: the Provinces and other VP left, shared out by each
+  deck's rate up to the likely end. Add each share to that player's score.
+- **The same plan on both sides**: compare directly: copies of the key
+  cards, how far the thinning has got, junk taken, turns to the payoff. A
+  shuffle's lead here is a real lead.
+- **Banked resources**: Coffers, Villagers, cards on mats, Favors and the
+  like are output that doesn't show in the deck.
+- **Control of the end**: who can empty the piles or take the last
+  Provinces when it suits them. A slower deck that controls the ending can
+  be ahead.
+
+Say how sure the read is and why. A mirror can support a firm assessment
+when one deck has the same capabilities plus better thinning, key pieces
+or reliability; sharing a strategy alone doesn't establish a lead. Being
+clearly ahead still doesn't guarantee a win. Comparing unlike decks is
+often less certain, and an estimate of an unfamiliar deck runs late (see
+"How fast decks are"). If the evidence doesn't settle it, say so.
+
+As the game nears its end, use the endgame check above: calculate the
+scores after plausible finishing turns and replies. A score lead matters
+in relation to what can still be scored and who controls the ending;
+even a large lead can be overtaken by an engine's final turn or VP tokens.
+Before then, judge position mainly from the decks and their clocks.
+
 ## Risk and luck
+
+Judge ahead or behind as in "Who's ahead", not from the score.
 
 - When ahead, cut variance: add a spare village, stop drawing to avoid a
   bad reshuffle, keep spare draw.

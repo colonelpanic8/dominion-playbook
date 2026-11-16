@@ -71,16 +71,39 @@ be decided together.
   those cards plus the top of the new shuffle. Buy what improves that hand.
   Early in the game, buy what improves your very next shuffle.
 
-## 4. Review the plan at each reshuffle
+## 4. Check in on the position
 
-On the first turn after you reshuffle, compare your deck with the plan:
+On the first turn after you reshuffle, write a short read of where you
+stand. Also check when an attack, contested pile, unexpected deck problem
+or signal from the plan could change a decision; don't wait for the next
+shuffle. Usually one to three sentences cover the position, bottleneck
+and response together. If unchanged, one line is enough. Expand only when
+the evidence changes the read or the decision needs a closer comparison.
+Use the state already available; fetch more only if missing information
+could change the decision.
 
-- Is it on schedule? Check it against the plan, or against "How fast
-  decks are" in `context/strategy.md`.
-- What does the opponent's deck threaten, and by when?
-- Being behind on score while building is expected. Not reaching your
-  payoff before the opponent's clock runs out is the reason to change. A
-  new plan starts from the deck you have.
+- **Position**: ahead, even, behind or unclear, with confidence and the
+  evidence. "I'm clearly ahead: same engine, but mine is thinned and has
+  spare draw" is stronger than "I think I'm behind: theirs looks faster,
+  but I haven't established its reliability." Judge it as in "Who's
+  ahead" in `context/strategy.md`, mainly from the decks, clocks and
+  control of the ending. Near the end, calculate finishing scores.
+- **Deck**: the one thing most likely to stop your deck doing its job next
+  shuffle, and whether it is on pace for the plan's payoff before the
+  opponent's clock runs out. Give the evidence: "4 terminals, 1 village:
+  over-terminaled", "stalled twice because the only village missed the
+  starting hand: needs reliability", "nothing at $5 yet". Distinguish a
+  composition problem from an unlucky hand. Use observed counts or a
+  worked estimate, not an invented success rate. If no bottleneck needs
+  fixing, say so briefly.
+- **So**: what the read changes: the next buys, how much risk to take
+  (`context/strategy.md`, "Risk and luck"), when to green, a branch to
+  choose. Being behind on score while building is expected. Not reaching
+  your payoff before the opponent's clock runs out is the reason to change
+  plan. A new plan starts from the deck you have.
+
+Later gain checks (step 6) start from this assessment, updated for any
+cards gained or removed since it. Don't repeat the check-in at each prompt.
 
 ## 5. Don't play everything
 
@@ -164,7 +187,8 @@ Also:
 **Buy/gain:** <what the deck needs now, with the counts that show it ·
 candidates · pick, and the reason for any departure; for a terminal, the
 count against deck size>
-**Review:** <first turn after a reshuffle: deck vs plan, both clocks, the call>
+**Check-in:** <when due: position and confidence · deck bottleneck and
+evidence · response; combine into a sentence if little changed>
 **Endgame:** <once the game could end: scores after each option, and what
 the opponent would need>
 ```

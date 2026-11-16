@@ -18,6 +18,9 @@ Defaults, unless the user says otherwise:
   view you have already formed.
 - Keep the reasoning concise. Don't give a tutorial, assume an audience that is
   proficient in the game.
+- Distinguish firm conclusions from tentative ones where it affects the
+  plan. Name the uncertainty and what would resolve it; don't hedge clear
+  conclusions or attach a confidence label to every line.
 
 ## 1. Inventory
 
@@ -169,16 +172,27 @@ If the sweep turns up a new loop, take it back through step 3.
 - **Buy priorities** for the first two or three shuffles, and roughly when
   to start greening.
 - **Ending**: which piles could empty, who benefits, and how the game ends.
-- **What would flip the choice**: a different split, the opponent's
-  opening, more players, a key pile running low.
 - **Challenge the pick**: take one more look at the rejected plan with the
   highest ceiling, with every fix the board offers. Most wrong calls come
   from rejecting the stronger, harder plan after a shallow look. Then ask
   how your pick loses.
 - **Least sure of**: the one conclusion most likely to be wrong, and what
-  would show it.
+  would show it. If the game itself will show it, make it a signal below.
+- **Branches and signals**: for an uncertainty the game can resolve, name
+  the preferred line, the observation that would change it, when to check,
+  and the response. Consider your access to key prices, the deck's pace
+  and reliability, the opponent's opening or attacks, and contested piles.
+  Use the worked line and the opponent's clock to set checkpoints, rather
+  than a fixed turn to abandon the build. Prefer useful buys shared by
+  the live options while waiting, but don't pay heavily to keep options
+  open or build half of two incompatible decks. One bad draw alone needn't
+  disprove the plan. Also name any split that changes the pick.
 
 ## Output format
+
+Keep branches and signals to those that could change a decision; combine
+them when they describe the same contingency. State confidence where it
+matters, especially for the recommendation and its weakest assumption.
 
 ```markdown
 **Board:** <what it is about, from step 2, in 2–3 sentences>
@@ -192,9 +206,11 @@ $8 turns, attack plays) · needs · weakness>
 **Recommendation:** <plan, and why it holds up against the best response>
 **Against their best plan:** <the matchup for the pick and the runner-up>
 **Open:** <split>: <cards> · <split>: <cards>
-**Buy priorities:** <first two or three shuffles, then when to green>
+**Buy priorities:** <first two or three shuffles, per branch where they
+differ, then when to green>
 **Ending:** <how it ends, which piles are at risk>
-**Watch out for:** <1–3 risks, and what would change the plan>
+**Branches/signals:** <where needed: preferred line · what you see · when
+to check · what you do then>
 **Challenged:** <the rejected plan you re-tested, and how the pick loses>
 **Least sure of:** <the conclusion most likely to be wrong, and the test>
 **Assumed:** <rules readings or card text you weren't sure of, and anything
