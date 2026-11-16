@@ -57,6 +57,17 @@ be decided together.
   ends Treasure play for the turn (`context/rules.md`, "Buy phase"), so
   paying for one purchase with just the Treasures it needs strands the
   rest. Hold back only a Treasure that hurts you to play.
+- Play the Treasures all at once only when neither their order nor which
+  ones you play can matter. Otherwise play them one at a time:
+  - a Treasure that counts or multiplies what is already in play goes
+    last (Bank, Fortune);
+  - a Treasure that asks a question or plays another Treasure (Loan,
+    Crown, Counterfeit, Venture) needs its answer chosen with the rest in
+    view;
+  - hold back a Treasure that costs you to play when you don't need its $
+    (Capital's Debt, Contraband letting the opponent name a card), or
+    that blocks the buy you want (Copper in play stops a Grand Market
+    buy).
 
 ## 3. Control the reshuffle
 

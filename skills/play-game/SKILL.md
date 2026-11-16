@@ -124,6 +124,10 @@ Mechanics:
   ordered decision, list the top card first.
 - After a `REJECTED` error, read the reason and the decision that came with
   it, then answer that. Don't resend the same answer.
+- In a Buy phase, `play_treasures` plays every Treasure the decision offers
+  in one call. Use it when the order and which Treasures you play don't
+  matter; otherwise play them one at a time with `step` (`play-turn`,
+  "Order the plays").
 - On `WAITING`, call `wait`. Call `state` only when you've lost track: it
   prints everything. Use `log` for older history.
 
