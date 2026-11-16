@@ -9,6 +9,13 @@ Use ratings as a check, not as a starting point. Read the card and work out
 what it does on the board first. Then compare your view with the rating, and
 explain any large gap. A low rating is never a reason to skip a card.
 
+Don't take the numbers too seriously. A rating averages a card's value over
+every kingdom, and its value on one board can swing by more than the whole
+scale: the same card decides one game and is skipped in the next. Gardens
+rates −1.7 and is the whole plan on some boards. So a gap of a few points
+between two cards says little about this board. What the other cards on it
+supply says much more.
+
 ## Primary source: Dominion Card Glicko
 
 A live community rating system by the Dominion Strategy community. Raters
@@ -25,7 +32,8 @@ data is `data/card-ratings.jsonl`, one card per line.
 - Scale for kingdom cards: the median is about 0, the top 10% is above 3.3
   and the bottom 10% is below −3. The extremes are about +6.9 and −7.8.
 - Ratings carry about ±0.7 of uncertainty, so treat cards within about one
-  point of each other as tied.
+  point of each other as tied. That is uncertainty in the average, not how
+  much a card swings between boards, which is far more.
 - Coverage: kingdom cards and landscapes through Rising Sun. Arcana is not
   rated yet. First-edition cards are listed separately, with rough ratings.
 - Look ratings up rather than relying on memory.
