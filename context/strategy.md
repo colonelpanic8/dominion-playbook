@@ -634,9 +634,30 @@ cards out of it.
 
 ## Greening and the endgame
 
-Greening trades deck quality for points: every Victory card is a dead card
-you draw for the rest of the game.
+Greening trades deck quality for points. A Victory card scores once, but
+it is a dead card in every hand it lands in for the rest of the game. Its
+real cost is the hands it spoils before the game ends, which depends on
+how many shuffles are left and how much each hand needs every card.
 
+- **The fewer VP a card gives, the later it pays.** A Province, a Duchy
+  and an Estate are the same dead card for 6, 3 and 1 VP. So Duchies wait
+  until the end is in sight, and Estates usually wait for the last turn or
+  two.
+- **Spare $ and Buys aren't free points.** An Estate taken on an early
+  Province turn just because $2 and a Buy are left over is usually a
+  mistake. It lands in many later hands, and each is a little less likely
+  to hit its price. You can't count that cost exactly, but it always has
+  to be weighed. The Estate can be right when the deck has far more
+  reliability than it needs, or when the point builds a lead the opponent
+  can't match (they have no +Buy, say). Otherwise a useful cheap card, or
+  nothing, is usually better. Cheap VP is also fine when the game ends
+  within about a shuffle, the point decides a close score, the card count
+  is what scores, or the board takes away its cost.
+- **Some boards take away the cost.** Ask of each card on the board
+  whether it keeps Victory cards out of your hands while they still score,
+  or makes them useful when drawn. For example, a way to Exile a card from
+  your hand every turn (Sanctuary) makes an Estate close to a free point.
+  VP that adds no card at all is the extreme case (below).
 - Start buying Victory cards when the remaining turns are few enough that
   the points beat the economy you give up. The faster your deck can still
   improve, the later you green:

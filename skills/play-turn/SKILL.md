@@ -158,7 +158,11 @@ Also:
   terminal collides often enough that Treasure or a non-terminal is
   usually the better buy.
 - Before a scoring buy, check the endgame (`context/strategy.md`, "Greening
-  and the endgame"). Once either player could end the game within a turn
+  and the endgame"). Before gaining a Victory card, weigh its VP against
+  the later hands it will land in. A rough read is enough: how many
+  shuffles are left, and how much slack the deck has to hit its prices. A
+  spare Buy with leftover $ isn't a free point: before the endgame, a
+  useful card or nothing usually beats an Estate or an early Duchy. Once either player could end the game within a turn
   or two, work out the scores after each option and what the opponent
   would need on their next turn to win. Then apply:
   - the Penultimate Province Rule and its exceptions, to those numbers;
