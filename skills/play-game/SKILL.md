@@ -30,9 +30,13 @@ seats). Its result is your first full view.
 
 ## 2. Make the plan
 
-Run `kingdom-analysis` on the kingdom in the
-first view. The `CARDS` block has the text of every card. Keep the result as a
-short game plan, about ten lines:
+Before answering the first decision, run `kingdom-analysis` on the kingdom
+in the first view, every step of it, the sweep of every card included. The
+`CARDS` block has the text of every card. The first decision looks routine
+(a $3 or $4 buy), and that is when the plan gets skipped; the opening is
+where the plan matters most. Write the analysis and the plan out in your
+reply before you answer, not only in private reasoning, which you may not see
+again. Keep the result as a short game plan, about ten lines:
 
 - the plan and the reason it beats Big Money here;
 - the opening for each split;
