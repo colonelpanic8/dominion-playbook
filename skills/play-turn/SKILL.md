@@ -5,11 +5,11 @@ description: Choose plays in a Dominion game in progress, including play order, 
 
 # Play a turn
 
-Turn the current game state into plays and a buy. Write the reasoning
-before each decision, in proportion to what the decision can change:
-nothing for routine moves such as playing Treasures, a line or two for an
-Action play, and a worked check for every buy or gain (step 6). Writing it
-out is how the plan gets applied, so don't cut it to keep output short.
+Turn the current game state into plays and a buy. Briefly explain important
+choices using the relevant game facts: nothing for routine moves such as
+playing Treasures, a line or two for an Action play, and a short gain
+explanation for every buy or gain (step 6). Report the choice and the
+evidence supporting it, rather than a running account of the deliberation.
 The sections cited below are in `context/strategy.md`, which `play-game`
 has you read before the first decision. If you haven't read it in this game,
 read it whole now, once; don't re-read it each turn.
@@ -128,9 +128,9 @@ cards gained or removed since it. Don't repeat the check-in at each prompt.
 
 ## 6. Choose the buy or gains
 
-Every gain changes every later hand, so write this check out before every
-buy or gain, including one the plan seems to settle, gains from Action
-cards, and buying nothing. It usually takes two to four lines:
+For every buy or gain, briefly explain how it serves the deck, including
+one the plan seems to settle, gains from Action cards, and buying nothing.
+Summarize the relevant points below, usually in two to four lines:
 
 - **Composition**: look at the whole deck as it is now, not just this
   hand, and say what it most needs for the plan, with the counts that
