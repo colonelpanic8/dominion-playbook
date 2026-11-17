@@ -48,8 +48,8 @@ Before answering the first decision, do these in order, every game:
    it, the sweep of every card included, comparing your view with the
    ratings from step 1 where the skill says to. The `CARDS` block has the
    text of every card.
-4. Write the analysis and the plan out in your reply before you answer, not
-   only in private reasoning, which you may not see again.
+4. Before the first decision, share a short game plan: the recommended
+   strategy, opening, and the key game facts that support them.
 
 The first decision looks routine (a $3 or $4 buy), and that is when the
 plan gets skipped; the opening is where the plan matters most. Keep the
@@ -77,11 +77,11 @@ Each `step` result shows what changed and your next decision. A game has
 roughly 30–60 decisions. Most are routine, but the gains and a few plays
 decide the game, and those are where a deck drifts away from its plan.
 
-Your thinking is what you write before you answer. A decision answered
-without its reasoning written out gets made from habit, not from the plan.
-So before each decision that isn't routine, write the reasoning its level
-asks for below, then call `step`. This is not the operator chatter that
-"Talking to the operator" limits.
+Before a nonroutine decision, briefly explain your choice using the game
+facts that matter. Give the conclusion and supporting evidence, such as
+deck counts or finishing scores. Summarize the choice rather than narrating
+the deliberation. Use the levels below to choose what to report, then call
+`step`.
 
 - **Routine**: no other answer could change the deck or this turn's
   result. Examples are playing Treasures when no card reacts to their
@@ -96,8 +96,8 @@ asks for below, then call `step`. This is not the operator chatter that
 - **Deck change**: every buy or gain, including buying nothing and gains
   from a card such as Workshop, and every choice of what to trash, Exile or
   otherwise remove for good. These shape every hand for the rest of the
-  game, so even one the plan seems to settle gets `play-turn`'s written
-  gain check (step 6): what the deck's composition needs now, the
+  game, so even one the plan seems to settle gets `play-turn`'s short
+  gain explanation (step 6): what the deck's composition needs now, the
   candidates, and the pick. Read the composition from your player view's
   `owns` line (`owned` in JSON), which lists every card you own. It usually takes two to four lines. A choice that is close to this, such as a Throne Room target, a
   Reaction to reveal or Coffers to spend, gets the same care.
@@ -168,11 +168,9 @@ Keep the report short. Don't write lessons into the repository unless asked.
 
 ## Talking to the operator during play
 
-Keep reports short: the plan once it is made, brief position check-ins,
-any change to the plan, and the result. Share the check-in where the
-operator can see it, without repeating the underlying gain checks. That
-limit is on reports, not on reasoning. The reasoning that section 3 asks
-for is written as you go, and stays as long as the decision needs. If the
-server breaks (errors that aren't about your answer, a
+Keep reports short: the plan once it is made, brief explanations of
+important choices, position check-ins, any change to the plan, and the
+result. Combine a check-in with a gain explanation when they cover the same
+facts. If the server breaks (errors that aren't about your answer, a
 game that stops advancing), stop and report what you called and what came
 back, rather than guessing around it.
