@@ -148,10 +148,12 @@ Check the plan against the view, in a line or two, at each of these moments:
 - someone buys the first Victory card.
 
 Use `play-turn`'s short check-in for position, the deck's current bottleneck
-and the response. Combine it with the gain check when they coincide. If
-nothing changed, a line confirming that is enough. Rewrite the compact
-plan after a material change, or when the previous version is too far
-back to follow reliably; say what changed and why.
+and the response. In it, count the deck you are building toward against
+what you own and name the next piece, in one line: "draw 0 of 3, payload
+1 of 3: the next $5 is draw". Combine it with the gain check when they
+coincide. If nothing changed, a line confirming that is enough. Rewrite
+the compact plan after a material change, or when the previous version is
+too far back to follow reliably; say what changed and why.
 
 ## 5. Finish and review
 

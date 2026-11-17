@@ -102,7 +102,8 @@ could change the decision.
   control of the ending. Near the end, calculate finishing scores.
 - **Deck**: the one thing most likely to stop your deck doing its job next
   shuffle, and whether it is on pace for the plan's payoff before the
-  opponent's clock runs out. Give the evidence: "4 terminals, 1 village:
+  opponent's clock runs out: count the pieces the plan's deck needs
+  against the ones you own. Give the evidence: "4 terminals, 1 village:
   over-terminaled", "stalled twice because the only village missed the
   starting hand: needs reliability", "nothing at $5 yet". Distinguish a
   composition problem from an unlucky hand. Use observed counts or a

@@ -164,9 +164,11 @@ Further reading: Adam Horton on
   trasher, the payoff) in your hand every turn, a deck that looks
   inconsistent may be reliable.
 
-If nothing on the board increases hand size, no deck on it will play much
-more than five cards a turn. Villages matter only in proportion to
-terminals: non-terminal draw needs none.
+Even without cards that increase hand size, a chain of cantrips can cycle
+through most of a deck once strong thinning has cut it down to a dozen
+cards. Check how quickly you can thin and what the cantrips do before
+choosing between a thin cantrip deck and money. Villages matter only in
+proportion to terminals: non-terminal draw needs none.
 
 ### Thinning: addition by subtraction
 
@@ -232,8 +234,9 @@ builds the deck rather than scoring.
 You score by gaining Victory cards, and each Buy gains one card. So
 without +Buy, gainers or VP tokens, a turn's payload is capped at one
 card, whatever $ it makes: $16 buys one Province, the same as $8. A deck
-that draws itself every turn then scores no faster than a money deck that
-hits $8, and has lost the turns it spent building.
+that draws itself every turn then takes one Province a turn at most. That
+is still about twice a money deck's rate (see "The Big Money baseline"),
+but it has to win back the turns it spent building.
 
 With +Buy, each extra Buy raises the ceiling by one card: $16 and 2 Buys is
 two Provinces, $13 and 2 Buys is a Province and a Duchy. That is what lets
@@ -370,6 +373,13 @@ so look for one first.
   Junking attacks push toward this deck. A lone village earns its place only
   once you have several terminals worth playing together
   ([Wandering Winder](http://wanderingwindergames.blogspot.com/2015/07/dominion-good-stuff-deck.html)).
+- **Thin cantrip deck**: halfway to an engine. Nothing increases hand
+  size, but thinning cuts the deck to a small one that is mostly cantrips,
+  so a turn plays nearly all of it: every cantrip, plus the five cards
+  left in hand. It needs strong thinning, started early and removing most
+  of the starting cards, and cantrips that carry payload ($, +Buy, an
+  attack). With weak or slow thinning the cantrips only cycle a deck of
+  Coppers, and money or a good-stuff deck is better.
 - **Slog**: heavy junking (Curses, Ruins) or no good draw make big turns
   impossible. Gain many cards, value cheap or alternative VP, and expect a
   long game.
@@ -466,7 +476,8 @@ conditional village, no village at all) is not evidence either way.
 
 Things that weaken an engine, to weigh rather than to rule it out:
 
-- The only "draw" is cantrips. A good-stuff deck is usually better (see
+- The only "draw" is cantrips. With strong thinning that can still be a
+  thin cantrip deck; without it a good-stuff deck is usually better (see
   Archetypes).
 - Draw with nothing to pay its Actions, or villages with nothing to draw.
 - No +Buy, gaining or alternative payload, so a built turn still takes

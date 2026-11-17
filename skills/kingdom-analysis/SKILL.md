@@ -156,7 +156,10 @@ If the sweep turns up a new loop, take it back through step 3.
   first check for non-terminal draw: with it, an engine of non-terminal
   draw and payload needs no village. Without it, the realistic plans are
   mostly money decks and the choice of X matters
-  most. If the board has an attack, compare at least X as a draw card, X as
+  most, unless the board thins well: then work the thin deck's line (what
+  leaves, how many cards remain by about turn 8, what that deck plays each
+  turn) before picking money.
+  If the board has an attack, compare at least X as a draw card, X as
   the attack, and two copies of the attack. Estimate for each: the
   opening, the turns it first hits $6 and $8, and how often it plays its
   attack. k copies in an N-card deck reach a 5-card hand in at most
