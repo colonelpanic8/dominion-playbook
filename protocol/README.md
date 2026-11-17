@@ -79,7 +79,9 @@ identities you still know, spread over zones:
 - `uncertain` (per player, for groups within that player's zones): `{zones, count,
   candidates, outside}`: these zones together hold `count` cards that are exactly
   `candidates` (`outside` of the candidates are elsewhere; 0 when the producer knows the
-  group exactly). Those cards are counted as `unknown` in each zone.
+  group exactly). Those cards are counted as `unknown` in each zone. `unknown`, when
+  present, is how many further candidates you can't name (an opponent's cards you have
+  never seen, shuffled in with ones you have).
 - `view.uncertain` (top level): the same for groups spanning several players' zones,
   piles or the trash, with each zone as `{player?, pile?, zone, count}`.
 - `owned`: the identities you know of a player's cards wherever they are among their
