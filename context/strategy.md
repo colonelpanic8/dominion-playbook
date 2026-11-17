@@ -396,8 +396,11 @@ board's cards do to each plan rather than reading the number off.
 - **Combos and one-huge-turn decks**: the fast ones finish in 8–10 turns,
   and a few have their one turn as early as turn 7.
 - **Whole games** between strong players mostly end between turns 11 and
-  15. A plan still building on turn 14 is usually too slow. So is a money
-  deck that needs until turn 17 on a board where any of the above exists.
+  15.
+
+No turn is too late in itself. A plan is too slow only when another plan
+on the same board, or the opponent's deck, ends the game or takes the
+points first.
 
 An estimate of an unfamiliar deck runs late, often by five turns or more:
 it counts one gain per turn, leaves out the helpers and stops at the first
@@ -408,8 +411,7 @@ against these numbers before trusting it.
 ### Colony games
 
 The numbers above are for games that end on Provinces. With Colony and
-Platinum in the Supply, games run longer, often by several turns, and the
-turn-14 cutoff above doesn't apply:
+Platinum in the Supply, games run longer, often by several turns:
 
 - The top card costs $11 and is worth 10 VP to a Province's 6. A deck
   capped at $8–10 falls behind one that reaches $11 most turns, so every
