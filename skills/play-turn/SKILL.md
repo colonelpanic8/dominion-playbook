@@ -107,7 +107,10 @@ could change the decision.
   starting hand: needs reliability", "nothing at $5 yet". Distinguish a
   composition problem from an unlucky hand. Use observed counts or a
   worked estimate, not an invented success rate. If no bottleneck needs
-  fixing, say so briefly.
+  fixing, say so briefly. Once the deck draws most of itself, the limit
+  is usually what it makes, not what it draws: give its total $ and Buys
+  with every card played, against the price the plan needs
+  (`context/strategy.md`, "Count what the deck makes").
 - **So**: what the read changes: the next buys, how much risk to take
   (`context/strategy.md`, "Risk and luck"), when to green, a branch to
   choose. Being behind on score while building is expected. Not reaching
@@ -153,7 +156,22 @@ Summarize the relevant points below, usually in two to four lines:
   holds up, take what the plan says.
 
 Choosing what to trash or Exile gets the same check in short form: what
-leaves, and what the deck needs after.
+leaves, and what the deck needs after. Which way the doubt goes depends
+on the deck:
+
+- **While a hand is a sample of the deck**, removing its worst cards is
+  the default, Coppers included.
+- **Once the deck draws most of itself**, a card that makes $ stays by
+  default. Give the deck's total $ before and after the trash
+  (`context/strategy.md`, "Count what the deck makes") and the price the
+  turns left need. Trash it when the total after still clears that price
+  with $1–2 spare, when the same turn replaces it, or when the game ends
+  before it would be played again. A bonus for trashing it (VP, Villagers,
+  a gain) is weighed against the $ it would make on each turn left.
+- **A mandatory trash is part of the cost of the play that forces it.**
+  Count it before playing that card. Choose the order and target that
+  take least from the total, and skip the play if the turn doesn't need
+  what it gives.
 
 Also:
 
@@ -203,6 +221,8 @@ Also:
 **Buy/gain:** <what the deck needs now, with the counts that show it ·
 candidates · pick, and the reason for any departure; for a terminal, the
 count against deck size>
+**Trash/Exile:** <what leaves, and what the deck needs after; once the
+deck draws itself, total $ before → after and the price still needed>
 **Check-in:** <when due: position and confidence · deck bottleneck and
 evidence · response; combine into a sentence if little changed>
 **Endgame:** <once the game could end: scores after each option, and what

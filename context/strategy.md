@@ -192,9 +192,13 @@ In practice:
 - **Trashing** (Chapel, Sentry, Steward, …) is the usual way. With Chapel,
   on turn 3 or 4 trash your whole hand, even if it's only Coppers. The
   exception is a hand holding your other opener.
-- After the first big trashing turn, keep enough money to buy what you
-  need. Don't thin so hard you lose your economy. If you're drawing
-  everything but short on money, you trashed Coppers too fast.
+- **Thinning stops paying once the deck draws itself.** The average-card
+  argument holds while a hand is a sample of the deck. A deck that plays
+  every card makes their sum, so removing a card that makes $ lowers
+  every later turn by that much: there a Copper is $1 of payload, not
+  junk. From then on trash what makes nothing, and anything else only if
+  the total left still reaches the price you need (see "Count what the
+  deck makes").
 - A trasher that goes dead late in the game has usually already paid for
   itself.
 - Thinning matters less where the deck wants many cards: Gardens and other
@@ -265,6 +269,36 @@ useless in the deck the board actually wants, and the reverse.
   reliably play your full payload, so build less.
 - **Once your deck is under control**, balance adding payload against still
   drawing most or all of your deck each turn.
+
+### Count what the deck makes
+
+A deck that draws itself has a ceiling: what it makes with every card
+played. No turn can beat it, so know the number. Count it when the deck
+starts drawing most of itself, and again before a card that makes $
+leaves it.
+
+- **Total $** is Treasure, plus $ from Actions, plus tokens you would
+  spend. Treasure alone undercounts a deck whose money is on its Actions.
+  Count a card that either draws or makes $ once: if the turn needs it to
+  reach the rest of the deck, it isn't money. Take off what the turn's own
+  plays must trash or discard.
+- **Set it against the prices the turns left need**: $8 for a Province,
+  $13 and two Buys for a Province and a Duchy, $16 and two Buys for two
+  Provinces. Include the turn that decides the game, which often needs
+  the last Province.
+- **A total that only just reaches the price isn't reliable.** It needs
+  every money card in the same turn, so one missed draw or forced trash
+  drops it a price step. Keep $1–2 spare, as with spare draw.
+- **A total below the price can't be fixed by drawing or thinning.** The
+  next gains have to be payload. In a thin deck that is quick: one Gold
+  adds $3 to every later turn.
+- **Trashing for benefit spends the deck.** The VP, Villagers or gain from
+  trashing a card that makes $ is paid once, and the $ is lost on every
+  turn left. Dropping from a Province to a Duchy costs 3 VP a turn, so a
+  trash that gains 3 VP and causes that drop is behind after two more
+  turns. It is right on the last turn or two, when the total still clears
+  the price afterwards, or when the same turn replaces the card. Check
+  too that the rest of the game will use what the trash pays for.
 
 ### Gold, Treasure gainers and Coffers
 
