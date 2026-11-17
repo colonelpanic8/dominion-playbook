@@ -25,8 +25,8 @@ decides what every later hand can be.
   given 5-card hand one turn in three in a 15-card deck, and one turn in
   six in a 30-card deck.
 - **Tempo compounds.** Games between strong players mostly end between
-  turns 11 and 15, and the fastest decks end them by turn 8 or 9 (see "How
-  fast decks are"). A card gained early is drawn many
+  turns 11 and 15, later with Colonies, and the fastest decks end them by
+  turn 8 or 9 (see "How fast decks are"). A card gained early is drawn many
   more times than one gained late, so early gains should improve the deck
   and late gains mostly need to be points.
 
@@ -319,6 +319,8 @@ benchmark every plan should be measured against.
 
 - Buy Province at $8, Gold at $6–7 and Silver at $3–5. Start buying Duchies
   at $5–7 once 4–5 Provinces are left, and Estates at $2–4 near the very end.
+- With Colonies, buy Colony at $11 and Platinum at $9–10, and take Gold
+  rather than a Province at $8 until the Colonies start running low.
 - **Big Money + X** adds one or two copies of a strong terminal, such as
   Smithy, a good attack or a strong draw card. It is a solid default when
   the kingdom offers nothing better. A good BM+X deck takes 4 Provinces by
@@ -394,6 +396,26 @@ it counts one gain per turn, leaves out the helpers and stops at the first
 stall. For money it is about right, because money is simple. So "the engine
 arrives around turn 15" is weak evidence against the engine. Check it
 against these numbers before trusting it.
+
+### Colony games
+
+The numbers above are for games that end on Provinces. With Colony and
+Platinum in the Supply, games run longer, often by several turns, and the
+turn-14 cutoff above doesn't apply:
+
+- The top card costs $11 and is worth 10 VP to a Province's 6. A deck
+  capped at $8–10 falls behind one that reaches $11 most turns, so every
+  plan needs more economy before greening pays.
+- Money gains least from the extra turns. BM+X reaches $11 only with
+  several Platinums, while a deck that draws itself with +Buy takes two or
+  more Colonies a turn. Building that pays off late (draw, +Buy, payload,
+  VP that adds no card) has more turns to repay itself, so it gets the
+  benefit of the doubt unless something can end the game first.
+- The game still ends when the Provinces run out or three piles do. It
+  runs long only while nobody who can end it wants to. Ask who is ahead on
+  the projected split (see "Who's ahead") and whether they can empty the
+  Provinces or three piles. If they can, use that ending as the clock, not
+  the Colony pile.
 
 ## Engines
 
@@ -724,7 +746,8 @@ how many shuffles are left and how much each hand needs every card.
 - Three-pile endings are a real threat with +Buy and cheap piles. Count how
   many gains each player can make to empty the piles. In mirrors, the
   number of gains often matters more than money.
-- Colony games last longer and favor engines and Platinum economies.
+- Colony games last longer and change who wants the game to end (see
+  "Colony games").
 
 ## Who's ahead
 

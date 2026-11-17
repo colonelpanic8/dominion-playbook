@@ -33,6 +33,8 @@ Defaults, unless the user says otherwise:
 - Note setup effects: Colony/Platinum, Shelters, Heirlooms, Young Witch's
   Bane, a Prophecy and its Sun count, which pile a Trait is on, split piles,
   and added piles (Approaching Army, Ferryman, Riverboat, ...).
+  Colony/Platinum changes the race clock for every plan. Read "Colony
+  games" in `context/strategy.md` before comparing speeds.
 - Note special rules in play: Debt, Potion, Night, Favors, Exile, Coffers,
   Villagers, Durations.
 - Note the price points: which costs are crowded (every key card at $5) and

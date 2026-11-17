@@ -110,7 +110,8 @@ etc.) plays a Duration, it stays in play as long as the Duration does.
 
 The game ends **at the end of a turn** when either:
 
-- the Province pile is empty (or the Colony pile, when Colonies are used), or
+- the Province pile is empty, or the Colony pile when Colonies are used
+  (either one ends it), or
 - **three** Supply piles are empty, or **four** with 5–6 players. A split or
   mixed pile counts as one pile and is empty only when all its cards are gone.
 
