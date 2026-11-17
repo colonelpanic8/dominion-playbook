@@ -1,8 +1,14 @@
 # Dominion Strategy Basics
 
 Principles that strong players broadly agree on. Unless noted, they assume
-2-player games, which is how most competitive play happens. Every kingdom
-is different: treat these as defaults to check, not laws.
+2-player games, which is how most competitive play happens.
+
+Everything here is a rule of thumb, including every number. Dominion has
+almost no strategy rules that hold on every board, because the kingdom
+shapes each game: how fast decks are, when to green and which cards are
+strong all move with it. Start from these defaults, and when a card on
+the board gives a reason to depart from one, follow the board and name
+the reason.
 
 ## Deck composition
 
@@ -377,7 +383,9 @@ so look for one first.
 ## How fast decks are
 
 Reference points for a race, from commentated top-level games and designers'
-solo playtests. They assume a strong player and no interference.
+solo playtests. They assume a strong player and no interference. They are
+typical values, not limits: the kingdom moves them, so work out what this
+board's cards do to each plan rather than reading the number off.
 
 - **Money**: BM+X has 4 Provinces around turn 14–17 and doesn't speed up
   (see "The Big Money baseline").

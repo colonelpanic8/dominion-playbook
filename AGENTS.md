@@ -8,6 +8,9 @@ same files.
 
 - Card text overrides general rules. When a question hinges on exact card
   wording, quote or ask for the card text rather than reciting it from memory.
+- Strategy advice here, numbers included, is rule of thumb. The kingdom
+  shapes every game, so when its cards give a reason to depart from a
+  default, follow the board and say why.
 
 ## What to read when
 
