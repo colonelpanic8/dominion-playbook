@@ -129,10 +129,11 @@ could change the decision.
   (`context/strategy.md`, "Count what the deck makes").
 - **So**: what the read changes: the next buys, how much risk to take
   (`context/strategy.md`, "Risk and luck"), when to green, a branch to
-  choose. Being behind on score while building is expected. Change plan
-  when you won't reach your payoff before the opponent's clock runs out,
-  or when the opponent's choices make another plan better. A new plan
-  starts from the deck you have.
+  choose. Being behind on score while building is expected, and so is
+  a stalled turn: it calls for more draw or Actions, not a switch to
+  money. Change plan when you won't reach your payoff before the
+  opponent's clock runs out, or when the opponent's choices make another
+  plan better. A new plan starts from the deck you have.
 
 Later gain checks (step 6) start from this assessment, updated for any
 cards gained or removed since it. Don't repeat the check-in at each prompt.
@@ -159,7 +160,9 @@ Summarize the relevant points below, usually in two to four lines:
   next shuffle. "3 villages,
   Militia, Smithy: Actions to spare, short of draw" is enough. Early, deck
   control and thinning usually beat payload; once the deck is reliable,
-  payload usually wins. A card that is strong in general can be wrong for
+  payload usually wins. On an engine plan, until the deck draws itself, a
+  draw card or village it can use beats Gold or a strong card that
+  doesn't draw. A card that is strong in general can be wrong for
   this deck, such as more draw with nothing to play it with.
 - **Candidates**: the card the plan names, and the best other card at each
   price you can pay.

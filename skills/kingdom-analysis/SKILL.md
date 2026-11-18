@@ -187,7 +187,15 @@ If the sweep turns up a new loop, take it back through step 3.
   controls when the game ends.
 - **Pick** the plan with the best result against the opponent's best
   response. Against a strong opponent prefer a plan that holds up whatever
-  they do. Between two plans that are close, prefer the more reliable one.
+  they do.
+- **The engine is the default.** If step 3 found draw that can reach most
+  of the deck and the Actions to play it, pick the engine unless a
+  compelling reason from "The engine gets the benefit of the doubt" in
+  `context/strategy.md` holds, shown with worked lines for both plans.
+  Engines usually beat money and good-stuff decks, and estimates of them
+  run late, so between an engine and a rival that look close, pick the
+  engine. An obstacle is a problem for the build to solve, not a reason
+  to drop it.
 - **Openings**: the best opening for each split from step 1, with one line
   of reasoning each. If a split leaves nothing worth buying at one price,
   say so.
@@ -228,6 +236,8 @@ turn's $ and Buys; or the missing piece>
 **Plans considered:** <each in one line: how it works · rough line ($6 and
 $8 turns, attack plays) · needs · weakness · what would make it the pick>
 **Recommendation:** <plan, and why it holds up against the best response>
+**Why not the engine:** <only if the board has one and the pick isn't it:
+the compelling reason, with the worked lines for both plans>
 **Against their best plan:** <the matchup for the pick and the runner-up>
 **Open:** <split>: <cards> · <split>: <cards>
 **Buy priorities:** <first two or three shuffles, per branch where they

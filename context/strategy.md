@@ -88,6 +88,11 @@ much as how big that turn is.
 - **Money's strength is reliability.** It never stalls, it only
   fluctuates, which is why it is the baseline. A plan that beats money on
   its good turns but not on average loses to it.
+- **A built engine is more reliable than money.** Money never stalls,
+  but it hits $8 only about half its turns. A deck that draws itself
+  plays the same cards every turn. Unreliability is a risk while the
+  engine is building, and the fix is spare draw and Actions, not a
+  money plan.
 - **Reliability decides when to stop building.** Add a spare village or
   draw card before more payload whenever the deck still stalls, and
   especially when ahead (see "Risk and luck").
@@ -240,7 +245,11 @@ without +Buy, gainers or VP tokens, a turn's payload is capped at one
 card, whatever $ it makes: $16 buys one Province, the same as $8. A deck
 that draws itself every turn then takes one Province a turn at most. That
 is still about twice a money deck's rate (see "The Big Money baseline"),
-but it has to win back the turns it spent building.
+but it has to win back the turns it spent building. A one-Buy engine
+taking a Province a turn from turn 10–11 has 4 by turn 14, level with
+BM+X, and pulls ahead from there, more so if it plays an attack every
+turn or the top card is a Colony. So no +Buy makes the comparison close;
+it doesn't settle it.
 
 With +Buy, each extra Buy raises the ceiling by one card: $16 and 2 Buys is
 two Provinces, $13 and 2 Buys is a Province and a Duchy. That is what lets
@@ -285,8 +294,9 @@ useless in the deck the board actually wants, and the reverse.
 
 - **Before the game**, work out the best payload this kingdom allows, given
   its deck control. Ten Bridges is no payload without villages to play them.
-  If the ceiling is about one Province per turn, a complex deck rarely beats
-  Big Money.
+  If the ceiling is about one Province per turn, a complex deck has to win
+  by taking it every turn, sooner than money's every other turn: compare
+  the worked lines (see "+Buy turns a big turn into points").
 - **If deck control is weak** (little draw or trashing), you won't
   reliably play your full payload, so build less.
 - **Once your deck is under control**, balance adding payload against still
@@ -337,7 +347,9 @@ leaves it.
 ## The Big Money baseline
 
 "Big Money" means buying only Treasures and Victory cards. It's the
-benchmark every plan should be measured against.
+benchmark every plan should be measured against: a floor to beat, not a
+likely pick. With the full modern card pool, most boards have an engine or
+another plan that beats it, and strong players rarely end up playing money.
 
 - Buy Province at $8, Gold at $6–7 and Silver at $3–5. Start buying Duchies
   at $5–7 once 4–5 Provinces are left, and Estates at $2–4 near the very end.
@@ -377,9 +389,9 @@ so look for one first.
   card per turn. Aim to draw most of your deck each turn and gain several
   cards, often more than one Province, per turn. Engines start slower but
   usually win (see "Engines" below).
-- **Money / BM+X**: few Actions, lots of Treasure, greens early. Strongest
-  when the kingdom lacks draw or thinning, or when attacks punish slow
-  decks.
+- **Money / BM+X**: few Actions, lots of Treasure, greens early. The right
+  plan only on the minority of boards that lack draw, or where a junker
+  or rush punishes slow decks and nothing answers it.
 - **Good-stuff deck**: no real draw, but a few good non-drawing
   terminals (still one slot a turn without villages, so keep to the
   budget in "Terminal slots and collision"), cantrips and Silver-like
@@ -389,6 +401,9 @@ so look for one first.
   this deck. A lone village earns its place only
   once you have several terminals worth playing together
   ([Wandering Winder](http://wanderingwindergames.blogspot.com/2015/07/dominion-good-stuff-deck.html)).
+  It is the answer to a board without real draw, not a rival to an engine
+  on a board that has one. There, the strong non-drawing cards are the
+  engine's payload, bought once the deck can draw them.
 - **Thin cantrip deck**: halfway to an engine. Nothing increases hand
   size, but thinning cuts the deck to a small one that is mostly cantrips,
   so a turn plays nearly all of it: every cantrip, plus the five cards
@@ -465,6 +480,26 @@ of every card in it, keeps growing as it adds payload, and can take
 several Provinces a turn where a money deck takes one. So start every board
 by looking for the engine, and settle for another archetype only when the
 board can't support one or a faster plan beats it.
+
+**The engine gets the benefit of the doubt.** When the board has draw that
+can reach most of the deck and the Actions to play it (a village with
+terminal draw, or non-terminal draw), the engine is the plan. Choosing
+anything else needs a compelling reason, shown with a worked line for
+both plans. Compelling reasons are few:
+
+- A rival plan ends the game, or takes a lead the engine can't recover,
+  before the engine's first big turn, judged against the speeds in "How
+  fast decks are".
+- A junker or attack the engine has no answer to: nothing trashes the
+  junk, and the draw can't outgrow it.
+- No way past one card per turn, on a Province board with no attack worth
+  playing every turn, and the worked lines show money keeping pace (see
+  "+Buy turns a big turn into points").
+
+Not reasons on their own: parts at $5 or more, no trashing, a conditional
+village, a slower start, "money is simpler", strong non-drawing cards
+elsewhere on the board, or a guessed turn count for the engine. Each costs
+the engine a turn or two at most, and the build should work round it.
 
 What an engine needs follows from payload and deck control, not from a
 fixed list of cards:
