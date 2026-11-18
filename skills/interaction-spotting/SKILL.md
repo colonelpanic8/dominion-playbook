@@ -1,6 +1,6 @@
 ---
 name: interaction-spotting
-description: Find how the cards and landscapes on a Dominion board work together, including tricks no card's text announces. Use when asked what combos, synergies or interactions a kingdom has, or before analysing a kingdom when the board looks unusual.
+description: Find how the cards and landscapes on a Dominion board work together, including tricks no card's text announces. Use when asked what combos, synergies or interactions a kingdom has, including mid-game. kingdom-analysis runs it as its step 2.
 ---
 
 # Interaction spotting

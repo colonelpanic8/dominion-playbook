@@ -21,7 +21,7 @@ different plan better, and switch to it.
 Defaults, unless the user says otherwise:
 
 - Assume 2 players. Name what would change with more players.
-- Work from card text. Community ratings come in at step 4, as a check on a
+- Work from card text. Community ratings come in at step 5, as a check on a
   view you have already formed.
 - Keep the reasoning concise. Don't give a tutorial, assume an audience that is
   proficient in the game.
@@ -50,7 +50,22 @@ Defaults, unless the user says otherwise:
   reconstruct it from memory. If text is missing, ask or state your
   assumption.
 
-## 2. First read: what is this board about?
+## 2. Interactions
+
+Before judging plans, find what the board's cards do together. The tricks
+no card announces often decide a board, and an analysis that goes straight
+to plans misses them. Follow the `interaction-spotting` skill
+(`skills/interaction-spotting/SKILL.md`) now, in full: every card read to
+the bottom, what would make each one great or take its hidden costs away,
+every candidate tested and, when it fails, rescued if the board allows,
+then the second look. Write its output before reading on, and give this
+step real effort.
+
+The steps after this one build on that list. Every interaction in it is a
+candidate engine piece, loop or plan, and one that could decide the board
+must come back in step 6, as a plan or as the reason against one.
+
+## 3. First read: what is this board about?
 
 Answer these quickly from the card text, before studying any card in depth.
 The answers decide where to look harder. "Payload" and "deck control" are
@@ -79,9 +94,9 @@ used as defined in "Payload and deck control" in `context/strategy.md`.
 
 Then write one or two sentences: what the board is about, and what is still
 open ("the only village is conditional", "no +Buy", "the payoff needs a
-discard outlet"). Those open points are what step 3 goes looking for.
+discard outlet"). Those open points are what step 4 goes looking for.
 
-## 3. Is there an engine, and is it fast and reliable enough?
+## 4. Is there an engine, and is it fast and reliable enough?
 
 This is usually the question that decides the board. Money plus +Buy is
 payload enough, so payload is rarely what's missing. What decides the
@@ -113,7 +128,7 @@ board is whether a deck here can draw itself, how soon, and how often.
 When something stalls the engine (a missing or conditional village, no
 +Buy, a key card not in hand every turn, a price that's hard to hit), look
 for the card or landscape that fixes it. Do the same for any other scoring
-route or combo from step 2. Read cards for what they **supply** and what
+route or combo from step 3. Read cards for what they **supply** and what
 they **want**, not only for their role:
 
 - Supplies: gains (and where they land: discard, hand, top of deck),
@@ -132,15 +147,15 @@ up every turn, and that is often what makes an awkward engine work.
 Write each real interaction as a loop with numbers: "A does X, which
 triggers B, for Y per turn, from about turn T".
 
-## 4. Sweep what's left
+## 5. Sweep what's left
 
-Step 3 finds what you were looking for. This pass finds what you weren't.
+Step 4 finds what you were looking for. This pass finds what you weren't.
 
-- For every card and landscape that step 3 didn't use, answer in one line:
-  which other card here makes this better than its text alone? "None" is an
-  allowed answer only after checking it against each of the others. Read the
-  whole card first: the type line, the text below the dividing line, and
-  where it goes when gained.
+- Go back to step 2's unpaired and rejected cards with the deck you now
+  expect to build. A card that had no partner on a blank board may have
+  one in this deck: does it create the situation the card needed, or take
+  its cost away? "None" is an allowed answer only after checking it
+  against each of the others.
 - Check the patterns in `context/strategy.md` ("Interactions to look for").
   That list shows kinds of interaction and is not complete. Don't drop an interaction because it
   isn't listed.
@@ -149,20 +164,20 @@ Step 3 finds what you were looking for. This pass finds what you weren't.
   and give the board-specific reason. A rating is never a reason to skip a card or
   to buy one. First-edition ratings carry little weight.
 
-If the sweep turns up a new loop, take it back through step 3.
+If the sweep turns up a new loop, take it back through step 4.
 
-## 5. Decide
+## 6. Decide
 
 - **Candidates**: two or three plans that are realistic here. Always
   include the strongest Big Money + X as the baseline, the engine from
-  step 3 if there is one, and one plan for each strong loop. Build the
+  step 4 if there is one, and one plan for each strong loop. Build the
   best version of each before judging it: the right opening, the cheapest
   set of pieces, every helper the board offers.
   For each, say how it works, what it needs by when (including the minimum
   number of copies of any scarce card, and whether the opponent wants them
   too), and its main weakness. Write every candidate down, even in a short
   write-up. A recommendation with no rivals beside it skipped this step.
-- **No village**: when step 2 found no way to play two terminals in a turn,
+- **No village**: when step 3 found no way to play two terminals in a turn,
   first check for non-terminal draw: with it, an engine of non-terminal
   draw and payload needs no village. Without it, the realistic plans are
   mostly money decks and the choice of X matters
@@ -188,7 +203,7 @@ If the sweep turns up a new loop, take it back through step 3.
 - **Pick** the plan with the best result against the opponent's best
   response. Against a strong opponent prefer a plan that holds up whatever
   they do.
-- **The engine is the default.** If step 3 found draw that can reach most
+- **The engine is the default.** If step 4 found draw that can reach most
   of the deck and the Actions to play it, pick the engine unless a
   compelling reason from "The engine gets the benefit of the doubt" in
   `context/strategy.md` holds, shown with worked lines for both plans.
@@ -231,11 +246,13 @@ them when they describe the same contingency. State confidence where it
 matters, especially for the recommendation and its weakest assumption.
 
 ```markdown
-**Board:** <what it is about, from step 2, in 2–3 sentences>
+**Board:** <what it is about, from step 3, in 2–3 sentences>
 **Engine:** <the pieces, when it draws its deck, how reliably, and a built
 turn's $ and Buys; or the missing piece>
 **Key interactions:**
-- <A + B: the loop, with numbers>
+- <A + B: the loop, with numbers; step 2's list, ranked, with anything
+  later steps added>
+**Rejected interactions:** <from step 2: the candidate and why it fails>
 **Other cards:** <one line each: its best partner here, or "none">
 **Plans considered:** <each in one line: how it works · rough line ($6 and
 $8 turns, attack plays) · needs · weakness · what would make it the pick>
