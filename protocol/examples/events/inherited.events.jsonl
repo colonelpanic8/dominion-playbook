@@ -1,340 +1,468 @@
 {"schema":"dominion/events@1","viewer":"full"}
-{"seq":0,"type":"setup","rules":{"implementation":"dominion-engine","version":"0.1.0"},"seats":["Ann","Bo"],"kingdom":["Hermit","Rats","Marauder","Fortress","Procession","Quartermaster","Grotto","Village","Smithy","Market"],"landscapes":["Inherited"],"table":{"zones":{"0/deck":["Copper","Copper","Copper","Copper","Copper","Copper","Copper","Grotto","Necropolis","Overgrown Estate"],"1/deck":["Copper","Copper","Copper","Copper","Copper","Copper","Copper","Grotto","Necropolis","Overgrown Estate"],"pile/Copper":["Copper","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Copper"],"pile/Curse":["Curse","Curse","Curse","Curse","Curse","Curse","Curse","Curse","Curse","Curse"],"pile/Duchy":["Duchy","Duchy","Duchy","Duchy","Duchy","Duchy","Duchy","Duchy"],"pile/Estate":["Estate","Estate","Estate","Estate","Estate","Estate","Estate","Estate"],"pile/Fortress":["Fortress","Fortress","Fortress","Fortress","Fortress","Fortress","Fortress","Fortress","Fortress","Fortress"],"pile/Gold":["Gold","Gold","Gold","Gold","Gold","Gold","Gold","Gold","Gold","Gold","Gold","Gold","Gold","Gold","Gold","Gold","Gold","Gold","Gold","Gold","Gold","Gold","Gold","Gold","Gold","Gold","Gold","Gold","Gold","Gold"],"pile/Grotto":["Grotto","Grotto","Grotto","Grotto","Grotto","Grotto","Grotto","Grotto"],"pile/Hermit":["Hermit","Hermit","Hermit","Hermit","Hermit","Hermit","Hermit","Hermit","Hermit","Hermit"],"pile/Madman":["Madman","Madman","Madman","Madman","Madman","Madman","Madman","Madman","Madman","Madman"],"pile/Marauder":["Marauder","Marauder","Marauder","Marauder","Marauder","Marauder","Marauder","Marauder","Marauder","Marauder"],"pile/Market":["Market","Market","Market","Market","Market","Market","Market","Market","Market","Market"],"pile/Procession":["Procession","Procession","Procession","Procession","Procession","Procession","Procession","Procession","Procession","Procession"],"pile/Province":["Province","Province","Province","Province","Province","Province","Province","Province"],"pile/Quartermaster":["Quartermaster","Quartermaster","Quartermaster","Quartermaster","Quartermaster","Quartermaster","Quartermaster","Quartermaster","Quartermaster","Quartermaster"],"pile/Rats":["Rats","Rats","Rats","Rats","Rats","Rats","Rats","Rats","Rats","Rats","Rats","Rats","Rats","Rats","Rats","Rats","Rats","Rats","Rats","Rats"],"pile/Ruins":["Ruined Village","Survivors","Ruined Market","Ruined Library","Survivors","Ruined Village","Ruined Village","Ruined Village","Survivors","Ruined Market"],"pile/Silver":["Silver","Silver","Silver","Silver","Silver","Silver","Silver","Silver","Silver","Silver","Silver","Silver","Silver","Silver","Silver","Silver","Silver","Silver","Silver","Silver","Silver","Silver","Silver","Silver","Silver","Silver","Silver","Silver","Silver","Silver","Silver","Silver","Silver","Silver","Silver","Silver","Silver","Silver","Silver","Silver"],"pile/Smithy":["Smithy","Smithy","Smithy","Smithy","Smithy","Smithy","Smithy","Smithy","Smithy","Smithy"],"pile/Spoils":["Spoils","Spoils","Spoils","Spoils","Spoils","Spoils","Spoils","Spoils","Spoils","Spoils","Spoils","Spoils","Spoils","Spoils","Spoils"],"pile/Village":["Village","Village","Village","Village","Village","Village","Village","Village","Village","Village"]},"piles":{"pile/Copper":{"card":"Copper","supply":true,"recipe":{"kind":"stacked","cards":[{"card":"Copper","count":46}]}},"pile/Curse":{"card":"Curse","supply":true,"recipe":{"kind":"stacked","cards":[{"card":"Curse","count":10}]}},"pile/Duchy":{"card":"Duchy","supply":true,"recipe":{"kind":"stacked","cards":[{"card":"Duchy","count":8}]}},"pile/Estate":{"card":"Estate","supply":true,"recipe":{"kind":"stacked","cards":[{"card":"Estate","count":8}]}},"pile/Fortress":{"card":"Fortress","supply":true,"recipe":{"kind":"stacked","cards":[{"card":"Fortress","count":10}]}},"pile/Gold":{"card":"Gold","supply":true,"recipe":{"kind":"stacked","cards":[{"card":"Gold","count":30}]}},"pile/Grotto":{"card":"Grotto","supply":true,"traits":["Inherited"],"recipe":{"kind":"stacked","cards":[{"card":"Grotto","count":10}]}},"pile/Hermit":{"card":"Hermit","supply":true,"recipe":{"kind":"stacked","cards":[{"card":"Hermit","count":10}]}},"pile/Madman":{"card":"Madman","recipe":{"kind":"stacked","cards":[{"card":"Madman","count":10}]}},"pile/Marauder":{"card":"Marauder","supply":true,"recipe":{"kind":"stacked","cards":[{"card":"Marauder","count":10}]}},"pile/Market":{"card":"Market","supply":true,"recipe":{"kind":"stacked","cards":[{"card":"Market","count":10}]}},"pile/Procession":{"card":"Procession","supply":true,"recipe":{"kind":"stacked","cards":[{"card":"Procession","count":10}]}},"pile/Province":{"card":"Province","supply":true,"recipe":{"kind":"stacked","cards":[{"card":"Province","count":8}]}},"pile/Quartermaster":{"card":"Quartermaster","supply":true,"recipe":{"kind":"stacked","cards":[{"card":"Quartermaster","count":10}]}},"pile/Rats":{"card":"Rats","supply":true,"recipe":{"kind":"stacked","cards":[{"card":"Rats","count":20}]}},"pile/Ruins":{"card":"Ruins","supply":true,"recipe":{"kind":"shuffled","cards":[{"card":"Abandoned Mine","count":10},{"card":"Ruined Library","count":10},{"card":"Ruined Market","count":10},{"card":"Ruined Village","count":10},{"card":"Survivors","count":10}],"sample":10}},"pile/Silver":{"card":"Silver","supply":true,"recipe":{"kind":"stacked","cards":[{"card":"Silver","count":40}]}},"pile/Smithy":{"card":"Smithy","supply":true,"recipe":{"kind":"stacked","cards":[{"card":"Smithy","count":10}]}},"pile/Spoils":{"card":"Spoils","recipe":{"kind":"stacked","cards":[{"card":"Spoils","count":15}]}},"pile/Village":{"card":"Village","supply":true,"recipe":{"kind":"stacked","cards":[{"card":"Village","count":10}]}}},"landscapes":["Inherited"],"costs":{"Copper":{"coins":0},"Curse":{"coins":0},"Duchy":{"coins":5},"Estate":{"coins":2},"Fortress":{"coins":4},"Gold":{"coins":6},"Grotto":{"coins":2},"Hermit":{"coins":3},"Madman":{"coins":0},"Marauder":{"coins":4},"Market":{"coins":5},"Necropolis":{"coins":1},"Overgrown Estate":{"coins":1},"Procession":{"coins":4},"Province":{"coins":8},"Quartermaster":{"coins":5},"Rats":{"coins":4},"Ruined Library":{"coins":0},"Ruined Market":{"coins":0},"Ruined Village":{"coins":0},"Silver":{"coins":3},"Smithy":{"coins":4},"Spoils":{"coins":0},"Survivors":{"coins":0},"Village":{"coins":3}}}}
+{"seq":0,"type":"setup","rules":{"implementation":"dominion-engine","version":"0.1.0"},"seats":["Ann","Bo"],"kingdom":["Hermit","Rats","Marauder","Fortress","Procession","Quartermaster","Grotto","Village","Smithy","Market"],"landscapes":["Inherited"],"table":{"zones":{"0/deck":["Copper","Copper","Copper","Copper","Copper","Copper","Copper","Grotto","Necropolis","Overgrown Estate"],"1/deck":["Copper","Copper","Copper","Copper","Copper","Copper","Copper","Grotto","Necropolis","Overgrown Estate"],"pile/Copper":["Copper","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Copper"],"pile/Curse":["Curse","Curse","Curse","Curse","Curse","Curse","Curse","Curse","Curse","Curse"],"pile/Duchy":["Duchy","Duchy","Duchy","Duchy","Duchy","Duchy","Duchy","Duchy"],"pile/Estate":["Estate","Estate","Estate","Estate","Estate","Estate","Estate","Estate"],"pile/Fortress":["Fortress","Fortress","Fortress","Fortress","Fortress","Fortress","Fortress","Fortress","Fortress","Fortress"],"pile/Gold":["Gold","Gold","Gold","Gold","Gold","Gold","Gold","Gold","Gold","Gold","Gold","Gold","Gold","Gold","Gold","Gold","Gold","Gold","Gold","Gold","Gold","Gold","Gold","Gold","Gold","Gold","Gold","Gold","Gold","Gold"],"pile/Grotto":["Grotto","Grotto","Grotto","Grotto","Grotto","Grotto","Grotto","Grotto"],"pile/Hermit":["Hermit","Hermit","Hermit","Hermit","Hermit","Hermit","Hermit","Hermit","Hermit","Hermit"],"pile/Madman":["Madman","Madman","Madman","Madman","Madman","Madman","Madman","Madman","Madman","Madman"],"pile/Marauder":["Marauder","Marauder","Marauder","Marauder","Marauder","Marauder","Marauder","Marauder","Marauder","Marauder"],"pile/Market":["Market","Market","Market","Market","Market","Market","Market","Market","Market","Market"],"pile/Procession":["Procession","Procession","Procession","Procession","Procession","Procession","Procession","Procession","Procession","Procession"],"pile/Province":["Province","Province","Province","Province","Province","Province","Province","Province"],"pile/Quartermaster":["Quartermaster","Quartermaster","Quartermaster","Quartermaster","Quartermaster","Quartermaster","Quartermaster","Quartermaster","Quartermaster","Quartermaster"],"pile/Rats":["Rats","Rats","Rats","Rats","Rats","Rats","Rats","Rats","Rats","Rats","Rats","Rats","Rats","Rats","Rats","Rats","Rats","Rats","Rats","Rats"],"pile/Ruins":["Ruined Village","Survivors","Ruined Market","Ruined Library","Survivors","Ruined Village","Ruined Village","Ruined Village","Survivors","Ruined Market"],"pile/Silver":["Silver","Silver","Silver","Silver","Silver","Silver","Silver","Silver","Silver","Silver","Silver","Silver","Silver","Silver","Silver","Silver","Silver","Silver","Silver","Silver","Silver","Silver","Silver","Silver","Silver","Silver","Silver","Silver","Silver","Silver","Silver","Silver","Silver","Silver","Silver","Silver","Silver","Silver","Silver","Silver"],"pile/Smithy":["Smithy","Smithy","Smithy","Smithy","Smithy","Smithy","Smithy","Smithy","Smithy","Smithy"],"pile/Spoils":["Spoils","Spoils","Spoils","Spoils","Spoils","Spoils","Spoils","Spoils","Spoils","Spoils","Spoils","Spoils","Spoils","Spoils","Spoils"],"pile/Village":["Village","Village","Village","Village","Village","Village","Village","Village","Village","Village"]},"piles":{"pile/Copper":{"card":"Copper","supply":true,"recipe":{"kind":"stacked","cards":[{"card":"Copper","count":46}]}},"pile/Curse":{"card":"Curse","supply":true,"recipe":{"kind":"stacked","cards":[{"card":"Curse","count":10}]}},"pile/Duchy":{"card":"Duchy","supply":true,"recipe":{"kind":"stacked","cards":[{"card":"Duchy","count":8}]}},"pile/Estate":{"card":"Estate","supply":true,"recipe":{"kind":"stacked","cards":[{"card":"Estate","count":8}]}},"pile/Fortress":{"card":"Fortress","supply":true,"recipe":{"kind":"stacked","cards":[{"card":"Fortress","count":10}]}},"pile/Gold":{"card":"Gold","supply":true,"recipe":{"kind":"stacked","cards":[{"card":"Gold","count":30}]}},"pile/Grotto":{"card":"Grotto","supply":true,"traits":["Inherited"],"recipe":{"kind":"stacked","cards":[{"card":"Grotto","count":10}]}},"pile/Hermit":{"card":"Hermit","supply":true,"recipe":{"kind":"stacked","cards":[{"card":"Hermit","count":10}]}},"pile/Madman":{"card":"Madman","recipe":{"kind":"stacked","cards":[{"card":"Madman","count":10}]}},"pile/Marauder":{"card":"Marauder","supply":true,"recipe":{"kind":"stacked","cards":[{"card":"Marauder","count":10}]}},"pile/Market":{"card":"Market","supply":true,"recipe":{"kind":"stacked","cards":[{"card":"Market","count":10}]}},"pile/Procession":{"card":"Procession","supply":true,"recipe":{"kind":"stacked","cards":[{"card":"Procession","count":10}]}},"pile/Province":{"card":"Province","supply":true,"recipe":{"kind":"stacked","cards":[{"card":"Province","count":8}]}},"pile/Quartermaster":{"card":"Quartermaster","supply":true,"recipe":{"kind":"stacked","cards":[{"card":"Quartermaster","count":10}]}},"pile/Rats":{"card":"Rats","supply":true,"recipe":{"kind":"stacked","cards":[{"card":"Rats","count":20}]}},"pile/Ruins":{"card":"Ruins","supply":true,"recipe":{"kind":"shuffled","cards":[{"card":"Abandoned Mine","count":10},{"card":"Ruined Library","count":10},{"card":"Ruined Market","count":10},{"card":"Ruined Village","count":10},{"card":"Survivors","count":10}],"sample":10}},"pile/Silver":{"card":"Silver","supply":true,"recipe":{"kind":"stacked","cards":[{"card":"Silver","count":40}]}},"pile/Smithy":{"card":"Smithy","supply":true,"recipe":{"kind":"stacked","cards":[{"card":"Smithy","count":10}]}},"pile/Spoils":{"card":"Spoils","recipe":{"kind":"stacked","cards":[{"card":"Spoils","count":15}]}},"pile/Village":{"card":"Village","supply":true,"recipe":{"kind":"stacked","cards":[{"card":"Village","count":10}]}}},"landscapes":["Inherited"],"costs":{"Copper":{"coins":0},"Curse":{"coins":0},"Duchy":{"coins":5},"Estate":{"coins":2},"Fortress":{"coins":4},"Gold":{"coins":6},"Grotto":{"coins":2},"Hermit":{"coins":3},"Madman":{"coins":0},"Marauder":{"coins":4},"Market":{"coins":5},"Necropolis":{"coins":1},"Overgrown Estate":{"coins":1},"Procession":{"coins":4},"Province":{"coins":8},"Quartermaster":{"coins":5},"Rats":{"coins":4},"Ruined Library":{"coins":0},"Ruined Market":{"coins":0},"Ruined Village":{"coins":0},"Silver":{"coins":3},"Smithy":{"coins":4},"Spoils":{"coins":0},"Survivors":{"coins":0},"Village":{"coins":3}}},"config":{"landscapes":["Inherited"],"colonies":false,"shelters":true,"turnLimit":20,"seed":1},"chance":[{"site":"pile","card":"Ruins","cards":["Ruined Village","Survivors","Ruined Market","Ruined Library","Survivors","Ruined Village","Ruined Village","Ruined Village","Survivors","Ruined Market"]},{"site":"choice","card":"Inherited","cards":["Grotto"]}]}
 {"seq":1,"type":"shuffle","player":0,"cards":["Copper","Overgrown Estate","Copper","Copper","Necropolis","Copper","Copper","Copper","Grotto","Copper"],"from":"0/deck","to":"0/deck","pos":[0,8,0,0,5,0,0,0,1,0]}
 {"seq":2,"type":"draw","player":0,"cards":["Copper","Overgrown Estate","Copper","Copper","Necropolis"],"from":"0/deck","to":"0/hand"}
 {"seq":3,"type":"shuffle","player":1,"cards":["Copper","Copper","Overgrown Estate","Copper","Copper","Copper","Copper","Necropolis","Copper","Grotto"],"from":"1/deck","to":"1/deck","pos":[0,0,7,0,0,0,0,2,0,0]}
 {"seq":4,"type":"draw","player":1,"cards":["Copper","Copper","Overgrown Estate","Copper","Copper"],"from":"1/deck","to":"1/hand"}
 {"seq":5,"type":"resolve","player":0,"card":"Inherited","when":"game-start"}
 {"seq":6,"by":5,"type":"topdeck","player":0,"cards":["Copper","Overgrown Estate","Copper","Copper","Necropolis"],"from":"0/hand","to":"0/deck"}
-{"seq":7,"by":5,"type":"rename","card":"Necropolis","name":"Hovel","zone":"0/deck"}
-{"seq":8,"by":5,"type":"derived","costs":{"Hovel":{"coins":1}}}
-{"seq":9,"by":5,"type":"shuffle","player":0,"cards":["Grotto","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Hovel","Overgrown Estate"],"from":"0/deck","to":"0/deck","pos":[8,1,3,3,3,1,2,2,0,0]}
-{"seq":10,"by":5,"type":"draw","player":0,"cards":["Grotto","Copper","Copper","Copper","Copper"],"from":"0/deck","to":"0/hand"}
-{"seq":11,"type":"resolve","player":1,"card":"Inherited","when":"game-start"}
-{"seq":12,"by":11,"type":"topdeck","player":1,"cards":["Copper","Copper","Overgrown Estate","Copper","Copper"],"from":"1/hand","to":"1/deck"}
-{"seq":13,"by":11,"type":"shuffle","player":1,"cards":["Copper","Overgrown Estate","Copper","Copper","Copper","Necropolis","Copper","Grotto","Copper","Copper"],"from":"1/deck","to":"1/deck","pos":[3,2,6,0,0,3,0,2,0,0]}
-{"seq":14,"by":11,"type":"draw","player":1,"cards":["Copper","Overgrown Estate","Copper","Copper","Copper"],"from":"1/deck","to":"1/hand"}
-{"seq":15,"type":"turn","player":0,"number":1,"kind":"regular"}
-{"seq":16,"by":15,"type":"phase","phase":"action"}
-{"seq":17,"by":15,"type":"phase","phase":"buy"}
-{"seq":18,"by":17,"type":"play","player":0,"card":"Copper","from":"0/hand","to":"0/play"}
-{"seq":19,"by":18,"type":"counter","counter":"coins","delta":1,"value":1}
-{"seq":20,"by":17,"type":"play","player":0,"card":"Copper","from":"0/hand","to":"0/play"}
-{"seq":21,"by":20,"type":"counter","counter":"coins","delta":1,"value":2}
-{"seq":22,"by":17,"type":"buy","player":0,"card":"Ruined Village"}
-{"seq":23,"by":22,"type":"counter","counter":"buys","delta":-1,"value":0}
-{"seq":24,"by":22,"type":"counter","counter":"bought","delta":1,"value":1}
-{"seq":25,"by":22,"type":"gain","player":0,"cards":["Ruined Village"],"from":"pile/Ruins","to":"0/discard"}
-{"seq":26,"by":15,"type":"phase","phase":"night"}
-{"seq":27,"by":15,"type":"phase","phase":"cleanup"}
-{"seq":28,"by":27,"type":"discard","player":0,"cards":["Copper","Copper"],"from":"0/play","to":"0/discard"}
-{"seq":29,"by":27,"type":"discard","player":0,"cards":["Grotto","Copper","Copper"],"from":"0/hand","to":"0/discard"}
-{"seq":30,"by":27,"type":"draw","player":0,"cards":["Copper","Copper","Copper","Hovel","Overgrown Estate"],"from":"0/deck","to":"0/hand"}
-{"seq":31,"by":15,"type":"turn-end","player":0}
-{"seq":32,"type":"turn","player":1,"number":1,"kind":"regular"}
-{"seq":33,"by":32,"type":"phase","phase":"action"}
-{"seq":34,"by":32,"type":"phase","phase":"buy"}
-{"seq":35,"by":34,"type":"play","player":1,"card":"Copper","from":"1/hand","to":"1/play"}
-{"seq":36,"by":35,"type":"counter","counter":"coins","delta":1,"value":1}
-{"seq":37,"by":32,"type":"phase","phase":"night"}
-{"seq":38,"by":32,"type":"phase","phase":"cleanup"}
-{"seq":39,"by":38,"type":"discard","player":1,"cards":["Copper"],"from":"1/play","to":"1/discard"}
-{"seq":40,"by":38,"type":"discard","player":1,"cards":["Copper","Overgrown Estate","Copper","Copper"],"from":"1/hand","to":"1/discard"}
-{"seq":41,"by":38,"type":"draw","player":1,"cards":["Necropolis","Copper","Grotto","Copper","Copper"],"from":"1/deck","to":"1/hand"}
-{"seq":42,"by":32,"type":"turn-end","player":1}
-{"seq":43,"type":"turn","player":0,"number":2,"kind":"regular"}
-{"seq":44,"by":43,"type":"phase","phase":"action"}
-{"seq":45,"by":43,"type":"phase","phase":"buy"}
-{"seq":46,"by":45,"type":"buy","player":0,"card":"Curse"}
-{"seq":47,"by":46,"type":"counter","counter":"buys","delta":-1,"value":0}
-{"seq":48,"by":46,"type":"counter","counter":"bought","delta":1,"value":1}
-{"seq":49,"by":46,"type":"gain","player":0,"cards":["Curse"],"from":"pile/Curse","to":"0/discard"}
-{"seq":50,"by":43,"type":"phase","phase":"night"}
-{"seq":51,"by":43,"type":"phase","phase":"cleanup"}
-{"seq":52,"by":51,"type":"discard","player":0,"cards":["Copper","Copper","Copper","Hovel","Overgrown Estate"],"from":"0/hand","to":"0/discard"}
-{"seq":53,"by":51,"type":"shuffle","player":0,"cards":["Grotto","Overgrown Estate","Copper","Ruined Village","Copper","Copper","Hovel","Copper","Copper","Copper","Curse","Copper"],"from":"0/discard","to":"0/deck","at":"bottom","pos":[8,0,5,8,5,1,0,0,0,1,0,0]}
-{"seq":54,"by":51,"type":"draw","player":0,"cards":["Grotto","Overgrown Estate","Copper","Ruined Village","Copper"],"from":"0/deck","to":"0/hand"}
-{"seq":55,"by":43,"type":"turn-end","player":0}
-{"seq":56,"type":"turn","player":1,"number":2,"kind":"regular"}
-{"seq":57,"by":56,"type":"phase","phase":"action"}
-{"seq":58,"by":57,"type":"play","player":1,"card":"Grotto","from":"1/hand","to":"1/play"}
-{"seq":59,"by":58,"type":"counter","counter":"actions","delta":-1,"value":0}
-{"seq":60,"by":58,"type":"counter","counter":"actions","delta":1,"value":1}
-{"seq":61,"by":58,"type":"set-aside","player":1,"cards":["Copper","Necropolis","Copper"],"from":"1/hand","to":"1/aside","face":"down"}
-{"seq":62,"by":58,"type":"effect","id":0,"card":"Grotto","source":"Grotto","owner":1,"until":{"start-of-turn":1},"keeps":["Grotto"],"holds":["Copper","Copper","Necropolis"]}
-{"seq":63,"by":56,"type":"phase","phase":"buy"}
-{"seq":64,"by":63,"type":"play","player":1,"card":"Copper","from":"1/hand","to":"1/play"}
-{"seq":65,"by":64,"type":"counter","counter":"coins","delta":1,"value":1}
-{"seq":66,"by":63,"type":"buy","player":1,"card":"Copper"}
-{"seq":67,"by":66,"type":"counter","counter":"buys","delta":-1,"value":0}
-{"seq":68,"by":66,"type":"counter","counter":"bought","delta":1,"value":1}
-{"seq":69,"by":66,"type":"gain","player":1,"cards":["Copper"],"from":"pile/Copper","to":"1/discard"}
-{"seq":70,"by":56,"type":"phase","phase":"night"}
-{"seq":71,"by":56,"type":"phase","phase":"cleanup"}
-{"seq":72,"by":71,"type":"discard","player":1,"cards":["Copper"],"from":"1/play","to":"1/discard"}
-{"seq":73,"by":71,"type":"shuffle","player":1,"cards":["Copper","Copper","Copper","Copper","Overgrown Estate","Copper","Copper"],"from":"1/discard","to":"1/deck","at":"bottom","pos":[0,4,4,0,2,0,0]}
-{"seq":74,"by":71,"type":"draw","player":1,"cards":["Copper","Copper","Copper","Copper","Overgrown Estate"],"from":"1/deck","to":"1/hand"}
-{"seq":75,"by":56,"type":"turn-end","player":1}
-{"seq":76,"type":"turn","player":0,"number":3,"kind":"regular"}
-{"seq":77,"by":76,"type":"phase","phase":"action"}
-{"seq":78,"by":76,"type":"phase","phase":"buy"}
-{"seq":79,"by":78,"type":"play","player":0,"card":"Copper","from":"0/hand","to":"0/play"}
-{"seq":80,"by":79,"type":"counter","counter":"coins","delta":1,"value":1}
-{"seq":81,"by":78,"type":"buy","player":0,"card":"Survivors"}
-{"seq":82,"by":81,"type":"counter","counter":"buys","delta":-1,"value":0}
-{"seq":83,"by":81,"type":"counter","counter":"bought","delta":1,"value":1}
-{"seq":84,"by":81,"type":"gain","player":0,"cards":["Survivors"],"from":"pile/Ruins","to":"0/discard"}
-{"seq":85,"by":76,"type":"phase","phase":"night"}
-{"seq":86,"by":76,"type":"phase","phase":"cleanup"}
-{"seq":87,"by":86,"type":"discard","player":0,"cards":["Copper"],"from":"0/play","to":"0/discard"}
-{"seq":88,"by":86,"type":"discard","player":0,"cards":["Grotto","Overgrown Estate","Copper","Ruined Village"],"from":"0/hand","to":"0/discard"}
-{"seq":89,"by":86,"type":"draw","player":0,"cards":["Copper","Hovel","Copper","Copper","Copper"],"from":"0/deck","to":"0/hand"}
-{"seq":90,"by":76,"type":"turn-end","player":0}
-{"seq":91,"type":"turn","player":1,"number":3,"kind":"regular"}
-{"seq":92,"by":91,"type":"resolve","player":1,"card":"Grotto","when":"start-turn","origin":58}
-{"seq":93,"by":92,"type":"effect-end","id":0,"why":"resolved"}
-{"seq":94,"by":92,"type":"discard","player":1,"cards":["Copper","Necropolis","Copper"],"from":"1/aside","to":"1/discard"}
-{"seq":95,"by":92,"type":"shuffle","player":1,"cards":["Necropolis","Copper","Copper"],"from":"1/discard","to":"1/deck","at":"bottom","pos":[1,0,0]}
-{"seq":96,"by":92,"type":"draw","player":1,"cards":["Copper","Copper","Necropolis"],"from":"1/deck","to":"1/hand"}
-{"seq":97,"by":91,"type":"phase","phase":"action"}
-{"seq":98,"by":97,"type":"play","player":1,"card":"Necropolis","from":"1/hand","to":"1/play"}
-{"seq":99,"by":98,"type":"counter","counter":"actions","delta":-1,"value":0}
-{"seq":100,"by":98,"type":"counter","counter":"actions","delta":2,"value":2}
-{"seq":101,"by":91,"type":"phase","phase":"buy"}
-{"seq":102,"by":101,"type":"play","player":1,"card":"Copper","from":"1/hand","to":"1/play"}
-{"seq":103,"by":102,"type":"counter","counter":"coins","delta":1,"value":1}
-{"seq":104,"by":91,"type":"phase","phase":"night"}
-{"seq":105,"by":91,"type":"phase","phase":"cleanup"}
-{"seq":106,"by":105,"type":"discard","player":1,"cards":["Grotto","Necropolis","Copper"],"from":"1/play","to":"1/discard"}
-{"seq":107,"by":105,"type":"discard","player":1,"cards":["Copper","Copper","Copper","Copper","Overgrown Estate","Copper"],"from":"1/hand","to":"1/discard"}
-{"seq":108,"by":105,"type":"shuffle","player":1,"cards":["Copper","Copper","Grotto","Copper","Copper","Copper","Copper","Necropolis","Overgrown Estate"],"from":"1/discard","to":"1/deck","at":"bottom","pos":[2,2,6,2,2,0,1,1,0]}
-{"seq":109,"by":105,"type":"draw","player":1,"cards":["Copper","Copper","Copper","Copper","Grotto"],"from":"1/deck","to":"1/hand"}
-{"seq":110,"by":91,"type":"turn-end","player":1}
-{"seq":111,"type":"turn","player":0,"number":4,"kind":"regular"}
-{"seq":112,"by":111,"type":"phase","phase":"action"}
-{"seq":113,"by":111,"type":"phase","phase":"buy"}
-{"seq":114,"by":113,"type":"buy","player":0,"card":"Copper"}
-{"seq":115,"by":114,"type":"counter","counter":"buys","delta":-1,"value":0}
-{"seq":116,"by":114,"type":"counter","counter":"bought","delta":1,"value":1}
-{"seq":117,"by":114,"type":"gain","player":0,"cards":["Copper"],"from":"pile/Copper","to":"0/discard"}
-{"seq":118,"by":111,"type":"phase","phase":"night"}
-{"seq":119,"by":111,"type":"phase","phase":"cleanup"}
-{"seq":120,"by":119,"type":"discard","player":0,"cards":["Copper","Hovel","Copper","Copper","Copper"],"from":"0/hand","to":"0/discard"}
-{"seq":121,"by":119,"type":"shuffle","player":0,"cards":["Copper","Hovel","Survivors","Copper","Copper","Grotto","Copper","Copper","Copper","Overgrown Estate","Ruined Village","Copper"],"from":"0/discard","to":"0/deck","at":"bottom","pos":[4,3,9,0,0,5,0,2,3,2,1,0]}
-{"seq":122,"by":119,"type":"draw","player":0,"cards":["Curse","Copper","Copper","Hovel","Survivors"],"from":"0/deck","to":"0/hand"}
-{"seq":123,"by":111,"type":"turn-end","player":0}
-{"seq":124,"type":"turn","player":1,"number":4,"kind":"regular"}
-{"seq":125,"by":124,"type":"phase","phase":"action"}
-{"seq":126,"by":124,"type":"phase","phase":"buy"}
-{"seq":127,"by":126,"type":"play","player":1,"card":"Copper","from":"1/hand","to":"1/play"}
-{"seq":128,"by":127,"type":"counter","counter":"coins","delta":1,"value":1}
-{"seq":129,"by":124,"type":"phase","phase":"night"}
-{"seq":130,"by":124,"type":"phase","phase":"cleanup"}
-{"seq":131,"by":130,"type":"discard","player":1,"cards":["Copper"],"from":"1/play","to":"1/discard"}
-{"seq":132,"by":130,"type":"discard","player":1,"cards":["Copper","Copper","Copper","Grotto"],"from":"1/hand","to":"1/discard"}
-{"seq":133,"by":130,"type":"draw","player":1,"cards":["Copper","Copper","Copper","Copper","Necropolis"],"from":"1/deck","to":"1/hand"}
-{"seq":134,"by":124,"type":"turn-end","player":1}
-{"seq":135,"type":"turn","player":0,"number":5,"kind":"regular"}
-{"seq":136,"by":135,"type":"phase","phase":"action"}
-{"seq":137,"by":136,"type":"play","player":0,"card":"Survivors","from":"0/hand","to":"0/play"}
-{"seq":138,"by":137,"type":"counter","counter":"actions","delta":-1,"value":0}
-{"seq":139,"by":137,"type":"look","player":0,"cards":["Copper","Copper"],"from":"0/deck","to":"0/looking","face":"down"}
-{"seq":140,"by":137,"type":"choose","player":0,"source":"Survivors","choices":["Put them back in any order"]}
-{"seq":141,"by":137,"type":"topdeck","player":0,"cards":["Copper","Copper"],"from":"0/looking","to":"0/deck"}
-{"seq":142,"by":135,"type":"phase","phase":"buy"}
-{"seq":143,"by":142,"type":"buy","player":0,"card":"Copper"}
-{"seq":144,"by":143,"type":"counter","counter":"buys","delta":-1,"value":0}
-{"seq":145,"by":143,"type":"counter","counter":"bought","delta":1,"value":1}
-{"seq":146,"by":143,"type":"gain","player":0,"cards":["Copper"],"from":"pile/Copper","to":"0/discard"}
-{"seq":147,"by":135,"type":"phase","phase":"night"}
-{"seq":148,"by":135,"type":"phase","phase":"cleanup"}
-{"seq":149,"by":148,"type":"discard","player":0,"cards":["Survivors"],"from":"0/play","to":"0/discard"}
-{"seq":150,"by":148,"type":"discard","player":0,"cards":["Curse","Copper","Copper","Hovel"],"from":"0/hand","to":"0/discard"}
-{"seq":151,"by":148,"type":"draw","player":0,"cards":["Copper","Copper","Grotto","Copper","Copper"],"from":"0/deck","to":"0/hand"}
-{"seq":152,"by":135,"type":"turn-end","player":0}
-{"seq":153,"type":"turn","player":1,"number":5,"kind":"regular"}
-{"seq":154,"by":153,"type":"phase","phase":"action"}
-{"seq":155,"by":154,"type":"play","player":1,"card":"Necropolis","from":"1/hand","to":"1/play"}
-{"seq":156,"by":155,"type":"counter","counter":"actions","delta":-1,"value":0}
-{"seq":157,"by":155,"type":"counter","counter":"actions","delta":2,"value":2}
-{"seq":158,"by":153,"type":"phase","phase":"buy"}
-{"seq":159,"by":158,"type":"play","player":1,"card":"Copper","from":"1/hand","to":"1/play"}
-{"seq":160,"by":159,"type":"counter","counter":"coins","delta":1,"value":1}
-{"seq":161,"by":153,"type":"phase","phase":"night"}
-{"seq":162,"by":153,"type":"phase","phase":"cleanup"}
-{"seq":163,"by":162,"type":"discard","player":1,"cards":["Necropolis","Copper"],"from":"1/play","to":"1/discard"}
-{"seq":164,"by":162,"type":"discard","player":1,"cards":["Copper","Copper","Copper"],"from":"1/hand","to":"1/discard"}
-{"seq":165,"by":162,"type":"shuffle","player":1,"cards":["Copper","Copper","Copper","Copper","Copper","Copper","Grotto","Copper","Copper","Necropolis"],"from":"1/discard","to":"1/deck","at":"bottom","pos":[6,0,0,0,3,3,2,0,1,0]}
-{"seq":166,"by":162,"type":"draw","player":1,"cards":["Overgrown Estate","Copper","Copper","Copper","Copper"],"from":"1/deck","to":"1/hand"}
-{"seq":167,"by":153,"type":"turn-end","player":1}
-{"seq":168,"type":"turn","player":0,"number":6,"kind":"regular"}
-{"seq":169,"by":168,"type":"phase","phase":"action"}
-{"seq":170,"by":168,"type":"phase","phase":"buy"}
-{"seq":171,"by":168,"type":"phase","phase":"night"}
-{"seq":172,"by":168,"type":"phase","phase":"cleanup"}
-{"seq":173,"by":172,"type":"discard","player":0,"cards":["Copper","Copper","Grotto","Copper","Copper"],"from":"0/hand","to":"0/discard"}
-{"seq":174,"by":172,"type":"shuffle","player":0,"cards":["Copper","Copper","Grotto","Curse","Copper","Survivors","Hovel","Copper","Copper","Copper","Copper"],"from":"0/discard","to":"0/deck","at":"bottom","pos":[0,2,1,5,0,4,1,0,0,0,0]}
-{"seq":175,"by":172,"type":"draw","player":0,"cards":["Copper","Overgrown Estate","Ruined Village","Copper","Copper"],"from":"0/deck","to":"0/hand"}
-{"seq":176,"by":168,"type":"turn-end","player":0}
-{"seq":177,"type":"turn","player":1,"number":6,"kind":"regular"}
-{"seq":178,"by":177,"type":"phase","phase":"action"}
-{"seq":179,"by":177,"type":"phase","phase":"buy"}
-{"seq":180,"by":179,"type":"buy","player":1,"card":"Ruined Market"}
-{"seq":181,"by":180,"type":"counter","counter":"buys","delta":-1,"value":0}
-{"seq":182,"by":180,"type":"counter","counter":"bought","delta":1,"value":1}
-{"seq":183,"by":180,"type":"gain","player":1,"cards":["Ruined Market"],"from":"pile/Ruins","to":"1/discard"}
-{"seq":184,"by":177,"type":"phase","phase":"night"}
-{"seq":185,"by":177,"type":"phase","phase":"cleanup"}
-{"seq":186,"by":185,"type":"discard","player":1,"cards":["Overgrown Estate","Copper","Copper","Copper","Copper"],"from":"1/hand","to":"1/discard"}
-{"seq":187,"by":185,"type":"draw","player":1,"cards":["Copper","Copper","Grotto","Copper","Copper"],"from":"1/deck","to":"1/hand"}
-{"seq":188,"by":177,"type":"turn-end","player":1}
-{"seq":189,"type":"turn","player":0,"number":7,"kind":"regular"}
-{"seq":190,"by":189,"type":"phase","phase":"action"}
-{"seq":191,"by":189,"type":"phase","phase":"buy"}
-{"seq":192,"by":191,"type":"play","player":0,"card":"Copper","from":"0/hand","to":"0/play"}
-{"seq":193,"by":192,"type":"counter","counter":"coins","delta":1,"value":1}
-{"seq":194,"by":191,"type":"play","player":0,"card":"Copper","from":"0/hand","to":"0/play"}
-{"seq":195,"by":194,"type":"counter","counter":"coins","delta":1,"value":2}
-{"seq":196,"by":191,"type":"play","player":0,"card":"Copper","from":"0/hand","to":"0/play"}
-{"seq":197,"by":196,"type":"counter","counter":"coins","delta":1,"value":3}
-{"seq":198,"by":191,"type":"buy","player":0,"card":"Curse"}
-{"seq":199,"by":198,"type":"counter","counter":"buys","delta":-1,"value":0}
-{"seq":200,"by":198,"type":"counter","counter":"bought","delta":1,"value":1}
-{"seq":201,"by":198,"type":"gain","player":0,"cards":["Curse"],"from":"pile/Curse","to":"0/discard"}
-{"seq":202,"by":189,"type":"phase","phase":"night"}
-{"seq":203,"by":189,"type":"phase","phase":"cleanup"}
-{"seq":204,"by":203,"type":"discard","player":0,"cards":["Copper","Copper","Copper"],"from":"0/play","to":"0/discard"}
-{"seq":205,"by":203,"type":"discard","player":0,"cards":["Overgrown Estate","Ruined Village"],"from":"0/hand","to":"0/discard"}
-{"seq":206,"by":203,"type":"draw","player":0,"cards":["Copper","Grotto","Curse","Copper","Survivors"],"from":"0/deck","to":"0/hand"}
-{"seq":207,"by":189,"type":"turn-end","player":0}
-{"seq":208,"type":"turn","player":1,"number":7,"kind":"regular"}
-{"seq":209,"by":208,"type":"phase","phase":"action"}
-{"seq":210,"by":209,"type":"play","player":1,"card":"Grotto","from":"1/hand","to":"1/play"}
-{"seq":211,"by":210,"type":"counter","counter":"actions","delta":-1,"value":0}
-{"seq":212,"by":210,"type":"counter","counter":"actions","delta":1,"value":1}
-{"seq":213,"by":210,"type":"set-aside","player":1,"cards":["Copper"],"from":"1/hand","to":"1/aside","face":"down"}
-{"seq":214,"by":210,"type":"effect","id":1,"card":"Grotto","source":"Grotto","owner":1,"until":{"start-of-turn":1},"keeps":["Grotto"],"holds":["Copper"]}
-{"seq":215,"by":208,"type":"phase","phase":"buy"}
-{"seq":216,"by":208,"type":"phase","phase":"night"}
-{"seq":217,"by":208,"type":"phase","phase":"cleanup"}
-{"seq":218,"by":217,"type":"discard","player":1,"cards":["Copper","Copper","Copper"],"from":"1/hand","to":"1/discard"}
-{"seq":219,"by":217,"type":"shuffle","player":1,"cards":["Overgrown Estate","Ruined Market","Copper","Copper","Copper","Copper","Copper","Copper","Copper"],"from":"1/discard","to":"1/deck","at":"bottom","pos":[7,7,0,0,0,0,0,0,0]}
-{"seq":220,"by":217,"type":"draw","player":1,"cards":["Necropolis","Overgrown Estate","Ruined Market","Copper","Copper"],"from":"1/deck","to":"1/hand"}
-{"seq":221,"by":208,"type":"turn-end","player":1}
-{"seq":222,"type":"turn","player":0,"number":8,"kind":"regular"}
-{"seq":223,"by":222,"type":"phase","phase":"action"}
-{"seq":224,"by":223,"type":"play","player":0,"card":"Grotto","from":"0/hand","to":"0/play"}
-{"seq":225,"by":224,"type":"counter","counter":"actions","delta":-1,"value":0}
-{"seq":226,"by":224,"type":"counter","counter":"actions","delta":1,"value":1}
-{"seq":227,"by":223,"type":"play","player":0,"card":"Survivors","from":"0/hand","to":"0/play"}
-{"seq":228,"by":227,"type":"counter","counter":"actions","delta":-1,"value":0}
-{"seq":229,"by":227,"type":"look","player":0,"cards":["Hovel","Copper"],"from":"0/deck","to":"0/looking","face":"down"}
-{"seq":230,"by":227,"type":"choose","player":0,"source":"Survivors","choices":["Put them back in any order"]}
-{"seq":231,"by":227,"type":"topdeck","player":0,"cards":["Hovel","Copper"],"from":"0/looking","to":"0/deck"}
-{"seq":232,"by":222,"type":"phase","phase":"buy"}
-{"seq":233,"by":232,"type":"play","player":0,"card":"Copper","from":"0/hand","to":"0/play"}
-{"seq":234,"by":233,"type":"counter","counter":"coins","delta":1,"value":1}
-{"seq":235,"by":232,"type":"play","player":0,"card":"Copper","from":"0/hand","to":"0/play"}
-{"seq":236,"by":235,"type":"counter","counter":"coins","delta":1,"value":2}
-{"seq":237,"by":232,"type":"buy","player":0,"card":"Copper"}
-{"seq":238,"by":237,"type":"counter","counter":"buys","delta":-1,"value":0}
-{"seq":239,"by":237,"type":"counter","counter":"bought","delta":1,"value":1}
-{"seq":240,"by":237,"type":"gain","player":0,"cards":["Copper"],"from":"pile/Copper","to":"0/discard"}
-{"seq":241,"by":222,"type":"phase","phase":"night"}
-{"seq":242,"by":222,"type":"phase","phase":"cleanup"}
-{"seq":243,"by":242,"type":"discard","player":0,"cards":["Grotto","Survivors","Copper","Copper"],"from":"0/play","to":"0/discard"}
-{"seq":244,"by":242,"type":"discard","player":0,"cards":["Curse"],"from":"0/hand","to":"0/discard"}
-{"seq":245,"by":242,"type":"draw","player":0,"cards":["Copper","Hovel","Copper","Copper","Copper"],"from":"0/deck","to":"0/hand"}
-{"seq":246,"by":222,"type":"turn-end","player":0}
-{"seq":247,"type":"turn","player":1,"number":8,"kind":"regular"}
-{"seq":248,"by":247,"type":"resolve","player":1,"card":"Grotto","when":"start-turn","origin":210}
-{"seq":249,"by":248,"type":"effect-end","id":1,"why":"resolved"}
-{"seq":250,"by":248,"type":"discard","player":1,"cards":["Copper"],"from":"1/aside","to":"1/discard"}
-{"seq":251,"by":248,"type":"draw","player":1,"cards":["Copper"],"from":"1/deck","to":"1/hand"}
-{"seq":252,"by":247,"type":"phase","phase":"action"}
-{"seq":253,"by":252,"type":"play","player":1,"card":"Necropolis","from":"1/hand","to":"1/play"}
-{"seq":254,"by":253,"type":"counter","counter":"actions","delta":-1,"value":0}
-{"seq":255,"by":253,"type":"counter","counter":"actions","delta":2,"value":2}
-{"seq":256,"by":247,"type":"phase","phase":"buy"}
-{"seq":257,"by":256,"type":"play","player":1,"card":"Copper","from":"1/hand","to":"1/play"}
-{"seq":258,"by":257,"type":"counter","counter":"coins","delta":1,"value":1}
-{"seq":259,"by":256,"type":"buy","player":1,"card":"Ruined Library"}
-{"seq":260,"by":259,"type":"counter","counter":"buys","delta":-1,"value":0}
-{"seq":261,"by":259,"type":"counter","counter":"bought","delta":1,"value":1}
-{"seq":262,"by":259,"type":"gain","player":1,"cards":["Ruined Library"],"from":"pile/Ruins","to":"1/discard"}
-{"seq":263,"by":247,"type":"phase","phase":"night"}
-{"seq":264,"by":247,"type":"phase","phase":"cleanup"}
-{"seq":265,"by":264,"type":"discard","player":1,"cards":["Grotto","Necropolis","Copper"],"from":"1/play","to":"1/discard"}
-{"seq":266,"by":264,"type":"discard","player":1,"cards":["Overgrown Estate","Ruined Market","Copper","Copper"],"from":"1/hand","to":"1/discard"}
-{"seq":267,"by":264,"type":"shuffle","player":1,"cards":["Overgrown Estate","Ruined Market","Grotto","Copper","Copper","Necropolis","Copper","Copper","Ruined Library"],"from":"1/discard","to":"1/deck","at":"bottom","pos":[3,2,4,0,0,1,0,1,0]}
-{"seq":268,"by":264,"type":"draw","player":1,"cards":["Copper","Copper","Copper","Copper","Overgrown Estate"],"from":"1/deck","to":"1/hand"}
-{"seq":269,"by":247,"type":"turn-end","player":1}
-{"seq":270,"type":"turn","player":0,"number":9,"kind":"regular"}
-{"seq":271,"by":270,"type":"phase","phase":"action"}
-{"seq":272,"by":270,"type":"phase","phase":"buy"}
-{"seq":273,"by":272,"type":"play","player":0,"card":"Copper","from":"0/hand","to":"0/play"}
-{"seq":274,"by":273,"type":"counter","counter":"coins","delta":1,"value":1}
-{"seq":275,"by":272,"type":"play","player":0,"card":"Copper","from":"0/hand","to":"0/play"}
-{"seq":276,"by":275,"type":"counter","counter":"coins","delta":1,"value":2}
-{"seq":277,"by":272,"type":"play","player":0,"card":"Copper","from":"0/hand","to":"0/play"}
-{"seq":278,"by":277,"type":"counter","counter":"coins","delta":1,"value":3}
-{"seq":279,"by":272,"type":"buy","player":0,"card":"Hermit"}
-{"seq":280,"by":279,"type":"counter","counter":"buys","delta":-1,"value":0}
-{"seq":281,"by":279,"type":"counter","counter":"coins","delta":-3,"value":0}
-{"seq":282,"by":279,"type":"counter","counter":"bought","delta":1,"value":1}
-{"seq":283,"by":279,"type":"gain","player":0,"cards":["Hermit"],"from":"pile/Hermit","to":"0/discard"}
-{"seq":284,"by":270,"type":"phase","phase":"night"}
-{"seq":285,"by":270,"type":"phase","phase":"cleanup"}
-{"seq":286,"by":285,"type":"discard","player":0,"cards":["Copper","Copper","Copper"],"from":"0/play","to":"0/discard"}
-{"seq":287,"by":285,"type":"discard","player":0,"cards":["Hovel","Copper"],"from":"0/hand","to":"0/discard"}
-{"seq":288,"by":285,"type":"shuffle","player":0,"cards":["Copper","Grotto","Copper","Copper","Curse","Overgrown Estate","Curse","Copper","Ruined Village","Copper","Copper","Copper","Survivors","Hovel","Hermit","Copper","Copper","Copper"],"from":"0/discard","to":"0/deck","at":"bottom","pos":[2,9,12,12,13,11,5,2,8,4,4,2,3,1,1,0,0,0]}
-{"seq":289,"by":285,"type":"draw","player":0,"cards":["Copper","Grotto","Copper","Copper","Curse"],"from":"0/deck","to":"0/hand"}
-{"seq":290,"by":270,"type":"turn-end","player":0}
-{"seq":291,"type":"turn","player":1,"number":9,"kind":"regular"}
-{"seq":292,"by":291,"type":"phase","phase":"action"}
-{"seq":293,"by":291,"type":"phase","phase":"buy"}
-{"seq":294,"by":293,"type":"play","player":1,"card":"Copper","from":"1/hand","to":"1/play"}
-{"seq":295,"by":294,"type":"counter","counter":"coins","delta":1,"value":1}
-{"seq":296,"by":293,"type":"buy","player":1,"card":"Survivors"}
-{"seq":297,"by":296,"type":"counter","counter":"buys","delta":-1,"value":0}
-{"seq":298,"by":296,"type":"counter","counter":"bought","delta":1,"value":1}
-{"seq":299,"by":296,"type":"gain","player":1,"cards":["Survivors"],"from":"pile/Ruins","to":"1/discard"}
-{"seq":300,"by":291,"type":"phase","phase":"night"}
-{"seq":301,"by":291,"type":"phase","phase":"cleanup"}
-{"seq":302,"by":301,"type":"discard","player":1,"cards":["Copper"],"from":"1/play","to":"1/discard"}
-{"seq":303,"by":301,"type":"discard","player":1,"cards":["Copper","Copper","Copper","Overgrown Estate"],"from":"1/hand","to":"1/discard"}
-{"seq":304,"by":301,"type":"draw","player":1,"cards":["Ruined Market","Grotto","Copper","Copper","Necropolis"],"from":"1/deck","to":"1/hand"}
-{"seq":305,"by":291,"type":"turn-end","player":1}
-{"seq":306,"type":"turn","player":0,"number":10,"kind":"regular"}
-{"seq":307,"by":306,"type":"phase","phase":"action"}
-{"seq":308,"by":306,"type":"phase","phase":"buy"}
-{"seq":309,"by":308,"type":"buy","player":0,"card":"Curse"}
-{"seq":310,"by":309,"type":"counter","counter":"buys","delta":-1,"value":0}
-{"seq":311,"by":309,"type":"counter","counter":"bought","delta":1,"value":1}
-{"seq":312,"by":309,"type":"gain","player":0,"cards":["Curse"],"from":"pile/Curse","to":"0/discard"}
-{"seq":313,"by":306,"type":"phase","phase":"night"}
-{"seq":314,"by":306,"type":"phase","phase":"cleanup"}
-{"seq":315,"by":314,"type":"discard","player":0,"cards":["Copper","Grotto","Copper","Copper","Curse"],"from":"0/hand","to":"0/discard"}
-{"seq":316,"by":314,"type":"draw","player":0,"cards":["Overgrown Estate","Curse","Copper","Ruined Village","Copper"],"from":"0/deck","to":"0/hand"}
-{"seq":317,"by":306,"type":"turn-end","player":0}
-{"seq":318,"type":"turn","player":1,"number":10,"kind":"regular"}
-{"seq":319,"by":318,"type":"phase","phase":"action"}
-{"seq":320,"by":319,"type":"play","player":1,"card":"Ruined Market","from":"1/hand","to":"1/play"}
-{"seq":321,"by":320,"type":"counter","counter":"actions","delta":-1,"value":0}
-{"seq":322,"by":320,"type":"counter","counter":"buys","delta":1,"value":2}
-{"seq":323,"by":318,"type":"phase","phase":"buy"}
-{"seq":324,"by":323,"type":"play","player":1,"card":"Copper","from":"1/hand","to":"1/play"}
-{"seq":325,"by":324,"type":"counter","counter":"coins","delta":1,"value":1}
-{"seq":326,"by":323,"type":"buy","player":1,"card":"Curse"}
-{"seq":327,"by":326,"type":"counter","counter":"buys","delta":-1,"value":1}
-{"seq":328,"by":326,"type":"counter","counter":"bought","delta":1,"value":1}
-{"seq":329,"by":326,"type":"gain","player":1,"cards":["Curse"],"from":"pile/Curse","to":"1/discard"}
-{"seq":330,"by":318,"type":"phase","phase":"night"}
-{"seq":331,"by":318,"type":"phase","phase":"cleanup"}
-{"seq":332,"by":331,"type":"discard","player":1,"cards":["Ruined Market","Copper"],"from":"1/play","to":"1/discard"}
-{"seq":333,"by":331,"type":"discard","player":1,"cards":["Grotto","Copper","Necropolis"],"from":"1/hand","to":"1/discard"}
-{"seq":334,"by":331,"type":"shuffle","player":1,"cards":["Copper","Ruined Market","Copper","Copper","Curse","Survivors","Necropolis","Copper","Overgrown Estate","Copper","Grotto","Copper"],"from":"1/discard","to":"1/deck","at":"bottom","pos":[7,4,3,5,3,6,0,0,1,1,0,0]}
-{"seq":335,"by":331,"type":"draw","player":1,"cards":["Copper","Copper","Ruined Library","Copper","Ruined Market"],"from":"1/deck","to":"1/hand"}
-{"seq":336,"by":318,"type":"turn-end","player":1}
-{"seq":337,"type":"game-ending","reason":"turn-limit"}
-{"seq":338,"type":"game-end","reason":"turn-limit","result":[{"seat":0,"vp":-3,"turns":10,"rank":2},{"seat":1,"vp":-1,"turns":10,"rank":1}]}
+{"seq":7,"by":5,"type":"ask","seat":0,"prompt":"Inherited: which starting card does your Grotto replace?","kind":"choose","purpose":"other","source":"Inherited","min":1,"max":1,"options":[{"index":0,"group":0,"action":"select","label":"Hovel","card":"Hovel"},{"index":1,"group":0,"action":"select","label":"Copper","card":"Copper"},{"index":2,"group":0,"action":"select","label":"Overgrown Estate","card":"Overgrown Estate"},{"index":3,"group":0,"action":"select","label":"Necropolis","card":"Necropolis"}]}
+{"seq":8,"by":5,"type":"answer","seat":0,"indices":[3]}
+{"seq":9,"by":5,"type":"rename","card":"Necropolis","name":"Hovel","zone":"0/deck"}
+{"seq":10,"by":5,"type":"derived","costs":{"Hovel":{"coins":1}}}
+{"seq":11,"by":5,"type":"shuffle","player":0,"cards":["Grotto","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Hovel","Overgrown Estate"],"from":"0/deck","to":"0/deck","pos":[8,1,1,2,2,2,2,2,0,0]}
+{"seq":12,"by":5,"type":"draw","player":0,"cards":["Grotto","Copper","Copper","Copper","Copper"],"from":"0/deck","to":"0/hand"}
+{"seq":13,"type":"resolve","player":1,"card":"Inherited","when":"game-start"}
+{"seq":14,"by":13,"type":"topdeck","player":1,"cards":["Copper","Copper","Overgrown Estate","Copper","Copper"],"from":"1/hand","to":"1/deck"}
+{"seq":15,"by":13,"type":"ask","seat":1,"prompt":"Inherited: which starting card does your Grotto replace?","kind":"choose","purpose":"other","source":"Inherited","min":1,"max":1,"options":[{"index":0,"group":0,"action":"select","label":"Hovel","card":"Hovel"},{"index":1,"group":0,"action":"select","label":"Copper","card":"Copper"},{"index":2,"group":0,"action":"select","label":"Necropolis","card":"Necropolis"},{"index":3,"group":0,"action":"select","label":"Overgrown Estate","card":"Overgrown Estate"}]}
+{"seq":16,"by":13,"type":"answer","seat":1,"indices":[0]}
+{"seq":17,"by":13,"type":"shuffle","player":1,"cards":["Copper","Overgrown Estate","Copper","Copper","Copper","Necropolis","Copper","Grotto","Copper","Copper"],"from":"1/deck","to":"1/deck","pos":[0,1,0,0,0,2,0,2,0,0]}
+{"seq":18,"by":13,"type":"draw","player":1,"cards":["Copper","Overgrown Estate","Copper","Copper","Copper"],"from":"1/deck","to":"1/hand"}
+{"seq":19,"type":"turn","player":0,"number":1,"kind":"regular"}
+{"seq":20,"by":19,"type":"phase","phase":"action"}
+{"seq":21,"by":20,"type":"ask","seat":0,"prompt":"Action phase: choose a move","kind":"turn","purpose":"turn","phase":"action","min":1,"max":1,"options":[{"index":0,"group":0,"action":"play","label":"Play Grotto","card":"Grotto","zone":"hand"},{"index":1,"group":0,"action":"end-phase","label":"End your Action phase"}]}
+{"seq":22,"by":20,"type":"answer","seat":0,"indices":[1]}
+{"seq":23,"by":19,"type":"phase","phase":"buy"}
+{"seq":24,"by":23,"type":"ask","seat":0,"prompt":"Buy phase: choose a move","kind":"turn","purpose":"turn","phase":"buy","min":1,"max":1,"options":[{"index":0,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":1,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":2,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":3,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":4,"group":0,"action":"buy","label":"Buy Copper ($0)","card":"Copper","cost":{"coins":0}},{"index":5,"group":0,"action":"buy","label":"Buy Curse ($0)","card":"Curse","cost":{"coins":0}},{"index":6,"group":0,"action":"buy","label":"Buy Ruined Village ($0)","card":"Ruined Village","cost":{"coins":0}},{"index":7,"group":0,"action":"end-phase","label":"End your Buy phase"}]}
+{"seq":25,"by":23,"type":"answer","seat":0,"indices":[3]}
+{"seq":26,"by":23,"type":"play","player":0,"card":"Copper","from":"0/hand","to":"0/play"}
+{"seq":27,"by":26,"type":"counter","counter":"coins","delta":1,"value":1}
+{"seq":28,"by":23,"type":"ask","seat":0,"prompt":"Buy phase: choose a move","kind":"turn","purpose":"turn","phase":"buy","min":1,"max":1,"options":[{"index":0,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":1,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":2,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":3,"group":0,"action":"buy","label":"Buy Copper ($0)","card":"Copper","cost":{"coins":0}},{"index":4,"group":0,"action":"buy","label":"Buy Curse ($0)","card":"Curse","cost":{"coins":0}},{"index":5,"group":0,"action":"buy","label":"Buy Ruined Village ($0)","card":"Ruined Village","cost":{"coins":0}},{"index":6,"group":0,"action":"end-phase","label":"End your Buy phase"}]}
+{"seq":29,"by":23,"type":"answer","seat":0,"indices":[1]}
+{"seq":30,"by":23,"type":"play","player":0,"card":"Copper","from":"0/hand","to":"0/play"}
+{"seq":31,"by":30,"type":"counter","counter":"coins","delta":1,"value":2}
+{"seq":32,"by":23,"type":"ask","seat":0,"prompt":"Buy phase: choose a move","kind":"turn","purpose":"turn","phase":"buy","min":1,"max":1,"options":[{"index":0,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":1,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":2,"group":0,"action":"buy","label":"Buy Copper ($0)","card":"Copper","cost":{"coins":0}},{"index":3,"group":0,"action":"buy","label":"Buy Estate ($2)","card":"Estate","cost":{"coins":2}},{"index":4,"group":0,"action":"buy","label":"Buy Curse ($0)","card":"Curse","cost":{"coins":0}},{"index":5,"group":0,"action":"buy","label":"Buy Grotto ($2)","card":"Grotto","cost":{"coins":2}},{"index":6,"group":0,"action":"buy","label":"Buy Ruined Village ($0)","card":"Ruined Village","cost":{"coins":0}},{"index":7,"group":0,"action":"end-phase","label":"End your Buy phase"}]}
+{"seq":33,"by":23,"type":"answer","seat":0,"indices":[6]}
+{"seq":34,"by":23,"type":"buy","player":0,"card":"Ruined Village"}
+{"seq":35,"by":34,"type":"counter","counter":"buys","delta":-1,"value":0}
+{"seq":36,"by":34,"type":"counter","counter":"bought","delta":1,"value":1}
+{"seq":37,"by":34,"type":"gain","player":0,"cards":["Ruined Village"],"from":"pile/Ruins","to":"0/discard"}
+{"seq":38,"by":19,"type":"phase","phase":"night"}
+{"seq":39,"by":19,"type":"phase","phase":"cleanup"}
+{"seq":40,"by":39,"type":"discard","player":0,"cards":["Copper","Copper"],"from":"0/play","to":"0/discard"}
+{"seq":41,"by":39,"type":"discard","player":0,"cards":["Grotto","Copper","Copper"],"from":"0/hand","to":"0/discard"}
+{"seq":42,"by":39,"type":"draw","player":0,"cards":["Copper","Copper","Copper","Hovel","Overgrown Estate"],"from":"0/deck","to":"0/hand"}
+{"seq":43,"by":19,"type":"turn-end","player":0}
+{"seq":44,"type":"turn","player":1,"number":1,"kind":"regular"}
+{"seq":45,"by":44,"type":"phase","phase":"action"}
+{"seq":46,"by":44,"type":"phase","phase":"buy"}
+{"seq":47,"by":46,"type":"ask","seat":1,"prompt":"Buy phase: choose a move","kind":"turn","purpose":"turn","phase":"buy","min":1,"max":1,"options":[{"index":0,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":1,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":2,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":3,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":4,"group":0,"action":"buy","label":"Buy Copper ($0)","card":"Copper","cost":{"coins":0}},{"index":5,"group":0,"action":"buy","label":"Buy Curse ($0)","card":"Curse","cost":{"coins":0}},{"index":6,"group":0,"action":"buy","label":"Buy Survivors ($0)","card":"Survivors","cost":{"coins":0}},{"index":7,"group":0,"action":"end-phase","label":"End your Buy phase"}]}
+{"seq":48,"by":46,"type":"answer","seat":1,"indices":[2]}
+{"seq":49,"by":46,"type":"play","player":1,"card":"Copper","from":"1/hand","to":"1/play"}
+{"seq":50,"by":49,"type":"counter","counter":"coins","delta":1,"value":1}
+{"seq":51,"by":46,"type":"ask","seat":1,"prompt":"Buy phase: choose a move","kind":"turn","purpose":"turn","phase":"buy","min":1,"max":1,"options":[{"index":0,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":1,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":2,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":3,"group":0,"action":"buy","label":"Buy Copper ($0)","card":"Copper","cost":{"coins":0}},{"index":4,"group":0,"action":"buy","label":"Buy Curse ($0)","card":"Curse","cost":{"coins":0}},{"index":5,"group":0,"action":"buy","label":"Buy Survivors ($0)","card":"Survivors","cost":{"coins":0}},{"index":6,"group":0,"action":"end-phase","label":"End your Buy phase"}]}
+{"seq":52,"by":46,"type":"answer","seat":1,"indices":[6]}
+{"seq":53,"by":44,"type":"phase","phase":"night"}
+{"seq":54,"by":44,"type":"phase","phase":"cleanup"}
+{"seq":55,"by":54,"type":"discard","player":1,"cards":["Copper"],"from":"1/play","to":"1/discard"}
+{"seq":56,"by":54,"type":"discard","player":1,"cards":["Copper","Overgrown Estate","Copper","Copper"],"from":"1/hand","to":"1/discard"}
+{"seq":57,"by":54,"type":"draw","player":1,"cards":["Necropolis","Copper","Grotto","Copper","Copper"],"from":"1/deck","to":"1/hand"}
+{"seq":58,"by":44,"type":"turn-end","player":1}
+{"seq":59,"type":"turn","player":0,"number":2,"kind":"regular"}
+{"seq":60,"by":59,"type":"phase","phase":"action"}
+{"seq":61,"by":59,"type":"phase","phase":"buy"}
+{"seq":62,"by":61,"type":"ask","seat":0,"prompt":"Buy phase: choose a move","kind":"turn","purpose":"turn","phase":"buy","min":1,"max":1,"options":[{"index":0,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":1,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":2,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":3,"group":0,"action":"buy","label":"Buy Copper ($0)","card":"Copper","cost":{"coins":0}},{"index":4,"group":0,"action":"buy","label":"Buy Curse ($0)","card":"Curse","cost":{"coins":0}},{"index":5,"group":0,"action":"buy","label":"Buy Survivors ($0)","card":"Survivors","cost":{"coins":0}},{"index":6,"group":0,"action":"end-phase","label":"End your Buy phase"}]}
+{"seq":63,"by":61,"type":"answer","seat":0,"indices":[4]}
+{"seq":64,"by":61,"type":"buy","player":0,"card":"Curse"}
+{"seq":65,"by":64,"type":"counter","counter":"buys","delta":-1,"value":0}
+{"seq":66,"by":64,"type":"counter","counter":"bought","delta":1,"value":1}
+{"seq":67,"by":64,"type":"gain","player":0,"cards":["Curse"],"from":"pile/Curse","to":"0/discard"}
+{"seq":68,"by":59,"type":"phase","phase":"night"}
+{"seq":69,"by":59,"type":"phase","phase":"cleanup"}
+{"seq":70,"by":69,"type":"discard","player":0,"cards":["Copper","Copper","Copper","Hovel","Overgrown Estate"],"from":"0/hand","to":"0/discard"}
+{"seq":71,"by":69,"type":"shuffle","player":0,"cards":["Grotto","Overgrown Estate","Copper","Ruined Village","Copper","Copper","Hovel","Copper","Copper","Copper","Curse","Copper"],"from":"0/discard","to":"0/deck","at":"bottom","pos":[8,0,1,8,1,1,0,1,1,1,0,0]}
+{"seq":72,"by":69,"type":"draw","player":0,"cards":["Grotto","Overgrown Estate","Copper","Ruined Village","Copper"],"from":"0/deck","to":"0/hand"}
+{"seq":73,"by":59,"type":"turn-end","player":0}
+{"seq":74,"type":"turn","player":1,"number":2,"kind":"regular"}
+{"seq":75,"by":74,"type":"phase","phase":"action"}
+{"seq":76,"by":75,"type":"ask","seat":1,"prompt":"Action phase: choose a move","kind":"turn","purpose":"turn","phase":"action","min":1,"max":1,"options":[{"index":0,"group":0,"action":"play","label":"Play Necropolis","card":"Necropolis","zone":"hand"},{"index":1,"group":0,"action":"play","label":"Play Grotto","card":"Grotto","zone":"hand"},{"index":2,"group":0,"action":"end-phase","label":"End your Action phase"}]}
+{"seq":77,"by":75,"type":"answer","seat":1,"indices":[1]}
+{"seq":78,"by":75,"type":"play","player":1,"card":"Grotto","from":"1/hand","to":"1/play"}
+{"seq":79,"by":78,"type":"counter","counter":"actions","delta":-1,"value":0}
+{"seq":80,"by":78,"type":"counter","counter":"actions","delta":1,"value":1}
+{"seq":81,"by":78,"type":"ask","seat":1,"prompt":"Grotto: choose up to 4 cards to set aside","kind":"cards","purpose":"set-aside","source":"Grotto","min":0,"max":4,"options":[{"index":0,"group":0,"action":"select","label":"Necropolis","card":"Necropolis","zone":"hand"},{"index":1,"group":0,"action":"select","label":"Copper","card":"Copper","zone":"hand"},{"index":2,"group":0,"action":"select","label":"Copper","card":"Copper","zone":"hand"},{"index":3,"group":0,"action":"select","label":"Copper","card":"Copper","zone":"hand"}]}
+{"seq":82,"by":78,"type":"answer","seat":1,"indices":[3,0,2]}
+{"seq":83,"by":78,"type":"set-aside","player":1,"cards":["Copper","Necropolis","Copper"],"from":"1/hand","to":"1/aside","face":"down"}
+{"seq":84,"by":78,"type":"effect","id":0,"card":"Grotto","source":"Grotto","owner":1,"until":{"start-of-turn":1},"keeps":["Grotto"],"holds":["Copper","Copper","Necropolis"]}
+{"seq":85,"by":74,"type":"phase","phase":"buy"}
+{"seq":86,"by":85,"type":"ask","seat":1,"prompt":"Buy phase: choose a move","kind":"turn","purpose":"turn","phase":"buy","min":1,"max":1,"options":[{"index":0,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":1,"group":0,"action":"buy","label":"Buy Copper ($0)","card":"Copper","cost":{"coins":0}},{"index":2,"group":0,"action":"buy","label":"Buy Curse ($0)","card":"Curse","cost":{"coins":0}},{"index":3,"group":0,"action":"buy","label":"Buy Survivors ($0)","card":"Survivors","cost":{"coins":0}},{"index":4,"group":0,"action":"end-phase","label":"End your Buy phase"}]}
+{"seq":87,"by":85,"type":"answer","seat":1,"indices":[0]}
+{"seq":88,"by":85,"type":"play","player":1,"card":"Copper","from":"1/hand","to":"1/play"}
+{"seq":89,"by":88,"type":"counter","counter":"coins","delta":1,"value":1}
+{"seq":90,"by":85,"type":"ask","seat":1,"prompt":"Buy phase: choose a move","kind":"turn","purpose":"turn","phase":"buy","min":1,"max":1,"options":[{"index":0,"group":0,"action":"buy","label":"Buy Copper ($0)","card":"Copper","cost":{"coins":0}},{"index":1,"group":0,"action":"buy","label":"Buy Curse ($0)","card":"Curse","cost":{"coins":0}},{"index":2,"group":0,"action":"buy","label":"Buy Survivors ($0)","card":"Survivors","cost":{"coins":0}},{"index":3,"group":0,"action":"end-phase","label":"End your Buy phase"}]}
+{"seq":91,"by":85,"type":"answer","seat":1,"indices":[0]}
+{"seq":92,"by":85,"type":"buy","player":1,"card":"Copper"}
+{"seq":93,"by":92,"type":"counter","counter":"buys","delta":-1,"value":0}
+{"seq":94,"by":92,"type":"counter","counter":"bought","delta":1,"value":1}
+{"seq":95,"by":92,"type":"gain","player":1,"cards":["Copper"],"from":"pile/Copper","to":"1/discard"}
+{"seq":96,"by":74,"type":"phase","phase":"night"}
+{"seq":97,"by":74,"type":"phase","phase":"cleanup"}
+{"seq":98,"by":97,"type":"discard","player":1,"cards":["Copper"],"from":"1/play","to":"1/discard"}
+{"seq":99,"by":97,"type":"shuffle","player":1,"cards":["Copper","Copper","Copper","Copper","Overgrown Estate","Copper","Copper"],"from":"1/discard","to":"1/deck","at":"bottom"}
+{"seq":100,"by":97,"type":"draw","player":1,"cards":["Copper","Copper","Copper","Copper","Overgrown Estate"],"from":"1/deck","to":"1/hand"}
+{"seq":101,"by":74,"type":"turn-end","player":1}
+{"seq":102,"type":"turn","player":0,"number":3,"kind":"regular"}
+{"seq":103,"by":102,"type":"phase","phase":"action"}
+{"seq":104,"by":103,"type":"ask","seat":0,"prompt":"Action phase: choose a move","kind":"turn","purpose":"turn","phase":"action","min":1,"max":1,"options":[{"index":0,"group":0,"action":"play","label":"Play Grotto","card":"Grotto","zone":"hand"},{"index":1,"group":0,"action":"play","label":"Play Ruined Village","card":"Ruined Village","zone":"hand"},{"index":2,"group":0,"action":"end-phase","label":"End your Action phase"}]}
+{"seq":105,"by":103,"type":"answer","seat":0,"indices":[2]}
+{"seq":106,"by":102,"type":"phase","phase":"buy"}
+{"seq":107,"by":106,"type":"ask","seat":0,"prompt":"Buy phase: choose a move","kind":"turn","purpose":"turn","phase":"buy","min":1,"max":1,"options":[{"index":0,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":1,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":2,"group":0,"action":"buy","label":"Buy Copper ($0)","card":"Copper","cost":{"coins":0}},{"index":3,"group":0,"action":"buy","label":"Buy Curse ($0)","card":"Curse","cost":{"coins":0}},{"index":4,"group":0,"action":"buy","label":"Buy Survivors ($0)","card":"Survivors","cost":{"coins":0}},{"index":5,"group":0,"action":"end-phase","label":"End your Buy phase"}]}
+{"seq":108,"by":106,"type":"answer","seat":0,"indices":[1]}
+{"seq":109,"by":106,"type":"play","player":0,"card":"Copper","from":"0/hand","to":"0/play"}
+{"seq":110,"by":109,"type":"counter","counter":"coins","delta":1,"value":1}
+{"seq":111,"by":106,"type":"ask","seat":0,"prompt":"Buy phase: choose a move","kind":"turn","purpose":"turn","phase":"buy","min":1,"max":1,"options":[{"index":0,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":1,"group":0,"action":"buy","label":"Buy Copper ($0)","card":"Copper","cost":{"coins":0}},{"index":2,"group":0,"action":"buy","label":"Buy Curse ($0)","card":"Curse","cost":{"coins":0}},{"index":3,"group":0,"action":"buy","label":"Buy Survivors ($0)","card":"Survivors","cost":{"coins":0}},{"index":4,"group":0,"action":"end-phase","label":"End your Buy phase"}]}
+{"seq":112,"by":106,"type":"answer","seat":0,"indices":[3]}
+{"seq":113,"by":106,"type":"buy","player":0,"card":"Survivors"}
+{"seq":114,"by":113,"type":"counter","counter":"buys","delta":-1,"value":0}
+{"seq":115,"by":113,"type":"counter","counter":"bought","delta":1,"value":1}
+{"seq":116,"by":113,"type":"gain","player":0,"cards":["Survivors"],"from":"pile/Ruins","to":"0/discard"}
+{"seq":117,"by":102,"type":"phase","phase":"night"}
+{"seq":118,"by":102,"type":"phase","phase":"cleanup"}
+{"seq":119,"by":118,"type":"discard","player":0,"cards":["Copper"],"from":"0/play","to":"0/discard"}
+{"seq":120,"by":118,"type":"discard","player":0,"cards":["Grotto","Overgrown Estate","Copper","Ruined Village"],"from":"0/hand","to":"0/discard"}
+{"seq":121,"by":118,"type":"draw","player":0,"cards":["Copper","Hovel","Copper","Copper","Copper"],"from":"0/deck","to":"0/hand"}
+{"seq":122,"by":102,"type":"turn-end","player":0}
+{"seq":123,"type":"turn","player":1,"number":3,"kind":"regular"}
+{"seq":124,"by":123,"type":"resolve","player":1,"card":"Grotto","when":"start-turn","origin":78}
+{"seq":125,"by":124,"type":"effect-end","id":0,"why":"resolved"}
+{"seq":126,"by":124,"type":"discard","player":1,"cards":["Copper","Necropolis","Copper"],"from":"1/aside","to":"1/discard"}
+{"seq":127,"by":124,"type":"shuffle","player":1,"cards":["Necropolis","Copper","Copper"],"from":"1/discard","to":"1/deck","at":"bottom","pos":[1,0,0]}
+{"seq":128,"by":124,"type":"draw","player":1,"cards":["Copper","Copper","Necropolis"],"from":"1/deck","to":"1/hand"}
+{"seq":129,"by":123,"type":"phase","phase":"action"}
+{"seq":130,"by":129,"type":"ask","seat":1,"prompt":"Action phase: choose a move","kind":"turn","purpose":"turn","phase":"action","min":1,"max":1,"options":[{"index":0,"group":0,"action":"play","label":"Play Necropolis","card":"Necropolis","zone":"hand"},{"index":1,"group":0,"action":"end-phase","label":"End your Action phase"}]}
+{"seq":131,"by":129,"type":"answer","seat":1,"indices":[0]}
+{"seq":132,"by":129,"type":"play","player":1,"card":"Necropolis","from":"1/hand","to":"1/play"}
+{"seq":133,"by":132,"type":"counter","counter":"actions","delta":-1,"value":0}
+{"seq":134,"by":132,"type":"counter","counter":"actions","delta":2,"value":2}
+{"seq":135,"by":123,"type":"phase","phase":"buy"}
+{"seq":136,"by":135,"type":"ask","seat":1,"prompt":"Buy phase: choose a move","kind":"turn","purpose":"turn","phase":"buy","min":1,"max":1,"options":[{"index":0,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":1,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":2,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":3,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":4,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":5,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":6,"group":0,"action":"buy","label":"Buy Copper ($0)","card":"Copper","cost":{"coins":0}},{"index":7,"group":0,"action":"buy","label":"Buy Curse ($0)","card":"Curse","cost":{"coins":0}},{"index":8,"group":0,"action":"buy","label":"Buy Ruined Market ($0)","card":"Ruined Market","cost":{"coins":0}},{"index":9,"group":0,"action":"end-phase","label":"End your Buy phase"}]}
+{"seq":137,"by":135,"type":"answer","seat":1,"indices":[4]}
+{"seq":138,"by":135,"type":"play","player":1,"card":"Copper","from":"1/hand","to":"1/play"}
+{"seq":139,"by":138,"type":"counter","counter":"coins","delta":1,"value":1}
+{"seq":140,"by":135,"type":"ask","seat":1,"prompt":"Buy phase: choose a move","kind":"turn","purpose":"turn","phase":"buy","min":1,"max":1,"options":[{"index":0,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":1,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":2,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":3,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":4,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":5,"group":0,"action":"buy","label":"Buy Copper ($0)","card":"Copper","cost":{"coins":0}},{"index":6,"group":0,"action":"buy","label":"Buy Curse ($0)","card":"Curse","cost":{"coins":0}},{"index":7,"group":0,"action":"buy","label":"Buy Ruined Market ($0)","card":"Ruined Market","cost":{"coins":0}},{"index":8,"group":0,"action":"end-phase","label":"End your Buy phase"}]}
+{"seq":141,"by":135,"type":"answer","seat":1,"indices":[8]}
+{"seq":142,"by":123,"type":"phase","phase":"night"}
+{"seq":143,"by":123,"type":"phase","phase":"cleanup"}
+{"seq":144,"by":143,"type":"discard","player":1,"cards":["Grotto","Necropolis","Copper"],"from":"1/play","to":"1/discard"}
+{"seq":145,"by":143,"type":"discard","player":1,"cards":["Copper","Copper","Copper","Copper","Overgrown Estate","Copper"],"from":"1/hand","to":"1/discard"}
+{"seq":146,"by":143,"type":"shuffle","player":1,"cards":["Copper","Copper","Grotto","Copper","Copper","Copper","Copper","Necropolis","Overgrown Estate"],"from":"1/discard","to":"1/deck","at":"bottom","pos":[0,1,6,1,1,1,1,1,0]}
+{"seq":147,"by":143,"type":"draw","player":1,"cards":["Copper","Copper","Copper","Copper","Grotto"],"from":"1/deck","to":"1/hand"}
+{"seq":148,"by":123,"type":"turn-end","player":1}
+{"seq":149,"type":"turn","player":0,"number":4,"kind":"regular"}
+{"seq":150,"by":149,"type":"phase","phase":"action"}
+{"seq":151,"by":149,"type":"phase","phase":"buy"}
+{"seq":152,"by":151,"type":"ask","seat":0,"prompt":"Buy phase: choose a move","kind":"turn","purpose":"turn","phase":"buy","min":1,"max":1,"options":[{"index":0,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":1,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":2,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":3,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":4,"group":0,"action":"buy","label":"Buy Copper ($0)","card":"Copper","cost":{"coins":0}},{"index":5,"group":0,"action":"buy","label":"Buy Curse ($0)","card":"Curse","cost":{"coins":0}},{"index":6,"group":0,"action":"buy","label":"Buy Ruined Market ($0)","card":"Ruined Market","cost":{"coins":0}},{"index":7,"group":0,"action":"end-phase","label":"End your Buy phase"}]}
+{"seq":153,"by":151,"type":"answer","seat":0,"indices":[4]}
+{"seq":154,"by":151,"type":"buy","player":0,"card":"Copper"}
+{"seq":155,"by":154,"type":"counter","counter":"buys","delta":-1,"value":0}
+{"seq":156,"by":154,"type":"counter","counter":"bought","delta":1,"value":1}
+{"seq":157,"by":154,"type":"gain","player":0,"cards":["Copper"],"from":"pile/Copper","to":"0/discard"}
+{"seq":158,"by":149,"type":"phase","phase":"night"}
+{"seq":159,"by":149,"type":"phase","phase":"cleanup"}
+{"seq":160,"by":159,"type":"discard","player":0,"cards":["Copper","Hovel","Copper","Copper","Copper"],"from":"0/hand","to":"0/discard"}
+{"seq":161,"by":159,"type":"shuffle","player":0,"cards":["Copper","Hovel","Survivors","Copper","Copper","Grotto","Copper","Copper","Copper","Overgrown Estate","Ruined Village","Copper"],"from":"0/discard","to":"0/deck","at":"bottom","pos":[0,2,9,0,0,5,0,0,1,1,0,0]}
+{"seq":162,"by":159,"type":"draw","player":0,"cards":["Curse","Copper","Copper","Hovel","Survivors"],"from":"0/deck","to":"0/hand"}
+{"seq":163,"by":149,"type":"turn-end","player":0}
+{"seq":164,"type":"turn","player":1,"number":4,"kind":"regular"}
+{"seq":165,"by":164,"type":"phase","phase":"action"}
+{"seq":166,"by":165,"type":"ask","seat":1,"prompt":"Action phase: choose a move","kind":"turn","purpose":"turn","phase":"action","min":1,"max":1,"options":[{"index":0,"group":0,"action":"play","label":"Play Grotto","card":"Grotto","zone":"hand"},{"index":1,"group":0,"action":"end-phase","label":"End your Action phase"}]}
+{"seq":167,"by":165,"type":"answer","seat":1,"indices":[1]}
+{"seq":168,"by":164,"type":"phase","phase":"buy"}
+{"seq":169,"by":168,"type":"ask","seat":1,"prompt":"Buy phase: choose a move","kind":"turn","purpose":"turn","phase":"buy","min":1,"max":1,"options":[{"index":0,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":1,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":2,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":3,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":4,"group":0,"action":"buy","label":"Buy Copper ($0)","card":"Copper","cost":{"coins":0}},{"index":5,"group":0,"action":"buy","label":"Buy Curse ($0)","card":"Curse","cost":{"coins":0}},{"index":6,"group":0,"action":"buy","label":"Buy Ruined Market ($0)","card":"Ruined Market","cost":{"coins":0}},{"index":7,"group":0,"action":"end-phase","label":"End your Buy phase"}]}
+{"seq":170,"by":168,"type":"answer","seat":1,"indices":[0]}
+{"seq":171,"by":168,"type":"play","player":1,"card":"Copper","from":"1/hand","to":"1/play"}
+{"seq":172,"by":171,"type":"counter","counter":"coins","delta":1,"value":1}
+{"seq":173,"by":168,"type":"ask","seat":1,"prompt":"Buy phase: choose a move","kind":"turn","purpose":"turn","phase":"buy","min":1,"max":1,"options":[{"index":0,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":1,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":2,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":3,"group":0,"action":"buy","label":"Buy Copper ($0)","card":"Copper","cost":{"coins":0}},{"index":4,"group":0,"action":"buy","label":"Buy Curse ($0)","card":"Curse","cost":{"coins":0}},{"index":5,"group":0,"action":"buy","label":"Buy Ruined Market ($0)","card":"Ruined Market","cost":{"coins":0}},{"index":6,"group":0,"action":"end-phase","label":"End your Buy phase"}]}
+{"seq":174,"by":168,"type":"answer","seat":1,"indices":[6]}
+{"seq":175,"by":164,"type":"phase","phase":"night"}
+{"seq":176,"by":164,"type":"phase","phase":"cleanup"}
+{"seq":177,"by":176,"type":"discard","player":1,"cards":["Copper"],"from":"1/play","to":"1/discard"}
+{"seq":178,"by":176,"type":"discard","player":1,"cards":["Copper","Copper","Copper","Grotto"],"from":"1/hand","to":"1/discard"}
+{"seq":179,"by":176,"type":"draw","player":1,"cards":["Copper","Copper","Copper","Copper","Necropolis"],"from":"1/deck","to":"1/hand"}
+{"seq":180,"by":164,"type":"turn-end","player":1}
+{"seq":181,"type":"turn","player":0,"number":5,"kind":"regular"}
+{"seq":182,"by":181,"type":"phase","phase":"action"}
+{"seq":183,"by":182,"type":"ask","seat":0,"prompt":"Action phase: choose a move","kind":"turn","purpose":"turn","phase":"action","min":1,"max":1,"options":[{"index":0,"group":0,"action":"play","label":"Play Survivors","card":"Survivors","zone":"hand"},{"index":1,"group":0,"action":"end-phase","label":"End your Action phase"}]}
+{"seq":184,"by":182,"type":"answer","seat":0,"indices":[0]}
+{"seq":185,"by":182,"type":"play","player":0,"card":"Survivors","from":"0/hand","to":"0/play"}
+{"seq":186,"by":185,"type":"counter","counter":"actions","delta":-1,"value":0}
+{"seq":187,"by":185,"type":"look","player":0,"cards":["Copper","Copper"],"from":"0/deck","to":"0/looking","face":"down"}
+{"seq":188,"by":185,"type":"ask","seat":0,"prompt":"Survivors (looking at Copper, Copper): choose an option","kind":"choose","purpose":"either","source":"Survivors","min":1,"max":1,"options":[{"index":0,"group":0,"action":"mode","label":"Discard them","value":0},{"index":1,"group":0,"action":"mode","label":"Put them back in any order","value":1}]}
+{"seq":189,"by":185,"type":"answer","seat":0,"indices":[1]}
+{"seq":190,"by":185,"type":"choose","player":0,"source":"Survivors","choices":["Put them back in any order"]}
+{"seq":191,"by":185,"type":"topdeck","player":0,"cards":["Copper","Copper"],"from":"0/looking","to":"0/deck"}
+{"seq":192,"by":181,"type":"phase","phase":"buy"}
+{"seq":193,"by":192,"type":"ask","seat":0,"prompt":"Buy phase: choose a move","kind":"turn","purpose":"turn","phase":"buy","min":1,"max":1,"options":[{"index":0,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":1,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":2,"group":0,"action":"buy","label":"Buy Copper ($0)","card":"Copper","cost":{"coins":0}},{"index":3,"group":0,"action":"buy","label":"Buy Curse ($0)","card":"Curse","cost":{"coins":0}},{"index":4,"group":0,"action":"buy","label":"Buy Ruined Market ($0)","card":"Ruined Market","cost":{"coins":0}},{"index":5,"group":0,"action":"end-phase","label":"End your Buy phase"}]}
+{"seq":194,"by":192,"type":"answer","seat":0,"indices":[2]}
+{"seq":195,"by":192,"type":"buy","player":0,"card":"Copper"}
+{"seq":196,"by":195,"type":"counter","counter":"buys","delta":-1,"value":0}
+{"seq":197,"by":195,"type":"counter","counter":"bought","delta":1,"value":1}
+{"seq":198,"by":195,"type":"gain","player":0,"cards":["Copper"],"from":"pile/Copper","to":"0/discard"}
+{"seq":199,"by":181,"type":"phase","phase":"night"}
+{"seq":200,"by":181,"type":"phase","phase":"cleanup"}
+{"seq":201,"by":200,"type":"discard","player":0,"cards":["Survivors"],"from":"0/play","to":"0/discard"}
+{"seq":202,"by":200,"type":"discard","player":0,"cards":["Curse","Copper","Copper","Hovel"],"from":"0/hand","to":"0/discard"}
+{"seq":203,"by":200,"type":"draw","player":0,"cards":["Copper","Copper","Grotto","Copper","Copper"],"from":"0/deck","to":"0/hand"}
+{"seq":204,"by":181,"type":"turn-end","player":0}
+{"seq":205,"type":"turn","player":1,"number":5,"kind":"regular"}
+{"seq":206,"by":205,"type":"phase","phase":"action"}
+{"seq":207,"by":206,"type":"ask","seat":1,"prompt":"Action phase: choose a move","kind":"turn","purpose":"turn","phase":"action","min":1,"max":1,"options":[{"index":0,"group":0,"action":"play","label":"Play Necropolis","card":"Necropolis","zone":"hand"},{"index":1,"group":0,"action":"end-phase","label":"End your Action phase"}]}
+{"seq":208,"by":206,"type":"answer","seat":1,"indices":[0]}
+{"seq":209,"by":206,"type":"play","player":1,"card":"Necropolis","from":"1/hand","to":"1/play"}
+{"seq":210,"by":209,"type":"counter","counter":"actions","delta":-1,"value":0}
+{"seq":211,"by":209,"type":"counter","counter":"actions","delta":2,"value":2}
+{"seq":212,"by":205,"type":"phase","phase":"buy"}
+{"seq":213,"by":212,"type":"ask","seat":1,"prompt":"Buy phase: choose a move","kind":"turn","purpose":"turn","phase":"buy","min":1,"max":1,"options":[{"index":0,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":1,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":2,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":3,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":4,"group":0,"action":"buy","label":"Buy Copper ($0)","card":"Copper","cost":{"coins":0}},{"index":5,"group":0,"action":"buy","label":"Buy Curse ($0)","card":"Curse","cost":{"coins":0}},{"index":6,"group":0,"action":"buy","label":"Buy Ruined Market ($0)","card":"Ruined Market","cost":{"coins":0}},{"index":7,"group":0,"action":"end-phase","label":"End your Buy phase"}]}
+{"seq":214,"by":212,"type":"answer","seat":1,"indices":[0]}
+{"seq":215,"by":212,"type":"play","player":1,"card":"Copper","from":"1/hand","to":"1/play"}
+{"seq":216,"by":215,"type":"counter","counter":"coins","delta":1,"value":1}
+{"seq":217,"by":212,"type":"ask","seat":1,"prompt":"Buy phase: choose a move","kind":"turn","purpose":"turn","phase":"buy","min":1,"max":1,"options":[{"index":0,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":1,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":2,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":3,"group":0,"action":"buy","label":"Buy Copper ($0)","card":"Copper","cost":{"coins":0}},{"index":4,"group":0,"action":"buy","label":"Buy Curse ($0)","card":"Curse","cost":{"coins":0}},{"index":5,"group":0,"action":"buy","label":"Buy Ruined Market ($0)","card":"Ruined Market","cost":{"coins":0}},{"index":6,"group":0,"action":"end-phase","label":"End your Buy phase"}]}
+{"seq":218,"by":212,"type":"answer","seat":1,"indices":[6]}
+{"seq":219,"by":205,"type":"phase","phase":"night"}
+{"seq":220,"by":205,"type":"phase","phase":"cleanup"}
+{"seq":221,"by":220,"type":"discard","player":1,"cards":["Necropolis","Copper"],"from":"1/play","to":"1/discard"}
+{"seq":222,"by":220,"type":"discard","player":1,"cards":["Copper","Copper","Copper"],"from":"1/hand","to":"1/discard"}
+{"seq":223,"by":220,"type":"shuffle","player":1,"cards":["Copper","Copper","Copper","Copper","Copper","Copper","Grotto","Copper","Copper","Necropolis"],"from":"1/discard","to":"1/deck","at":"bottom","pos":[0,0,0,0,2,2,1,1,1,0]}
+{"seq":224,"by":220,"type":"draw","player":1,"cards":["Overgrown Estate","Copper","Copper","Copper","Copper"],"from":"1/deck","to":"1/hand"}
+{"seq":225,"by":205,"type":"turn-end","player":1}
+{"seq":226,"type":"turn","player":0,"number":6,"kind":"regular"}
+{"seq":227,"by":226,"type":"phase","phase":"action"}
+{"seq":228,"by":227,"type":"ask","seat":0,"prompt":"Action phase: choose a move","kind":"turn","purpose":"turn","phase":"action","min":1,"max":1,"options":[{"index":0,"group":0,"action":"play","label":"Play Grotto","card":"Grotto","zone":"hand"},{"index":1,"group":0,"action":"end-phase","label":"End your Action phase"}]}
+{"seq":229,"by":227,"type":"answer","seat":0,"indices":[1]}
+{"seq":230,"by":226,"type":"phase","phase":"buy"}
+{"seq":231,"by":230,"type":"ask","seat":0,"prompt":"Buy phase: choose a move","kind":"turn","purpose":"turn","phase":"buy","min":1,"max":1,"options":[{"index":0,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":1,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":2,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":3,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":4,"group":0,"action":"buy","label":"Buy Copper ($0)","card":"Copper","cost":{"coins":0}},{"index":5,"group":0,"action":"buy","label":"Buy Curse ($0)","card":"Curse","cost":{"coins":0}},{"index":6,"group":0,"action":"buy","label":"Buy Ruined Market ($0)","card":"Ruined Market","cost":{"coins":0}},{"index":7,"group":0,"action":"end-phase","label":"End your Buy phase"}]}
+{"seq":232,"by":230,"type":"answer","seat":0,"indices":[7]}
+{"seq":233,"by":226,"type":"phase","phase":"night"}
+{"seq":234,"by":226,"type":"phase","phase":"cleanup"}
+{"seq":235,"by":234,"type":"discard","player":0,"cards":["Copper","Copper","Grotto","Copper","Copper"],"from":"0/hand","to":"0/discard"}
+{"seq":236,"by":234,"type":"shuffle","player":0,"cards":["Copper","Copper","Grotto","Curse","Copper","Survivors","Hovel","Copper","Copper","Copper","Copper"],"from":"0/discard","to":"0/deck","at":"bottom","pos":[0,0,0,5,0,4,1,0,0,0,0]}
+{"seq":237,"by":234,"type":"draw","player":0,"cards":["Copper","Overgrown Estate","Ruined Village","Copper","Copper"],"from":"0/deck","to":"0/hand"}
+{"seq":238,"by":226,"type":"turn-end","player":0}
+{"seq":239,"type":"turn","player":1,"number":6,"kind":"regular"}
+{"seq":240,"by":239,"type":"phase","phase":"action"}
+{"seq":241,"by":239,"type":"phase","phase":"buy"}
+{"seq":242,"by":241,"type":"ask","seat":1,"prompt":"Buy phase: choose a move","kind":"turn","purpose":"turn","phase":"buy","min":1,"max":1,"options":[{"index":0,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":1,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":2,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":3,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":4,"group":0,"action":"buy","label":"Buy Copper ($0)","card":"Copper","cost":{"coins":0}},{"index":5,"group":0,"action":"buy","label":"Buy Curse ($0)","card":"Curse","cost":{"coins":0}},{"index":6,"group":0,"action":"buy","label":"Buy Ruined Market ($0)","card":"Ruined Market","cost":{"coins":0}},{"index":7,"group":0,"action":"end-phase","label":"End your Buy phase"}]}
+{"seq":243,"by":241,"type":"answer","seat":1,"indices":[6]}
+{"seq":244,"by":241,"type":"buy","player":1,"card":"Ruined Market"}
+{"seq":245,"by":244,"type":"counter","counter":"buys","delta":-1,"value":0}
+{"seq":246,"by":244,"type":"counter","counter":"bought","delta":1,"value":1}
+{"seq":247,"by":244,"type":"gain","player":1,"cards":["Ruined Market"],"from":"pile/Ruins","to":"1/discard"}
+{"seq":248,"by":239,"type":"phase","phase":"night"}
+{"seq":249,"by":239,"type":"phase","phase":"cleanup"}
+{"seq":250,"by":249,"type":"discard","player":1,"cards":["Overgrown Estate","Copper","Copper","Copper","Copper"],"from":"1/hand","to":"1/discard"}
+{"seq":251,"by":249,"type":"draw","player":1,"cards":["Copper","Copper","Grotto","Copper","Copper"],"from":"1/deck","to":"1/hand"}
+{"seq":252,"by":239,"type":"turn-end","player":1}
+{"seq":253,"type":"turn","player":0,"number":7,"kind":"regular"}
+{"seq":254,"by":253,"type":"phase","phase":"action"}
+{"seq":255,"by":254,"type":"ask","seat":0,"prompt":"Action phase: choose a move","kind":"turn","purpose":"turn","phase":"action","min":1,"max":1,"options":[{"index":0,"group":0,"action":"play","label":"Play Ruined Village","card":"Ruined Village","zone":"hand"},{"index":1,"group":0,"action":"end-phase","label":"End your Action phase"}]}
+{"seq":256,"by":254,"type":"answer","seat":0,"indices":[1]}
+{"seq":257,"by":253,"type":"phase","phase":"buy"}
+{"seq":258,"by":257,"type":"ask","seat":0,"prompt":"Buy phase: choose a move","kind":"turn","purpose":"turn","phase":"buy","min":1,"max":1,"options":[{"index":0,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":1,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":2,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":3,"group":0,"action":"buy","label":"Buy Copper ($0)","card":"Copper","cost":{"coins":0}},{"index":4,"group":0,"action":"buy","label":"Buy Curse ($0)","card":"Curse","cost":{"coins":0}},{"index":5,"group":0,"action":"buy","label":"Buy Ruined Library ($0)","card":"Ruined Library","cost":{"coins":0}},{"index":6,"group":0,"action":"end-phase","label":"End your Buy phase"}]}
+{"seq":259,"by":257,"type":"answer","seat":0,"indices":[1]}
+{"seq":260,"by":257,"type":"play","player":0,"card":"Copper","from":"0/hand","to":"0/play"}
+{"seq":261,"by":260,"type":"counter","counter":"coins","delta":1,"value":1}
+{"seq":262,"by":257,"type":"ask","seat":0,"prompt":"Buy phase: choose a move","kind":"turn","purpose":"turn","phase":"buy","min":1,"max":1,"options":[{"index":0,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":1,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":2,"group":0,"action":"buy","label":"Buy Copper ($0)","card":"Copper","cost":{"coins":0}},{"index":3,"group":0,"action":"buy","label":"Buy Curse ($0)","card":"Curse","cost":{"coins":0}},{"index":4,"group":0,"action":"buy","label":"Buy Ruined Library ($0)","card":"Ruined Library","cost":{"coins":0}},{"index":5,"group":0,"action":"end-phase","label":"End your Buy phase"}]}
+{"seq":263,"by":257,"type":"answer","seat":0,"indices":[0]}
+{"seq":264,"by":257,"type":"play","player":0,"card":"Copper","from":"0/hand","to":"0/play"}
+{"seq":265,"by":264,"type":"counter","counter":"coins","delta":1,"value":2}
+{"seq":266,"by":257,"type":"ask","seat":0,"prompt":"Buy phase: choose a move","kind":"turn","purpose":"turn","phase":"buy","min":1,"max":1,"options":[{"index":0,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":1,"group":0,"action":"buy","label":"Buy Copper ($0)","card":"Copper","cost":{"coins":0}},{"index":2,"group":0,"action":"buy","label":"Buy Estate ($2)","card":"Estate","cost":{"coins":2}},{"index":3,"group":0,"action":"buy","label":"Buy Curse ($0)","card":"Curse","cost":{"coins":0}},{"index":4,"group":0,"action":"buy","label":"Buy Grotto ($2)","card":"Grotto","cost":{"coins":2}},{"index":5,"group":0,"action":"buy","label":"Buy Ruined Library ($0)","card":"Ruined Library","cost":{"coins":0}},{"index":6,"group":0,"action":"end-phase","label":"End your Buy phase"}]}
+{"seq":267,"by":257,"type":"answer","seat":0,"indices":[0]}
+{"seq":268,"by":257,"type":"play","player":0,"card":"Copper","from":"0/hand","to":"0/play"}
+{"seq":269,"by":268,"type":"counter","counter":"coins","delta":1,"value":3}
+{"seq":270,"by":257,"type":"ask","seat":0,"prompt":"Buy phase: choose a move","kind":"turn","purpose":"turn","phase":"buy","min":1,"max":1,"options":[{"index":0,"group":0,"action":"buy","label":"Buy Copper ($0)","card":"Copper","cost":{"coins":0}},{"index":1,"group":0,"action":"buy","label":"Buy Silver ($3)","card":"Silver","cost":{"coins":3}},{"index":2,"group":0,"action":"buy","label":"Buy Estate ($2)","card":"Estate","cost":{"coins":2}},{"index":3,"group":0,"action":"buy","label":"Buy Curse ($0)","card":"Curse","cost":{"coins":0}},{"index":4,"group":0,"action":"buy","label":"Buy Hermit ($3)","card":"Hermit","cost":{"coins":3}},{"index":5,"group":0,"action":"buy","label":"Buy Grotto ($2)","card":"Grotto","cost":{"coins":2}},{"index":6,"group":0,"action":"buy","label":"Buy Village ($3)","card":"Village","cost":{"coins":3}},{"index":7,"group":0,"action":"buy","label":"Buy Ruined Library ($0)","card":"Ruined Library","cost":{"coins":0}},{"index":8,"group":0,"action":"end-phase","label":"End your Buy phase"}]}
+{"seq":271,"by":257,"type":"answer","seat":0,"indices":[3]}
+{"seq":272,"by":257,"type":"buy","player":0,"card":"Curse"}
+{"seq":273,"by":272,"type":"counter","counter":"buys","delta":-1,"value":0}
+{"seq":274,"by":272,"type":"counter","counter":"bought","delta":1,"value":1}
+{"seq":275,"by":272,"type":"gain","player":0,"cards":["Curse"],"from":"pile/Curse","to":"0/discard"}
+{"seq":276,"by":253,"type":"phase","phase":"night"}
+{"seq":277,"by":253,"type":"phase","phase":"cleanup"}
+{"seq":278,"by":277,"type":"discard","player":0,"cards":["Copper","Copper","Copper"],"from":"0/play","to":"0/discard"}
+{"seq":279,"by":277,"type":"discard","player":0,"cards":["Overgrown Estate","Ruined Village"],"from":"0/hand","to":"0/discard"}
+{"seq":280,"by":277,"type":"draw","player":0,"cards":["Copper","Grotto","Curse","Copper","Survivors"],"from":"0/deck","to":"0/hand"}
+{"seq":281,"by":253,"type":"turn-end","player":0}
+{"seq":282,"type":"turn","player":1,"number":7,"kind":"regular"}
+{"seq":283,"by":282,"type":"phase","phase":"action"}
+{"seq":284,"by":283,"type":"ask","seat":1,"prompt":"Action phase: choose a move","kind":"turn","purpose":"turn","phase":"action","min":1,"max":1,"options":[{"index":0,"group":0,"action":"play","label":"Play Grotto","card":"Grotto","zone":"hand"},{"index":1,"group":0,"action":"end-phase","label":"End your Action phase"}]}
+{"seq":285,"by":283,"type":"answer","seat":1,"indices":[0]}
+{"seq":286,"by":283,"type":"play","player":1,"card":"Grotto","from":"1/hand","to":"1/play"}
+{"seq":287,"by":286,"type":"counter","counter":"actions","delta":-1,"value":0}
+{"seq":288,"by":286,"type":"counter","counter":"actions","delta":1,"value":1}
+{"seq":289,"by":286,"type":"ask","seat":1,"prompt":"Grotto: choose up to 4 cards to set aside","kind":"cards","purpose":"set-aside","source":"Grotto","min":0,"max":4,"options":[{"index":0,"group":0,"action":"select","label":"Copper","card":"Copper","zone":"hand"},{"index":1,"group":0,"action":"select","label":"Copper","card":"Copper","zone":"hand"},{"index":2,"group":0,"action":"select","label":"Copper","card":"Copper","zone":"hand"},{"index":3,"group":0,"action":"select","label":"Copper","card":"Copper","zone":"hand"}]}
+{"seq":290,"by":286,"type":"answer","seat":1,"indices":[1]}
+{"seq":291,"by":286,"type":"set-aside","player":1,"cards":["Copper"],"from":"1/hand","to":"1/aside","face":"down"}
+{"seq":292,"by":286,"type":"effect","id":1,"card":"Grotto","source":"Grotto","owner":1,"until":{"start-of-turn":1},"keeps":["Grotto"],"holds":["Copper"]}
+{"seq":293,"by":282,"type":"phase","phase":"buy"}
+{"seq":294,"by":293,"type":"ask","seat":1,"prompt":"Buy phase: choose a move","kind":"turn","purpose":"turn","phase":"buy","min":1,"max":1,"options":[{"index":0,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":1,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":2,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":3,"group":0,"action":"buy","label":"Buy Copper ($0)","card":"Copper","cost":{"coins":0}},{"index":4,"group":0,"action":"buy","label":"Buy Curse ($0)","card":"Curse","cost":{"coins":0}},{"index":5,"group":0,"action":"buy","label":"Buy Ruined Library ($0)","card":"Ruined Library","cost":{"coins":0}},{"index":6,"group":0,"action":"end-phase","label":"End your Buy phase"}]}
+{"seq":295,"by":293,"type":"answer","seat":1,"indices":[6]}
+{"seq":296,"by":282,"type":"phase","phase":"night"}
+{"seq":297,"by":282,"type":"phase","phase":"cleanup"}
+{"seq":298,"by":297,"type":"discard","player":1,"cards":["Copper","Copper","Copper"],"from":"1/hand","to":"1/discard"}
+{"seq":299,"by":297,"type":"shuffle","player":1,"cards":["Overgrown Estate","Ruined Market","Copper","Copper","Copper","Copper","Copper","Copper","Copper"],"from":"1/discard","to":"1/deck","at":"bottom","pos":[7,7,0,0,0,0,0,0,0]}
+{"seq":300,"by":297,"type":"draw","player":1,"cards":["Necropolis","Overgrown Estate","Ruined Market","Copper","Copper"],"from":"1/deck","to":"1/hand"}
+{"seq":301,"by":282,"type":"turn-end","player":1}
+{"seq":302,"type":"turn","player":0,"number":8,"kind":"regular"}
+{"seq":303,"by":302,"type":"phase","phase":"action"}
+{"seq":304,"by":303,"type":"ask","seat":0,"prompt":"Action phase: choose a move","kind":"turn","purpose":"turn","phase":"action","min":1,"max":1,"options":[{"index":0,"group":0,"action":"play","label":"Play Grotto","card":"Grotto","zone":"hand"},{"index":1,"group":0,"action":"play","label":"Play Survivors","card":"Survivors","zone":"hand"},{"index":2,"group":0,"action":"end-phase","label":"End your Action phase"}]}
+{"seq":305,"by":303,"type":"answer","seat":0,"indices":[0]}
+{"seq":306,"by":303,"type":"play","player":0,"card":"Grotto","from":"0/hand","to":"0/play"}
+{"seq":307,"by":306,"type":"counter","counter":"actions","delta":-1,"value":0}
+{"seq":308,"by":306,"type":"counter","counter":"actions","delta":1,"value":1}
+{"seq":309,"by":306,"type":"ask","seat":0,"prompt":"Grotto: choose up to 4 cards to set aside","kind":"cards","purpose":"set-aside","source":"Grotto","min":0,"max":4,"options":[{"index":0,"group":0,"action":"select","label":"Copper","card":"Copper","zone":"hand"},{"index":1,"group":0,"action":"select","label":"Curse","card":"Curse","zone":"hand"},{"index":2,"group":0,"action":"select","label":"Copper","card":"Copper","zone":"hand"},{"index":3,"group":0,"action":"select","label":"Survivors","card":"Survivors","zone":"hand"}]}
+{"seq":310,"by":306,"type":"answer","seat":0,"indices":[]}
+{"seq":311,"by":303,"type":"ask","seat":0,"prompt":"Action phase: choose a move","kind":"turn","purpose":"turn","phase":"action","min":1,"max":1,"options":[{"index":0,"group":0,"action":"play","label":"Play Survivors","card":"Survivors","zone":"hand"},{"index":1,"group":0,"action":"end-phase","label":"End your Action phase"}]}
+{"seq":312,"by":303,"type":"answer","seat":0,"indices":[0]}
+{"seq":313,"by":303,"type":"play","player":0,"card":"Survivors","from":"0/hand","to":"0/play"}
+{"seq":314,"by":313,"type":"counter","counter":"actions","delta":-1,"value":0}
+{"seq":315,"by":313,"type":"look","player":0,"cards":["Hovel","Copper"],"from":"0/deck","to":"0/looking","face":"down"}
+{"seq":316,"by":313,"type":"ask","seat":0,"prompt":"Survivors (looking at Hovel, Copper): choose an option","kind":"choose","purpose":"either","source":"Survivors","min":1,"max":1,"options":[{"index":0,"group":0,"action":"mode","label":"Discard them","value":0},{"index":1,"group":0,"action":"mode","label":"Put them back in any order","value":1}]}
+{"seq":317,"by":313,"type":"answer","seat":0,"indices":[1]}
+{"seq":318,"by":313,"type":"choose","player":0,"source":"Survivors","choices":["Put them back in any order"]}
+{"seq":319,"by":313,"type":"ask","seat":0,"prompt":"Survivors: choose 2 cards to put onto your deck, in order (first listed ends on top)","kind":"cards","purpose":"top-deck","source":"Survivors","ordered":true,"min":2,"max":2,"options":[{"index":0,"group":0,"action":"select","label":"Hovel","card":"Hovel","zone":"looking"},{"index":1,"group":0,"action":"select","label":"Copper","card":"Copper","zone":"looking"}]}
+{"seq":320,"by":313,"type":"answer","seat":0,"indices":[1,0]}
+{"seq":321,"by":313,"type":"topdeck","player":0,"cards":["Hovel","Copper"],"from":"0/looking","to":"0/deck"}
+{"seq":322,"by":302,"type":"phase","phase":"buy"}
+{"seq":323,"by":322,"type":"ask","seat":0,"prompt":"Buy phase: choose a move","kind":"turn","purpose":"turn","phase":"buy","min":1,"max":1,"options":[{"index":0,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":1,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":2,"group":0,"action":"buy","label":"Buy Copper ($0)","card":"Copper","cost":{"coins":0}},{"index":3,"group":0,"action":"buy","label":"Buy Curse ($0)","card":"Curse","cost":{"coins":0}},{"index":4,"group":0,"action":"buy","label":"Buy Ruined Library ($0)","card":"Ruined Library","cost":{"coins":0}},{"index":5,"group":0,"action":"end-phase","label":"End your Buy phase"}]}
+{"seq":324,"by":322,"type":"answer","seat":0,"indices":[0]}
+{"seq":325,"by":322,"type":"play","player":0,"card":"Copper","from":"0/hand","to":"0/play"}
+{"seq":326,"by":325,"type":"counter","counter":"coins","delta":1,"value":1}
+{"seq":327,"by":322,"type":"ask","seat":0,"prompt":"Buy phase: choose a move","kind":"turn","purpose":"turn","phase":"buy","min":1,"max":1,"options":[{"index":0,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":1,"group":0,"action":"buy","label":"Buy Copper ($0)","card":"Copper","cost":{"coins":0}},{"index":2,"group":0,"action":"buy","label":"Buy Curse ($0)","card":"Curse","cost":{"coins":0}},{"index":3,"group":0,"action":"buy","label":"Buy Ruined Library ($0)","card":"Ruined Library","cost":{"coins":0}},{"index":4,"group":0,"action":"end-phase","label":"End your Buy phase"}]}
+{"seq":328,"by":322,"type":"answer","seat":0,"indices":[0]}
+{"seq":329,"by":322,"type":"play","player":0,"card":"Copper","from":"0/hand","to":"0/play"}
+{"seq":330,"by":329,"type":"counter","counter":"coins","delta":1,"value":2}
+{"seq":331,"by":322,"type":"ask","seat":0,"prompt":"Buy phase: choose a move","kind":"turn","purpose":"turn","phase":"buy","min":1,"max":1,"options":[{"index":0,"group":0,"action":"buy","label":"Buy Copper ($0)","card":"Copper","cost":{"coins":0}},{"index":1,"group":0,"action":"buy","label":"Buy Estate ($2)","card":"Estate","cost":{"coins":2}},{"index":2,"group":0,"action":"buy","label":"Buy Curse ($0)","card":"Curse","cost":{"coins":0}},{"index":3,"group":0,"action":"buy","label":"Buy Grotto ($2)","card":"Grotto","cost":{"coins":2}},{"index":4,"group":0,"action":"buy","label":"Buy Ruined Library ($0)","card":"Ruined Library","cost":{"coins":0}},{"index":5,"group":0,"action":"end-phase","label":"End your Buy phase"}]}
+{"seq":332,"by":322,"type":"answer","seat":0,"indices":[0]}
+{"seq":333,"by":322,"type":"buy","player":0,"card":"Copper"}
+{"seq":334,"by":333,"type":"counter","counter":"buys","delta":-1,"value":0}
+{"seq":335,"by":333,"type":"counter","counter":"bought","delta":1,"value":1}
+{"seq":336,"by":333,"type":"gain","player":0,"cards":["Copper"],"from":"pile/Copper","to":"0/discard"}
+{"seq":337,"by":302,"type":"phase","phase":"night"}
+{"seq":338,"by":302,"type":"phase","phase":"cleanup"}
+{"seq":339,"by":338,"type":"discard","player":0,"cards":["Grotto","Survivors","Copper","Copper"],"from":"0/play","to":"0/discard"}
+{"seq":340,"by":338,"type":"discard","player":0,"cards":["Curse"],"from":"0/hand","to":"0/discard"}
+{"seq":341,"by":338,"type":"draw","player":0,"cards":["Copper","Hovel","Copper","Copper","Copper"],"from":"0/deck","to":"0/hand"}
+{"seq":342,"by":302,"type":"turn-end","player":0}
+{"seq":343,"type":"turn","player":1,"number":8,"kind":"regular"}
+{"seq":344,"by":343,"type":"resolve","player":1,"card":"Grotto","when":"start-turn","origin":286}
+{"seq":345,"by":344,"type":"effect-end","id":1,"why":"resolved"}
+{"seq":346,"by":344,"type":"discard","player":1,"cards":["Copper"],"from":"1/aside","to":"1/discard"}
+{"seq":347,"by":344,"type":"draw","player":1,"cards":["Copper"],"from":"1/deck","to":"1/hand"}
+{"seq":348,"by":343,"type":"phase","phase":"action"}
+{"seq":349,"by":348,"type":"ask","seat":1,"prompt":"Action phase: choose a move","kind":"turn","purpose":"turn","phase":"action","min":1,"max":1,"options":[{"index":0,"group":0,"action":"play","label":"Play Necropolis","card":"Necropolis","zone":"hand"},{"index":1,"group":0,"action":"play","label":"Play Ruined Market","card":"Ruined Market","zone":"hand"},{"index":2,"group":0,"action":"end-phase","label":"End your Action phase"}]}
+{"seq":350,"by":348,"type":"answer","seat":1,"indices":[0]}
+{"seq":351,"by":348,"type":"play","player":1,"card":"Necropolis","from":"1/hand","to":"1/play"}
+{"seq":352,"by":351,"type":"counter","counter":"actions","delta":-1,"value":0}
+{"seq":353,"by":351,"type":"counter","counter":"actions","delta":2,"value":2}
+{"seq":354,"by":348,"type":"ask","seat":1,"prompt":"Action phase: choose a move","kind":"turn","purpose":"turn","phase":"action","min":1,"max":1,"options":[{"index":0,"group":0,"action":"play","label":"Play Ruined Market","card":"Ruined Market","zone":"hand"},{"index":1,"group":0,"action":"end-phase","label":"End your Action phase"}]}
+{"seq":355,"by":348,"type":"answer","seat":1,"indices":[1]}
+{"seq":356,"by":343,"type":"phase","phase":"buy"}
+{"seq":357,"by":356,"type":"ask","seat":1,"prompt":"Buy phase: choose a move","kind":"turn","purpose":"turn","phase":"buy","min":1,"max":1,"options":[{"index":0,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":1,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":2,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":3,"group":0,"action":"buy","label":"Buy Copper ($0)","card":"Copper","cost":{"coins":0}},{"index":4,"group":0,"action":"buy","label":"Buy Curse ($0)","card":"Curse","cost":{"coins":0}},{"index":5,"group":0,"action":"buy","label":"Buy Ruined Library ($0)","card":"Ruined Library","cost":{"coins":0}},{"index":6,"group":0,"action":"end-phase","label":"End your Buy phase"}]}
+{"seq":358,"by":356,"type":"answer","seat":1,"indices":[1]}
+{"seq":359,"by":356,"type":"play","player":1,"card":"Copper","from":"1/hand","to":"1/play"}
+{"seq":360,"by":359,"type":"counter","counter":"coins","delta":1,"value":1}
+{"seq":361,"by":356,"type":"ask","seat":1,"prompt":"Buy phase: choose a move","kind":"turn","purpose":"turn","phase":"buy","min":1,"max":1,"options":[{"index":0,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":1,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":2,"group":0,"action":"buy","label":"Buy Copper ($0)","card":"Copper","cost":{"coins":0}},{"index":3,"group":0,"action":"buy","label":"Buy Curse ($0)","card":"Curse","cost":{"coins":0}},{"index":4,"group":0,"action":"buy","label":"Buy Ruined Library ($0)","card":"Ruined Library","cost":{"coins":0}},{"index":5,"group":0,"action":"end-phase","label":"End your Buy phase"}]}
+{"seq":362,"by":356,"type":"answer","seat":1,"indices":[4]}
+{"seq":363,"by":356,"type":"buy","player":1,"card":"Ruined Library"}
+{"seq":364,"by":363,"type":"counter","counter":"buys","delta":-1,"value":0}
+{"seq":365,"by":363,"type":"counter","counter":"bought","delta":1,"value":1}
+{"seq":366,"by":363,"type":"gain","player":1,"cards":["Ruined Library"],"from":"pile/Ruins","to":"1/discard"}
+{"seq":367,"by":343,"type":"phase","phase":"night"}
+{"seq":368,"by":343,"type":"phase","phase":"cleanup"}
+{"seq":369,"by":368,"type":"discard","player":1,"cards":["Grotto","Necropolis","Copper"],"from":"1/play","to":"1/discard"}
+{"seq":370,"by":368,"type":"discard","player":1,"cards":["Overgrown Estate","Ruined Market","Copper","Copper"],"from":"1/hand","to":"1/discard"}
+{"seq":371,"by":368,"type":"shuffle","player":1,"cards":["Overgrown Estate","Ruined Market","Grotto","Copper","Copper","Necropolis","Copper","Copper","Ruined Library"],"from":"1/discard","to":"1/deck","at":"bottom","pos":[3,2,4,0,0,1,0,1,0]}
+{"seq":372,"by":368,"type":"draw","player":1,"cards":["Copper","Copper","Copper","Copper","Overgrown Estate"],"from":"1/deck","to":"1/hand"}
+{"seq":373,"by":343,"type":"turn-end","player":1}
+{"seq":374,"type":"turn","player":0,"number":9,"kind":"regular"}
+{"seq":375,"by":374,"type":"phase","phase":"action"}
+{"seq":376,"by":374,"type":"phase","phase":"buy"}
+{"seq":377,"by":376,"type":"ask","seat":0,"prompt":"Buy phase: choose a move","kind":"turn","purpose":"turn","phase":"buy","min":1,"max":1,"options":[{"index":0,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":1,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":2,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":3,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":4,"group":0,"action":"buy","label":"Buy Copper ($0)","card":"Copper","cost":{"coins":0}},{"index":5,"group":0,"action":"buy","label":"Buy Curse ($0)","card":"Curse","cost":{"coins":0}},{"index":6,"group":0,"action":"buy","label":"Buy Survivors ($0)","card":"Survivors","cost":{"coins":0}},{"index":7,"group":0,"action":"end-phase","label":"End your Buy phase"}]}
+{"seq":378,"by":376,"type":"answer","seat":0,"indices":[2]}
+{"seq":379,"by":376,"type":"play","player":0,"card":"Copper","from":"0/hand","to":"0/play"}
+{"seq":380,"by":379,"type":"counter","counter":"coins","delta":1,"value":1}
+{"seq":381,"by":376,"type":"ask","seat":0,"prompt":"Buy phase: choose a move","kind":"turn","purpose":"turn","phase":"buy","min":1,"max":1,"options":[{"index":0,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":1,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":2,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":3,"group":0,"action":"buy","label":"Buy Copper ($0)","card":"Copper","cost":{"coins":0}},{"index":4,"group":0,"action":"buy","label":"Buy Curse ($0)","card":"Curse","cost":{"coins":0}},{"index":5,"group":0,"action":"buy","label":"Buy Survivors ($0)","card":"Survivors","cost":{"coins":0}},{"index":6,"group":0,"action":"end-phase","label":"End your Buy phase"}]}
+{"seq":382,"by":376,"type":"answer","seat":0,"indices":[0]}
+{"seq":383,"by":376,"type":"play","player":0,"card":"Copper","from":"0/hand","to":"0/play"}
+{"seq":384,"by":383,"type":"counter","counter":"coins","delta":1,"value":2}
+{"seq":385,"by":376,"type":"ask","seat":0,"prompt":"Buy phase: choose a move","kind":"turn","purpose":"turn","phase":"buy","min":1,"max":1,"options":[{"index":0,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":1,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":2,"group":0,"action":"buy","label":"Buy Copper ($0)","card":"Copper","cost":{"coins":0}},{"index":3,"group":0,"action":"buy","label":"Buy Estate ($2)","card":"Estate","cost":{"coins":2}},{"index":4,"group":0,"action":"buy","label":"Buy Curse ($0)","card":"Curse","cost":{"coins":0}},{"index":5,"group":0,"action":"buy","label":"Buy Grotto ($2)","card":"Grotto","cost":{"coins":2}},{"index":6,"group":0,"action":"buy","label":"Buy Survivors ($0)","card":"Survivors","cost":{"coins":0}},{"index":7,"group":0,"action":"end-phase","label":"End your Buy phase"}]}
+{"seq":386,"by":376,"type":"answer","seat":0,"indices":[0]}
+{"seq":387,"by":376,"type":"play","player":0,"card":"Copper","from":"0/hand","to":"0/play"}
+{"seq":388,"by":387,"type":"counter","counter":"coins","delta":1,"value":3}
+{"seq":389,"by":376,"type":"ask","seat":0,"prompt":"Buy phase: choose a move","kind":"turn","purpose":"turn","phase":"buy","min":1,"max":1,"options":[{"index":0,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":1,"group":0,"action":"buy","label":"Buy Copper ($0)","card":"Copper","cost":{"coins":0}},{"index":2,"group":0,"action":"buy","label":"Buy Silver ($3)","card":"Silver","cost":{"coins":3}},{"index":3,"group":0,"action":"buy","label":"Buy Estate ($2)","card":"Estate","cost":{"coins":2}},{"index":4,"group":0,"action":"buy","label":"Buy Curse ($0)","card":"Curse","cost":{"coins":0}},{"index":5,"group":0,"action":"buy","label":"Buy Hermit ($3)","card":"Hermit","cost":{"coins":3}},{"index":6,"group":0,"action":"buy","label":"Buy Grotto ($2)","card":"Grotto","cost":{"coins":2}},{"index":7,"group":0,"action":"buy","label":"Buy Village ($3)","card":"Village","cost":{"coins":3}},{"index":8,"group":0,"action":"buy","label":"Buy Survivors ($0)","card":"Survivors","cost":{"coins":0}},{"index":9,"group":0,"action":"end-phase","label":"End your Buy phase"}]}
+{"seq":390,"by":376,"type":"answer","seat":0,"indices":[5]}
+{"seq":391,"by":376,"type":"buy","player":0,"card":"Hermit"}
+{"seq":392,"by":391,"type":"counter","counter":"buys","delta":-1,"value":0}
+{"seq":393,"by":391,"type":"counter","counter":"coins","delta":-3,"value":0}
+{"seq":394,"by":391,"type":"counter","counter":"bought","delta":1,"value":1}
+{"seq":395,"by":391,"type":"gain","player":0,"cards":["Hermit"],"from":"pile/Hermit","to":"0/discard"}
+{"seq":396,"by":374,"type":"phase","phase":"night"}
+{"seq":397,"by":374,"type":"phase","phase":"cleanup"}
+{"seq":398,"by":397,"type":"discard","player":0,"cards":["Copper","Copper","Copper"],"from":"0/play","to":"0/discard"}
+{"seq":399,"by":397,"type":"discard","player":0,"cards":["Hovel","Copper"],"from":"0/hand","to":"0/discard"}
+{"seq":400,"by":397,"type":"shuffle","player":0,"cards":["Copper","Grotto","Copper","Copper","Curse","Overgrown Estate","Curse","Copper","Ruined Village","Copper","Copper","Copper","Survivors","Hovel","Hermit","Copper","Copper","Copper"],"from":"0/discard","to":"0/deck","at":"bottom","pos":[0,9,1,1,3,8,11,1,6,2,2,3,2,0,0,0,0,0]}
+{"seq":401,"by":397,"type":"draw","player":0,"cards":["Copper","Grotto","Copper","Copper","Curse"],"from":"0/deck","to":"0/hand"}
+{"seq":402,"by":374,"type":"turn-end","player":0}
+{"seq":403,"type":"turn","player":1,"number":9,"kind":"regular"}
+{"seq":404,"by":403,"type":"phase","phase":"action"}
+{"seq":405,"by":403,"type":"phase","phase":"buy"}
+{"seq":406,"by":405,"type":"ask","seat":1,"prompt":"Buy phase: choose a move","kind":"turn","purpose":"turn","phase":"buy","min":1,"max":1,"options":[{"index":0,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":1,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":2,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":3,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":4,"group":0,"action":"buy","label":"Buy Copper ($0)","card":"Copper","cost":{"coins":0}},{"index":5,"group":0,"action":"buy","label":"Buy Curse ($0)","card":"Curse","cost":{"coins":0}},{"index":6,"group":0,"action":"buy","label":"Buy Survivors ($0)","card":"Survivors","cost":{"coins":0}},{"index":7,"group":0,"action":"end-phase","label":"End your Buy phase"}]}
+{"seq":407,"by":405,"type":"answer","seat":1,"indices":[0]}
+{"seq":408,"by":405,"type":"play","player":1,"card":"Copper","from":"1/hand","to":"1/play"}
+{"seq":409,"by":408,"type":"counter","counter":"coins","delta":1,"value":1}
+{"seq":410,"by":405,"type":"ask","seat":1,"prompt":"Buy phase: choose a move","kind":"turn","purpose":"turn","phase":"buy","min":1,"max":1,"options":[{"index":0,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":1,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":2,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":3,"group":0,"action":"buy","label":"Buy Copper ($0)","card":"Copper","cost":{"coins":0}},{"index":4,"group":0,"action":"buy","label":"Buy Curse ($0)","card":"Curse","cost":{"coins":0}},{"index":5,"group":0,"action":"buy","label":"Buy Survivors ($0)","card":"Survivors","cost":{"coins":0}},{"index":6,"group":0,"action":"end-phase","label":"End your Buy phase"}]}
+{"seq":411,"by":405,"type":"answer","seat":1,"indices":[5]}
+{"seq":412,"by":405,"type":"buy","player":1,"card":"Survivors"}
+{"seq":413,"by":412,"type":"counter","counter":"buys","delta":-1,"value":0}
+{"seq":414,"by":412,"type":"counter","counter":"bought","delta":1,"value":1}
+{"seq":415,"by":412,"type":"gain","player":1,"cards":["Survivors"],"from":"pile/Ruins","to":"1/discard"}
+{"seq":416,"by":403,"type":"phase","phase":"night"}
+{"seq":417,"by":403,"type":"phase","phase":"cleanup"}
+{"seq":418,"by":417,"type":"discard","player":1,"cards":["Copper"],"from":"1/play","to":"1/discard"}
+{"seq":419,"by":417,"type":"discard","player":1,"cards":["Copper","Copper","Copper","Overgrown Estate"],"from":"1/hand","to":"1/discard"}
+{"seq":420,"by":417,"type":"draw","player":1,"cards":["Ruined Market","Grotto","Copper","Copper","Necropolis"],"from":"1/deck","to":"1/hand"}
+{"seq":421,"by":403,"type":"turn-end","player":1}
+{"seq":422,"type":"turn","player":0,"number":10,"kind":"regular"}
+{"seq":423,"by":422,"type":"phase","phase":"action"}
+{"seq":424,"by":423,"type":"ask","seat":0,"prompt":"Action phase: choose a move","kind":"turn","purpose":"turn","phase":"action","min":1,"max":1,"options":[{"index":0,"group":0,"action":"play","label":"Play Grotto","card":"Grotto","zone":"hand"},{"index":1,"group":0,"action":"end-phase","label":"End your Action phase"}]}
+{"seq":425,"by":423,"type":"answer","seat":0,"indices":[1]}
+{"seq":426,"by":422,"type":"phase","phase":"buy"}
+{"seq":427,"by":426,"type":"ask","seat":0,"prompt":"Buy phase: choose a move","kind":"turn","purpose":"turn","phase":"buy","min":1,"max":1,"options":[{"index":0,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":1,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":2,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":3,"group":0,"action":"buy","label":"Buy Copper ($0)","card":"Copper","cost":{"coins":0}},{"index":4,"group":0,"action":"buy","label":"Buy Curse ($0)","card":"Curse","cost":{"coins":0}},{"index":5,"group":0,"action":"buy","label":"Buy Ruined Village ($0)","card":"Ruined Village","cost":{"coins":0}},{"index":6,"group":0,"action":"end-phase","label":"End your Buy phase"}]}
+{"seq":428,"by":426,"type":"answer","seat":0,"indices":[4]}
+{"seq":429,"by":426,"type":"buy","player":0,"card":"Curse"}
+{"seq":430,"by":429,"type":"counter","counter":"buys","delta":-1,"value":0}
+{"seq":431,"by":429,"type":"counter","counter":"bought","delta":1,"value":1}
+{"seq":432,"by":429,"type":"gain","player":0,"cards":["Curse"],"from":"pile/Curse","to":"0/discard"}
+{"seq":433,"by":422,"type":"phase","phase":"night"}
+{"seq":434,"by":422,"type":"phase","phase":"cleanup"}
+{"seq":435,"by":434,"type":"discard","player":0,"cards":["Copper","Grotto","Copper","Copper","Curse"],"from":"0/hand","to":"0/discard"}
+{"seq":436,"by":434,"type":"draw","player":0,"cards":["Overgrown Estate","Curse","Copper","Ruined Village","Copper"],"from":"0/deck","to":"0/hand"}
+{"seq":437,"by":422,"type":"turn-end","player":0}
+{"seq":438,"type":"turn","player":1,"number":10,"kind":"regular"}
+{"seq":439,"by":438,"type":"phase","phase":"action"}
+{"seq":440,"by":439,"type":"ask","seat":1,"prompt":"Action phase: choose a move","kind":"turn","purpose":"turn","phase":"action","min":1,"max":1,"options":[{"index":0,"group":0,"action":"play","label":"Play Ruined Market","card":"Ruined Market","zone":"hand"},{"index":1,"group":0,"action":"play","label":"Play Grotto","card":"Grotto","zone":"hand"},{"index":2,"group":0,"action":"play","label":"Play Necropolis","card":"Necropolis","zone":"hand"},{"index":3,"group":0,"action":"end-phase","label":"End your Action phase"}]}
+{"seq":441,"by":439,"type":"answer","seat":1,"indices":[0]}
+{"seq":442,"by":439,"type":"play","player":1,"card":"Ruined Market","from":"1/hand","to":"1/play"}
+{"seq":443,"by":442,"type":"counter","counter":"actions","delta":-1,"value":0}
+{"seq":444,"by":442,"type":"counter","counter":"buys","delta":1,"value":2}
+{"seq":445,"by":438,"type":"phase","phase":"buy"}
+{"seq":446,"by":445,"type":"ask","seat":1,"prompt":"Buy phase: choose a move","kind":"turn","purpose":"turn","phase":"buy","min":1,"max":1,"options":[{"index":0,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":1,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":2,"group":0,"action":"buy","label":"Buy Copper ($0)","card":"Copper","cost":{"coins":0}},{"index":3,"group":0,"action":"buy","label":"Buy Curse ($0)","card":"Curse","cost":{"coins":0}},{"index":4,"group":0,"action":"buy","label":"Buy Ruined Village ($0)","card":"Ruined Village","cost":{"coins":0}},{"index":5,"group":0,"action":"end-phase","label":"End your Buy phase"}]}
+{"seq":447,"by":445,"type":"answer","seat":1,"indices":[1]}
+{"seq":448,"by":445,"type":"play","player":1,"card":"Copper","from":"1/hand","to":"1/play"}
+{"seq":449,"by":448,"type":"counter","counter":"coins","delta":1,"value":1}
+{"seq":450,"by":445,"type":"ask","seat":1,"prompt":"Buy phase: choose a move","kind":"turn","purpose":"turn","phase":"buy","min":1,"max":1,"options":[{"index":0,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":1,"group":0,"action":"buy","label":"Buy Copper ($0)","card":"Copper","cost":{"coins":0}},{"index":2,"group":0,"action":"buy","label":"Buy Curse ($0)","card":"Curse","cost":{"coins":0}},{"index":3,"group":0,"action":"buy","label":"Buy Ruined Village ($0)","card":"Ruined Village","cost":{"coins":0}},{"index":4,"group":0,"action":"end-phase","label":"End your Buy phase"}]}
+{"seq":451,"by":445,"type":"answer","seat":1,"indices":[2]}
+{"seq":452,"by":445,"type":"buy","player":1,"card":"Curse"}
+{"seq":453,"by":452,"type":"counter","counter":"buys","delta":-1,"value":1}
+{"seq":454,"by":452,"type":"counter","counter":"bought","delta":1,"value":1}
+{"seq":455,"by":452,"type":"gain","player":1,"cards":["Curse"],"from":"pile/Curse","to":"1/discard"}
+{"seq":456,"by":445,"type":"ask","seat":1,"prompt":"Buy phase: choose a move","kind":"turn","purpose":"turn","phase":"buy","min":1,"max":1,"options":[{"index":0,"group":0,"action":"buy","label":"Buy Copper ($0)","card":"Copper","cost":{"coins":0}},{"index":1,"group":0,"action":"buy","label":"Buy Curse ($0)","card":"Curse","cost":{"coins":0}},{"index":2,"group":0,"action":"buy","label":"Buy Ruined Village ($0)","card":"Ruined Village","cost":{"coins":0}},{"index":3,"group":0,"action":"end-phase","label":"End your Buy phase"}]}
+{"seq":457,"by":445,"type":"answer","seat":1,"indices":[3]}
+{"seq":458,"by":438,"type":"phase","phase":"night"}
+{"seq":459,"by":438,"type":"phase","phase":"cleanup"}
+{"seq":460,"by":459,"type":"discard","player":1,"cards":["Ruined Market","Copper"],"from":"1/play","to":"1/discard"}
+{"seq":461,"by":459,"type":"discard","player":1,"cards":["Grotto","Copper","Necropolis"],"from":"1/hand","to":"1/discard"}
+{"seq":462,"by":459,"type":"shuffle","player":1,"cards":["Copper","Ruined Market","Copper","Copper","Curse","Survivors","Necropolis","Copper","Overgrown Estate","Copper","Grotto","Copper"],"from":"1/discard","to":"1/deck","at":"bottom","pos":[1,3,2,4,2,6,0,2,1,1,0,0]}
+{"seq":463,"by":459,"type":"draw","player":1,"cards":["Copper","Copper","Ruined Library","Copper","Ruined Market"],"from":"1/deck","to":"1/hand"}
+{"seq":464,"by":438,"type":"turn-end","player":1}
+{"seq":465,"type":"game-ending","reason":"turn-limit"}
+{"seq":466,"type":"game-end","reason":"turn-limit","result":[{"seat":0,"vp":-3,"turns":10,"rank":2},{"seat":1,"vp":-1,"turns":10,"rank":1}]}

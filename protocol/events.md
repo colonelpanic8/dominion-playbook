@@ -9,7 +9,9 @@ to the table.
 
 The same stream is how a game is talked about (by a program, a log, an agent), how it is
 recorded (Arena records every game it hosts this way), and, later, what a client can be
-sent to follow a live game.
+sent to follow a live game. It also holds what caused the game: how it was set up, how
+chance fell, and what each seat was asked and answered. So the engine that recorded a
+stream can play the game again from the stream alone ([Replay](#replay)).
 
 The format is a **model**: the types below and what they mean. An **encoding** writes
 those types as bytes. JSON Lines is the reference encoding and CBOR is a second one
@@ -25,11 +27,12 @@ versions for one seat and for the public are not specified
 
 The first turn of [`moat-chapel.events.jsonl`](examples/events/moat-chapel.events.jsonl),
 a two-player game. The first record is the header; then come `setup` (here trimmed with
-`…`), each player's opening shuffle and draw, and the first turn:
+`…`), each player's opening shuffle and draw, and the first turn, with each question Ann
+was asked (after the first, their options trimmed with `…`) and her answer:
 
 ```jsonl
 {"schema":"dominion/events@1","viewer":"full","game":"g12"}
-{"seq":0,"type":"setup","rules":{"implementation":"dominion-engine","version":"0.1.0"},"seats":["Ann","Bo"],"kingdom":["Throne Room","Wharf","Moat","Militia","Chapel","Fortress","Haven","Village","Smithy","Market"],"table":{"zones":{"0/deck":["Copper","Copper","Copper","Copper","Copper","Copper","Copper","Estate","Estate","Estate"],"1/deck":["Copper",…],"pile/Chapel":["Chapel",…],…},"piles":{"pile/Chapel":{"card":"Chapel","supply":true,"recipe":{"kind":"stacked","cards":[{"card":"Chapel","count":10}]}},…},"costs":{"Chapel":{"coins":2},"Copper":{"coins":0},…}}}
+{"seq":0,"type":"setup","rules":{"implementation":"dominion-engine","version":"0.1.0"},"seats":["Ann","Bo"],"kingdom":["Throne Room","Wharf","Moat","Militia","Chapel","Fortress","Haven","Village","Smithy","Market"],"table":{"zones":{"0/deck":["Copper","Copper","Copper","Copper","Copper","Copper","Copper","Estate","Estate","Estate"],"1/deck":["Copper",…],"pile/Chapel":["Chapel",…],…},"piles":{"pile/Chapel":{"card":"Chapel","supply":true,"recipe":{"kind":"stacked","cards":[{"card":"Chapel","count":10}]}},…},"costs":{"Chapel":{"coins":2},"Copper":{"coins":0},…}},"config":{"colonies":false,"shelters":false,"turnLimit":40,"seed":189}}
 {"seq":1,"type":"shuffle","player":0,"cards":["Estate","Copper","Estate","Copper","Copper","Estate","Copper","Copper","Copper","Copper"],"from":"0/deck","to":"0/deck","pos":[7,0,6,0,0,4,0,0,0,0]}
 {"seq":2,"type":"draw","player":0,"cards":["Estate","Copper","Estate","Copper","Copper"],"from":"0/deck","to":"0/hand"}
 {"seq":3,"type":"shuffle","player":1,"cards":["Copper","Copper","Copper","Copper","Copper","Estate","Estate","Estate","Copper","Copper"],"from":"1/deck","to":"1/deck","pos":[0,0,0,0,0,2,2,2,0,0]}
@@ -37,29 +40,39 @@ a two-player game. The first record is the header; then come `setup` (here trimm
 {"seq":5,"type":"turn","player":0,"number":1,"kind":"regular"}
 {"seq":6,"by":5,"type":"phase","phase":"action"}
 {"seq":7,"by":5,"type":"phase","phase":"buy"}
-{"seq":8,"by":7,"type":"play","player":0,"card":"Copper","from":"0/hand","to":"0/play"}
-{"seq":9,"by":8,"type":"counter","counter":"coins","delta":1,"value":1}
+{"seq":8,"by":7,"type":"ask","seat":0,"prompt":"Buy phase: choose a move","kind":"turn","purpose":"turn","phase":"buy","min":1,"max":1,"options":[{"index":0,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":1,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":2,"group":0,"action":"play","label":"Play Copper","card":"Copper","zone":"hand"},{"index":3,"group":0,"action":"buy","label":"Buy Copper ($0)","card":"Copper","cost":{"coins":0}},{"index":4,"group":0,"action":"buy","label":"Buy Curse ($0)","card":"Curse","cost":{"coins":0}},{"index":5,"group":0,"action":"end-phase","label":"End your Buy phase"}]}
+{"seq":9,"by":7,"type":"answer","seat":0,"indices":[1]}
 {"seq":10,"by":7,"type":"play","player":0,"card":"Copper","from":"0/hand","to":"0/play"}
-{"seq":11,"by":10,"type":"counter","counter":"coins","delta":1,"value":2}
-{"seq":12,"by":7,"type":"play","player":0,"card":"Copper","from":"0/hand","to":"0/play"}
-{"seq":13,"by":12,"type":"counter","counter":"coins","delta":1,"value":3}
-{"seq":14,"by":7,"type":"buy","player":0,"card":"Silver"}
-{"seq":15,"by":14,"type":"counter","counter":"buys","delta":-1,"value":0}
-{"seq":16,"by":14,"type":"counter","counter":"coins","delta":-3,"value":0}
-{"seq":17,"by":14,"type":"counter","counter":"bought","delta":1,"value":1}
-{"seq":18,"by":14,"type":"gain","player":0,"cards":["Silver"],"from":"pile/Silver","to":"0/discard"}
-{"seq":19,"by":5,"type":"phase","phase":"night"}
-{"seq":20,"by":5,"type":"phase","phase":"cleanup"}
-{"seq":21,"by":20,"type":"discard","player":0,"cards":["Copper","Copper","Copper"],"from":"0/play","to":"0/discard"}
-{"seq":22,"by":20,"type":"discard","player":0,"cards":["Estate","Estate"],"from":"0/hand","to":"0/discard"}
-{"seq":23,"by":20,"type":"draw","player":0,"cards":["Estate","Copper","Copper","Copper","Copper"],"from":"0/deck","to":"0/hand"}
-{"seq":24,"by":5,"type":"turn-end","player":0}
+{"seq":11,"by":10,"type":"counter","counter":"coins","delta":1,"value":1}
+{"seq":12,"by":7,"type":"ask","seat":0,"prompt":"Buy phase: choose a move","kind":"turn","purpose":"turn","phase":"buy","min":1,"max":1,"options":[…]}
+{"seq":13,"by":7,"type":"answer","seat":0,"indices":[0]}
+{"seq":14,"by":7,"type":"play","player":0,"card":"Copper","from":"0/hand","to":"0/play"}
+{"seq":15,"by":14,"type":"counter","counter":"coins","delta":1,"value":2}
+{"seq":16,"by":7,"type":"ask","seat":0,"prompt":"Buy phase: choose a move","kind":"turn","purpose":"turn","phase":"buy","min":1,"max":1,"options":[…]}
+{"seq":17,"by":7,"type":"answer","seat":0,"indices":[0]}
+{"seq":18,"by":7,"type":"play","player":0,"card":"Copper","from":"0/hand","to":"0/play"}
+{"seq":19,"by":18,"type":"counter","counter":"coins","delta":1,"value":3}
+{"seq":20,"by":7,"type":"ask","seat":0,"prompt":"Buy phase: choose a move","kind":"turn","purpose":"turn","phase":"buy","min":1,"max":1,"options":[…]}
+{"seq":21,"by":7,"type":"answer","seat":0,"indices":[1]}
+{"seq":22,"by":7,"type":"buy","player":0,"card":"Silver"}
+{"seq":23,"by":22,"type":"counter","counter":"buys","delta":-1,"value":0}
+{"seq":24,"by":22,"type":"counter","counter":"coins","delta":-3,"value":0}
+{"seq":25,"by":22,"type":"counter","counter":"bought","delta":1,"value":1}
+{"seq":26,"by":22,"type":"gain","player":0,"cards":["Silver"],"from":"pile/Silver","to":"0/discard"}
+{"seq":27,"by":5,"type":"phase","phase":"night"}
+{"seq":28,"by":5,"type":"phase","phase":"cleanup"}
+{"seq":29,"by":28,"type":"discard","player":0,"cards":["Copper","Copper","Copper"],"from":"0/play","to":"0/discard"}
+{"seq":30,"by":28,"type":"discard","player":0,"cards":["Estate","Estate"],"from":"0/hand","to":"0/discard"}
+{"seq":31,"by":28,"type":"draw","player":0,"cards":["Estate","Copper","Copper","Copper","Copper"],"from":"0/deck","to":"0/hand"}
+{"seq":32,"by":5,"type":"turn-end","player":0}
 ```
 
 After the header, each line is one event. `seq` numbers the events from 0. `by` names the event this one
-happened inside: Copper's +$1 (9) is inside its play (8), which is inside the Buy phase
+happened inside: Copper's +$1 (11) is inside its play (10), which is inside the Buy phase
 (7), which is inside the turn (5). The setup table lists each deck in no particular order;
-the shuffle at seq 1 says which order it is in afterwards.
+the shuffle at seq 1 says which order it is in afterwards. Ann is asked for a move (8) and
+answers with option 1, a Copper to play (9); the play that follows is inside the Buy
+phase, not inside her answer: questions and answers are no causes.
 
 ## The table
 
@@ -359,7 +372,7 @@ comes only first. Each
 later event changes the table as its section below says, or changes nothing (most
 occurrences). Applying them in order is **the fold**.
 
-### Two kinds of events
+### Three kinds of events
 
 - **Occurrences**: something the rules have a name for happens: a turn begins, a phase
   begins, the turn ends, a card is played, something is bought, an ability resolves, a
@@ -367,9 +380,14 @@ occurrences). Applying them in order is **the fold**.
   They say *why*. Other events happen inside them.
 - **Changes**: the table changes: cards move, a counter changes, an effect begins. They
   say *what*.
+- **Inputs**: what the rules don't decide: a seat is asked something (`ask`), the seat
+  answers (`answer`), chance decides something no `shuffle` shows (`chance`). They say
+  *what decided* the game. They change nothing on the table, and nothing happens inside
+  them ([Questions, answers and chance](#questions-answers-and-chance)).
 
-A `play`, `gain`, `trash`, `discard` and `shuffle` are both: they move cards, and other
-events happen inside them.
+A `play`, `gain`, `trash`, `discard` and `shuffle` are both occurrences and changes: they
+move cards, and other events happen inside them. A `shuffle` also records a chance
+outcome: its `cards`.
 
 ### Causes
 
@@ -403,6 +421,12 @@ taken, skipped or lost, and the counters a skipped turn changes have no `by`. An
 that resolves between turns is a `resolve` with no `by`, and what it does names it.
 Before the first turn the opening shuffles and draws have no `by`; what an ability at
 the start of the game does (Inherited) names its `resolve`.
+
+**Inputs are never causes.** An `ask`, `answer` or `chance` has as `by` the occurrence in
+progress when it came, like any event: the `play` or `resolve` whose card asks, the
+`phase` for a move, the `play` whose removal of the last Sun drew Divine Wind's Kingdom;
+none between turns. But they are no occurrences, so no event names one in `by`: what
+follows an answer happens inside the occurrence that asked.
 
 **The other state** is read as counters are, so a change to it names the occurrence it
 happened in: an `effect` names the `play`, `resolve`, `buy` or `receive` that made it; an
@@ -482,6 +506,14 @@ refusals are given with each event; together they are:
 - A `holding` from a seat that doesn't hold the card, to a seat that already holds it, or
   with neither.
 
+An `ask`, `answer` or `chance` is refused only by the first four: in the wrong place.
+The fold doesn't hold an `answer` to its `ask` (right after it, from the seat asked,
+indices among its options) nor a `chance` record to anything: [replay](#replay) does.
+
+To refuse an event out of place, a fold keeps where it is in its stream: the `seq` the
+next event must have, and which events so far were occurrences. That is no part of the
+table: two tables are equal whatever it says, and `setup`'s table never carries it.
+
 The fold checks that a stream can be one game's, not that it is the game the rules
 would make: that `by` is the innermost occurrence in progress, that a card moved is the
 one the rules move, that the table's derived values are right. `dominion-engine`'s tests
@@ -496,6 +528,7 @@ hold its streams to those.
 | [Moves](#moves) | `draw`, `discard`, `gain`, `trash`, `topdeck`, `bottomdeck`, `insert`, `reveal`, `look`, `set-aside`, `exile`, `put`, `return`, `exchange`, `pass`, `rotate`, `take`, `shuffle` |
 | [Cards entering and changing](#cards-entering-and-changing) | `add`, `rename` |
 | [The table's other changes](#the-tables-other-changes) | `counter`, `effect`, `effect-change`, `effect-end`, `extra-turn`, `extra-turn-removed`, `token`, `holding`, `pile`, `landscape`, `notes`, `derived` |
+| [Questions, answers and chance](#questions-answers-and-chance) | `ask`, `answer`, `chance` |
 
 `player` in an event is a seat. A `card` given as a plain name in an occurrence (`buy`,
 `resolve`, `receive`, ...) names a card, landscape, Boon or State; it is never `?`.
@@ -511,14 +544,40 @@ The first event: the game before anything happens.
 | `rules` | `implementation` and `version`: what decided this game (`dominion-engine`, `0.1.0`) |
 | `seats` | the players' names, in turn order |
 | `kingdom` | the Kingdom cards, by name |
-| `landscapes` | the landscapes chosen for the game, by name; absent when none (the table's `landscapes` also has the Artifacts and Allies setup added) |
+| `landscapes` | the landscapes in the game, by name: those given (`config.landscapes`) and an Ally or Prophecy setup added at random; absent when none (the table's `landscapes` also has the Artifacts) |
 | `table` | the whole table |
+| `config` | what the game was set up from besides `seats` and `kingdom` (below). Absent from a stream recorded before it was written: such a stream can be folded, not replayed |
+| `chance` | every chance outcome setup drew that no `shuffle` shows, in the order drawn, each a [`chance` record](#chance); absent when none |
 
 **Fold:** the table becomes `table`. Refused unless it is the stream's first event.
+`config` and `chance` change nothing.
 
 The setup table has every pile with its cards, properties and costs, the Boons' and
 Hexes' zones, and each player's starting cards in their deck, listed by name before they
 are shuffled. The opening shuffle and draw of each player follow as events, with no `by`.
+
+`config`:
+
+| Field | |
+| --- | --- |
+| `landscapes` | the landscapes given. Setup may add more (an Ally or Prophecy at random: a `chance` record); `setup.landscapes` is all of them |
+| `colonies` | Platinum and Colony are in the game, as setup decided (given, or from a random Kingdom card) |
+| `shelters` | Shelters replace the starting Estates, as setup decided |
+| `turnLimit` | the game ends once this many turns have been taken in all; absent: no limit |
+| `choices` | choices setup makes that were given rather than drawn, by the card making them: `{"Young Witch": ["Moat"]}`. A given choice may be a card no random choice would make (a card removed in a second edition) |
+| `seed` | the engine's seed. It reproduces the chance outcomes only in the build that drew them; replay needs it nowhere |
+
+Colonies and Shelters decided at random and a Kingdom dealt from randomizers are not
+`chance` records: `colonies`, `shelters`, `kingdom` and `config.landscapes` are what was
+decided.
+
+The setup of [`inherited.events.jsonl`](examples/events/inherited.events.jsonl), its table
+trimmed: setup decided on Shelters (it drew a Dark Ages card), shuffled the Ruins pile,
+and chose at random Grotto's as the pile the Trait Inherited goes on:
+
+```json
+{"seq":0,"type":"setup","rules":{"implementation":"dominion-engine","version":"0.1.0"},"seats":["Ann","Bo"],"kingdom":["Hermit","Rats","Marauder","Fortress","Procession","Quartermaster","Grotto","Village","Smithy","Market"],"landscapes":["Inherited"],"table":{…},"config":{"landscapes":["Inherited"],"colonies":false,"shelters":true,"turnLimit":20,"seed":1},"chance":[{"site":"pile","card":"Ruins","cards":["Ruined Village","Survivors","Ruined Market","Ruined Library","Survivors","Ruined Village","Ruined Village","Ruined Village","Survivors","Ruined Market"]},{"site":"choice","card":"Inherited","cards":["Grotto"]}]}
+```
 
 #### `turn`
 
@@ -592,21 +651,22 @@ The game is over. `reason` and `result` ([The game ending](#the-game-ending)).
 after it.
 
 After a `game-ending` it comes once `finalRound` is empty and no extra turn comes first.
-A resignation is `game-end` alone, with reason `resigned`, at any point: the turn in
-progress, its effects and the extra turns waiting stay on the table as they were. Extra
-turns still waiting when the game ends normally are never taken; they stay too.
+A resignation is `game-end` alone, with reason `resigned`, wherever the game waits: right
+after an `ask` that gets no answer. The turn in progress, its effects and the extra turns
+waiting stay on the table as they were. Extra turns still waiting when the game ends
+normally are never taken; they stay too.
 
 The end of [`outpost-fleet.events.jsonl`](examples/events/outpost-fleet.events.jsonl):
 Bo's turn takes the last Province, and Ann, who has Fleet, takes one turn more.
 
 ```jsonl
-{"seq":1493,"by":1459,"type":"turn-end","player":1}
-{"seq":1494,"type":"game-ending","reason":"provinces","finalRound":[0]}
-{"seq":1495,"type":"turn","player":0,"number":27,"kind":"final"}
-{"seq":1496,"by":1495,"type":"resolve","player":0,"card":"Haven","when":"start-turn","origin":1425}
+{"seq":2193,"by":2141,"type":"turn-end","player":1}
+{"seq":2194,"type":"game-ending","reason":"provinces","finalRound":[0]}
+{"seq":2195,"type":"turn","player":0,"number":27,"kind":"final"}
+{"seq":2196,"by":2195,"type":"resolve","player":0,"card":"Haven","when":"start-turn","origin":2091}
 …
-{"seq":1524,"by":1495,"type":"turn-end","player":0}
-{"seq":1525,"type":"game-end","reason":"provinces","result":[{"seat":0,"vp":9,"turns":26,"rank":2},{"seat":1,"vp":42,"turns":26,"rank":1}]}
+{"seq":2236,"by":2195,"type":"turn-end","player":0}
+{"seq":2237,"type":"game-end","reason":"provinces","result":[{"seat":0,"vp":9,"turns":26,"rank":2},{"seat":1,"vp":42,"turns":26,"rank":1}]}
 ```
 
 ### Occurrences
@@ -635,30 +695,32 @@ by the rules: one `play` whose instructions run twice.
 From [`throne-room-wharf.events.jsonl`](examples/events/throne-room-wharf.events.jsonl):
 
 ```jsonl
-{"seq":608,"by":607,"type":"play","player":1,"card":"Throne Room","from":"1/hand","to":"1/play"}
-{"seq":609,"by":608,"type":"counter","counter":"actions","delta":-1,"value":0}
-{"seq":610,"by":608,"type":"play","player":1,"card":"Wharf","from":"1/hand","to":"1/play"}
-{"seq":611,"by":610,"type":"counter","counter":"buys","delta":1,"value":2}
-{"seq":612,"by":610,"type":"draw","player":1,"cards":["Copper","Militia"],"from":"1/deck","to":"1/hand"}
-{"seq":613,"by":610,"type":"effect","id":2,"card":"Wharf","source":"Wharf","owner":1,"until":{"start-of-turn":1},"keeps":["Throne Room","Wharf"]}
-{"seq":614,"by":608,"type":"play","player":1,"card":"Wharf"}
-{"seq":615,"by":614,"type":"counter","counter":"buys","delta":1,"value":3}
-{"seq":616,"by":614,"type":"draw","player":1,"cards":["Estate","Copper"],"from":"1/deck","to":"1/hand"}
-{"seq":617,"by":614,"type":"effect","id":3,"card":"Wharf","source":"Wharf","owner":1,"until":{"start-of-turn":1},"keeps":["Throne Room","Wharf"]}
+{"seq":870,"by":867,"type":"play","player":1,"card":"Throne Room","from":"1/hand","to":"1/play"}
+{"seq":871,"by":870,"type":"counter","counter":"actions","delta":-1,"value":0}
+{"seq":872,"by":870,"type":"ask","seat":1,"prompt":"Throne Room: choose up to 1 card to play","kind":"cards","purpose":"play","source":"Throne Room","min":0,"max":1,"options":[…]}
+{"seq":873,"by":870,"type":"answer","seat":1,"indices":[0]}
+{"seq":874,"by":870,"type":"play","player":1,"card":"Wharf","from":"1/hand","to":"1/play"}
+{"seq":875,"by":874,"type":"counter","counter":"buys","delta":1,"value":2}
+{"seq":876,"by":874,"type":"draw","player":1,"cards":["Copper","Militia"],"from":"1/deck","to":"1/hand"}
+{"seq":877,"by":874,"type":"effect","id":2,"card":"Wharf","source":"Wharf","owner":1,"until":{"start-of-turn":1},"keeps":["Throne Room","Wharf"]}
+{"seq":878,"by":870,"type":"play","player":1,"card":"Wharf"}
+{"seq":879,"by":878,"type":"counter","counter":"buys","delta":1,"value":3}
+{"seq":880,"by":878,"type":"draw","player":1,"cards":["Estate","Copper"],"from":"1/deck","to":"1/hand"}
+{"seq":881,"by":878,"type":"effect","id":3,"card":"Wharf","source":"Wharf","owner":1,"until":{"start-of-turn":1},"keeps":["Throne Room","Wharf"]}
 …
-{"seq":663,"type":"turn","player":1,"number":14,"kind":"regular"}
-{"seq":664,"by":663,"type":"resolve","player":1,"card":"Wharf","when":"start-turn","origin":610}
-{"seq":665,"by":664,"type":"effect-end","id":2,"why":"resolved"}
-{"seq":666,"by":664,"type":"counter","counter":"buys","delta":1,"value":2}
-{"seq":667,"by":664,"type":"draw","player":1,"cards":["Estate","Copper"],"from":"1/deck","to":"1/hand"}
-{"seq":668,"by":663,"type":"resolve","player":1,"card":"Wharf","when":"start-turn","origin":614}
-{"seq":669,"by":668,"type":"effect-end","id":3,"why":"resolved"}
-{"seq":670,"by":668,"type":"counter","counter":"buys","delta":1,"value":3}
-{"seq":671,"by":668,"type":"draw","player":1,"cards":["Copper","Silver"],"from":"1/deck","to":"1/hand"}
-{"seq":672,"by":663,"type":"phase","phase":"action"}
+{"seq":947,"type":"turn","player":1,"number":14,"kind":"regular"}
+{"seq":948,"by":947,"type":"resolve","player":1,"card":"Wharf","when":"start-turn","origin":874}
+{"seq":949,"by":948,"type":"effect-end","id":2,"why":"resolved"}
+{"seq":950,"by":948,"type":"counter","counter":"buys","delta":1,"value":2}
+{"seq":951,"by":948,"type":"draw","player":1,"cards":["Estate","Copper"],"from":"1/deck","to":"1/hand"}
+{"seq":952,"by":947,"type":"resolve","player":1,"card":"Wharf","when":"start-turn","origin":878}
+{"seq":953,"by":952,"type":"effect-end","id":3,"why":"resolved"}
+{"seq":954,"by":952,"type":"counter","counter":"buys","delta":1,"value":3}
+{"seq":955,"by":952,"type":"draw","player":1,"cards":["Copper","Silver"],"from":"1/deck","to":"1/hand"}
+{"seq":956,"by":947,"type":"phase","phase":"action"}
 ```
 
-The second play of Wharf (614) moves nothing. Each play makes its own effect, which keeps
+The second play of Wharf (878) moves nothing. Each play makes its own effect, which keeps
 both cards in play through Clean-up. At the next turn the two abilities have the same
 `by` (the `turn`) and different `origin`s: the two plays.
 
@@ -672,11 +734,11 @@ Inside it: the price (`buys` −1, `coins`, `potions`, `debt`, `bought`), overpa
 on-buy abilities, then the `gain` of the card, or what the Event or Project does:
 
 ```jsonl
-{"seq":56,"by":49,"type":"buy","player":0,"card":"Pageant"}
-{"seq":57,"by":56,"type":"counter","counter":"buys","delta":-1,"value":0}
-{"seq":58,"by":56,"type":"counter","counter":"coins","delta":-3,"value":0}
-{"seq":59,"by":56,"type":"counter","counter":"bought","delta":1,"value":1}
-{"seq":60,"by":56,"type":"holding","card":"Pageant","to":0}
+{"seq":82,"by":67,"type":"buy","player":0,"card":"Pageant"}
+{"seq":83,"by":82,"type":"counter","counter":"buys","delta":-1,"value":0}
+{"seq":84,"by":82,"type":"counter","counter":"coins","delta":-3,"value":0}
+{"seq":85,"by":82,"type":"counter","counter":"bought","delta":1,"value":1}
+{"seq":86,"by":82,"type":"holding","card":"Pageant","to":0}
 ```
 
 #### `resolve`
@@ -726,21 +788,25 @@ it is their Reaction; an ability another player resolves in the same window has 
 A Moat against Militia, from [`moat-chapel.events.jsonl`](examples/events/moat-chapel.events.jsonl):
 
 ```jsonl
-{"seq":624,"by":623,"type":"play","player":0,"card":"Militia","from":"0/hand","to":"0/play"}
-{"seq":625,"by":624,"type":"counter","counter":"actions","delta":-1,"value":0}
-{"seq":626,"by":624,"type":"resolve","player":1,"card":"Moat","when":"attack","target":1}
-{"seq":627,"by":626,"type":"unaffected","player":1,"attack":"Militia","card":"Moat"}
-{"seq":628,"by":624,"type":"counter","counter":"coins","delta":2,"value":2}
+{"seq":876,"by":873,"type":"play","player":0,"card":"Militia","from":"0/hand","to":"0/play"}
+{"seq":877,"by":876,"type":"counter","counter":"actions","delta":-1,"value":0}
+{"seq":878,"by":876,"type":"ask","seat":1,"prompt":"Ann attacks you with Militia: you may use this ability","kind":"choose","purpose":"trigger","min":1,"max":1,"options":[…]}
+{"seq":879,"by":876,"type":"answer","seat":1,"indices":[0]}
+{"seq":880,"by":876,"type":"resolve","player":1,"card":"Moat","when":"attack","target":1}
+{"seq":881,"by":880,"type":"unaffected","player":1,"attack":"Militia","card":"Moat"}
+{"seq":882,"by":876,"type":"counter","counter":"coins","delta":2,"value":2}
 ```
 
 Chapel trashing four cards, one of them Fortress, from the same game:
 
 ```jsonl
-{"seq":766,"by":759,"type":"play","player":0,"card":"Chapel","from":"0/hand","to":"0/play"}
-{"seq":767,"by":766,"type":"counter","counter":"actions","delta":-1,"value":0}
-{"seq":768,"by":766,"type":"trash","player":0,"cards":["Militia","Copper","Fortress","Silver"],"from":"0/hand","to":"trash"}
-{"seq":769,"by":768,"type":"resolve","player":0,"card":"Fortress","when":"trash","about":"Fortress","index":2}
-{"seq":770,"by":769,"type":"put","player":0,"cards":["Fortress"],"from":"trash","to":"0/hand","pos":[1]}
+{"seq":1076,"by":1065,"type":"play","player":0,"card":"Chapel","from":"0/hand","to":"0/play"}
+{"seq":1077,"by":1076,"type":"counter","counter":"actions","delta":-1,"value":0}
+{"seq":1078,"by":1076,"type":"ask","seat":0,"prompt":"Chapel: choose up to 4 cards to trash","kind":"cards","purpose":"trash","source":"Chapel","min":0,"max":4,"options":[…]}
+{"seq":1079,"by":1076,"type":"answer","seat":0,"indices":[2,3,1,4]}
+{"seq":1080,"by":1076,"type":"trash","player":0,"cards":["Militia","Copper","Fortress","Silver"],"from":"0/hand","to":"trash"}
+{"seq":1081,"by":1080,"type":"resolve","player":0,"card":"Fortress","when":"trash","about":"Fortress","index":2}
+{"seq":1082,"by":1081,"type":"put","player":0,"cards":["Fortress"],"from":"trash","to":"0/hand","pos":[1]}
 ```
 
 The four cards went onto the trash one after the other, so Silver lies on Fortress: it
@@ -765,20 +831,24 @@ by each other player is discarded once all have) has that `discard` named by the
 Bard's Boon and Skulk's Hex, from [`boons-hexes.events.jsonl`](examples/events/boons-hexes.events.jsonl):
 
 ```jsonl
-{"seq":173,"by":172,"type":"play","player":1,"card":"Bard","from":"1/hand","to":"1/play"}
-{"seq":174,"by":173,"type":"counter","counter":"actions","delta":-1,"value":0}
-{"seq":175,"by":173,"type":"counter","counter":"coins","delta":2,"value":2}
-{"seq":176,"by":173,"type":"take","player":1,"cards":["The Sky's Gift"],"from":"boons/deck","to":"1/boons"}
-{"seq":177,"by":173,"type":"receive","player":1,"card":"The Sky's Gift"}
-{"seq":178,"by":177,"type":"discard","player":1,"cards":["The Sky's Gift"],"from":"1/boons","to":"boons/discard"}
+{"seq":243,"by":240,"type":"play","player":1,"card":"Bard","from":"1/hand","to":"1/play"}
+{"seq":244,"by":243,"type":"counter","counter":"actions","delta":-1,"value":0}
+{"seq":245,"by":243,"type":"counter","counter":"coins","delta":2,"value":2}
+{"seq":246,"by":243,"type":"take","player":1,"cards":["The Sky's Gift"],"from":"boons/deck","to":"1/boons"}
+{"seq":247,"by":243,"type":"receive","player":1,"card":"The Sky's Gift"}
+{"seq":248,"by":247,"type":"ask","seat":1,"prompt":"The Sky's Gift: discard 3 cards to gain a Gold?","kind":"choose","purpose":"discard","source":"The Sky's Gift","min":1,"max":1,"options":[…]}
+{"seq":249,"by":247,"type":"answer","seat":1,"indices":[1]}
+{"seq":250,"by":247,"type":"discard","player":1,"cards":["The Sky's Gift"],"from":"1/boons","to":"boons/discard"}
 …
-{"seq":290,"by":289,"type":"play","player":1,"card":"Skulk","from":"1/hand","to":"1/play"}
-{"seq":291,"by":290,"type":"counter","counter":"actions","delta":-1,"value":0}
-{"seq":292,"by":290,"type":"counter","counter":"buys","delta":1,"value":2}
-{"seq":293,"by":290,"type":"take","player":1,"cards":["Haunting"],"from":"hexes/deck","to":"1/hexes"}
-{"seq":294,"by":290,"type":"receive","player":0,"card":"Haunting"}
-{"seq":295,"by":294,"type":"topdeck","player":0,"cards":["Copper"],"from":"0/hand","to":"0/deck"}
-{"seq":296,"by":290,"type":"discard","player":1,"cards":["Haunting"],"from":"1/hexes","to":"hexes/discard"}
+{"seq":406,"by":403,"type":"play","player":1,"card":"Skulk","from":"1/hand","to":"1/play"}
+{"seq":407,"by":406,"type":"counter","counter":"actions","delta":-1,"value":0}
+{"seq":408,"by":406,"type":"counter","counter":"buys","delta":1,"value":2}
+{"seq":409,"by":406,"type":"take","player":1,"cards":["Haunting"],"from":"hexes/deck","to":"1/hexes"}
+{"seq":410,"by":406,"type":"receive","player":0,"card":"Haunting"}
+{"seq":411,"by":410,"type":"ask","seat":0,"prompt":"Haunting: choose a card to put onto your deck","kind":"cards","purpose":"top-deck","source":"Haunting","min":1,"max":1,"options":[…]}
+{"seq":412,"by":410,"type":"answer","seat":0,"indices":[4]}
+{"seq":413,"by":410,"type":"topdeck","player":0,"cards":["Copper"],"from":"0/hand","to":"0/deck"}
+{"seq":414,"by":406,"type":"discard","player":1,"cards":["Haunting"],"from":"1/hexes","to":"hexes/discard"}
 ```
 
 #### `name`, `way`, `unaffected`, `call`, `choose`
@@ -794,7 +864,7 @@ Bard's Boon and Skulk's Hex, from [`boons-hexes.events.jsonl`](examples/events/b
 None changes the table.
 
 ```json
-{"seq":525,"by":524,"type":"choose","player":1,"source":"Quartermaster","choices":["Gain a card costing up to $4, setting it aside on this"]}
+{"seq":755,"by":752,"type":"choose","player":1,"source":"Quartermaster","choices":["Gain a card costing up to $4, setting it aside on this"]}
 ```
 
 ### Moves
@@ -878,19 +948,27 @@ each move.
 #### `shuffle`
 
 A `shuffle`'s `cards` are the **result**, top first. They leave `from` one after the
-other as for any move (with `pos`, which says the order they were in), then arrive in
-`to` **together**, in the order listed, at `at`: a discard pile shuffled under the cards
-left in a deck is `"from":"0/discard","to":"0/deck","at":"bottom"`; a deck shuffled where
-it lies has `from` equal to `to` and arrives on top. `to` must be ordered.
+other as for any move, then arrive in `to` **together**, in the order listed, at `at`: a
+discard pile shuffled under the cards left in a deck is
+`"from":"0/discard","to":"0/deck","at":"bottom"`; a deck shuffled where it lies has `from`
+equal to `to` and arrives on top. `to` must be ordered. A shuffle takes every card of
+`from`.
 
-A shuffle's order is a chance outcome. Cards that go to the bottom of a deck as it is
-shuffled (Shadow cards) and "when you shuffle" placements (Stash, Star Chart, Fated) are
-moves inside the `shuffle`, after it.
+Its `pos` takes each card as the **topmost card of its name** still in `from`, wherever
+the others of that name lie. Which copy of a name went where is no outcome of a shuffle,
+and the stream doesn't number copies, so `pos` depends only on the names in `from` and
+the result: in [An example](#an-example), Ann's unshuffled deck is seven Coppers over three
+Estates, and her first Estate leaves from under the seven Coppers (`pos` 7).
+
+A shuffle's order is a chance outcome, and its `cards` are the record of it
+([Chance](#chance)). Cards that go to the bottom of a deck as it is shuffled (Shadow
+cards) and "when you shuffle" placements (Stash, Star Chart, Fated) are moves inside the
+`shuffle`, after it.
 
 The Boons' and Hexes' discard piles are shuffled into their empty decks the same way:
 
 ```json
-{"seq":1117,"by":1114,"type":"shuffle","cards":["The Mountain's Gift","The Earth's Gift","The Moon's Gift","The Sky's Gift","The Sun's Gift","The Field's Gift","The Forest's Gift","The Wind's Gift","The River's Gift"],"from":"boons/discard","to":"boons/deck","pos":[3,3,2,5,2,0,0,1,0]}
+{"seq":1561,"by":1558,"type":"shuffle","cards":["The Mountain's Gift","The Earth's Gift","The Moon's Gift","The Sky's Gift","The Sun's Gift","The Field's Gift","The Forest's Gift","The Wind's Gift","The River's Gift"],"from":"boons/discard","to":"boons/deck","pos":[3,3,2,5,2,0,0,1,0]}
 ```
 
 #### `take`
@@ -911,28 +989,34 @@ in its `faceUp`.
 Haven, from [`throne-room-wharf.events.jsonl`](examples/events/throne-room-wharf.events.jsonl):
 
 ```jsonl
-{"seq":834,"by":830,"type":"set-aside","player":1,"cards":["Province"],"from":"1/hand","to":"1/aside","face":"down"}
-{"seq":835,"by":830,"type":"effect","id":4,"card":"Haven","source":"Haven","owner":1,"until":{"start-of-turn":1},"keeps":["Haven"],"holds":["Province"]}
+{"seq":1194,"by":1188,"type":"set-aside","player":1,"cards":["Province"],"from":"1/hand","to":"1/aside","face":"down"}
+{"seq":1195,"by":1188,"type":"effect","id":4,"card":"Haven","source":"Haven","owner":1,"until":{"start-of-turn":1},"keeps":["Haven"],"holds":["Province"]}
 …
-{"seq":880,"type":"turn","player":1,"number":18,"kind":"regular"}
-{"seq":881,"by":880,"type":"resolve","player":1,"card":"Haven","when":"start-turn","origin":830}
-{"seq":882,"by":881,"type":"effect-end","id":4,"why":"resolved"}
-{"seq":883,"by":881,"type":"put","player":1,"cards":["Province"],"from":"1/aside","to":"1/hand"}
+{"seq":1258,"type":"turn","player":1,"number":18,"kind":"regular"}
+{"seq":1259,"by":1258,"type":"resolve","player":1,"card":"Haven","when":"start-turn","origin":1188}
+{"seq":1260,"by":1259,"type":"effect-end","id":4,"why":"resolved"}
+{"seq":1261,"by":1259,"type":"put","player":1,"cards":["Province"],"from":"1/aside","to":"1/hand"}
 ```
 
 Quartermaster gains a card set aside face up, and later puts it into the hand, from
 [`outpost-fleet.events.jsonl`](examples/events/outpost-fleet.events.jsonl):
 
 ```jsonl
-{"seq":524,"by":520,"type":"resolve","player":1,"card":"Quartermaster","when":"start-turn","origin":473}
-{"seq":525,"by":524,"type":"choose","player":1,"source":"Quartermaster","choices":["Gain a card costing up to $4, setting it aside on this"]}
-{"seq":526,"by":524,"type":"gain","player":1,"cards":["Silver"],"from":"pile/Silver","to":"1/aside","face":"up"}
-{"seq":527,"by":524,"type":"effect-change","id":3,"card":"Quartermaster","source":"Quartermaster","owner":1,"until":"removed","keeps":["Quartermaster"],"holds":["Silver"],"faceUp":["Silver"]}
+{"seq":752,"by":746,"type":"resolve","player":1,"card":"Quartermaster","when":"start-turn","origin":679}
+{"seq":753,"by":752,"type":"ask","seat":1,"prompt":"Quartermaster: choose an option","kind":"choose","purpose":"mode","source":"Quartermaster","min":1,"max":1,"options":[…]}
+{"seq":754,"by":752,"type":"answer","seat":1,"indices":[0]}
+{"seq":755,"by":752,"type":"choose","player":1,"source":"Quartermaster","choices":["Gain a card costing up to $4, setting it aside on this"]}
+{"seq":756,"by":752,"type":"ask","seat":1,"prompt":"Quartermaster: choose a pile to gain from","kind":"pile","purpose":"gain","source":"Quartermaster","min":1,"max":1,"options":[…]}
+{"seq":757,"by":752,"type":"answer","seat":1,"indices":[1]}
+{"seq":758,"by":752,"type":"gain","player":1,"cards":["Silver"],"from":"pile/Silver","to":"1/aside","face":"up"}
+{"seq":759,"by":752,"type":"effect-change","id":3,"card":"Quartermaster","source":"Quartermaster","owner":1,"until":"removed","keeps":["Quartermaster"],"holds":["Silver"],"faceUp":["Silver"]}
 …
-{"seq":587,"by":586,"type":"resolve","player":1,"card":"Quartermaster","when":"start-turn","origin":473}
-{"seq":588,"by":587,"type":"choose","player":1,"source":"Quartermaster","choices":["Put a card from this into your hand"]}
-{"seq":589,"by":587,"type":"put","player":1,"cards":["Silver"],"from":"1/aside","to":"1/hand","fromFace":"up"}
-{"seq":590,"by":587,"type":"effect-change","id":3,"card":"Quartermaster","source":"Quartermaster","owner":1,"until":"removed","keeps":["Quartermaster"]}
+{"seq":847,"by":846,"type":"resolve","player":1,"card":"Quartermaster","when":"start-turn","origin":679}
+{"seq":848,"by":847,"type":"ask","seat":1,"prompt":"Quartermaster: choose an option","kind":"choose","purpose":"mode","source":"Quartermaster","min":1,"max":1,"options":[…]}
+{"seq":849,"by":847,"type":"answer","seat":1,"indices":[1]}
+{"seq":850,"by":847,"type":"choose","player":1,"source":"Quartermaster","choices":["Put a card from this into your hand"]}
+{"seq":851,"by":847,"type":"put","player":1,"cards":["Silver"],"from":"1/aside","to":"1/hand","fromFace":"up"}
+{"seq":852,"by":847,"type":"effect-change","id":3,"card":"Quartermaster","source":"Quartermaster","owner":1,"until":"removed","keeps":["Quartermaster"]}
 ```
 
 ### Cards entering and changing
@@ -967,9 +1051,11 @@ replaces becomes the default one again, in the deck before it is shuffled. From
 ```jsonl
 {"seq":5,"type":"resolve","player":0,"card":"Inherited","when":"game-start"}
 {"seq":6,"by":5,"type":"topdeck","player":0,"cards":["Copper","Overgrown Estate","Copper","Copper","Necropolis"],"from":"0/hand","to":"0/deck"}
-{"seq":7,"by":5,"type":"rename","card":"Necropolis","name":"Hovel","zone":"0/deck"}
-{"seq":8,"by":5,"type":"derived","costs":{"Hovel":{"coins":1}}}
-{"seq":9,"by":5,"type":"shuffle","player":0,"cards":["Grotto","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Hovel","Overgrown Estate"],"from":"0/deck","to":"0/deck","pos":[8,1,3,3,3,1,2,2,0,0]}
+{"seq":7,"by":5,"type":"ask","seat":0,"prompt":"Inherited: which starting card does your Grotto replace?","kind":"choose","purpose":"other","source":"Inherited","min":1,"max":1,"options":[…]}
+{"seq":8,"by":5,"type":"answer","seat":0,"indices":[3]}
+{"seq":9,"by":5,"type":"rename","card":"Necropolis","name":"Hovel","zone":"0/deck"}
+{"seq":10,"by":5,"type":"derived","costs":{"Hovel":{"coins":1}}}
+{"seq":11,"by":5,"type":"shuffle","player":0,"cards":["Grotto","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Hovel","Overgrown Estate"],"from":"0/deck","to":"0/deck","pos":[8,1,1,2,2,2,2,2,0,0]}
 ```
 
 The rename comes first, then the `derived` event pricing the new name. When a rename
@@ -1041,27 +1127,33 @@ Outpost, from [`outpost-fleet.events.jsonl`](examples/events/outpost-fleet.event
 Bo has a Haven holding a Copper and plays Outpost:
 
 ```jsonl
-{"seq":714,"by":709,"type":"effect","id":7,"card":"Haven","source":"Haven","owner":1,"until":{"start-of-turn":1},"keeps":["Haven"],"holds":["Copper"]}
-{"seq":715,"by":708,"type":"play","player":1,"card":"Outpost","from":"1/hand","to":"1/play"}
-{"seq":716,"by":715,"type":"counter","counter":"actions","delta":-1,"value":0}
-{"seq":717,"by":715,"type":"effect","id":8,"card":"Outpost","source":"Outpost","owner":1,"until":"end-of-turn"}
-{"seq":718,"by":715,"type":"effect","id":9,"card":"Outpost","source":"Outpost","owner":1,"until":"extra-turn","keeps":["Outpost"]}
-{"seq":719,"by":715,"type":"counter","counter":"next-hand","delta":-2,"value":3}
-{"seq":720,"by":715,"type":"extra-turn","id":1,"player":1,"card":"Outpost","limit":"third-in-a-row","effect":9}
-{"seq":721,"by":705,"type":"phase","phase":"buy"}
-{"seq":722,"by":705,"type":"phase","phase":"night"}
-{"seq":723,"by":705,"type":"phase","phase":"cleanup"}
-{"seq":724,"by":723,"type":"discard","player":1,"cards":["Curse","Gold","Smithy"],"from":"1/hand","to":"1/discard"}
-{"seq":725,"by":723,"type":"draw","player":1,"cards":["Copper","Copper","Copper"],"from":"1/deck","to":"1/hand"}
-{"seq":726,"by":705,"type":"turn-end","player":1}
-{"seq":727,"by":726,"type":"effect-end","id":8,"why":"expired"}
-{"seq":728,"type":"effect-end","id":9,"why":"extra-turn"}
-{"seq":729,"type":"turn","player":1,"number":15,"extra":"Outpost","kind":"extra","extraTurn":1}
-{"seq":730,"by":729,"type":"resolve","player":1,"card":"Haven","when":"start-turn","origin":709}
-{"seq":731,"by":730,"type":"effect-end","id":7,"why":"resolved"}
-{"seq":732,"by":730,"type":"put","player":1,"cards":["Copper"],"from":"1/aside","to":"1/hand"}
+{"seq":1038,"by":1031,"type":"effect","id":7,"card":"Haven","source":"Haven","owner":1,"until":{"start-of-turn":1},"keeps":["Haven"],"holds":["Copper"]}
+{"seq":1039,"by":1028,"type":"ask","seat":1,"prompt":"Action phase: choose a move","kind":"turn","purpose":"turn","phase":"action","min":1,"max":1,"options":[…]}
+{"seq":1040,"by":1028,"type":"answer","seat":1,"indices":[0]}
+{"seq":1041,"by":1028,"type":"play","player":1,"card":"Outpost","from":"1/hand","to":"1/play"}
+{"seq":1042,"by":1041,"type":"counter","counter":"actions","delta":-1,"value":0}
+{"seq":1043,"by":1041,"type":"effect","id":8,"card":"Outpost","source":"Outpost","owner":1,"until":"end-of-turn"}
+{"seq":1044,"by":1041,"type":"effect","id":9,"card":"Outpost","source":"Outpost","owner":1,"until":"extra-turn","keeps":["Outpost"]}
+{"seq":1045,"by":1041,"type":"counter","counter":"next-hand","delta":-2,"value":3}
+{"seq":1046,"by":1041,"type":"extra-turn","id":1,"player":1,"card":"Outpost","limit":"third-in-a-row","effect":9}
+{"seq":1047,"by":1023,"type":"phase","phase":"buy"}
+{"seq":1048,"by":1047,"type":"ask","seat":1,"prompt":"Buy phase: choose a move","kind":"turn","purpose":"turn","phase":"buy","min":1,"max":1,"options":[…]}
+{"seq":1049,"by":1047,"type":"answer","seat":1,"indices":[3]}
+{"seq":1050,"by":1023,"type":"phase","phase":"night"}
+{"seq":1051,"by":1023,"type":"phase","phase":"cleanup"}
+{"seq":1052,"by":1051,"type":"discard","player":1,"cards":["Curse","Gold","Smithy"],"from":"1/hand","to":"1/discard"}
+{"seq":1053,"by":1051,"type":"draw","player":1,"cards":["Copper","Copper","Copper"],"from":"1/deck","to":"1/hand"}
+{"seq":1054,"by":1023,"type":"turn-end","player":1}
+{"seq":1055,"by":1054,"type":"effect-end","id":8,"why":"expired"}
+{"seq":1056,"type":"effect-end","id":9,"why":"extra-turn"}
+{"seq":1057,"type":"turn","player":1,"number":15,"extra":"Outpost","kind":"extra","extraTurn":1}
+{"seq":1058,"by":1057,"type":"ask","seat":1,"prompt":"Start of your turn: choose which of your abilities resolves next (the others stay pending)","kind":"choose","purpose":"trigger","min":1,"max":1,"options":[…]}
+{"seq":1059,"by":1057,"type":"answer","seat":1,"indices":[0]}
+{"seq":1060,"by":1057,"type":"resolve","player":1,"card":"Haven","when":"start-turn","origin":1031}
+{"seq":1061,"by":1060,"type":"effect-end","id":7,"why":"resolved"}
+{"seq":1062,"by":1060,"type":"put","player":1,"cards":["Copper"],"from":"1/aside","to":"1/hand"}
 …
-{"seq":752,"by":751,"type":"discard","player":1,"cards":["Haven","Outpost","Copper","Copper","Copper","Copper"],"from":"1/play","to":"1/discard"}
+{"seq":1094,"by":1093,"type":"discard","player":1,"cards":["Haven","Outpost","Copper","Copper","Copper","Copper"],"from":"1/play","to":"1/discard"}
 ```
 
 Clean-up draws 3 (`next-hand`). The Outpost, kept in play by effect 9 until its extra turn
@@ -1076,7 +1168,7 @@ lists it (a token not had any more, the Journey token turned face up).
 at its place in order. Refused if `at` is a pile not in `piles`.
 
 ```json
-{"seq":1233,"by":1230,"type":"token","player":1,"token":"journey","at":"face-down"}
+{"seq":1725,"by":1722,"type":"token","player":1,"token":"journey","at":"face-down"}
 ```
 
 #### `holding`
@@ -1092,9 +1184,9 @@ holders leaves `holdings`). Refused if `from` doesn't hold it, `to` already does
 neither is given.
 
 ```jsonl
-{"seq":1239,"by":1238,"type":"holding","card":"Envious","to":0}
+{"seq":1733,"by":1732,"type":"holding","card":"Envious","to":0}
 …
-{"seq":1276,"by":1274,"type":"holding","card":"Envious","from":0}
+{"seq":1786,"by":1784,"type":"holding","card":"Envious","from":0}
 ```
 
 #### `pile`
@@ -1140,8 +1232,230 @@ ending, Ferry's token placed. Bridge played, from
 [`boons-hexes.events.jsonl`](examples/events/boons-hexes.events.jsonl):
 
 ```json
-{"seq":148,"by":143,"type":"derived","costs":{"Bard":{"coins":3},"Blessed Village":{"coins":3},"Bridge":{"coins":3},"Druid":{"coins":1},"Duchy":{"coins":4},"Estate":{"coins":1},"Flag Bearer":{"coins":3},"Gold":{"coins":5},"Market":{"coins":4},"Province":{"coins":7},"Ranger":{"coins":3},"Silver":{"coins":2},"Skulk":{"coins":3},"Smithy":{"coins":3},"Village":{"coins":2}}}
+{"seq":208,"by":203,"type":"derived","costs":{"Bard":{"coins":3},"Blessed Village":{"coins":3},"Bridge":{"coins":3},"Druid":{"coins":1},"Duchy":{"coins":4},"Estate":{"coins":1},"Flag Bearer":{"coins":3},"Gold":{"coins":5},"Market":{"coins":4},"Province":{"coins":7},"Ranger":{"coins":3},"Silver":{"coins":2},"Skulk":{"coins":3},"Smithy":{"coins":3},"Village":{"coins":2}}}
 ```
+
+### Questions, answers and chance
+
+The inputs: what the rules leave to the players and to chance. None changes the table,
+and none is a cause.
+
+#### `ask`
+
+A seat is asked something, and the game waits on its answer. The fields are
+`dominion/agent-view@2`'s decision ([Decisions](README.md#decisions)) as that seat is
+shown it, without its `id` and `groups`, with `seat` for `player`:
+
+| Field | |
+| --- | --- |
+| `seat` | who is asked |
+| `prompt` | the question, players called by their names |
+| `kind` | `turn`, `cards`, `pile`, `choose`, `name` or `number` |
+| `purpose` | what it is for, in agent-view@2's words: `turn`, `discard`, `trash`, `gain`, `top-deck`, `play`, `trigger`, `mode` (a Way question's too), ... |
+| `source` | the card asking, if one is |
+| `phase` | for `turn`: the phase |
+| `ordered` | the cards chosen are ordered: the first listed ends on top |
+| `nameAny` | any card may be named: the answer is a name |
+| `min`, `max` | how many options to choose |
+| `options` | agent-view@2's options: `index` (from 0), `group` (0: a question has one group, whose bounds are `min` and `max`), `action`, `label`, and `card`, `zone`, `cost`, `value`, `player` as they apply |
+
+**Fold:** nothing changes.
+
+Only real questions are written. A decision the engine answers itself, because only one
+answer matters (a phase whose only move is to end it, two cards to discard to Militia
+from a hand of three Coppers), is not: it is answered the same way every time. An `ask`
+is the last event written before the game waits, so a stream of a game in progress ends
+with one.
+
+Options are listed in the engine's order. Two options with the same label can be
+different things to the rules, and their place in the list tells them apart: the engine
+lists the cards of a zone in the zone's order (two Throne Rooms in play, one kept by a
+Duration), and the cards a "when you shuffle" choice looks through by name, then from the
+top down (Star Chart). What a label shows is what the seat sees: a card it doesn't see is
+`a card`.
+
+The `prompt` is the question, not the tool used to answer it: Arena's hint about answering
+a Way question in advance is not in it. A `name` question's `options` are the cards of the
+piles the seat can see; any card may be named.
+
+#### `answer`
+
+`seat`, and `indices` (into the `ask`'s `options`, in the order chosen; for an `ordered`
+question, top first) or `name` (for a `nameAny` question): what the seat answered.
+
+**Fold:** nothing changes.
+
+An `answer` is always the event right after its `ask`, with the same `seat` and `by`. An
+`ask` with no `answer` after it is the stream's last event (the game is waiting) or is
+followed by `game-end` with reason `resigned`. A named card is said to everyone too, by the
+`name` event that follows the answer.
+
+Chapel, from [`moat-chapel.events.jsonl`](examples/events/moat-chapel.events.jsonl):
+
+```jsonl
+{"seq":1076,"by":1065,"type":"play","player":0,"card":"Chapel","from":"0/hand","to":"0/play"}
+{"seq":1077,"by":1076,"type":"counter","counter":"actions","delta":-1,"value":0}
+{"seq":1078,"by":1076,"type":"ask","seat":0,"prompt":"Chapel: choose up to 4 cards to trash","kind":"cards","purpose":"trash","source":"Chapel","min":0,"max":4,"options":[{"index":0,"group":0,"action":"select","label":"Estate","card":"Estate","zone":"hand"},{"index":1,"group":0,"action":"select","label":"Fortress","card":"Fortress","zone":"hand"},{"index":2,"group":0,"action":"select","label":"Militia","card":"Militia","zone":"hand"},{"index":3,"group":0,"action":"select","label":"Copper","card":"Copper","zone":"hand"},{"index":4,"group":0,"action":"select","label":"Silver","card":"Silver","zone":"hand"}]}
+{"seq":1079,"by":1076,"type":"answer","seat":0,"indices":[2,3,1,4]}
+{"seq":1080,"by":1076,"type":"trash","player":0,"cards":["Militia","Copper","Fortress","Silver"],"from":"0/hand","to":"trash"}
+```
+
+Ann chose Militia, a Copper, Fortress and Silver, in that order, and the `trash` lists them
+in that order.
+
+**What they are not.** No event names an `ask` or `answer` in `by` ([Causes](#causes)),
+and nothing else refers to them: the `trash` above is by Chapel's `play`. A question is
+always the last event written before the game waits and its answer the first written
+after, so no move was ever merged across one ([One event per
+occurrence](#one-event-per-occurrence)). So dropping every `ask` and `answer` from a
+stream leaves the other events as they were, but for their numbers.
+
+**Conveniences** a host offers are written as the plain answers they stand for, as they
+are given: Arena's Autoplay Treasures is one `ask` and `answer` per Treasure played; a
+Way question answered in advance (with the answer that plays the card) is that question's
+`ask`, when it comes, and its `answer`, after any other seat's questions that come first.
+
+#### `chance`
+
+A chance outcome no `shuffle` shows: what was drawn, by name. Copies of a name are
+interchangeable, so the names are the whole outcome. The same record is an event during
+play, and an entry of `setup`'s `chance` for what setup drew.
+
+| Field | |
+| --- | --- |
+| `site` | what it decides (below) |
+| `card` | for `pile`, the pile's card; for `choice`, the card choosing |
+| `cards` | the outcome, in order |
+
+Every chance outcome is recorded once, at its site:
+
+| Chance | Recorded as |
+| --- | --- |
+| A player's deck shuffled: the opening deal, a discard pile into the deck, a whole deck (Inherited's, Inn, Famine) | the `shuffle` event: its `cards`, top first |
+| The Boons' or Hexes' discard pile shuffled into their deck | the `shuffle` event |
+| The Boons' or Hexes' deck as it is made | `chance` `boons` or `hexes`: the deck, top first |
+| A shuffled pile as setup makes it (Knights, Ruins, Loot, ...): its order, and which of the pool it took | `chance` `pile`, `card` the pile's card: the pile, top first |
+| A choice setup makes at random: Young Witch's Bane, Ferryman's pile, Way of the Mouse's and Riverboat's card, Approaching Army's, Obelisk's pile, each Trait's pile, Druid's Boons, the Black Market deck | `chance` `choice`, `card` the card choosing: what it chose, in its order (the Black Market deck top first) |
+| The Ally, the Prophecy, when none was given | `chance` `ally` or `prophecy` |
+| Divine Wind's new Kingdom | `chance` `kingdom`: the Kingdom piles, in the order they are set up. What their setup then draws follows as more `chance` events |
+
+As an event: **Fold:** nothing changes; the `pile`, `add`, `landscape` and move events that
+follow change the table. Today only Divine Wind draws chance during play that no shuffle
+shows: its new Kingdom and what that Kingdom's setup draws. From
+[`divine-wind.events.jsonl`](examples/events/divine-wind.events.jsonl), where Bo's
+Mountain Shrine removes the last Sun:
+
+```jsonl
+{"seq":411,"by":408,"type":"play","player":1,"card":"Mountain Shrine","from":"1/hand","to":"1/play"}
+{"seq":412,"by":411,"type":"counter","counter":"actions","delta":-1,"value":0}
+{"seq":413,"by":411,"type":"counter","counter":"sun","delta":-1,"value":0}
+{"seq":414,"by":411,"type":"receive","player":1,"card":"Divine Wind"}
+{"seq":415,"by":411,"type":"pile","pile":"pile/Young Witch","card":"Young Witch","removed":true,"recipe":{"kind":"stacked","cards":[{"card":"Young Witch","count":10}]}}
+…
+{"seq":425,"by":411,"type":"pile","pile":"pile/Aristocrat","card":"Aristocrat","removed":true,"roles":[{"card":"Young Witch","role":"bane"}],"recipe":{"kind":"stacked","cards":[{"card":"Aristocrat","count":10}]}}
+{"seq":426,"by":411,"type":"chance","site":"kingdom","cards":["Dismantle","Jack of All Trades","Urchin","Druid","Archive","Settlers","Pilgrim","Raider","Shop","Conspirator"]}
+{"seq":427,"by":411,"type":"pile","pile":"pile/Dismantle","card":"Dismantle","supply":true,"recipe":{"kind":"stacked","cards":[{"card":"Dismantle","count":10}]}}
+{"seq":428,"by":411,"type":"add","cards":["Dismantle"],"to":"pile/Dismantle"}
+{"seq":429,"by":411,"type":"derived","costs":{"Dismantle":{"coins":4}}}
+…
+{"seq":560,"by":411,"type":"chance","site":"boons","cards":["The Sun's Gift","The Sky's Gift","The Earth's Gift","The Forest's Gift","The Wind's Gift","The Field's Gift","The River's Gift","The Sea's Gift","The Mountain's Gift","The Moon's Gift","The Flame's Gift","The Swamp's Gift"]}
+{"seq":561,"by":411,"type":"add","cards":["The Swamp's Gift","The Flame's Gift","The Moon's Gift","The Mountain's Gift","The Sea's Gift","The River's Gift","The Field's Gift","The Wind's Gift","The Forest's Gift","The Earth's Gift","The Sky's Gift","The Sun's Gift"],"to":"boons/deck"}
+{"seq":562,"by":411,"type":"chance","site":"choice","card":"Druid","cards":["The Sun's Gift","The Moon's Gift","The Sky's Gift"]}
+{"seq":563,"by":411,"type":"set-aside","player":1,"cards":["The Sun's Gift","The Moon's Gift","The Sky's Gift"],"from":"boons/deck","to":"boons/druid","pos":[0,8,0]}
+```
+
+The Boons' deck is made with Druid in the new Kingdom, then Druid's three Boons are
+chosen from it. The `chance` of the Boons' deck lists it top first; the `add` puts the
+last listed on top.
+
+The Boons' deck and a shuffled pile made in setup are in the setup table too; their
+`chance` record says they were drawn, and keeps the outcomes in one place.
+
+## Replay
+
+A game is determined by its rules, its setup, what the players chose and how chance fell,
+and a full stream holds all four. `dominion-agent`'s `replay::replay` plays a game again
+from its stream alone, with the engine the stream names, and either gets the same stream,
+event for event, or says the first event that differs.
+
+### What a replayable stream holds
+
+| Cause | Where |
+| --- | --- |
+| The rules | `setup.rules`: `implementation` and `version` |
+| How the game was set up | `setup.seats` (the player count), `setup.kingdom`, `setup.config` |
+| What setup drew by chance | `setup.chance`, and the opening `shuffle` events |
+| What chance drew in play | each `shuffle` event's `cards`; each `chance` event |
+| What the players chose | each `answer`, to the `ask` before it |
+| A resignation | `game-end` with reason `resigned`, where it happened |
+
+Nothing else: not the seed, not the host's history of answers, not a snapshot. A stream
+without `setup.config` (recorded before it was written) can't be replayed, nor can a
+stream with a face-down card in a `shuffle` (only a `full` stream holds every outcome).
+
+### Which outcome answers which draw
+
+An outcome is matched to a draw by what it decides, its **site**: a seat's deck, the
+Boons' or Hexes' discard pile shuffled, the Boons' or Hexes' deck made, a pile by its
+card, a choice by the card choosing, the Ally, the Prophecy, Divine Wind's Kingdom. A
+`shuffle` into a seat's deck is that seat's; into `boons/deck` or `hexes/deck` the Boons'
+or Hexes' reshuffle. Each site's outcomes are taken in stream order. Within a site the
+stream's order is the order of the draws, because an outcome is written as it is drawn
+(a `chance`) or by the event that shows the draw (a `shuffle`, written before anything is
+drawn again for that deck). Across sites the order doesn't matter: so setup's draws, all
+made before event 0, are read from `setup.chance` and the `shuffle` events after `setup`,
+and a shuffle's event may come after the draw it shows.
+
+### Playing a stream again
+
+Replay:
+
+1. sets the game up from `setup`'s `seats`, `kingdom` and `config`;
+2. gives the engine, in place of its generator, every chance outcome in the stream, each
+   site's in order;
+3. records a new stream as the game goes and compares each event with the stream's;
+4. where the game waits on a question, gives it the stream's `answer` (or, where the
+   stream has `game-end` with reason `resigned`, resigns that seat).
+
+The engine takes each outcome it is given if it fits what it is drawing, and **refuses**
+one that doesn't: not the same cards as the deck being shuffled, a pick that isn't among
+those it picks from, the wrong number. It draws from its generator only after a refusal,
+when the replay has already failed.
+
+### What replay promises
+
+- **The same stream, event for event**, equal as values (so in either encoding), when the
+  stream is one this engine at this version recorded. Replay then returns the game at the
+  end of the stream, over or waiting on the question the stream ends with, and the
+  recorder that wrote it, to go on recording.
+- **Otherwise the first event that differs**: its `seq`, the stream's event there (or
+  none: the stream ended), what the game did there instead (or nothing), and why:
+  - the setup the engine writes differs from the stream's, `rules` included: event 0;
+  - an outcome refused, or a site with no outcome left: at the event the outcome was read
+    from, or at an earlier event that already differs;
+  - an answer that isn't one of the question's options: at the `answer`;
+  - the stream has something other than an answer where the game waits, or goes on
+    after the game is over: at that event;
+  - otherwise the game goes differently: at the first event that differs.
+
+  An outcome that fits but is not what happened (two cards of a shuffle swapped) is
+  taken, and the game goes on with it until the stream stops being that game's: at the
+  latest the first event that no longer folds, sooner where an answer picks a card by its
+  place. A different valid answer is found at the first event after it that differs. A
+  stream cut right after an `ask` is a game in progress; cut anywhere else, it differs at
+  the cut.
+- **Nothing from outside the stream**: no seed, no configuration, no snapshot.
+
+### What replay compares
+
+Exact streams written by the same recorder. Everything the recorder decides (which moves
+merge into one event, where counters fall between moves, a shuffle's `pos`, the order in
+which cards moved together out of a bag are listed, a question's prompt, labels and order
+of options) is decided the same way both times, so the comparison can be exact. Another
+producer's stream of the same game would differ in those decisions without the game
+differing: it would merge moves differently, word its prompts differently, list the cards
+of a hand discarded together in another order. Replaying it would need a comparison of
+what the events mean ([Not specified yet](#comparing-streams-from-different-producers)).
 
 ## Encodings
 
@@ -1156,7 +1470,7 @@ fields.
 | Model | JSON |
 | --- | --- |
 | Field names | `camelCase` (`fromFace`, `extraTurn`, `finalRound`) |
-| Enumerated values (event types, phases, `when`, `why`, turn kinds, limits, roles, recipe kinds, tokens, faces) | `kebab-case` strings (`set-aside`, `start-turn`, `third-in-a-row`, `plus-card`) |
+| Enumerated values (event types, phases, `when`, `why`, turn kinds, limits, roles, recipe kinds, tokens, faces, chance sites; an `ask`'s `kind`, `purpose`, `phase` and options' `action`) | `kebab-case` strings (`set-aside`, `start-turn`, `third-in-a-row`, `plus-card`, `top-deck`, `end-phase`) |
 | An event | one object: `seq`, `by` when present, `type`, then its own fields at the same level. A `pile` event's properties are fields of the event too: `{"type":"pile","pile":"pile/Footpad","card":"Footpad","supply":true,…}` |
 | A card | a string: its name, or `"?"` |
 | A zone | a string: `<seat>/deck`, `<seat>/native-village`, `pile/<card>`, `pile/<card> (2)`, `aside/<card>`, `trash`, `boons/deck`, `boons/discard`, `boons/druid`, `hexes/deck`, `hexes/discard` |
@@ -1170,17 +1484,25 @@ fields.
 | A cost | `{"coins": n}`, with `potions` and `debt` when not 0 |
 | Maps (`zones`, `faceUp`, `counters`, `piles`, `holdings`, `costs`, `types`) | objects keyed by the text form of their keys. Key order carries no meaning |
 | Absence | an optional field that is absent, a `false` flag, an empty list and a note's `count` of 0 are left out. A reader takes a missing field as absent, `false`, empty or 0 |
+| An `ask`'s options | objects as in agent-view@2: `{"index": 0, "group": 0, "action": "select", "label": "Estate", "card": "Estate", "zone": "hand"}` |
+| `config.choices` | an object keyed by the card choosing, each a list of names |
+| A chance record | `{"site": "pile", "card": "Ruins", "cards": [...]}`, in `setup`'s `chance` list or as an event's fields |
 | `null` | only in `derived`: a cost or types that are gone |
-| Integers | JSON numbers. `seq`, `by` and `origin` are unsigned 64-bit; ids unsigned 32-bit; seats 0 to 255; counters signed 64-bit |
+| Integers | JSON numbers. `seq`, `by`, `origin` and `seed` are unsigned 64-bit; ids, `turnLimit`, `min`, `max` and `indices` unsigned 32-bit; seats 0 to 255; counters signed 64-bit |
 
 Fields always written even at their default: a turn's `kind` (read as `regular` when
-missing), a cost's `coins`, an event's `seq` and `type`. The reference reader ignores
+missing), a cost's `coins`, an event's `seq` and `type`, `config`'s `colonies` and
+`shelters`, an `ask`'s `min`, `max` and `options`, an option's `index`, `group`, `action`
+and `label`, a chance record's `cards`. The reference reader ignores
 fields it doesn't know and refuses a `type` it doesn't know.
 
 A table in JSON is an object with `zones`, then each other part under its name
 (`counters`, `turn`, `ended`, `effects`, `faceUp`, `extraTurns`, `ending`, `piles`,
 `landscapes`, `prophecy`, `holdings`, `tokens`, `notes`, `costs`, `types`), each left
-out while empty. `setup`'s `table` is one. The turn in progress is `{player, number,
+out while empty. `setup`'s `table` is one. A table the reference reader has folded and
+writes out also carries `progress`, its fold's place in the stream ([When a stream is not
+one game's](#when-a-stream-is-not-one-games)): no part of the table, never in `setup`, and
+ignored when read there. The turn in progress is `{player, number,
 extra, phase, kind, limits}`.
 
 ### JSON Lines
@@ -1231,8 +1553,12 @@ full stream shows every hidden card and every shuffle's order, the future of a g
 progress, so it is served only once the game is over (409 before), to the game's seats
 or, for a watchable game, to anyone (403 otherwise).
 
-Games saved before streams were recorded have none. Solo games (`dominion solo`) and
-dominion.games games are not recorded.
+Games saved before streams were recorded have none, and streams recorded before
+`setup.config`, questions and chance were written fold but can't be replayed. Solo games
+(`dominion solo`) and dominion.games games are not recorded.
+
+Arena resumes and undoes a game from its snapshot, not from the stream ([Not specified
+yet](#loading-and-undoing-a-game-from-its-stream)).
 
 ### After a crash
 
@@ -1252,10 +1578,11 @@ is, and hosts the game without recording more of it.
 
 The stream holds no undo: undo is the host's, not the game's. A game taken back is
 replayed from its rules and seed with its remaining answers, which records the same
-events as before up to that point, so the stream of the game as it now stands is a
-prefix of the old one. Arena replaces the file with it, atomically, and appends from
-there: at every moment the file is the stream of the game as it stands. What was taken
-back never happened, and a reader of the file can't tell that it did.
+events as before up to that point, so the stream of the game as it now stands is a prefix
+of the old one, ending with the question whose answer was the first taken back. Arena
+replaces the file with it, atomically, and appends from there: at every moment the file
+is the stream of the game as it stands. What was taken back never happened, and a reader
+of the file can't tell that it did.
 
 ## Not specified yet
 
@@ -1283,6 +1610,13 @@ not say goes beyond faces. These are known; the versions are not designed in det
 - **How a bag mixes `?` and names**, and whether `pos` may be shown.
 - **Setup's hidden orders.** The setup table gives the Boons' and Hexes' decks and the
   shuffled piles (Knights, Ruins) in their order; a masked setup can't.
+- **Questions are the asked seat's alone.** What a seat is asked, and that it is asked at
+  all, is in that seat's stream only, with its answer; the public's has neither. Since no
+  event names a question as its cause, dropping them changes no other event.
+- **Chance that shows nothing.** `config.seed` is in no masked stream; `chance` records of
+  hidden things (a shuffled pile's order below its top, the Boons' and Hexes' decks, the
+  Black Market deck) are hidden; a `shuffle` shows its count, not its cards. So only the
+  full stream replays.
 - **Which `resolve`s to drop.** A `resolve` for every ability is right for the full stream;
   a seat's or the public stream will have to drop some (an ability that exists because of
   a hidden card) and say which causes it can't show. The plain-name `card` fields of
@@ -1294,13 +1628,40 @@ The test that will hold them to account: two games that differ only in cards a v
 never sees give that viewer identical streams. No JSON Schema is written until these
 versions settle the shapes.
 
-### Questions, answers and chance
+### Loading and undoing a game from its stream
 
-What a seat was asked and what it answered, and chance outcomes (shuffles, the Boons'
-and Hexes' decks, random setup) named as inputs an engine can be driven by, are being
-built and are not in this spec. With them a game can be resumed and undone from its
-stream alone; until then Arena's snapshot, not the stream, is what a game is resumed and
-undone from.
+The stream holds every cause of the game, so a host could load a game by replaying its
+stream and undo by replaying a stream cut right after the `ask` of the answer taken back.
+Arena does neither yet: it resumes and undoes from its snapshot, which keeps the engine's
+game and the host's history of answers. What the stream still lacks for it:
+
+- **A Way question answered in advance that is waiting.** An answer may answer the Way
+  questions of the card it plays in advance, and they can come after other seats'
+  questions (Reactions to an Attack). While one waits, it is the one piece of state that
+  changes the game and is in no event. It belongs in the host's snapshot, or in a host
+  record beside the stream.
+- **Command boundaries.** One command of a seat can be several answers: an Autoplay
+  Treasures run, an answer with the Way questions it answered in advance. Undo takes back
+  a command, but the stream doesn't say where one began. A field on `answer` marking those
+  a host gave on a seat's behalf, or a host record of where each command began, would let
+  undo find "my last answer" from the stream alone.
+
+The host's own state stays out of the stream either way: decision ids, each seat's log
+cursor, who asked to undo.
+
+### Rules changes and games in progress
+
+A stream replays only with the engine that recorded it, and `rules.version` doesn't
+change with every rules fix. A fix that changes what a game does makes a game in progress
+recorded before it fail to replay at the first event it changes. No policy is set: keep
+the snapshot until such a game ends, accept the difference, or end the game.
+
+### Comparing streams from different producers
+
+Replay compares exact streams from one recorder ([What replay
+compares](#what-replay-compares)). Holding another producer's stream to the same game
+(dominion.games', or another engine's) needs a comparison by meaning: the table folded at
+every question equal, the questions asking the same, the answers equal. It is not built.
 
 ### Out of scope
 
@@ -1331,17 +1692,23 @@ Undo, clocks, chat and who is connected belong to whatever hosts a game, not to 
 - **Open causes in a snapshot.** A reader joining mid-game would need the occurrences
   still in progress; nothing carries them.
 - **Charm** keeps its spent effect until the end of the turn.
+- **Questions with several groups.** An `ask` has no `groups`: every question this engine
+  asks has one group, whose bounds are `min` and `max`. A producer whose questions have
+  several would need them.
 
 ## Example streams
 
 Every example in this document is quoted from these, written by `dominion-engine` 0.1.0.
-Each is a two-player game whose seats, Ann and Bo, take scripted answers; the JSON Lines
-files were read back and folded, and the CBOR file read back to the same events.
+Each is a two-player game whose seats, Ann and Bo, take scripted answers; its
+`setup.config` gives the seed and turn limit it was played with. The JSON Lines files were
+read back, folded and replayed to themselves, and the CBOR file read back to the same
+events.
 
 | File | Kingdom | Shows |
 | --- | --- | --- |
-| [`moat-chapel.events.jsonl`](examples/events/moat-chapel.events.jsonl), [`.cbor`](examples/events/moat-chapel.events.cbor) | Throne Room, Wharf, Moat, Militia, Chapel, Fortress, Haven, Village, Smithy, Market | a complete opening; Moat against Militia; Fortress trashed with other cards; the same stream in CBOR |
+| [`moat-chapel.events.jsonl`](examples/events/moat-chapel.events.jsonl), [`.cbor`](examples/events/moat-chapel.events.cbor) | Throne Room, Wharf, Moat, Militia, Chapel, Fortress, Haven, Village, Smithy, Market | a complete opening; questions and answers; Moat against Militia; Fortress trashed with other cards; the same stream in CBOR |
 | [`throne-room-wharf.events.jsonl`](examples/events/throne-room-wharf.events.jsonl) | the same | Throne Room on Wharf and the next turn; Haven |
 | [`outpost-fleet.events.jsonl`](examples/events/outpost-fleet.events.jsonl) | Outpost, Haven, Quartermaster, Grotto, Library, Village, Smithy, Market, Laboratory, Festival; Fleet | an extra turn; cards set aside face up; the end with a final round |
 | [`boons-hexes.events.jsonl`](examples/events/boons-hexes.events.jsonl) | Bard, Blessed Village, Skulk, Druid, Bridge, Ranger, Flag Bearer, Village, Smithy, Market; Pageant | Boons and Hexes; a Project, an Artifact and a State held; the Journey token; costs changing |
-| [`inherited.events.jsonl`](examples/events/inherited.events.jsonl) | Hermit, Rats, Marauder, Fortress, Procession, Quartermaster, Grotto, Village, Smithy, Market; Inherited | an ability at the start of the game; `rename` |
+| [`inherited.events.jsonl`](examples/events/inherited.events.jsonl) | Hermit, Rats, Marauder, Fortress, Procession, Quartermaster, Grotto, Village, Smithy, Market; Inherited | an ability at the start of the game; `rename`; `setup.config` and `setup.chance` |
+| [`divine-wind.events.jsonl`](examples/events/divine-wind.events.jsonl) | Young Witch, Rustic Village, Poet, Tea House, Kitsune, Mountain Shrine, River Shrine, Village, Smithy, Market; Divine Wind | a Bane chosen at random; `chance` events in play: Divine Wind's new Kingdom, the Boons' deck and Druid's Boons it brings |
