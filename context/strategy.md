@@ -250,6 +250,15 @@ Other ways past one card per turn: gainers that gain without a Buy, Events
 and Projects bought with spare Buys, VP tokens, and Victory cards that
 gain or come with other cards. Count them alongside +Buy.
 
+A gainer that trades a card up (Remodel and its relatives) is one more gain
+each time it is played, so in a deck that plays most of itself several
+copies act like several +Buys. That holds only while it has fodder: ask
+what it trashes, and whether the deck makes that card again every turn. A
+card that gains a Silver or other cheap card each play supplies it, and
+then each extra copy of the gainer turns that byproduct into an engine part
+while building and a Duchy or Province at the end. Count the copies the
+fodder can feed, not one.
+
 ### Payload depends on the deck
 
 Whether a payload card is good depends on whether the deck around it can
@@ -416,7 +425,9 @@ An estimate of an unfamiliar deck runs late, often by five turns or more:
 it counts one gain per turn, leaves out the helpers and stops at the first
 stall. For money it is about right, because money is simple. So "the engine
 arrives around turn 15" is weak evidence against the engine. Check it
-against these numbers before trusting it.
+against these numbers before trusting it. A simulation runs late the same
+way: it plays only what its policy knows, so a policy that gains one card a
+turn can't see a deck that gains three.
 
 ### Colony games
 
@@ -552,6 +563,12 @@ it, whether or not the pair appears below.
 - **Cards that play themselves**: a card that plays itself when gained or
   discarded (Trail) uses no Action. A terminal gainer that gains one gets
   its Action back, and any discard effect becomes a way to play it.
+- **Byproducts as fuel**: a card's side gain that looks like dilution (a
+  Silver, a Ruins, a Curse you gain yourself) can be exactly what another
+  card wants to trash, trade up or count. Then the first card feeds the
+  second every turn, and the pair works as a loop: write it with what each
+  turn produces and consumes (`kingdom-analysis`, "Resource loop"). Check
+  every gain a card makes for a card here that wants it.
 - **VP per gain or per play + cheap repeats**: VP tokens earned each time
   you gain or play something (Collection, Groundskeeper, Monument) pair with
   +Buy, cheap piles, cards that gain two at once, and anything that replays
@@ -648,6 +665,10 @@ turn 3 or 4 five times in six. No later gain shapes as many hands.
   first, then gainers. Draw and payload rarely drive the opening. Buying
   Silver to reach $5 for a key $5 trasher or junker counts as working
   toward that goal. Opening a plain village is almost never right.
+- **A gainer can reach the key price for you.** A card that trades up
+  (Remodel turns a $3 Silver into a $5 card) gets the key $5 piece on a hand
+  that can't buy it, and frees the Buy for something else. Gainer + Silver
+  is then a strong 4/3: the Silver is both money and fodder.
 - **A turn 1 buy that acts before the shuffle changes turn 2.** A card
   gained to your hand or onto your deck, a when-gain effect, or a Night
   card played the turn it is bought makes the turn 2 hand something other

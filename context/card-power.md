@@ -30,7 +30,9 @@ large gap as a question about combinations:
   matter less, or does it better? If you can't name it, look again.
 - **A low-rated card you want**: what on this board lifts it? Name the
   card or landscape it works with. If nothing does, the rating is probably
-  right.
+  right. A gainer is the usual case: Remodel rates near the median, but on
+  a board without +Buy whose engine makes its fodder every turn (a draw
+  card that gains a Silver), several copies are the board's extra gains.
 - **Cards a few points apart**: the ratings don't separate them. What each
   does with the rest of the board decides.
 - **A card the board has changed**: a Trait on its pile, a Way, a cost

@@ -55,7 +55,8 @@ The first decision looks routine (a $3 or $4 buy), and that is when the
 plan gets skipped; the opening is where the plan matters most. Keep the
 result as a short game plan, about ten lines:
 
-- the plan and the reason it beats Big Money here;
+- the plan and the reason it beats Big Money here, with its loop when it
+  has one: what feeds what, and which side runs short;
 - the opening for each split;
 - the deck you are building toward, in a line: its shape and the
   balances that matter (e.g. "a village per Smithy, 2 +Buys, Estates

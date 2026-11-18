@@ -65,7 +65,9 @@ used as defined in "Payload and deck control" in `context/strategy.md`.
 4. **+Buy and gaining**: where does +Buy come from (Kingdom cards, Events,
    tokens), and what gains cards or VP without a Buy? With none of these, a
    turn scores at most one card, so an engine can't outscore money (see
-   "+Buy turns a big turn into points").
+   "+Buy turns a big turn into points"). For each gainer, say what it
+   consumes, whether the deck will make that every turn, and what a second
+   and third copy add: a gainer with renewable fodder is a stacking +Buy.
 5. **Attacks**: is there a junker? Can it be blocked, trashed away or
    outpaced? What do the other attacks hit?
 6. **Standouts**: a card the whole board bends around, an unusual setup, a
