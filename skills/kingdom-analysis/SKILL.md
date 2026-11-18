@@ -93,6 +93,12 @@ board is whether a deck here can draw itself, how soon, and how often.
   can stall it (see "Reliability" in `context/strategy.md`): copies of the
   key cards, Actions against terminals, spare draw, junk, and the
   opponent's attacks.
+- **Resource loop**: when pieces feed each other (a card that gains what a
+  trasher eats, Villagers that pay for terminal draw, tokens spent and
+  earned each turn), write the loop with its rates: what each turn adds
+  and spends. The engine works only while the loop balances, so the
+  ratio of the pieces matters as much as their count, and the scarce side
+  of the loop is what to buy next.
 - **Ceiling**: the $ and Buys of a built turn, and how many Provinces (or
   other VP) that is per turn.
 - **Payload**: now judge the payload cards for the deck this board wants.

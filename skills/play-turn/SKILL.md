@@ -34,6 +34,11 @@ be decided together.
   "gain 2 villages"). A good draw can make room for both an engine piece
   and a Duchy; a bad one can make the best play a modest gain and a strong
   next hand.
+- Ask what your deck is most short of right now, and let the answer guide
+  every gain, trash and choice this turn, not only the buy. It is often
+  not a missing card but a balance: Actions spent faster than they come
+  in, trash fodder running out, draw that finds nothing to play. Revisit it
+  after each draw: what the deck lacks can change in the middle of a turn.
 - When a card that wasn't part of the plan shows up (a Black Market reveal,
   a Loot, a Reward, a card an attack hands you, something the opponent just
   started buying), check it against the board before judging it: what here
@@ -52,6 +57,11 @@ be decided together.
   turn still needs.
 - Play a gainer just before a reshuffle if you want the gained card soon,
   and late if you don't.
+- Some costs depend on what you gained this turn (a card that copies the
+  last gain's cost, one that gets cheaper per gain). Then the order and
+  choice of gains is part of the play: a cheap gain first can make the
+  card you want affordable, and a gainer can take a cheap card to set the
+  price the Buy can pay.
 - With more than one Buy, or before buying an Event or Project, play all
   the Treasures you mean to use before the first purchase. Buying anything
   ends Treasure play for the turn (`context/rules.md`, "Buy phase"), so
@@ -74,7 +84,9 @@ be decided together.
 - Cards in your hand or in play when you reshuffle miss that whole pass
   through your deck. Trigger a reshuffle when your discard pile is strong
   and your hand is weak, not right after a big turn put your best cards in
-  play.
+  play. Drawing is a choice too: when a draw would reshuffle with your best
+  cards in play, look for a way not to draw (take $ instead of cards,
+  stop playing draw) if the turn already has what it needs.
 - Don't fill your discard with junk (Cellar, Warehouse) just before you
   draw into a reshuffle.
 - Cards that reveal or look at several cards (Sentry) reshuffle as soon as
@@ -105,7 +117,10 @@ could change the decision.
   opponent's clock runs out: count the pieces the plan's deck needs
   against the ones you own. Give the evidence: "4 terminals, 1 village:
   over-terminaled", "stalled twice because the only village missed the
-  starting hand: needs reliability", "nothing at $5 yet". Distinguish a
+  starting hand: needs reliability", "nothing at $5 yet". A shortage can be
+  a rate rather than a count: "2 Villagers banked, spending 3 a turn,
+  earning 3 only when Recruiter finds a Silver: short of Recruiter food".
+  Count what comes in and goes out each turn. Distinguish a
   composition problem from an unlucky hand. Use observed counts or a
   worked estimate, not an invented success rate. If no bottleneck needs
   fixing, say so briefly. Once the deck draws most of itself, the limit
@@ -137,8 +152,10 @@ one the plan seems to settle, gains from Action cards, and buying nothing.
 Summarize the relevant points below, usually in two to four lines:
 
 - **Composition**: look at the whole deck as it is now, not just this
-  hand, and say what it most needs for the plan, with the counts that
-  show it, and only those. "3 villages,
+  hand, and say what it is most short of right now, with the counts that
+  show it, and only those. This is the main question for every gain: the
+  best gain is usually whatever relieves the shortage that will stop the
+  next shuffle. "3 villages,
   Militia, Smithy: Actions to spare, short of draw" is enough. Early, deck
   control and thinning usually beat payload; once the deck is reliable,
   payload usually wins. A card that is strong in general can be wrong for
