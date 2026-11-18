@@ -1,242 +1,1336 @@
 # dominion/events@1
 
-A precise language for what happens in a game of Dominion: a stream of events, each one
-unambiguous statement about the table. The same stream is
+A game of Dominion as a stream of **events**, each one precise statement about the game.
+The events describe a **table**: where every card is, every counter and token, the turn,
+the lasting effects, the piles. A reader who applies the events one after another has the
+whole table, with no rules engine: **the table after event *n* is the fold of events
+`0..=n`**. This document defines the table, every event, and exactly what each event does
+to the table.
 
-- how a game is **talked about** (by a program, a log, an agent),
-- how a game is **recorded** (the stream in a file is the replay), and
-- what a client can be sent to **follow** a game (apply the events as they arrive).
+The same stream is how a game is talked about (by a program, a log, an agent), how it is
+recorded (Arena records every game it hosts this way), and, later, what a client can be
+sent to follow a live game.
 
-A reader needs no rules engine: **the table after event *n* is the fold of events
-`0..=n`**, and this document defines what each event does to the table.
+The format is a **model**: the types below and what they mean. An **encoding** writes
+those types as bytes. JSON Lines is the reference encoding and CBOR is a second one
+([Encodings](#encodings)). The JSON examples in this document illustrate the model in the
+reference encoding; every one is real output of `dominion-engine`, from the complete
+streams in [`examples/events/`](examples/events/).
 
-Status: working draft. [Implemented](#status) says what `dominion-engine` writes today.
+Status: only the **full** stream exists: every card's face, every shuffle's order. The
+versions for one seat and for the public are not specified
+([Not specified yet](#not-specified-yet)).
+
+## An example
+
+The first turn of [`moat-chapel.events.jsonl`](examples/events/moat-chapel.events.jsonl),
+a two-player game. The first record is the header; then come `setup` (here trimmed with
+`…`), each player's opening shuffle and draw, and the first turn:
+
+```jsonl
+{"schema":"dominion/events@1","viewer":"full","game":"g12"}
+{"seq":0,"type":"setup","rules":{"implementation":"dominion-engine","version":"0.1.0"},"seats":["Ann","Bo"],"kingdom":["Throne Room","Wharf","Moat","Militia","Chapel","Fortress","Haven","Village","Smithy","Market"],"table":{"zones":{"0/deck":["Copper","Copper","Copper","Copper","Copper","Copper","Copper","Estate","Estate","Estate"],"1/deck":["Copper",…],"pile/Chapel":["Chapel",…],…},"piles":{"pile/Chapel":{"card":"Chapel","supply":true,"recipe":{"kind":"stacked","cards":[{"card":"Chapel","count":10}]}},…},"costs":{"Chapel":{"coins":2},"Copper":{"coins":0},…}}}
+{"seq":1,"type":"shuffle","player":0,"cards":["Estate","Copper","Estate","Copper","Copper","Estate","Copper","Copper","Copper","Copper"],"from":"0/deck","to":"0/deck","pos":[7,0,6,0,0,4,0,0,0,0]}
+{"seq":2,"type":"draw","player":0,"cards":["Estate","Copper","Estate","Copper","Copper"],"from":"0/deck","to":"0/hand"}
+{"seq":3,"type":"shuffle","player":1,"cards":["Copper","Copper","Copper","Copper","Copper","Estate","Estate","Estate","Copper","Copper"],"from":"1/deck","to":"1/deck","pos":[0,0,0,0,0,2,2,2,0,0]}
+{"seq":4,"type":"draw","player":1,"cards":["Copper","Copper","Copper","Copper","Copper"],"from":"1/deck","to":"1/hand"}
+{"seq":5,"type":"turn","player":0,"number":1,"kind":"regular"}
+{"seq":6,"by":5,"type":"phase","phase":"action"}
+{"seq":7,"by":5,"type":"phase","phase":"buy"}
+{"seq":8,"by":7,"type":"play","player":0,"card":"Copper","from":"0/hand","to":"0/play"}
+{"seq":9,"by":8,"type":"counter","counter":"coins","delta":1,"value":1}
+{"seq":10,"by":7,"type":"play","player":0,"card":"Copper","from":"0/hand","to":"0/play"}
+{"seq":11,"by":10,"type":"counter","counter":"coins","delta":1,"value":2}
+{"seq":12,"by":7,"type":"play","player":0,"card":"Copper","from":"0/hand","to":"0/play"}
+{"seq":13,"by":12,"type":"counter","counter":"coins","delta":1,"value":3}
+{"seq":14,"by":7,"type":"buy","player":0,"card":"Silver"}
+{"seq":15,"by":14,"type":"counter","counter":"buys","delta":-1,"value":0}
+{"seq":16,"by":14,"type":"counter","counter":"coins","delta":-3,"value":0}
+{"seq":17,"by":14,"type":"counter","counter":"bought","delta":1,"value":1}
+{"seq":18,"by":14,"type":"gain","player":0,"cards":["Silver"],"from":"pile/Silver","to":"0/discard"}
+{"seq":19,"by":5,"type":"phase","phase":"night"}
+{"seq":20,"by":5,"type":"phase","phase":"cleanup"}
+{"seq":21,"by":20,"type":"discard","player":0,"cards":["Copper","Copper","Copper"],"from":"0/play","to":"0/discard"}
+{"seq":22,"by":20,"type":"discard","player":0,"cards":["Estate","Estate"],"from":"0/hand","to":"0/discard"}
+{"seq":23,"by":20,"type":"draw","player":0,"cards":["Estate","Copper","Copper","Copper","Copper"],"from":"0/deck","to":"0/hand"}
+{"seq":24,"by":5,"type":"turn-end","player":0}
+```
+
+After the header, each line is one event. `seq` numbers the events from 0. `by` names the event this one
+happened inside: Copper's +$1 (9) is inside its play (8), which is inside the Buy phase
+(7), which is inside the turn (5). The setup table lists each deck in no particular order;
+the shuffle at seq 1 says which order it is in afterwards.
 
 ## The table
 
-What the events describe.
+The table is everything the events describe. Its parts:
 
-- **Cards** are physical cards. Each sits in exactly one zone.
-- **Zones** hold cards:
+| Part | |
+| --- | --- |
+| `zones` | the cards in every zone |
+| `faceUp` | of the cards in set-aside zones and `looking`, those lying face up |
+| `counters` | every counter that is not 0 |
+| `turn` | the turn in progress, if any |
+| `effects` | the lasting effects |
+| `extraTurns` | the extra turns waiting |
+| `ending` | once the game's end condition is met: why, and the final round still to play |
+| `ended` | once the game is over: the result |
+| `piles` | every pile's properties |
+| `landscapes`, `prophecy`, `holdings` | the landscapes and Artifacts in the game, its Prophecy, who holds each Project cube, Artifact and State |
+| `tokens` | the players' tokens that are out |
+| `notes` | public state a card keeps that has no other place |
+| `costs`, `types` | derived values: what each card costs now, and types that are not the printed ones |
 
-  | Zone | |
-  | --- | --- |
-  | `<seat>/deck`, `<seat>/discard` | ordered |
-  | `<seat>/hand`, `/play`, `/aside` (set aside), `/looking` (off the deck, being looked at or revealed), `/tavern`, `/island`, `/native-village`, `/exile` | unordered |
-  | `pile/<card>` | a pile, by the card or randomizer it is named after. Ordered |
-  | `aside/<card>` | cards a card set aside for the game: the Black Market deck, Way of the Mouse's card. Ordered |
-  | `trash` | ordered |
+### Cards
 
-  `<seat>` is a player's index in turn order, from 0. An **ordered** zone lists its cards
-  top first. An **unordered** zone lists them in the order they arrived. A seat's zones
-  and the trash always exist, and are left out of a snapshot while empty; a pile exists
-  from the moment the game has it, empty or not.
-- **Counters** are integers, zero unless an event says otherwise:
+A card is its **name**: `Copper`, `King's Court`, `The Sea's Gift`. A viewer who doesn't
+see a card's face writes it `?`. In the full stream every face is seen, so `?` never
+appears there.
 
-  | Counter | |
-  | --- | --- |
-  | `actions`, `buys`, `coins`, `potions` | the turn's |
-  | `<seat>/coffers`, `/villagers`, `/favors`, `/debt`, `/vp-tokens`, `/pirate-ship` | a player's |
-  | `pile/<card>/vp`, `/debt`, `/embargo`, `/trade-route` | tokens on a pile |
-  | `trade-route-mat`, `sun` | the game's |
+Nothing numbers the physical copy. Copies of a card are interchangeable under the rules;
+what can tell two copies apart is something attached to one, and the stream says each of
+those where it applies: a card's position in an ordered zone (`pos`), the effect that
+keeps or holds it (the effect's `id`), the way it lies in a set-aside zone (`face`,
+`fromFace`), which of the cards trashed or discarded together an ability answers
+(`index`).
 
-- **The turn**: whose it is, which of theirs it is, the card that gave it if it is an
-  extra turn, and its phase.
+Boons and Hexes are cards like any other: they lie in zones and move.
 
-A **snapshot** is the table as JSON:
+### Zones
+
+A zone holds cards. There are two kinds:
+
+- **Ordered**: a sequence of cards, top first.
+- **Bag**: how many of each card, with no order. A bag is listed sorted: `?` first, then
+  by name in Unicode code-point order (the byte order of the names in UTF-8). So
+  `["Copper","Copper","Estate","Silver"]` is the only way to list that hand.
+
+| Zone | Kind | |
+| --- | --- | --- |
+| `<seat>/deck` | ordered | |
+| `<seat>/discard` | ordered | |
+| `<seat>/hand` | bag | |
+| `<seat>/play` | bag | the cards in play |
+| `<seat>/aside` | bag, with faces | set aside |
+| `<seat>/looking` | bag, with faces | taken off the deck to be looked at or revealed |
+| `<seat>/tavern`, `<seat>/island`, `<seat>/native-village`, `<seat>/exile` | bag | mats |
+| `<seat>/boons` | bag | Boons the player took and has not discarded: being received, taken by Fool, held by Blessed Village for later, kept until Clean-up (The Field's Gift) |
+| `<seat>/hexes` | bag | a Hex the player turned over, while it is received (by them, or by each other player for an Attack) |
+| `pile/<card>` | ordered | a pile, named after the card or randomizer it is named after; a later pile of the same name (one joining after Divine Wind removed the first) is `pile/<card> (2)`, then `(3)` |
+| `aside/<card>` | ordered | cards set aside for the game that are no pile by the rules: the Black Market deck, Riverboat's and Way of the Mouse's cards. Named and numbered as piles are |
+| `trash` | ordered | |
+| `boons/deck`, `boons/discard` | ordered | the Boons' draw and discard piles |
+| `boons/druid` | ordered | Druid's three Boons, set aside for the game |
+| `hexes/deck`, `hexes/discard` | ordered | the Hexes' draw and discard piles |
+
+`<seat>` is a player's index in turn order, from 0. A pile is never identified by
+parsing its zone's name: `piles` says which card it is named after.
+
+**Which zones exist.** A seat's zones, the trash and the Boons' and Hexes' zones always
+exist; while empty they are left out of `zones`. A pile or `aside/<card>` zone exists
+from the moment it is in the table (in `setup`, or by a `pile` or `add` event) and is
+listed even when empty.
+
+**Faces.** A seat's `aside` and `looking` zones are bags whose cards each lie face up
+(everyone sees them) or face down (their owner may look at them). `faceUp` maps each such
+zone to the bag of its cards that lie face up; the rest of the zone lies face down. A
+zone with no face-up card is left out of `faceUp`. A card's face is said by the move
+that brings it in (`face`) and the move that takes it out (`fromFace`); a card stops
+being face up when it leaves the zone.
 
 ```json
-{
-  "zones": {"0/deck": ["Copper#249", "Estate#257"], "0/hand": ["Copper#254"], "pile/Village": ["Village#31", "Village#30"]},
-  "counters": {"actions": 1, "buys": 1, "1/coffers": 2},
-  "turn": {"player": 0, "number": 3, "phase": "buy"}
-}
+"zones": {"0/aside": ["Copper", "Copper", "Gold"]},
+"faceUp": {"0/aside": ["Copper"]}
 ```
 
-## Cards and viewers
+### Counters
 
-A stream is written for a **viewer**, named in its header: `full`, `public`, or a seat.
-Only `full` is specified so far: every card's face, every shuffle's order.
+A counter is an integer, 0 unless an event says otherwise. It is keyed by **whose** it
+is and **which** of theirs:
 
-A card is written `Name#handle` when the viewer sees its face and `?` when not. A
-**handle** names one physical card for as long as the viewer keeps seeing its face. In a
-`full` stream every face is seen, always, so a card keeps one handle for the whole game.
+| Whose | Text form | Which |
+| --- | --- | --- |
+| the turn | `<name>` | `actions`, `buys`, `coins`, `potions`, `next-hand`, `bought`, `hand-plays` |
+| the game | `<name>` | `trade-route-mat`, `sun` |
+| a seat | `<seat>/<name>` | `coffers`, `villagers`, `favors`, `debt`, `vp-tokens`, `pirate-ship`, `sinister-plot`, `skip-turns`, `turns-skipped` |
+| a pile | `<pile>/<name>` | `vp`, `debt`, `embargo`, `trade-route`, `favors` |
+| a landscape | `landscape/<card>/<name>` | `vp` |
 
-The `public` and seat versions are the same language with less shown. What they must
-not show goes beyond faces (see [Status](#status)), so they number their own events.
+`<pile>` is the pile's zone (`pile/Village/embargo`). The text form is the encoding's;
+in the model a counter key is the pair (whose, which). Which owner a bare name belongs
+to follows from the name: the first seven are the turn's, `trade-route-mat` and `sun`
+the game's.
 
-## The stream
+| Counter | |
+| --- | --- |
+| `actions`, `buys`, `coins`, `potions` | the turn's Actions, Buys, $ and Potions |
+| `next-hand` | how many cards this turn's Clean-up draws: 5, Outpost's 3, more with Expedition or Flag |
+| `bought` | 1 once something (a card, Event or Project) has been bought in this Buy phase, which ends playing Treasures; returning to the Action phase sets it back to 0 |
+| `hand-plays` | the plays from the hand this turn, in a turn whose `limits` has `handPlays` (Voyage's); 0 otherwise |
+| `trade-route-mat` | the coin tokens on the Trade Route mat |
+| `sun` | the Sun tokens on the Prophecy |
+| `<seat>/coffers`, `/villagers`, `/favors`, `/debt`, `/vp-tokens` | the player's |
+| `<seat>/pirate-ship` | coin tokens on their Pirate Ship mat |
+| `<seat>/sinister-plot` | their tokens on Sinister Plot |
+| `<seat>/skip-turns` | the next turns the player will skip (Lich): the next ones they would take, of any kind |
+| `<seat>/turns-skipped` | the regular turns they have skipped, which count for the tiebreaker |
+| `<pile>/vp`, `/debt`, `/embargo`, `/trade-route` | tokens on the pile |
+| `<pile>/favors` | Family of Inventors' Favor tokens on the pile |
+| `landscape/<card>/vp` | VP tokens on a Landmark |
 
-JSON Lines. The first line is the header:
+The turn's counters exist only while a turn is in progress: `turn` sets them and
+`turn-end` returns them to 0.
+
+### The turn
+
+The turn in progress, or none. There is none before the first turn and **between
+turns**: from a `turn-end` to the next `turn`. Things happen between turns (Donate,
+Mountain Pass, a player choosing which extra turn to take, turns skipped or lost, the end
+condition being met), and none of them is part of a turn.
+
+| Field | |
+| --- | --- |
+| `player` | whose turn it is |
+| `number` | which of that player's turns, from 1, every kind counted |
+| `kind` | `regular`; `extra` (given by a card; it doesn't count for the tiebreaker); `final` (one of the round played after the game has ended: Fleet) |
+| `extra` | for an extra turn, the card that gave it |
+| `phase` | `start`, `action`, `buy`, `night` or `cleanup` |
+| `limits` | what this turn forbids beyond the rules of every turn: `noCardBuys` (Mission's turn: no buying cards; Events and Projects may still be bought) and `handPlays` (Voyage's: at most that many plays from the hand). Absent: nothing |
+
+A turn is in `start` from its `turn` event to its first `phase` event. The model also has
+a phase `end`, which no stream writes.
+
+### Effects
+
+An **effect** is anything that outlives the play that made it: a Duration's later part,
+a "this turn" or "until your next turn" effect, a landscape's, Boon's or State's lasting
+part. Every lasting thing the engine keeps is an effect, as it shows them to players,
+including markers of a once-per-turn use spent (Alms, Borrow, Save, Pilgrimage bought this
+turn; Fortune's doubling): they last until the end of the turn and are the table's record
+that the use is spent. `effects` lists them by `id`, which is the order they began.
+
+| Field | |
+| --- | --- |
+| `id` | names it from its `effect` event to its `effect-end` |
+| `card` | the card, landscape, Boon or State it is of, by name |
+| `source` | the card it came from, when a card made it: the card played (a Way's effect is the Way's, its source the card played), the Estate playing an inherited card |
+| `owner` | a seat |
+| `until` | when it ends, as its players are told: `end-of-turn`; `start-of-turn` of a seat; `extra-turn` (when the extra turn it keeps its card in play for starts or doesn't happen); `removed` (when something it waits for happens) |
+| `ending` | its card has left play: it still works this turn and ends with it |
+| `keeps` | a bag of its owner's play area: the cards it keeps in play past Clean-up |
+| `holds` | a bag of its owner's set-aside zone: the cards it holds set aside |
+| `faceUp` | a bag: of `holds`, those lying face up |
+| `tokens` | how many tokens lie on its card (Garrison) |
+
+Two effects can keep the same card: Throne Room played on Wharf makes two Wharf effects,
+each keeping Throne Room and Wharf ([an example](#throne-room-on-wharf)). A card that no
+effect keeps or holds is not marked: when a copy an effect keeps leaves play, that
+effect changes (`effect-change` with fewer `keeps`, or `ending`); when a copy of the same
+name that no effect keeps leaves, no effect changes.
+
+`faceUp` is needed beside the zone's own `faceUp`: when cards of one name lie both ways in
+a set-aside zone and an effect holds one of them, the zone alone doesn't say whose is the
+face-up one.
 
 ```json
-{"schema": "dominion/events@1", "viewer": "full"}
+{"id":12,"card":"Quartermaster","source":"Quartermaster","owner":0,"until":"removed","keeps":["Quartermaster"],"holds":["Copper","Silver"],"faceUp":["Copper","Silver"]}
 ```
 
-Every other line is an event, in order:
+A card set aside that no effect holds belongs to the play in progress that set it aside
+(Library) or, in an `aside/<card>` zone, to the card that set it aside for the game.
+
+### Extra turns waiting
+
+`extraTurns` lists the extra turns waiting, in the order the engine keeps them (after the
+others, unless queued at the front: Island Folk). Each has:
+
+| Field | |
+| --- | --- |
+| `id` | names it from its `extra-turn` event until it is taken, skipped, lost or removed |
+| `player` | whose |
+| `card` | the card that gave it |
+| `limit` | `third-in-a-row`: it is lost if it would be that player's third turn in a row, decided when it is up next; `none`: it always happens (Seize the Day) |
+| `effect` | the effect keeping its card in play for it (Outpost, Voyage), if any |
+
+Two can wait for one player from the same card, each with its own effect; which one is
+lost decides which card is released. After each turn, extra turns are taken in turn order
+from the player of the most recent regular turn, and a player with extra turns from
+different cards chooses which first. The stream records the outcome (`turn`,
+`turn-skipped`); a reader needs no part of this rule.
+
+### The game ending
+
+- `ending` is set when the end condition is met: `reason` (`provinces`, `colonies`,
+  `piles` or `turn-limit`) and `finalRound`, the seats still to take a turn of the round
+  after the game's end (Fleet), in order. Each turn of that round, taken or skipped,
+  removes its seat from the front.
+- `ended` is set when the game is over: `reason` (as above, or `resigned`) and `result`,
+  per seat: `seat`, `vp`, `turns` (the turns that count for the tiebreaker: regular turns,
+  taken or skipped; extra turns and the final round's don't), `rank` (from 1; a seat that resigned ranks below every seat that
+  didn't, then more VP, then fewer turns; ties share a rank) and `resigned`.
+
+### Piles
+
+`piles` gives every pile's properties by its zone, `aside/<card>` zones included. A pile
+is listed from the moment the game has it.
+
+| Field | |
+| --- | --- |
+| `card` | the card or randomizer it is named after. Its types are the pile's types, whatever it holds now |
+| `supply` | it is in the Supply |
+| `hidden` | it lies face down: not even its top card is public (the Black Market deck) |
+| `removed` | it is out of the game (Divine Wind): no card's pile any more, though its cards and Traits are still its own |
+| `roles` | what setup made it for, each `{card, role}`: `bane` (Young Witch's), `extra-pile` (Ferryman's), `chosen-pile` (Obelisk's), `set-aside` (Riverboat's and Way of the Mouse's card), `deck` (the Black Market deck: contents public, order not) |
+| `traits` | the Traits on it |
+| `recipe` | what it was made of in setup, never what it holds now: `kind` (`stacked`: groups one on another, top first; `rotating`: groups whose top cards go to the bottom; `shuffled`: a pool shuffled together), `cards` (`{card, count}` groups), and `sample` (how many of a shuffled pool it took, when only some) |
 
 ```json
-{"seq": 14, "type": "gain", "player": 0, "cards": ["Copper#45"], "from": "pile/Copper", "to": "0/discard"}
+"pile/Will-o'-Wisp": {"card": "Will-o'-Wisp", "recipe": {"kind": "stacked", "cards": [{"card": "Will-o'-Wisp", "count": 12}]}}
 ```
 
-- `seq` counts from 0 with no gaps.
-- `type` says what happened.
-- `by` (optional) is the `seq` of the event that caused this one.
+### Landscapes, the Prophecy and holdings
+
+- `landscapes`: every landscape (Event, Landmark, Project, Way, Ally, Trait, Prophecy) and
+  Artifact in the game, sorted by name in code-point order.
+- `prophecy`: the game's Prophecy. It is in effect while the `sun` counter is 0.
+- `holdings`: who holds each Project (has a cube on it), Artifact and State, by name, as
+  a sorted list of seats. A name nobody holds is left out. Kept Boons are in
+  `<seat>/boons`, not here.
+
+### Tokens
+
+`tokens` lists each player's tokens that are **out**, each `{player, token, at}`, ordered
+by player, then by token in the order of this table:
+
+| `token` | | `at` when listed | Not listed |
+| --- | --- | --- | --- |
+| `plus-card`, `plus-action`, `plus-buy`, `plus-coin`, `minus-cost`, `trashing`, `estate` | Adventures tokens | a pile's zone; or `player`, on no pile (the Estate token on Inheritance's card, a token whose pile left the game) | not placed yet |
+| `minus-card` | the −1 Card token | `player`: on their deck | they don't have it |
+| `minus-coin` | the −$1 token | `player`: in front of them | they don't have it |
+| `journey` | the Journey token | `face-down` | face up |
+
+### Notes
+
+`notes`: public state a card or landscape keeps that has no other place on the table,
+each with `source` (the card or landscape) and as applicable `player`, `pile` (a pile's
+zone), `card` and `count`. Examples: the card each player set aside with Inheritance
+(`{"source": "Inheritance", "player": 1, "card": "Village"}`), Invest's Exiled cards.
+What has a place elsewhere is not a note: Druid's Boons are in `boons/druid`, a Bane is a
+pile's role, Fleet's final round is `ending`.
+
+### Derived values
+
+What the rules make of the table rather than things on it. A reader with a rules engine
+would compute them; they are in the table so a reader without one has them.
+
+- `costs`: what each card in the game costs now, by name: `coins`, `potions`, `debt`.
+  Every name some card in the game has is listed. Events and Projects are not: they never
+  change.
+- `types`: a card's types, by name, while they are not its printed types (Charlatan's
+  Curses, Capitalism's Actions, Enlightenment's Treasures).
+
+VP is not given: a running score says too much about cards a viewer can't see
+(Masquerade).
+
+## Reading a stream
+
+A stream is a **header**, then events in order.
+
+The header:
+
+| Field | |
+| --- | --- |
+| `schema` | `dominion/events@1` |
+| `viewer` | whose eyes the stream is written for: `full` (every face, every shuffle's order); later `public` or a seat |
+| `game` | the game's id where it has one (Arena's `g12`); optional |
+
+Each event has:
+
+| Field | |
+| --- | --- |
+| `seq` | its position, from 0, with none missing |
+| `by` | optional: the event it happened inside ([Causes](#causes)) |
+| `type` | what kind of event it is; its other fields depend on it |
+
+The first event is `setup`, which gives the whole table before anything happens. Each
+later event changes the table as its section below says, or changes nothing (most
+occurrences). Applying them in order is **the fold**.
+
+### Two kinds of events
+
+- **Occurrences**: something the rules have a name for happens: a turn begins, a phase
+  begins, the turn ends, a card is played, something is bought, an ability resolves, a
+  Boon or Hex is received, a card is gained, trashed or discarded, a deck is shuffled.
+  They say *why*. Other events happen inside them.
+- **Changes**: the table changes: cards move, a counter changes, an effect begins. They
+  say *what*.
+
+A `play`, `gain`, `trash`, `discard` and `shuffle` are both: they move cards, and other
+events happen inside them.
+
+### Causes
+
+Every event but `setup` may carry `by`: the `seq` of the **occurrence it happened
+inside**. It is always earlier than the event.
+
+Only these are causes, with what happens inside each:
+
+| Occurrence | What happens inside it |
+| --- | --- |
+| `turn` | its phases and its `turn-end`; the abilities that resolve at its start; effects that end as it starts (`effect-end`, `expired`); costs that change with it (`derived`) |
+| `phase` | the moves its player makes (plays, buys, Coffers, Villagers, paying Debt); abilities at its start; Clean-up's discards and draw, and the −1 Card token that draw uses up |
+| `turn-end` | what ends with the turn: effects ending (`expired`, `left-play`), extra turns removed with them, Boons kept until Clean-up discarded, costs changing back |
+| `receive` | what a Boon or Hex received does: its +$, its moves, the effect it makes |
+| `play` | the Action it costs, the card's bonuses and instructions, its Way, the Reactions to it, the plays it makes (Throne Room's of the card it chose) |
+| `buy` | its price (the Buy, $, Potions, Debt, `bought`), overpaying, on-buy abilities, the gain of the card bought, what a bought Event or Project does (its cube's `holding`, a token it moves, the effect or extra turn it makes) |
+| `resolve` | what the ability does, `unaffected` included |
+| `gain`, `trash`, `discard` | the abilities that answer it ("when you gain / trash / discard") and what the rules attach to it (the Trade Route token moving with a gain) |
+| `shuffle` | the cards put at the bottom of the deck as it is shuffled; "when you shuffle" abilities |
+
+`by` is the innermost occurrence still in progress, not the previous event: a draw three
+events after a play can name it. So `by` makes a tree of what happened inside what, and a
+reader that indents a log by `by` gets the right indentation. Every event from a `turn`
+to its `turn-end`, and what ends with it, leads back to that `turn` by following `by`;
+`by` never leaves the turn in progress.
+
+**Events with no `by`.** Between turns nothing is inside a turn: `turn`, `turn-skipped`, a
+`choose` of which extra turn to take, `game-ending`, `game-end`, the `effect-end`
+(`extra-turn`) of the effect an extra turn kept its card in play for as that turn is
+taken, skipped or lost, and the counters a skipped turn changes have no `by`. An ability
+that resolves between turns is a `resolve` with no `by`, and what it does names it.
+Before the first turn the opening shuffles and draws have no `by`; what an ability at
+the start of the game does (Inherited) names its `resolve`.
+
+**The other state** is read as counters are, so a change to it names the occurrence it
+happened in: an `effect` names the `play`, `resolve`, `buy` or `receive` that made it; an
+`effect-change` or `effect-end` (`resolved`) what changed or ended it; a `token` moved by
+an Event names the `buy`, one moved by an ability the `resolve`; a `holding` names the
+`buy` of a Project, the `play`, `gain` or `resolve` that took an Artifact, the `receive`
+of the Hex that gave a State; a `take` names what turned the Boon or Hex over (the `play`
+or `resolve` receiving it), the Boon's `discard` its `receive`; `pile`, `landscape`,
+`notes` and `derived` name whatever was in progress. An `extra-turn` names the `play`,
+`resolve` or `buy` that queued it.
+
+**Costs inside their occurrence.** The Action a card played from the Action phase costs
+is a `counter` (`actions`, −1) right after the `play`, by it; a card played by another
+card costs none. A `buy`'s price is its own `counter` events, by the `buy`, before
+anything else the buy causes. They are never netted with what follows: Village's −1 and
++2 Actions are two `counter` events.
+
+**A phase's cause.** A phase the turn moves on to has `by` = the `turn`; a phase an effect
+returns the turn to (Villa, Cavalry) has `by` = that effect's `resolve`. `turn-end` has
+`by` = the `turn`, not its Clean-up.
+
+**Two pointers for a lasting effect's ability.** A Duration's later part answers one
+thing and belongs to another. Its `resolve`'s `by` is the moment it answers (the `turn`),
+which keeps `by` a tree turn by turn. Its `origin` is the occurrence that made the
+effect it belongs to (the Duration's `play`, possibly turns ago). An extra turn's `turn`
+has no `by`; it names the `extra-turn` that entitled it in `extraTurn`, and that event's
+`by` is what queued it.
+
+### One event per occurrence
+
+A move event is exactly one occurrence, or cards moved together within one. Cards moving
+the same way one after the other are one event only if they have the same cause and no
+occurrence among them is over before the next card moves:
+
+- Two gains are two `gain` events, even of one card from one pile by one play: each is
+  its own occurrence, over (its "when you gain" abilities resolved) before the next
+  begins. A `gain` is always one card.
+- Cards trashed or discarded together by one effect (Chapel's, a hand discarded to
+  Militia) are one `trash` or `discard`: they are all moved before any of their abilities
+  resolve. Each card is still its own occurrence; an ability answering one says which by
+  `about` and `index`. Only a `resolve` happens directly inside such an event.
+- Moves that are no occurrence (a draw, a top-deck, a reveal, a set-aside, a look) are one
+  event when adjacent with the same cause: cards drawn by one draw are one `draw`, and so
+  are two draws of one play with nothing between them.
+- Moves with different causes are different events even when adjacent: Clean-up's discard
+  from play and an ability's discard.
+
+Moves of the same kind with different `player`, `from`, `to`, `at`, `face` or `fromFace`
+are different events.
+
+### When a stream is not one game's
+
+The fold **refuses** an event that can't apply to the table it has: the stream is then not
+one game's, and the table after a refused event is undefined. The refusals are given with
+each event; together they are:
+
+- `by` or `origin` not earlier than the event.
+- A move that names a card that isn't where it says ([Taking and placing](#taking-and-placing)),
+  into a zone that doesn't exist, under more cards than there are, at a position in a bag,
+  with a `pos` list of the wrong length, or a `shuffle` into a bag.
+- A `play` with `from` and no `to`, or `to` and no `from`.
+- A `rename` of a card not where it says.
+- A `counter` whose `value` isn't its old value plus `delta`.
+- A `phase` with no turn in progress; a `turn-end` of a seat whose turn is not in progress.
+- A `turn` or `turn-skipped` naming an extra turn not waiting; a `final` one for a seat
+  that is not first in `finalRound`.
+- An `effect` whose `id` has begun already; an `effect-change` or `effect-end` of an
+  effect not on the table.
+- An `extra-turn` whose `id` is waiting already; an `extra-turn-removed` of one not
+  waiting.
+- A `token` placed on a pile not in `piles`.
+- A `holding` from a seat that doesn't hold the card, to a seat that already holds it, or
+  with neither.
+
+The fold does not check everything a stream must be. These rules hold of every stream
+`dominion-engine` writes and are checked by its tests, not by the fold: `seq` counts from
+0 with none missing (a [recorded file](#recorded-streams) reader checks it); `setup` comes
+first and only first; `by` names an occurrence; a `turn` follows the previous turn's
+`turn-end`; nothing follows `game-end`.
 
 ## Events
 
-### `setup`
+| Group | Types |
+| --- | --- |
+| [Beginnings and ends](#beginnings-and-ends) | `setup`, `turn`, `phase`, `turn-end`, `turn-skipped`, `game-ending`, `game-end` |
+| [Occurrences](#occurrences) | `play`, `buy`, `resolve`, `receive`, `name`, `way`, `unaffected`, `call`, `choose` |
+| [Moves](#moves) | `draw`, `discard`, `gain`, `trash`, `topdeck`, `bottomdeck`, `insert`, `reveal`, `look`, `set-aside`, `exile`, `put`, `return`, `exchange`, `pass`, `rotate`, `take`, `shuffle` |
+| [Cards entering and changing](#cards-entering-and-changing) | `add`, `rename` |
+| [The table's other changes](#the-tables-other-changes) | `counter`, `effect`, `effect-change`, `effect-end`, `extra-turn`, `extra-turn-removed`, `token`, `holding`, `pile`, `landscape`, `notes`, `derived` |
 
-The first event. `rules` (`implementation`, `version`: what decides this game), `seats`
-(the players' names, in turn order), `kingdom`, `landscapes`, and `table`: the snapshot
-before anything happens. Each player's starting cards are in their deck, not yet
-shuffled.
+`player` in an event is a seat. A `card` given as a plain name in an occurrence (`buy`,
+`resolve`, `receive`, ...) names a card, landscape, Boon or State; it is never `?`.
+
+### Beginnings and ends
+
+#### `setup`
+
+The first event: the game before anything happens.
+
+| Field | |
+| --- | --- |
+| `rules` | `implementation` and `version`: what decided this game (`dominion-engine`, `0.1.0`) |
+| `seats` | the players' names, in turn order |
+| `kingdom` | the Kingdom cards, by name |
+| `landscapes` | the landscapes chosen for the game, by name; absent when none (the table's `landscapes` also has the Artifacts and Allies setup added) |
+| `table` | the whole table |
+
+**Fold:** the table becomes `table`.
+
+The setup table has every pile with its cards, properties and costs, the Boons' and
+Hexes' zones, and each player's starting cards in their deck, listed by name before they
+are shuffled. The opening shuffle and draw of each player follow as events, with no `by`.
+
+#### `turn`
+
+A turn begins. `player`, `number`, `kind`, and as applicable:
+
+| Field | |
+| --- | --- |
+| `extra` | for an extra turn, the card that gave it |
+| `extraTurn` | for an extra turn, the `id` of the extra turn waiting it is |
+| `limits` | what the turn forbids, when anything |
+
+**Fold:** if `extraTurn` is given, that extra turn leaves `extraTurns` (refused if it isn't
+waiting). A `final` turn removes `player` from the front of `ending.finalRound` (refused
+unless it is there). Then the turn in progress is `player`, `number`, `kind`, `extra`,
+`limits`, in phase `start`, and the turn's counters are set: `actions` 1, `buys` 1,
+`coins` 0, `potions` 0, `next-hand` 5, `bought` 0, `hand-plays` 0.
+
+A `turn` has no `by`.
+
+#### `phase`
+
+`phase`: `action`, `buy`, `night` or `cleanup`. Every phase is written as it begins, in
+order, also when nothing happens in it (the Night phase of a game without Night cards). A
+phase can come again: a turn that returns to its Action phase (Villa, Cavalry) has a
+second `action` and a second `buy`. The `start` phase is the `turn` event itself and is
+not written.
+
+**Fold:** the turn's phase becomes `phase`. Refused with no turn in progress.
+
+#### `turn-end`
+
+`player`: their turn is over.
+
+**Fold:** refused unless `player`'s turn is in progress. The table has no turn, and the
+turn's counters are 0.
+
+What ends "at the end of the turn" ends after it, inside it (`effect-end` with `expired`),
+as do effects whose card left play (`left-play`) and the extra turns removed with them.
+Abilities "at the end of this turn" (Squirrel, Island Folk, Coastal Haven) resolve before
+it, in Clean-up.
+
+#### `turn-skipped`
+
+A turn a player would have taken doesn't happen. `player`, `kind`, and as applicable
+`extra` and `extraTurn` (as for `turn`), and `lost` when an extra turn is lost as a third
+turn in a row.
+
+**Fold:** as `turn` for `extraTurn` and a `final` turn; the turn in progress and its
+counters don't change.
+
+A turn skipped by Lich lowers its player's `skip-turns` before this event, and a regular
+one raises `turns-skipped`; those `counter` events have no `by`. A skipped turn has no
+phases and no `turn-end`.
+
+#### `game-ending`
+
+The end condition is met. `reason`, and `finalRound` when the round after the game's end
+is to be played (Fleet).
+
+**Fold:** `ending` becomes `{reason, finalRound}`.
+
+Written between turns, after the turn that met it. A `turn-limit` end never has a final
+round. Extra turns still go before the turns of the final round.
+
+#### `game-end`
+
+The game is over. `reason` and `result` ([The game ending](#the-game-ending)).
+
+**Fold:** `ended` becomes `{reason, result}`.
+
+After a `game-ending` it comes once `finalRound` is empty and no extra turn comes first.
+A resignation is `game-end` alone, with reason `resigned`, at any point: the turn in
+progress, its effects and the extra turns waiting stay on the table as they were. Extra
+turns still waiting when the game ends normally are never taken; they stay too.
+
+The end of [`outpost-fleet.events.jsonl`](examples/events/outpost-fleet.events.jsonl):
+Bo's turn takes the last Province, and Ann, who has Fleet, takes one turn more.
+
+```jsonl
+{"seq":1493,"by":1459,"type":"turn-end","player":1}
+{"seq":1494,"type":"game-ending","reason":"provinces","finalRound":[0]}
+{"seq":1495,"type":"turn","player":0,"number":27,"kind":"final"}
+{"seq":1496,"by":1495,"type":"resolve","player":0,"card":"Haven","when":"start-turn","origin":1425}
+…
+{"seq":1524,"by":1495,"type":"turn-end","player":0}
+{"seq":1525,"type":"game-end","reason":"provinces","result":[{"seat":0,"vp":9,"turns":26,"rank":2},{"seat":1,"vp":42,"turns":26,"rank":1}]}
+```
+
+### Occurrences
+
+These change nothing on the table, except a `play` that moves its card. Other events
+happen inside them ([Causes](#causes)).
+
+#### `play`
+
+A card is played: its instructions are followed. `player`, `card`, and when it goes into
+play as it is played, `from` and `to` (and `pos` for an ordered `from`, `fromFace` for a
+zone with faces, as for a move). Without `from` and `to` it moves nowhere: a card played
+again (Throne Room's second play), or played where it lies (Necromancer plays a card that
+stays in the trash).
+
+**Fold:** with `from` and `to`, the card moves as a one-card `put` would. Refused with one
+of `from`, `to` and not the other.
+
+A card played twice is two `play` events: Throne Room's plays of the card it chose each
+have `by` = Throne Room's `play`, and what each does names its own play. A card played
+by another card costs no Action. Reckless's "follow its instructions twice" is one play,
+by the rules: one `play` whose instructions run twice.
+
+##### Throne Room on Wharf
+
+From [`throne-room-wharf.events.jsonl`](examples/events/throne-room-wharf.events.jsonl):
+
+```jsonl
+{"seq":608,"by":607,"type":"play","player":1,"card":"Throne Room","from":"1/hand","to":"1/play"}
+{"seq":609,"by":608,"type":"counter","counter":"actions","delta":-1,"value":0}
+{"seq":610,"by":608,"type":"play","player":1,"card":"Wharf","from":"1/hand","to":"1/play"}
+{"seq":611,"by":610,"type":"counter","counter":"buys","delta":1,"value":2}
+{"seq":612,"by":610,"type":"draw","player":1,"cards":["Copper","Militia"],"from":"1/deck","to":"1/hand"}
+{"seq":613,"by":610,"type":"effect","id":2,"card":"Wharf","source":"Wharf","owner":1,"until":{"start-of-turn":1},"keeps":["Throne Room","Wharf"]}
+{"seq":614,"by":608,"type":"play","player":1,"card":"Wharf"}
+{"seq":615,"by":614,"type":"counter","counter":"buys","delta":1,"value":3}
+{"seq":616,"by":614,"type":"draw","player":1,"cards":["Estate","Copper"],"from":"1/deck","to":"1/hand"}
+{"seq":617,"by":614,"type":"effect","id":3,"card":"Wharf","source":"Wharf","owner":1,"until":{"start-of-turn":1},"keeps":["Throne Room","Wharf"]}
+…
+{"seq":663,"type":"turn","player":1,"number":14,"kind":"regular"}
+{"seq":664,"by":663,"type":"resolve","player":1,"card":"Wharf","when":"start-turn","origin":610}
+{"seq":665,"by":664,"type":"effect-end","id":2,"why":"resolved"}
+{"seq":666,"by":664,"type":"counter","counter":"buys","delta":1,"value":2}
+{"seq":667,"by":664,"type":"draw","player":1,"cards":["Estate","Copper"],"from":"1/deck","to":"1/hand"}
+{"seq":668,"by":663,"type":"resolve","player":1,"card":"Wharf","when":"start-turn","origin":614}
+{"seq":669,"by":668,"type":"effect-end","id":3,"why":"resolved"}
+{"seq":670,"by":668,"type":"counter","counter":"buys","delta":1,"value":3}
+{"seq":671,"by":668,"type":"draw","player":1,"cards":["Copper","Silver"],"from":"1/deck","to":"1/hand"}
+{"seq":672,"by":663,"type":"phase","phase":"action"}
+```
+
+The second play of Wharf (614) moves nothing. Each play makes its own effect, which keeps
+both cards in play through Clean-up. At the next turn the two abilities have the same
+`by` (the `turn`) and different `origin`s: the two plays.
+
+#### `buy`
+
+`player`, `card`: a card, Event or Project is bought: paid for, before it is gained or
+does anything. `card` is a name: what is bought is a card of that name, not one copy
+(an on-buy ability may gain the copy that was on top).
+
+Inside it: the price (`buys` −1, `coins`, `potions`, `debt`, `bought`), overpaying,
+on-buy abilities, then the `gain` of the card, or what the Event or Project does:
+
+```jsonl
+{"seq":56,"by":49,"type":"buy","player":0,"card":"Pageant"}
+{"seq":57,"by":56,"type":"counter","counter":"buys","delta":-1,"value":0}
+{"seq":58,"by":56,"type":"counter","counter":"coins","delta":-3,"value":0}
+{"seq":59,"by":56,"type":"counter","counter":"bought","delta":1,"value":1}
+{"seq":60,"by":56,"type":"holding","card":"Pageant","to":0}
+```
+
+#### `resolve`
+
+An ability of `card` begins to resolve for `player`, answering the moment `when`. Every
+triggered ability that resolves has one, whether or not it then does anything, including
+bookkeeping ones nothing can interact with (Goons' +1 VP).
+
+| Field | |
+| --- | --- |
+| `player`, `card` | whose ability, and the card (or landscape, State, ...) it is of |
+| `when` | the moment it answers (below) |
+| `about` | the card the moment is about: the card gained, about to be gained, trashed, discarded, bought, or that left a Supply pile |
+| `index` | when `by` is cards trashed or discarded together: which of its `cards` this answers, from 0 |
+| `target` | for `attack`: the player the Attack is played against |
+| `origin` | the `seq` of the occurrence that made the lasting effect the ability belongs to: the `play` of a Duration, the `resolve`, `buy` or `receive` that made a "this turn" effect. Absent for an ability of a card that isn't a lasting effect (a card being gained, a Reaction in hand) |
+
+`when`, and what `by` is for each:
+
+| `when` | | `by` |
+| --- | --- | --- |
+| `game-start` | before the first turn | none |
+| `start-turn` | | the `turn` |
+| `start-buy-phase`, `start-night`, `start-cleanup` | | the `phase` |
+| `end-buy-phase` | as the Buy phase ends, before the next phase | the Buy `phase`, or the `resolve` returning to the Action phase (Villa) |
+| `discard-from-play` | before cards are discarded from play | the Clean-up `phase`; outside Clean-up, what discards the cards (Highwayman) |
+| `end-turn` | after Clean-up's draw | the Clean-up `phase` |
+| `play` | a card is played, before its instructions | the `play` |
+| `after-play` | its instructions have been followed | the `play` |
+| `attack` | an Attack is played against `target` | the Attack's `play` |
+| `buy` | a card, Event or Project is bought | the `buy` |
+| `would-gain` | a card is about to be gained: it may not be (a replacement can cancel it) | what is gaining it (a `play`, `buy`, `resolve`) |
+| `gain`, `trash`, `discard` | | the `gain`, `trash` or `discard` holding `about` |
+| `leave-supply` | a card left a Supply pile other than by being gained or trashed (Exiled, set aside) | what took it out |
+| `would-shuffle` | a discard pile is about to be shuffled | what needs the shuffle (a `play`'s draw, Clean-up's) |
+| `shuffle` | | the `shuffle` |
+
+A moment that comes before the thing it answers names in `by` the occurrence in
+progress, and `when` says which moment of it.
+
+`about` is a card's name. A `gain` is one card, so a `resolve` answering one has no
+`index`; one answering cards trashed or discarded together has `index` when that event
+moved more than one card. A `target`'s `resolve` has the attacked player as `player` when
+it is their Reaction; an ability another player resolves in the same window has its own
+`player` and the same `target`.
+
+A Moat against Militia, from [`moat-chapel.events.jsonl`](examples/events/moat-chapel.events.jsonl):
+
+```jsonl
+{"seq":624,"by":623,"type":"play","player":0,"card":"Militia","from":"0/hand","to":"0/play"}
+{"seq":625,"by":624,"type":"counter","counter":"actions","delta":-1,"value":0}
+{"seq":626,"by":624,"type":"resolve","player":1,"card":"Moat","when":"attack","target":1}
+{"seq":627,"by":626,"type":"unaffected","player":1,"attack":"Militia","card":"Moat"}
+{"seq":628,"by":624,"type":"counter","counter":"coins","delta":2,"value":2}
+```
+
+Chapel trashing four cards, one of them Fortress, from the same game:
+
+```jsonl
+{"seq":766,"by":759,"type":"play","player":0,"card":"Chapel","from":"0/hand","to":"0/play"}
+{"seq":767,"by":766,"type":"counter","counter":"actions","delta":-1,"value":0}
+{"seq":768,"by":766,"type":"trash","player":0,"cards":["Militia","Copper","Fortress","Silver"],"from":"0/hand","to":"trash"}
+{"seq":769,"by":768,"type":"resolve","player":0,"card":"Fortress","when":"trash","about":"Fortress","index":2}
+{"seq":770,"by":769,"type":"put","player":0,"cards":["Fortress"],"from":"trash","to":"0/hand","pos":[1]}
+```
+
+The four cards went onto the trash one after the other, so Silver lies on Fortress: it
+leaves from under one card (`pos` 1).
+
+An effect's own ability that removes the effect gives `effect-end` (`resolved`) right
+after its `resolve`, before what it does: Haven's ability ends Haven's effect, then puts
+the card into the hand ([Moves](#set-aside-cards-and-faces)).
+
+#### `receive`
+
+`player`, `card`: `player` receives a Boon or Hex (its instructions are followed), takes
+a State or Artifact, or the Prophecy comes into effect for them. One Hex received by each
+other player is one `take` and one `receive` per player.
+
+Everything a Boon or Hex received does is inside its `receive`. A `receive` of a State or
+Artifact taken, or of the Prophecy, holds nothing: the `holding` that goes with it names
+the occurrence in progress. A Boon or Hex that its card discards itself (a Hex received
+by each other player is discarded once all have) has that `discard` named by the card's
+`play`. Druid's Boons are received where they lie: a `receive` with no move.
+
+Bard's Boon and Skulk's Hex, from [`boons-hexes.events.jsonl`](examples/events/boons-hexes.events.jsonl):
+
+```jsonl
+{"seq":173,"by":172,"type":"play","player":1,"card":"Bard","from":"1/hand","to":"1/play"}
+{"seq":174,"by":173,"type":"counter","counter":"actions","delta":-1,"value":0}
+{"seq":175,"by":173,"type":"counter","counter":"coins","delta":2,"value":2}
+{"seq":176,"by":173,"type":"take","player":1,"cards":["The Sky's Gift"],"from":"boons/deck","to":"1/boons"}
+{"seq":177,"by":173,"type":"receive","player":1,"card":"The Sky's Gift"}
+{"seq":178,"by":177,"type":"discard","player":1,"cards":["The Sky's Gift"],"from":"1/boons","to":"boons/discard"}
+…
+{"seq":290,"by":289,"type":"play","player":1,"card":"Skulk","from":"1/hand","to":"1/play"}
+{"seq":291,"by":290,"type":"counter","counter":"actions","delta":-1,"value":0}
+{"seq":292,"by":290,"type":"counter","counter":"buys","delta":1,"value":2}
+{"seq":293,"by":290,"type":"take","player":1,"cards":["Haunting"],"from":"hexes/deck","to":"1/hexes"}
+{"seq":294,"by":290,"type":"receive","player":0,"card":"Haunting"}
+{"seq":295,"by":294,"type":"topdeck","player":0,"cards":["Copper"],"from":"0/hand","to":"0/deck"}
+{"seq":296,"by":290,"type":"discard","player":1,"cards":["Haunting"],"from":"1/hexes","to":"hexes/discard"}
+```
+
+#### `name`, `way`, `unaffected`, `call`, `choose`
+
+| Type | Fields | |
+| --- | --- | --- |
+| `name` | `player`, `card` | `player` names a card |
+| `way` | `player`, `card`, `way` | `player` plays `card` using the Way `way` instead of following its instructions |
+| `unaffected` | `player`, `attack`, `card` | the Attack `attack` doesn't affect `player`, because of `card` |
+| `call` | `player`, `card` | `player` calls `card` from their Tavern mat |
+| `choose` | `player`, `source`, `choices` | what `player` chose, said to everyone: a card's modes, a Boon, an extra turn to take. `source` is the card that asked (absent when none did); `choices` are the labels of the options chosen, in the engine's words |
+
+None changes the table.
+
+```json
+{"seq":525,"by":524,"type":"choose","player":1,"source":"Quartermaster","choices":["Gain a card costing up to $4, setting it aside on this"]}
+```
 
 ### Moves
 
-Cards change zone. The `type` is the word the rules use, because the rules care which it
-was: a card put into a hand is not gained; a deck put into its discard pile is not
+Cards change zone. The type is the word the rules use, because the rules care which it
+was: a card put into a hand is not gained, a deck put into its discard pile is not
 discarded.
 
 | Type | |
 | --- | --- |
 | `draw` | deck to hand |
-| `discard` | to a discard pile, as a discard |
-| `gain` | from a pile (or the trash) to a player, as a gain |
+| `discard` | to a discard pile (a seat's, or the Boons' or Hexes'), as a discard |
+| `gain` | from a pile (or the trash, ...) to a player, as a gain: to their discard pile, or wherever the rules say (their hand, their deck, set aside: Blockade, Reap) |
 | `trash` | to the trash |
-| `topdeck`, `bottomdeck`, `insert` | onto, under, or into a deck |
-| `reveal`, `look` | off the deck into `looking`, for everyone or for the player |
-| `set-aside` | to `aside` |
+| `topdeck` | onto a deck |
+| `bottomdeck` | under a deck |
+| `insert` | into a deck, under some of its cards |
+| `reveal` | off the deck into `looking`, face up |
+| `look` | off the deck into `looking`, face down |
+| `set-aside` | to a set-aside zone (a seat's `aside`, or `boons/druid`) |
 | `exile` | to the Exile mat |
 | `return` | to its pile |
-| `exchange` | one of an exchange's two moves: a card to its pile, another from a pile |
-| `pass` | to another player |
+| `exchange` | one of an exchange's two moves: a card to its pile, another from a pile (Travellers, Changeling, Trader) |
 | `rotate` | from the top of a pile to its bottom |
-| `put` | any other placement |
+| `take` | a Boon or Hex off its deck, or out of its discard pile, to the player taking or receiving it |
+| `pass` | to another player |
+| `put` | any other placement: into a hand, onto a mat, a deck into its discard pile |
 | `shuffle` | see below |
+
+Masquerade's passes are written as `put` from one hand to another; no stream writes
+`pass` yet.
 
 Fields:
 
-- `player`: whose action it is.
-- `cards`: the cards, in the order they move.
-- `from`, `to`: zones.
-- `at` (optional): where they arrive in an ordered `to`: `"top"` (the default),
-  `"bottom"`, or `{"under": n}` for under *n* cards.
-- `pos` (optional): for an ordered `from`, how many cards lay over each card when it
-  left. Absent when each came off the top.
+| Field | |
+| --- | --- |
+| `player` | whose action it is: the owner of `from`, else the owner of `to`, else (between zones nobody owns) the player of the turn in progress or the last one |
+| `cards` | the cards, in the order they move |
+| `from`, `to` | zones |
+| `at` | where they arrive in an ordered `to`: `top` (absent), `bottom`, or under *n* cards |
+| `pos` | for an ordered `from`: how many cards lay over each card as it left. Absent: each came off the top |
+| `face` | into a seat's `aside` or `looking`: `up` or `down` |
+| `fromFace` | out of a seat's `aside` or `looking`: `up` when the cards lay face up there. Absent: face down |
 
-The cards leave `from` and arrive in `to` **one after the other**, in the order listed.
-So of cards put on top of a deck, the last listed ends up on top; of cards put at the
-bottom, the last listed ends up lowest. In an unordered zone a card arrives at the end.
-A move within one zone (`from` equal to `to`) takes the card out and puts it back at
+#### Taking and placing
+
+**Fold:** the cards leave `from` and arrive in `to` **one after the other**, in the order
+listed. For each card:
+
+1. **Take it from `from`.**
+   - Ordered: the card under `pos` cards (`pos` absent: the top one). The card lying there
+     must have the name the move gives, or be `?`. `pos` counts the cards still there,
+     after the earlier cards of the move have left. Of a run of cards of one name, `pos`
+     is the topmost: taking any of them leaves the same zone, so the stream says the same
+     thing whichever copy the rules moved.
+   - Bag: one card of that name, or a `?` if the bag has none of that name. With
+     `fromFace` `up`, one of the face-up cards of that name, which stops being face up;
+     otherwise one that lies face down, so there must be more cards of that name than
+     face-up ones.
+2. **Mark it**, if `face` is `up` and `to` is a zone with faces: it joins `to`'s face-up
+   cards.
+3. **Place it in `to`.**
+   - Ordered: at `at`: on top (`top`), at the bottom (`bottom`), or under *n* cards (*n*
+     at most the zone's size). So of cards put on top, the last listed ends up on top; of
+     cards put at the bottom, the last listed ends up lowest.
+   - Bag: in its sorted place. `at` must be `top`.
+
+A move within one zone (`from` equal to `to`) takes each card out and puts it back at
 `at`.
 
-**`shuffle`** is the exception: its `cards` are the result, top first. They leave `from`
-and arrive in `to` **together**, in the order listed, at `at`. A discard pile shuffled
-under a deck is `"from": "0/discard", "to": "0/deck", "at": "bottom"`; a deck shuffled
-where it is has `from` equal to `to`.
+**Refused:** `to` doesn't exist (a pile or `aside/<card>` zone not on the table); `from`
+doesn't exist or doesn't have the card as above; a face that isn't there; `pos` with a
+different number of entries from `cards`; `pos` for a bag; `at` other than `top` in a
+bag, or under more cards than there are.
 
-### `play`
+Empty zones that always exist leave `zones` and empty face-up bags leave `faceUp` after
+each move.
 
-`player`, `card`: the card is played, and its instructions are followed. With `from` and
-`to` (and `pos` for an ordered `from`) it goes into play as it is played. Without them
-it moves nowhere: a card played again by Throne Room, or played where it lies.
+#### `shuffle`
 
-### What a player does that moves no card
+A `shuffle`'s `cards` are the **result**, top first. They leave `from` one after the
+other as for any move (with `pos`, which says the order they were in), then arrive in
+`to` **together**, in the order listed, at `at`: a discard pile shuffled under the cards
+left in a deck is `"from":"0/discard","to":"0/deck","at":"bottom"`; a deck shuffled where
+it lies has `from` equal to `to` and arrives on top. `to` must be ordered.
 
-| Type | Fields | |
-| --- | --- | --- |
-| `buy` | `player`, `card` | a card or landscape is bought: paid for, before it is gained or does anything. `card` is a name: what is bought is a card of that name |
-| `resolve` | `player`, `card` | an ability of `card` begins to resolve for `player` |
-| `name` | `player`, `card` | a card is named |
-| `way` | `player`, `card`, `way` | the play uses a Way instead of the card's instructions |
-| `unaffected` | `player`, `attack`, `card` | `attack` doesn't affect `player`, because of `card` |
-| `call` | `player`, `card` | a Reserve card is called from the Tavern mat |
-| `choose` | `player`, `source`, `choices` | a choice said to everyone: a card's modes, a number |
-| `turn-skipped` | `player`, `extra`, `lost` | a turn that doesn't happen: skipped, or `lost` as a third in a row |
+A shuffle's order is a chance outcome. Cards that go to the bottom of a deck as it is
+shuffled (Shadow cards) and "when you shuffle" placements (Stash, Star Chart, Fated) are
+moves inside the `shuffle`, after it.
 
-These change nothing on the table.
+The Boons' and Hexes' discard piles are shuffled into their empty decks the same way:
 
-### `add`
-
-`cards`, `to`: cards come into the game in `to`, each on top of the one before. A pile
-that wasn't there now is.
-
-### `rename`
-
-`card`, `name`: the card is now a card called `name`, with the same handle.
-
-### `turn`
-
-`player`, `number` (which of that player's turns it is, from 1), and `extra` (the card
-that gave it) for an extra turn. The phase becomes `start`, and the turn's counters
-become 1 Action, 1 Buy, $0 and no Potions.
-
-### `phase`
-
-`phase`: `start`, `action`, `buy`, `night`, `cleanup` or `end`. A turn has as many as
-the rules give it, in the order they happen: a turn that returns to its Action phase
-(Villa, Cavalry) has two Buy phases.
-
-### `counter`
-
-`counter`, `delta`, `value`: the counter changed by `delta` and is now `value`. A stream
-whose `value` isn't the counter's old value plus `delta` is not one game's.
-
-### `game-end`
-
-`reason` (`provinces`, `colonies`, `piles`, `turn-limit`, `resigned`) and `result`: per
-seat `vp`, `turns`, `rank` (from 1; ties share one) and `resigned`.
-
-## An opening
-
-```jsonl
-{"schema":"dominion/events@1","viewer":"full"}
-{"seq":0,"type":"setup","rules":{"implementation":"dominion-engine","version":"0.1.0"},"seats":["P1","P2"],"kingdom":["Throne Room","Sentry","Workshop","…"],"table":{"zones":{"0/deck":["Copper#248","Copper#249","…"],"pile/Copper":["Copper#45","…"]}}}
-{"seq":1,"type":"shuffle","player":0,"cards":["Estate#256","Copper#254","Copper#248","Copper#251","Estate#255","Copper#249","Estate#257","Copper#252","Copper#250","Copper#253"],"from":"0/deck","to":"0/deck","pos":[8,6,0,2,4,0,3,1,0,0]}
-{"seq":2,"type":"draw","player":0,"cards":["Estate#256","Copper#254","Copper#248","Copper#251","Estate#255"],"from":"0/deck","to":"0/hand"}
-{"seq":5,"type":"turn","player":0,"number":1}
-{"seq":6,"type":"phase","phase":"buy"}
-{"seq":7,"type":"play","player":0,"card":"Copper#254","from":"0/hand","to":"0/play"}
-{"seq":8,"type":"counter","counter":"coins","delta":1,"value":1}
-{"seq":13,"type":"buy","player":0,"card":"Copper"}
-{"seq":14,"type":"counter","counter":"buys","delta":-1,"value":0}
-{"seq":15,"type":"gain","player":0,"cards":["Copper#45"],"from":"pile/Copper","to":"0/discard"}
-{"seq":16,"type":"phase","phase":"cleanup"}
-{"seq":17,"type":"discard","player":0,"cards":["Copper#254","Copper#248","Copper#251"],"from":"0/play","to":"0/discard"}
-{"seq":18,"type":"discard","player":0,"cards":["Estate#256","Estate#255"],"from":"0/hand","to":"0/discard"}
-{"seq":19,"type":"draw","player":0,"cards":["Copper#249","Estate#257","Copper#252","Copper#250","Copper#253"],"from":"0/deck","to":"0/hand"}
-{"seq":20,"type":"phase","phase":"end"}
-{"seq":21,"type":"turn","player":1,"number":1}
+```json
+{"seq":1117,"by":1114,"type":"shuffle","player":1,"cards":["The Mountain's Gift","The Earth's Gift","The Moon's Gift","The Sky's Gift","The Sun's Gift","The Field's Gift","The Forest's Gift","The Wind's Gift","The River's Gift"],"from":"boons/discard","to":"boons/deck","pos":[3,3,2,5,2,0,0,1,0]}
 ```
 
-## Status
+#### `take`
 
-`dominion-engine` writes the **full** stream (`dominion-agent`'s `events::Recorder`), and
-`dominion-protocol`'s `events::Table` folds it. Over random games of every set the fold
-equals the engine's table at every decision: every zone with its order, every counter
-above, the turn's player and phase.
+A Boon or Hex turned over: off its deck, or out of its discard pile, to `<seat>/boons` or
+`<seat>/hexes`. The rest of a Boon's or Hex's life uses the other moves: `discard` to its
+discard pile once received (at Clean-up when kept), `set-aside` to `boons/druid`,
+`shuffle`, `add` when Boons or Hexes join the game. Pixie's "discard the top Boon" is a
+`take` then a `discard`.
 
-Not written yet, in the order planned:
+#### Set-aside cards and faces
 
-1. `by`: what caused each event.
-2. Boons, Hexes, States and Artifacts being received and returned.
-3. The rest of the table: Adventures tokens and the −Card, −Coin and Journey tokens,
-   Project cubes, Artifacts, States, Boons and Hexes, Traits; lasting effects with the
-   cards they keep in play or hold; extra turns waiting; a card that is another card
-   while in play; what the rules derive (costs, VP).
-4. The `public` and seat versions. Review found that masking faces is not enough: a
-   position in a discard pile its owner searched, the order of cards put back
-   privately, and whether a seat was asked at all (Library asks only about an Action)
-   each say something about hidden cards. So a viewer's stream has its own numbering,
-   says where a card left only when that viewer could see it, and holds face-down cards
-   set aside in a zone per holding.
-5. Decisions: what a seat was asked and answered. With every shuffle's order these are
-   everything that caused the game, so an engine can be driven by a full stream and
-   checked against it.
+A move into a seat's `aside` or `looking` says `face`. `reveal` is always `up` and `look`
+`down`; `set-aside` and `gain` say which. A move out says `fromFace` when the card lay
+face up. An effect that holds a card set aside lists it in `holds`, and the face-up ones
+in its `faceUp`.
 
-Known imprecision: a phase the turn passes through with nothing happening in it is not
-reported. A move between two zones nobody owns is given to the turn's player.
+Haven, from [`throne-room-wharf.events.jsonl`](examples/events/throne-room-wharf.events.jsonl):
 
-Out of scope: undo, clocks, chat, who is connected. Those belong to whatever hosts a
-game, not to the game.
+```jsonl
+{"seq":834,"by":830,"type":"set-aside","player":1,"cards":["Province"],"from":"1/hand","to":"1/aside","face":"down"}
+{"seq":835,"by":830,"type":"effect","id":4,"card":"Haven","source":"Haven","owner":1,"until":{"start-of-turn":1},"keeps":["Haven"],"holds":["Province"]}
+…
+{"seq":880,"type":"turn","player":1,"number":18,"kind":"regular"}
+{"seq":881,"by":880,"type":"resolve","player":1,"card":"Haven","when":"start-turn","origin":830}
+{"seq":882,"by":881,"type":"effect-end","id":4,"why":"resolved"}
+{"seq":883,"by":881,"type":"put","player":1,"cards":["Province"],"from":"1/aside","to":"1/hand"}
+```
+
+Quartermaster gains a card set aside face up, and later puts it into the hand, from
+[`outpost-fleet.events.jsonl`](examples/events/outpost-fleet.events.jsonl):
+
+```jsonl
+{"seq":524,"by":520,"type":"resolve","player":1,"card":"Quartermaster","when":"start-turn","origin":473}
+{"seq":525,"by":524,"type":"choose","player":1,"source":"Quartermaster","choices":["Gain a card costing up to $4, setting it aside on this"]}
+{"seq":526,"by":524,"type":"gain","player":1,"cards":["Silver"],"from":"pile/Silver","to":"1/aside","face":"up"}
+{"seq":527,"by":524,"type":"effect-change","id":3,"card":"Quartermaster","source":"Quartermaster","owner":1,"until":"removed","keeps":["Quartermaster"],"holds":["Silver"],"faceUp":["Silver"]}
+…
+{"seq":587,"by":586,"type":"resolve","player":1,"card":"Quartermaster","when":"start-turn","origin":473}
+{"seq":588,"by":587,"type":"choose","player":1,"source":"Quartermaster","choices":["Put a card from this into your hand"]}
+{"seq":589,"by":587,"type":"put","player":1,"cards":["Silver"],"from":"1/aside","to":"1/hand","fromFace":"up"}
+{"seq":590,"by":587,"type":"effect-change","id":3,"card":"Quartermaster","source":"Quartermaster","owner":1,"until":"removed","keeps":["Quartermaster"]}
+```
+
+### Cards entering and changing
+
+#### `add`
+
+`cards`, `to`: cards come into the game in `to`: Boons and Hexes joining, a pile's cards
+joining during play (Divine Wind), cards made in play.
+
+**Fold:** `to` is created if it isn't on the table. Each card in turn goes on top of an
+ordered `to` (so the last listed ends on top) or into a bag at its sorted place, face
+down in a zone with faces.
+
+A pile joining during play is declared by a `pile` event first; its cards follow as
+`add`.
+
+#### `rename`
+
+`card` in `zone` (under `pos` cards in an ordered zone) is now a card called `name`.
+
+**Fold:** in an ordered zone, the card under `pos` cards (absent: the top one) must be
+`card`; it becomes `name`. In a bag, one card named `card` becomes `name`: in a zone with
+faces, a face-down one when there is one, otherwise a face-up one, which stays face up.
+Refused when `card` isn't there.
+
+The engine writes it only for Inherited, at setup: the starting card the Inherited card
+replaces becomes the default one again, in the deck before it is shuffled. From
+[`inherited.events.jsonl`](examples/events/inherited.events.jsonl):
+
+```jsonl
+{"seq":5,"type":"resolve","player":0,"card":"Inherited","when":"game-start"}
+{"seq":6,"by":5,"type":"topdeck","player":0,"cards":["Copper","Overgrown Estate","Copper","Copper","Necropolis"],"from":"0/hand","to":"0/deck"}
+{"seq":7,"by":5,"type":"derived","costs":{"Hovel":{"coins":1}}}
+{"seq":8,"by":5,"type":"rename","card":"Necropolis","name":"Hovel","zone":"0/deck"}
+{"seq":9,"by":5,"type":"shuffle","player":0,"cards":["Grotto","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Hovel","Overgrown Estate"],"from":"0/deck","to":"0/deck","pos":[8,1,3,3,3,1,2,2,0,0]}
+```
+
+When a rename leaves no card of the old name in the game, a `derived` event gives that
+name a `null` cost.
+
+### The table's other changes
+
+#### `counter`
+
+`counter`, `delta`, `value`: the counter changed by `delta` and is now `value`.
+
+**Fold:** refused unless the counter's old value plus `delta` is `value`. The counter is
+now `value` (left out of `counters` when 0).
+
+A change sits between the same two card moves it happened between.
+
+#### `effect`
+
+All of an effect's fields ([Effects](#effects)): it begins.
+
+**Fold:** it joins `effects`, in `id` order. Refused if an effect with that `id` is on the
+table.
+
+#### `effect-change`
+
+All of an effect's fields: the effect with that `id` is now this. Written whenever a
+field changes as the table shows it: Archive's or Crypt's `holds` shrink, Quartermaster's
+or Cargo Ship's grow, Bridge Troll's and Taskmaster's `until` turns, Garrison's `tokens`
+count, a Duration whose card leaves play becomes `ending`. A change only in which copies
+it keeps or holds is not written.
+
+**Fold:** the effect with that `id` is replaced. Refused if there is none.
+
+#### `effect-end`
+
+`id`, `why`: the effect ends.
+
+| `why` | |
+| --- | --- |
+| `resolved` | an ability removed it: as a rule its own, resolving (a Duration's at the start of the turn) |
+| `expired` | its `until` came: the end of the turn, or its player's turn starting |
+| `left-play` | its card had left play: it ended with the turn |
+| `extra-turn` | the extra turn it kept its card in play for began, was skipped or was lost |
+
+**Fold:** the effect leaves `effects`. Refused if there is none with that `id`. The cards
+it kept or held don't move: what moves them is a move event of its own.
+
+#### `extra-turn`
+
+`id`, `player`, `card`, `limit`, `effect` when an effect keeps its card in play for it,
+and `front` when it goes before the others: an extra turn waits.
+
+**Fold:** it joins `extraTurns`, at the front with `front`, otherwise at the end. Refused
+if one with that `id` is waiting.
+
+It is taken by the `turn` naming it, skipped or lost by the `turn-skipped` naming it, or
+removed by `extra-turn-removed`.
+
+#### `extra-turn-removed`
+
+`id`: the extra turn won't happen, because the effect it came with ended (Voyage or
+Outpost left play before its turn). Its effect's `effect-end` (`left-play`) comes first.
+
+**Fold:** it leaves `extraTurns`. Refused if it isn't waiting.
+
+Outpost, from [`outpost-fleet.events.jsonl`](examples/events/outpost-fleet.events.jsonl).
+Bo has a Haven holding a Copper and plays Outpost:
+
+```jsonl
+{"seq":714,"by":709,"type":"effect","id":7,"card":"Haven","source":"Haven","owner":1,"until":{"start-of-turn":1},"keeps":["Haven"],"holds":["Copper"]}
+{"seq":715,"by":708,"type":"play","player":1,"card":"Outpost","from":"1/hand","to":"1/play"}
+{"seq":716,"by":715,"type":"counter","counter":"actions","delta":-1,"value":0}
+{"seq":717,"by":715,"type":"effect","id":8,"card":"Outpost","source":"Outpost","owner":1,"until":"end-of-turn"}
+{"seq":718,"by":715,"type":"effect","id":9,"card":"Outpost","source":"Outpost","owner":1,"until":"extra-turn","keeps":["Outpost"]}
+{"seq":719,"by":715,"type":"counter","counter":"next-hand","delta":-2,"value":3}
+{"seq":720,"by":715,"type":"extra-turn","id":1,"player":1,"card":"Outpost","limit":"third-in-a-row","effect":9}
+{"seq":721,"by":705,"type":"phase","phase":"buy"}
+{"seq":722,"by":705,"type":"phase","phase":"night"}
+{"seq":723,"by":705,"type":"phase","phase":"cleanup"}
+{"seq":724,"by":723,"type":"discard","player":1,"cards":["Curse","Gold","Smithy"],"from":"1/hand","to":"1/discard"}
+{"seq":725,"by":723,"type":"draw","player":1,"cards":["Copper","Copper","Copper"],"from":"1/deck","to":"1/hand"}
+{"seq":726,"by":705,"type":"turn-end","player":1}
+{"seq":727,"by":726,"type":"effect-end","id":8,"why":"expired"}
+{"seq":728,"type":"effect-end","id":9,"why":"extra-turn"}
+{"seq":729,"type":"turn","player":1,"number":15,"extra":"Outpost","kind":"extra","extraTurn":1}
+{"seq":730,"by":729,"type":"resolve","player":1,"card":"Haven","when":"start-turn","origin":709}
+{"seq":731,"by":730,"type":"effect-end","id":7,"why":"resolved"}
+{"seq":732,"by":730,"type":"put","player":1,"cards":["Copper"],"from":"1/aside","to":"1/hand"}
+…
+{"seq":752,"by":751,"type":"discard","player":1,"cards":["Haven","Outpost","Copper","Copper","Copper","Copper"],"from":"1/play","to":"1/discard"}
+```
+
+Clean-up draws 3 (`next-hand`). The Outpost, kept in play by effect 9 until its extra turn
+began, is discarded in that turn's Clean-up.
+
+#### `token`
+
+`player`, `token`, and `at`: the token is now `at`. Without `at`, the table no longer
+lists it (a token not had any more, the Journey token turned face up).
+
+**Fold:** the entry for (`player`, `token`) leaves `tokens`; with `at`, it is listed again
+at its place in order. Refused if `at` is a pile not in `piles`.
+
+```json
+{"seq":1233,"by":1230,"type":"token","player":1,"token":"journey","at":"face-down"}
+```
+
+#### `holding`
+
+`card`, and `from` and `to` (either may be absent): a Project cube, Artifact or State
+changes hands. `from` no longer holds `card`; `to` does. A Project bought is `to` only; a
+State returned is `from` only; an Artifact taken from another player has both. Misery
+turning Miserable over is two: Miserable `from` the player, then Twice Miserable `to`
+them.
+
+**Fold:** `from` leaves `card`'s holders and `to` joins them (kept sorted; a card with no
+holders leaves `holdings`). Refused if `from` doesn't hold it, `to` already does, or
+neither is given.
+
+```jsonl
+{"seq":1239,"by":1238,"type":"holding","card":"Envious","to":0}
+…
+{"seq":1276,"by":1274,"type":"holding","card":"Envious","from":0}
+```
+
+#### `pile`
+
+`pile` (a pile's zone) and the pile's properties ([Piles](#piles)): they are now these.
+
+**Fold:** `piles[pile]` is replaced; if `pile` has no zone yet, it is created, empty. Its
+cards follow as `add`.
+
+Divine Wind's removal of a pile is a `pile` event with `removed`, before the tokens
+leaving it. A pile given a role after it joined (a Young Witch joining during play, then
+its Bane chosen) gets a second `pile` event.
+
+#### `landscape`
+
+`card`, and `prophecy` when it is the game's Prophecy: a landscape or Artifact joins the
+game (an Ally for a Liaison, an Artifact for its card, a Prophecy for an Omen, during
+play when Divine Wind brings them).
+
+**Fold:** `card` joins `landscapes` (once, in name order); with `prophecy`, `prophecy`
+becomes `card`.
+
+#### `notes`
+
+`notes`: the table's notes are now these.
+
+**Fold:** `notes` is replaced.
+
+#### `derived`
+
+`costs` and `types`, each by card name: values the rules derive changed. One event carries
+everything that changed together.
+
+- Each name in `costs` costs that now; `null`: no card of that name is in the game any
+  more.
+- Each name in `types` has those types now; `null`: its printed types again.
+
+**Fold:** each name is set in, or with `null` removed from, the table's `costs` or
+`types`.
+
+Costs change whenever a rule says so: a Bridge played, a Canal owner's turn beginning or
+ending, Ferry's token placed. Bridge played, from
+[`boons-hexes.events.jsonl`](examples/events/boons-hexes.events.jsonl):
+
+```json
+{"seq":148,"by":143,"type":"derived","costs":{"Bard":{"coins":3},"Blessed Village":{"coins":3},"Bridge":{"coins":3},"Druid":{"coins":1},"Duchy":{"coins":4},"Estate":{"coins":1},"Flag Bearer":{"coins":3},"Gold":{"coins":5},"Market":{"coins":4},"Province":{"coins":7},"Ranger":{"coins":3},"Silver":{"coins":2},"Skulk":{"coins":3},"Smithy":{"coins":3},"Village":{"coins":2}}}
+```
+
+## Encodings
+
+The format is the model above. An encoding writes its types as bytes; the same stream in
+two encodings is the same stream. Two are defined: JSON (written as JSON Lines), the
+reference, and CBOR. Any self-describing format can carry the model (MessagePack would);
+one that isn't (bincode, postcard) can't, because an event is a tagged map with optional
+fields.
+
+### The JSON form
+
+| Model | JSON |
+| --- | --- |
+| Field names | `camelCase` (`fromFace`, `extraTurn`, `finalRound`) |
+| Enumerated values (event types, phases, `when`, `why`, turn kinds, limits, roles, recipe kinds, tokens, faces) | `kebab-case` strings (`set-aside`, `start-turn`, `third-in-a-row`, `plus-card`) |
+| An event | one object: `seq`, `by` when present, `type`, then its own fields at the same level. A `pile` event's properties are fields of the event too: `{"type":"pile","pile":"pile/Footpad","card":"Footpad","supply":true,…}` |
+| A card | a string: its name, or `"?"` |
+| A zone | a string: `<seat>/deck`, `<seat>/native-village`, `pile/<card>`, `pile/<card> (2)`, `aside/<card>`, `trash`, `boons/deck`, `boons/discard`, `boons/druid`, `hexes/deck`, `hexes/discard` |
+| A counter key | a string, as in [Counters](#counters): `coins`, `0/coffers`, `pile/Village/embargo`, `landscape/Arena/vp` |
+| A token's place | a string: a pile's zone, `player` or `face-down` |
+| An ordered zone's cards | an array, top first |
+| A bag | an array, sorted: `"?"` first, then names in code-point order |
+| `at` | absent for `top`; `"bottom"`; `{"under": n}` |
+| `until` | `"end-of-turn"`, `{"start-of-turn": n}`, `"extra-turn"`, `"removed"` |
+| `viewer` | `"full"`, `"public"`, `{"seat": n}` |
+| A cost | `{"coins": n}`, with `potions` and `debt` when not 0 |
+| Maps (`zones`, `faceUp`, `counters`, `piles`, `holdings`, `costs`, `types`) | objects keyed by the text form of their keys. Key order carries no meaning |
+| Absence | an optional field that is absent, a `false` flag, an empty list and a note's `count` of 0 are left out. A reader takes a missing field as absent, `false`, empty or 0 |
+| `null` | only in `derived`: a cost or types that are gone |
+| Integers | JSON numbers. `seq`, `by` and `origin` are unsigned 64-bit; ids unsigned 32-bit; seats 0 to 255; counters signed 64-bit |
+
+Fields always written even at their default: a turn's `kind` (read as `regular` when
+missing), a cost's `coins`, an event's `seq` and `type`. The reference reader ignores
+fields it doesn't know and refuses a `type` it doesn't know.
+
+A table in JSON is an object with `zones`, then each other part under its name
+(`counters`, `turn`, `ended`, `effects`, `faceUp`, `extraTurns`, `ending`, `piles`,
+`landscapes`, `prophecy`, `holdings`, `tokens`, `notes`, `costs`, `types`), each left
+out while empty. `setup`'s `table` is one. The turn in progress is `{player, number,
+extra, phase, kind, limits}`.
+
+### JSON Lines
+
+A stream in JSON is JSON Lines: one JSON object per line, each line ended by `\n`; the
+header, then the events.
+
+### CBOR
+
+A stream in CBOR is a CBOR sequence (RFC 8742): one CBOR data item per record, back to
+back, the header first. Each item is the same map the JSON has, with the same text keys
+and the same text forms of cards, zones and counter keys; integers are CBOR integers.
+[`moat-chapel.events.cbor`](examples/events/moat-chapel.events.cbor) is the same stream as
+[`moat-chapel.events.jsonl`](examples/events/moat-chapel.events.jsonl).
+
+## Recorded streams
+
+A recorded stream is a sequence of **records**: the header, then every event in order,
+`seq` 0, 1, 2, ... with none missing. A reader never guesses: the file's name says the
+encoding, and the first record says the schema and the viewer.
+
+| Encoding | File name ends | Media type |
+| --- | --- | --- |
+| JSON Lines | `.events.jsonl` | `application/jsonl` |
+| CBOR | `.events.cbor` | `application/cbor-seq` |
+
+A third encoding is a new file-name ending and media type, nothing else.
+
+A file is only ever appended to, so a write that never finished leaves at most one record
+cut short at its end: a last line with no `\n`, or a CBOR item that runs out. A reader
+ignores it. A whole record that doesn't parse, or an event whose `seq` isn't the next,
+means the file is not a stream. Recorded files are `full` streams; the reference reader
+accepts no other viewer.
+
+### What Arena keeps
+
+Every game `dominion serve` saves (not `--ephemeral`) is recorded from its first event,
+to `<state_dir>/<game id>.events.jsonl` (or `.events.cbor`), beside the game's snapshot
+`<game id>.json`. The setting `events_encoding` (`jsonl`, the default, or `cbor`; the flag
+`--events-encoding`) chooses the encoding of games that start; a game's stream stays in
+the encoding it began in. Events are appended as the game is played, after every answer.
+When the game is retired (finished and kept past `keep_finished_days`, idle past
+`keep_idle_days`, or `dominion games retire`) the stream moves to `<state_dir>/expired/`
+with the snapshot and is kept.
+
+`GET /api/games/{id}/recording` serves a game's stream as recorded, in its encoding. The
+full stream shows every hidden card and every shuffle's order, the future of a game in
+progress, so it is served only once the game is over (409 before), to the game's seats
+or, for a watchable game, to anyone (403 otherwise).
+
+Games saved before streams were recorded have none. Solo games (`dominion solo`) and
+dominion.games games are not recorded.
+
+### After a crash
+
+The snapshot and the stream are separate files. Whenever the server stops, **the
+stream's first *n* events are the snapshot's**, where *n* is the number of events the
+snapshot says were written. Loading cuts the stream back to those *n* (dropping a record
+cut short, and anything a later snapshot that was never saved had added), and the events
+the snapshot carries as not yet written follow at the next write. So once the server
+goes on, the file is exactly the stream of the game as it was restored, and a reader of a
+stream mid-write may see a last record cut short, never a wrong one.
+
+A stream that lacks events its snapshot says were written (a file deleted or damaged
+from outside) can't be mended: the server reports it at startup, leaves the file as it
+is, and hosts the game without recording more of it.
+
+### After an undo
+
+The stream holds no undo: undo is the host's, not the game's. A game taken back is
+replayed from its rules and seed with its remaining answers, which records the same
+events as before up to that point, so the stream of the game as it now stands is a
+prefix of the old one. Arena replaces the file with it, atomically, and appends from
+there: at every moment the file is the stream of the game as it stands. What was taken
+back never happened, and a reader of the file can't tell that it did.
+
+## Not specified yet
+
+### The seat and public versions
+
+Only `full` exists. A stream for one seat, or for the public, says less, and what it must
+not say goes beyond faces. These are known; the versions are not designed in detail:
+
+- **Their own numbering.** Whether a seat is asked at all depends on hidden cards (Library
+  asks only about an Action; Black Cat reacts only if held). A shared event number tells
+  everyone something happened, so a viewer's stream numbers its own events.
+- **More than faces is hidden.** Where a card left a discard pile its owner searched
+  (Harbinger); the order of revealed cards put back privately (Rabble, Mandarin); scores
+  after each leg of a Masquerade pass; a face-down Boon's or Hex's `pos` in its deck; the
+  order of a `shuffle` (only its count shows).
+- **A zone per holding.** The full stream joins a set-aside card to its effect by name,
+  face and effect id. A viewer who doesn't see a face can't, so face-down set-aside cards
+  need a zone per holding (`<seat>/aside/<n>`, named when the holding begins), and an
+  effect's `holds` must name that zone. A holding outlives effects (Cage's Duration ends
+  when it is trashed and an end-of-turn effect takes over the same cards; a Duration
+  whose card left play keeps its cards set aside with no effect), so a later effect must
+  be able to name the same zone.
+- **Backs that show.** Stash and Shadow cards are known by their backs, the exception to
+  "face down means unknown".
+- **How a bag mixes `?` and names**, and whether `pos` may be shown.
+- **Setup's hidden orders.** The setup table gives the Boons' and Hexes' decks and the
+  shuffled piles (Knights, Ruins) in their order; a masked setup can't.
+- **Which `resolve`s to drop.** A `resolve` for every ability is right for the full stream;
+  a seat's or the public stream will have to drop some (an ability that exists because of
+  a hidden card) and say which causes it can't show. The plain-name `card` fields of
+  occurrences can't be `?` today.
+- **Deduction stays out.** What a seat can work out is for a knowledge model reading the
+  stream, not for the stream.
+
+The test that will hold them to account: two games that differ only in cards a viewer
+never sees give that viewer identical streams. No JSON Schema is written until these
+versions settle the shapes.
+
+### Questions, answers and chance
+
+What a seat was asked and what it answered, and chance outcomes (shuffles, the Boons'
+and Hexes' decks, random setup) named as inputs an engine can be driven by, are being
+built and are not in this spec. With them a game can be resumed and undone from its
+stream alone; until then Arena's snapshot, not the stream, is what a game is resumed and
+undone from.
+
+### Out of scope
+
+Undo, clocks, chat and who is connected belong to whatever hosts a game, not to the game.
+
+### Known gaps
+
+- **Who an effect affects.** The players an Attack-Duration reached (Corsair, Blockade,
+  Swamp Hag, Haunted Woods, Gatekeeper, Frigate) are public, but effects don't carry
+  them. Likewise a card an effect is about (Contraband's and War Chest's named cards) and
+  a card an effect marks where it lies (Necromancer).
+- **What a Boon in `<seat>/boons` is waiting for**: that Blessed Village's Boon will be
+  received at the start of the next turn, or that Fool's remaining Boons are still to be
+  received.
+- **Types of one copy.** `types` is by name. Inheritance gives one player's Estates
+  another card's abilities, not new types by name, so it doesn't appear in `types`;
+  Inheritance's set-aside card is a note.
+- **VP**, by decision ([Derived values](#derived-values)).
+- **Causes the stream doesn't give exactly.** The bonus of a replaced or blocked play
+  (Enchantress's +1 Card +1 Action) names the `play`, not the `resolve` that replaced it.
+  Spending Coffers and Villagers and paying off Debt have no occurrence of their own:
+  their counters are by the phase. A pay-otherwise ability resolves before its `buy`, so
+  what it does is by the phase. The `hand-plays` counter changes before the `play` it
+  counts is written, so it names the phase.
+- **What a consequence of cards trashed or discarded together is about**, other than a
+  `resolve`'s (`about`, `index`). None is written today; a rule that attached something to
+  the trash or discard itself would need a field.
+- **Open causes in a snapshot.** A reader joining mid-game would need the occurrences
+  still in progress; nothing carries them.
+- **Charm** keeps its spent effect until the end of the turn.
+- **`pass`** is in the model, but Masquerade's passes are written as `put`.
+- **The `end` phase** is in the model and no stream writes it.
+- **A move between zones nobody owns** (a pile rotated, the Boons shuffled) is given to the
+  player of the turn in progress or of the last turn.
+
+## Example streams
+
+Every example in this document is quoted from these, written by `dominion-engine` 0.1.0.
+Each is a two-player game whose seats, Ann and Bo, take scripted answers; the JSON Lines
+files were read back and folded, and the CBOR file read back to the same events.
+
+| File | Kingdom | Shows |
+| --- | --- | --- |
+| [`moat-chapel.events.jsonl`](examples/events/moat-chapel.events.jsonl), [`.cbor`](examples/events/moat-chapel.events.cbor) | Throne Room, Wharf, Moat, Militia, Chapel, Fortress, Haven, Village, Smithy, Market | a complete opening; Moat against Militia; Fortress trashed with other cards; the same stream in CBOR |
+| [`throne-room-wharf.events.jsonl`](examples/events/throne-room-wharf.events.jsonl) | the same | Throne Room on Wharf and the next turn; Haven |
+| [`outpost-fleet.events.jsonl`](examples/events/outpost-fleet.events.jsonl) | Outpost, Haven, Quartermaster, Grotto, Library, Village, Smithy, Market, Laboratory, Festival; Fleet | an extra turn; cards set aside face up; the end with a final round |
+| [`boons-hexes.events.jsonl`](examples/events/boons-hexes.events.jsonl) | Bard, Blessed Village, Skulk, Druid, Bridge, Ranger, Flag Bearer, Village, Smithy, Market; Pageant | Boons and Hexes; a Project, an Artifact and a State held; the Journey token; costs changing |
+| [`inherited.events.jsonl`](examples/events/inherited.events.jsonl) | Hermit, Rats, Marauder, Fortress, Procession, Quartermaster, Grotto, Village, Smithy, Market; Inherited | an ability at the start of the game; `rename` |
