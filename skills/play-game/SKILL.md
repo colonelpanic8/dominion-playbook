@@ -39,8 +39,8 @@ Before answering the first decision, do these in order, every game:
 
    If you can't run it, say so in the plan; don't guess ratings from memory.
    `context/card-power.md` says how to read the numbers.
-2. Read `context/strategy.md` and `context/combos.md`, each whole and once,
-   and `context/card-power.md` if you haven't yet. Read `context/rules.md`
+2. Read `context/strategy.md` whole and once, and `context/card-power.md`
+   if you haven't yet. Read `context/rules.md`
    too if a card on the board turns on a rule you aren't sure of. Don't
    read them again later in the game unless a specific question sends you
    back to one.

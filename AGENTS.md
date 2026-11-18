@@ -21,8 +21,6 @@ step needs.
 
 - `context/strategy.md`: strategy fundamentals. Read it before analysing a
   kingdom or planning a game.
-- `context/combos.md`: known game-deciding combos. Read it with
-  `context/strategy.md` when analysing a kingdom.
 - `context/card-power.md`: what the community ratings mean and how to look
   them up. Read it before using them.
 - `context/rules.md`: the rules reference. Read it when a question turns on a

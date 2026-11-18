@@ -7,8 +7,8 @@ description: Analyze a Dominion kingdom before the game starts and recommend a p
 
 Turn a kingdom into a recommended plan, an opening for each split the
 starting deck can produce, and the risks to watch. First read
-`context/strategy.md` and `context/combos.md`, each whole and once, unless
-you already have in this task: the steps below cite their sections. Read
+`context/strategy.md` whole and once, unless you already have in this
+task: the steps below cite their sections. Read
 `context/card-power.md` before the ratings check in step 4, and
 `context/rules.md` when a rule decides something. This skill adds the
 procedure. Once the game starts, use the `play-turn` skill for each
@@ -76,8 +76,7 @@ used as defined in "Payload and deck control" in `context/strategy.md`.
 5. **Attacks**: is there a junker? Can it be blocked, trashed away or
    outpaced? What do the other attacks hit?
 6. **Standouts**: a card the whole board bends around, an unusual setup, a
-   landscape that changes scoring, a combo from `context/combos.md`, or a
-   way to end the game fast.
+   landscape that changes scoring, a combo, or a way to end the game fast.
 
 Then write one or two sentences: what the board is about, and what is still
 open ("the only village is conditional", "no +Buy", "the payoff needs a
@@ -143,9 +142,8 @@ Step 3 finds what you were looking for. This pass finds what you weren't.
   allowed answer only after checking it against each of the others. Read the
   whole card first: the type line, the text below the dividing line, and
   where it goes when gained.
-- Check the patterns in `context/strategy.md` ("Interactions to look for")
-  and the combos in `context/combos.md`. That list shows kinds of
-  interaction and is not complete. Don't drop an interaction because it
+- Check the patterns in `context/strategy.md` ("Interactions to look for").
+  That list shows kinds of interaction and is not complete. Don't drop an interaction because it
   isn't listed.
 - Look the board's cards up with `data/card-ratings.py` (see
   `context/card-power.md`). Where your view and the rating differ by a lot, in either direction, take a second look and give

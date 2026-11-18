@@ -398,7 +398,9 @@ so look for one first.
   can't punish it.
 - **Combos**: a plan built around a specific interaction (see "Interactions
   to look for"). Always look for them, but check that they beat the plain
-  options.
+  options. Against one, count how many copies of the key card it needs and
+  contest that pile; if you can't deny it, work out when it finishes and
+  whether a faster plan or a three-pile ending gets there first.
 
 ## How fast decks are
 
@@ -646,8 +648,7 @@ it, whether or not the pair appears below.
   cards you make them gain can help them.
 
 An interaction is only worth building around if the result beats the plain
-options, starting with Big Money + X. Known game-deciding combos are listed
-in `context/combos.md`.
+options, starting with Big Money + X.
 
 ## Openings
 
