@@ -169,6 +169,10 @@ If the sweep turns up a new loop, take it back through step 3.
   most, unless the board thins well: then work the thin deck's line (what
   leaves, how many cards remain by about turn 8, what that deck plays each
   turn) before picking money.
+  Every such plan has one terminal slot a turn. For each candidate, count
+  its terminals against the budget ("Terminal slots and collision" in
+  `context/strategy.md`), and spend the slots on the best terminals, not
+  on every good one.
   If the board has an attack, compare at least X as a draw card, X as
   the attack, and two copies of the attack. Estimate for each: the
   opening, the turns it first hits $6 and $8, and how often it plays its
@@ -227,7 +231,8 @@ $8 turns, attack plays) · needs · weakness · what would make it the pick>
 **Against their best plan:** <the matchup for the pick and the runner-up>
 **Open:** <split>: <cards> · <split>: <cards>
 **Buy priorities:** <first two or three shuffles, per branch where they
-differ, then when to green>
+differ, then when to green; without a village, the terminals the deck
+holds and when it stops adding them>
 **Ending:** <how it ends, which piles are at risk>
 **Branches/signals:** <where needed: preferred line · what you see · when
 to check · what you do then>

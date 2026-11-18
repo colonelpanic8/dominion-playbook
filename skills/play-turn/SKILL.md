@@ -201,8 +201,9 @@ Also:
   each price you can pay, and work out the next hand for any candidate that
   changes it (gained to hand, a when-gain effect, a Night card). If the
   comparison shows the plan misread a card, say so and redo the plan.
-- Before buying a terminal, count the terminals in your deck including
-  this one. Without villages, keep to roughly one per 8–10 cards
+- Before buying or gaining a terminal, count the terminals in your deck
+  including this one. Without villages, keep to roughly one per 8–10
+  cards, fewer once the deck draws, and one in all once it draws itself
   (`context/strategy.md`, "Terminal slots and collision"). Past that, a new
   terminal collides often enough that Treasure or a non-terminal is
   usually the better buy.
@@ -239,7 +240,7 @@ Also:
 **Play:** 1. <card> — <why, if not obvious> 2. ...
 **Buy/gain:** <what the deck needs now, with the counts that show it ·
 candidates · pick, and the reason for any departure; for a terminal, the
-count against deck size>
+count against the terminal budget>
 **Trash/Exile:** <what leaves, and what the deck needs after; once the
 deck draws itself, total $ before → after and the price still needed>
 **Check-in:** <when due: position and confidence · deck bottleneck and

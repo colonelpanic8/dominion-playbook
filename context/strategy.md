@@ -111,9 +111,14 @@ play one terminal.
   them is dead. Two terminal openers land in the same hand on turn 3 or 4
   about 30% of the time.
 - **Over-terminaled**: a deck holding more terminals than its turns have
-  slots. Without villages, keep roughly one terminal per 8–10 cards. Past
-  that, a new terminal collides often enough that Treasure or a
-  non-terminal is usually the better gain.
+  slots. Size the budget by the cards a turn sees, not by deck size: a
+  turn that sees h of N cards finds about T×h/N of its T terminals, and
+  only one fits. With 5-card hands and no village, that is roughly one
+  terminal per 8–10 cards. Draw tightens it: a turn that sees 8 cards has
+  room for about one per 13–16, and a deck that draws itself has room for
+  one terminal in all, however big it is. Past the budget, a new terminal
+  collides often enough that Treasure or a non-terminal is usually the
+  better gain, whether bought or gained.
 - **Slots are a budget.** Every terminal you add competes for the same
   slots, so a terminal is worth only what it adds over the best other use
   of the slot. A $2 terminal can cost you a turn's play of your draw card
@@ -375,8 +380,10 @@ so look for one first.
 - **Money / BM+X**: few Actions, lots of Treasure, greens early. Strongest
   when the kingdom lacks draw or thinning, or when attacks punish slow
   decks.
-- **Good-stuff deck**: no real draw, but several good non-drawing
-  terminals, cantrips and Silver-like cards. Buy whatever helps your next
+- **Good-stuff deck**: no real draw, but a few good non-drawing
+  terminals (still one slot a turn without villages, so keep to the
+  budget in "Terminal slots and collision"), cantrips and Silver-like
+  cards. Buy whatever helps your next
   turn most, add Silver and better Treasure, and skip terminal draw.
   Junking that the board's draw and trashing can't answer pushes toward
   this deck. A lone village earns its place only
