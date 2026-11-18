@@ -379,7 +379,8 @@ so look for one first.
 - **Good-stuff deck**: no real draw, but several good non-drawing
   terminals, cantrips and Silver-like cards. Buy whatever helps your next
   turn most, add Silver and better Treasure, and skip terminal draw.
-  Junking attacks push toward this deck. A lone village earns its place only
+  Junking that the board's draw and trashing can't answer pushes toward
+  this deck. A lone village earns its place only
   once you have several terminals worth playing together
   ([Wandering Winder](http://wanderingwindergames.blogspot.com/2015/07/dominion-good-stuff-deck.html)).
 - **Thin cantrip deck**: halfway to an engine. Nothing increases hand
@@ -702,8 +703,18 @@ cards out of it.
 
 - **Junking** (Curses, Ruins) is the strongest attack class: it costs the
   victim tempo and points.
-  - Take a junker even when the board has trashing: slowing the opponent is
-    still worth it.
+  - A junker doesn't rule out an engine. On many boards the right plan is
+    to buy the junker first and build the engine around it: the engine
+    plays it more often and wins the split. Junking makes engines less
+    viable when the board's draw and thinning are too weak to keep up with
+    the junk arriving.
+  - Thinning makes junk hurt less, since it can be trashed, but rarely
+    makes a junker worthless: the opponent still spends plays removing
+    junk instead of building. A junker can be worth skipping when their
+    thinning would remove the junk at little extra cost, or when your deck
+    can't spare the plays it takes.
+  - Whether the opponent junks changes your plan too. An engine their
+    junker would have shut down can become the best plan if they skip it.
   - You can ignore a junker only if your deck will draw itself before more
     than about one junk card per turn arrives.
   - Trashing Curses as your main plan usually loses, unless the trasher is

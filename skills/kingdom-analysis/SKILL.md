@@ -14,6 +14,11 @@ you already have in this task: the steps below cite their sections. Read
 procedure. Once the game starts, use the `play-turn` skill for each
 decision.
 
+The plan is a starting point, not a commitment. The analysis is worth
+doing up front because it maps what the board allows: then, during the
+game, you can see when the opponent's choices or your own draws make a
+different plan better, and switch to it.
+
 Defaults, unless the user says otherwise:
 
 - Assume 2 players. Name what would change with more players.
@@ -198,6 +203,8 @@ If the sweep turns up a new loop, take it back through step 3.
   the preferred line, the observation that would change it, when to check,
   and the response. Consider your access to key prices, the deck's pace
   and reliability, the opponent's opening or attacks, and contested piles.
+  The opponent's choices can reopen a plan you rejected: an engine their
+  junker would have shut down may be best if they don't buy it.
   Use the worked line and the opponent's clock to set checkpoints, rather
   than a fixed turn to abandon the build. Prefer useful buys shared by
   the live options while waiting, but don't pay heavily to keep options
@@ -218,7 +225,7 @@ turn's $ and Buys; or the missing piece>
 - <A + B: the loop, with numbers>
 **Other cards:** <one line each: its best partner here, or "none">
 **Plans considered:** <each in one line: how it works · rough line ($6 and
-$8 turns, attack plays) · needs · weakness>
+$8 turns, attack plays) · needs · weakness · what would make it the pick>
 **Recommendation:** <plan, and why it holds up against the best response>
 **Against their best plan:** <the matchup for the pick and the runner-up>
 **Open:** <split>: <cards> · <split>: <cards>

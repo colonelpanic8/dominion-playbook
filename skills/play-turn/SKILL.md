@@ -129,9 +129,10 @@ could change the decision.
   (`context/strategy.md`, "Count what the deck makes").
 - **So**: what the read changes: the next buys, how much risk to take
   (`context/strategy.md`, "Risk and luck"), when to green, a branch to
-  choose. Being behind on score while building is expected. Not reaching
-  your payoff before the opponent's clock runs out is the reason to change
-  plan. A new plan starts from the deck you have.
+  choose. Being behind on score while building is expected. Change plan
+  when you won't reach your payoff before the opponent's clock runs out,
+  or when the opponent's choices make another plan better. A new plan
+  starts from the deck you have.
 
 Later gain checks (step 6) start from this assessment, updated for any
 cards gained or removed since it. Don't repeat the check-in at each prompt.

@@ -139,7 +139,8 @@ Check the plan against the view, in a line or two, at each of these moments:
 - the first turn after each of your reshuffles (`play-turn`, "Check in
   on the position");
 - the opponent's opening is visible (after their second turn), and whenever
-  they start buying something new;
+  they start buying something new: check whether their choices reopen a
+  plan the analysis rejected;
 - your deck starts drawing itself, so it is time to switch to payload;
 - the deck stalls or misses an important price: check whether this was
   an unlucky hand or a composition problem;
