@@ -21,8 +21,6 @@ step needs.
 
 - `context/strategy.md`: strategy fundamentals. Read it before analysing a
   kingdom or planning a game.
-- `context/card-power.md`: what the community ratings mean and how to look
-  them up. Read it before using them.
 - `context/rules.md`: the rules reference. Read it when a question turns on a
   rule you aren't sure of (timing, triggers, setup, how the game ends).
 - `data/card-ratings.jsonl`: never read whole. Look cards up with

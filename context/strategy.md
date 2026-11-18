@@ -191,9 +191,8 @@ the average makes every later hand better.
 - **Draw finds draw.** In a thin deck a few draw cards play the whole
   deck, so thinning is what lets a deck reach "draws itself every turn".
 - **It's one of the strongest effects in the game.** Chapel costs $2 and
-  does nothing but trash, and it rates in the top tier (see
-  `context/card-power.md`). Don't pass up strong trashing because a turn
-  spent trashing looks empty.
+  does nothing but trash, and it rates in the top tier. Don't pass up
+  strong trashing because a turn spent trashing looks empty.
 
 In practice:
 

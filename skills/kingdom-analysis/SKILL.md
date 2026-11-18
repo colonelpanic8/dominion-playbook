@@ -8,9 +8,8 @@ description: Analyze a Dominion kingdom before the game starts and recommend a p
 Turn a kingdom into a recommended plan, an opening for each split the
 starting deck can produce, and the risks to watch. First read
 `context/strategy.md` whole and once, unless you already have in this
-task: the steps below cite their sections. Read
-`context/card-power.md` before the ratings check in step 4, and
-`context/rules.md` when a rule decides something. This skill adds the
+task: the steps below cite their sections. Read `context/rules.md` when a
+rule decides something. This skill adds the
 procedure. Once the game starts, use the `play-turn` skill for each
 decision.
 
@@ -145,9 +144,9 @@ Step 3 finds what you were looking for. This pass finds what you weren't.
 - Check the patterns in `context/strategy.md` ("Interactions to look for").
   That list shows kinds of interaction and is not complete. Don't drop an interaction because it
   isn't listed.
-- Look the board's cards up with `data/card-ratings.py` (see
-  `context/card-power.md`). Where your view and the rating differ by a lot, in either direction, take a second look and give
-  the board-specific reason. A rating is never a reason to skip a card or
+- Look the board's cards up with `data/card-ratings.py`. Where your view
+  and the rating differ by a lot, in either direction, take a second look
+  and give the board-specific reason. A rating is never a reason to skip a card or
   to buy one. First-edition ratings carry little weight.
 
 If the sweep turns up a new loop, take it back through step 3.
