@@ -1,17 +1,17 @@
 # Worked example: a Recruiter / Wayfarer engine with no +Buy
 
-One kingdom carried from analysis to a plan that won, with what a first
-analysis missed. It is here to show the kind of analysis and plan this
-skill asks for. Its conclusions belong to this board: don't carry Remodel
-as +Buy, the target deck or any of its numbers to another kingdom unless
-that kingdom gives the same reasons.
+One kingdom carried through this skill's analysis to a plan. It is here
+to show the kind of analysis and plan this skill asks for. Its conclusions
+belong to this board: don't carry Remodel as +Buy, the target deck or any
+of its numbers to another kingdom unless that kingdom gives the same
+reasons.
 
 **Kingdom:** Tide Pools, Recruiter, Page, Scrying Pool, Bishop, Wayfarer,
 Remodel, Develop, Bazaar, Destrier; Way of the Chameleon. No +Buy anywhere,
 no Colonies, no Shelters.
 
-The input, as the first view of one of the test games showed it to a seat
-(the players renamed):
+The input, as the first view of a game showed it to a seat (the players
+renamed):
 
 ```text
 STATUS game g109, seat 0 of 2, opponents: 1 other seats
@@ -88,37 +88,6 @@ Warrior | Action - Attack - Traveller | $4 | Adventures +2 Cards Once per Travel
 Way of the Chameleon | Way | Menagerie Follow this card's instructions; each time that would give you +Cards this turn, you get +$ instead, and vice-versa.
 Wayfarer | Action | $6 | Menagerie +3 Cards You may gain a Silver. --- This has the same cost as the last other card gained this turn, if any.
 ```
-
-**How it was tested:** about 25 two-player games between agents playing
-written plans, plus an expert's games against them. Money lost to the
-engine 1–3, and its one win came from a broken engine plan. The expert won
-37–18 and 42–12. Written as the plan below (in slightly rougher wording),
-the engine won all 4 games it played against the best earlier plans.
-
-## What a first analysis got wrong
-
-Two independent analyses called the board a payload problem: with no +Buy,
-how does an engine score faster than one Province a turn? Both leaned
-toward money or a small engine, at 55–65% confidence, and both backed this
-with simplified simulations that ran too pessimistic. The engine won
-easily. What they missed:
-
-- **The constraint was the resource loop, not payload.** The deck works
-  while Wayfarer's Silvers keep up with what Recruiter and Remodel eat.
-  Step 3's "Resource loop" question finds this; reasoning card by card
-  doesn't.
-- **A gainer whose fodder is renewable is a stacking +Buy.** Both treated
-  Remodel as one copy of a trimming tool. With Wayfarer making a Silver a
-  play, each extra Remodel is another $5 part a turn, and late another
-  Province. The expert built three.
-- **Gains that set other cards' costs.** Wayfarer costs whatever was last
-  gained, so a Remodel gain sets its price for the Buy. That only shows up
-  when you play concrete hands.
-- **Rules instead of ideas.** The first plans were buy lists and trash
-  orders. Agents followed their gaps literally (Copper Remodeled into
-  Copper, Recruiter fed Coppers for no Villagers, a Recruiter turned down
-  to keep $5 for a buy that wasn't needed). Stating the plan as ideas, and
-  allowing reasoned deviation, turned losing plans into winning ones.
 
 ## The analysis
 

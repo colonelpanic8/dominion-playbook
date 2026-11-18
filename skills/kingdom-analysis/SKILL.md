@@ -223,8 +223,8 @@ If the sweep turns up a new loop, take it back through step 3.
 ## Output format
 
 `references/example-recruiter-wayfarer.md` is one board taken through this
-analysis to a plan that won, with what a first pass missed. Read it when you
-want to see the depth and shape expected; its conclusions are that board's.
+analysis to a plan. Read it when you want to see the depth and shape
+expected; its conclusions are that board's.
 
 Keep branches and signals to those that could change a decision; combine
 them when they describe the same contingency. State confidence where it
