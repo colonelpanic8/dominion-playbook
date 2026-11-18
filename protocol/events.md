@@ -197,8 +197,8 @@ condition being met), and none of them is part of a turn.
 | `phase` | `start`, `action`, `buy`, `night` or `cleanup` |
 | `limits` | what this turn forbids beyond the rules of every turn: `noCardBuys` (Mission's turn: no buying cards; Events and Projects may still be bought) and `handPlays` (Voyage's: at most that many plays from the hand). Absent: nothing |
 
-A turn is in `start` from its `turn` event to its first `phase` event. The model also has
-a phase `end`, which no stream writes.
+A turn is in `start` from its `turn` event to its first `phase` event. There is no phase
+after Clean-up: `turn-end` ends the turn.
 
 ### Effects
 
@@ -223,7 +223,9 @@ that the use is spent. `effects` lists them by `id`, which is the order they beg
 | `tokens` | how many tokens lie on its card (Garrison) |
 
 Two effects can keep the same card: Throne Room played on Wharf makes two Wharf effects,
-each keeping Throne Room and Wharf ([an example](#throne-room-on-wharf)). A card that no
+each keeping Throne Room and Wharf ([an example](#throne-room-on-wharf)), and the cards
+stay in play while either is pending. So the `keeps` of different effects may overlap: a
+reader must not add them up to count the cards kept in play. A card that no
 effect keeps or holds is not marked: when a copy an effect keeps leaves play, that
 effect changes (`effect-change` with fewer `keeps`, or `ending`); when a copy of the same
 name that no effect keeps leaves, no effect changes.
@@ -348,11 +350,12 @@ Each event has:
 
 | Field | |
 | --- | --- |
-| `seq` | its position, from 0, with none missing |
+| `seq` | its position, from 0, with none missing: the fold refuses any other |
 | `by` | optional: the event it happened inside ([Causes](#causes)) |
 | `type` | what kind of event it is; its other fields depend on it |
 
-The first event is `setup`, which gives the whole table before anything happens. Each
+The first event is `setup`, which gives the whole table before anything happens; it
+comes only first. Each
 later event changes the table as its section below says, or changes nothing (most
 occurrences). Applying them in order is **the fold**.
 
@@ -371,7 +374,7 @@ events happen inside them.
 ### Causes
 
 Every event but `setup` may carry `by`: the `seq` of the **occurrence it happened
-inside**. It is always earlier than the event.
+inside**. It is always earlier than the event, and an occurrence.
 
 Only these are causes, with what happens inside each:
 
@@ -453,19 +456,24 @@ are different events.
 ### When a stream is not one game's
 
 The fold **refuses** an event that can't apply to the table it has: the stream is then not
-one game's, and the table after a refused event is undefined. The refusals are given with
-each event; together they are:
+one game's. A refused event changes nothing: the table is as it was before it. The
+refusals are given with each event; together they are:
 
-- `by` or `origin` not earlier than the event.
+- A `seq` other than the one after the last event's (0 for the first).
+- A first event that is no `setup`, or a `setup` after the first.
+- Any event after `game-end`.
+- `by` or `origin` not earlier than the event, or naming an event that is no occurrence.
 - A move that names a card that isn't where it says ([Taking and placing](#taking-and-placing)),
   into a zone that doesn't exist, under more cards than there are, at a position in a bag,
   with a `pos` list of the wrong length, or a `shuffle` into a bag.
 - A `play` with `from` and no `to`, or `to` and no `from`.
 - A `rename` of a card not where it says.
-- A `counter` whose `value` isn't its old value plus `delta`.
+- A `counter` whose `value` isn't its old value plus `delta`, or on a pile not in `piles`.
 - A `phase` with no turn in progress; a `turn-end` of a seat whose turn is not in progress.
-- A `turn` or `turn-skipped` naming an extra turn not waiting; a `final` one for a seat
-  that is not first in `finalRound`.
+- A `turn` or `turn-skipped` while a turn is in progress (no `turn-end` since the last
+  `turn`); of kind `extra` naming no extra turn, or one that isn't waiting or is another
+  seat's; naming an extra turn when it is of another kind; a `final` one for a seat that
+  is not first in `finalRound`.
 - An `effect` whose `id` has begun already; an `effect-change` or `effect-end` of an
   effect not on the table.
 - An `extra-turn` whose `id` is waiting already; an `extra-turn-removed` of one not
@@ -474,11 +482,10 @@ each event; together they are:
 - A `holding` from a seat that doesn't hold the card, to a seat that already holds it, or
   with neither.
 
-The fold does not check everything a stream must be. These rules hold of every stream
-`dominion-engine` writes and are checked by its tests, not by the fold: `seq` counts from
-0 with none missing (a [recorded file](#recorded-streams) reader checks it); `setup` comes
-first and only first; `by` names an occurrence; a `turn` follows the previous turn's
-`turn-end`; nothing follows `game-end`.
+The fold checks that a stream can be one game's, not that it is the game the rules
+would make: that `by` is the innermost occurrence in progress, that a card moved is the
+one the rules move, that the table's derived values are right. `dominion-engine`'s tests
+hold its streams to those.
 
 ## Events
 
@@ -507,7 +514,7 @@ The first event: the game before anything happens.
 | `landscapes` | the landscapes chosen for the game, by name; absent when none (the table's `landscapes` also has the Artifacts and Allies setup added) |
 | `table` | the whole table |
 
-**Fold:** the table becomes `table`.
+**Fold:** the table becomes `table`. Refused unless it is the stream's first event.
 
 The setup table has every pile with its cards, properties and costs, the Boons' and
 Hexes' zones, and each player's starting cards in their deck, listed by name before they
@@ -523,11 +530,12 @@ A turn begins. `player`, `number`, `kind`, and as applicable:
 | `extraTurn` | for an extra turn, the `id` of the extra turn waiting it is |
 | `limits` | what the turn forbids, when anything |
 
-**Fold:** if `extraTurn` is given, that extra turn leaves `extraTurns` (refused if it isn't
-waiting). A `final` turn removes `player` from the front of `ending.finalRound` (refused
-unless it is there). Then the turn in progress is `player`, `number`, `kind`, `extra`,
-`limits`, in phase `start`, and the turn's counters are set: `actions` 1, `buys` 1,
-`coins` 0, `potions` 0, `next-hand` 5, `bought` 0, `hand-plays` 0.
+**Fold:** refused while a turn is in progress. If `extraTurn` is given, that extra turn
+leaves `extraTurns` (refused if it isn't waiting or is another seat's; `extraTurn` is
+given exactly when `kind` is `extra`). A `final` turn removes `player` from the front of
+`ending.finalRound` (refused unless it is there). Then the turn in progress is `player`,
+`number`, `kind`, `extra`, `limits`, in phase `start`, and the turn's counters are set:
+`actions` 1, `buys` 1, `coins` 0, `potions` 0, `next-hand` 5, `bought` 0, `hand-plays` 0.
 
 A `turn` has no `by`.
 
@@ -559,8 +567,8 @@ A turn a player would have taken doesn't happen. `player`, `kind`, and as applic
 `extra` and `extraTurn` (as for `turn`), and `lost` when an extra turn is lost as a third
 turn in a row.
 
-**Fold:** as `turn` for `extraTurn` and a `final` turn; the turn in progress and its
-counters don't change.
+**Fold:** as `turn` for a turn in progress, `extraTurn` and a `final` turn; the turn in
+progress and its counters don't change.
 
 A turn skipped by Lich lowers its player's `skip-turns` before this event, and a regular
 one raises `turns-skipped`; those `counter` events have no `by`. A skipped turn has no
@@ -580,7 +588,8 @@ round. Extra turns still go before the turns of the final round.
 
 The game is over. `reason` and `result` ([The game ending](#the-game-ending)).
 
-**Fold:** `ended` becomes `{reason, result}`.
+**Fold:** `ended` becomes `{reason, result}`. It is the last event: the fold refuses any
+after it.
 
 After a `game-ending` it comes once `finalRound` is empty and no extra turn comes first.
 A resignation is `game-end` alone, with reason `resigned`, at any point: the turn in
@@ -815,14 +824,16 @@ discarded.
 | `put` | any other placement: into a hand, onto a mat, a deck into its discard pile |
 | `shuffle` | see below |
 
-Masquerade's passes are written as `put` from one hand to another; no stream writes
-`pass` yet.
+`pass` is Masquerade's: each card passed is a `pass` of its own, from the passer's hand
+to the hand of the next player passing. It is the only move from one player's zone to
+another's. A card taken from another player is not passed: it is trashed, then gained
+(Thief, Noble Brigand); an Artifact or a State changes hands as a `holding`.
 
 Fields:
 
 | Field | |
 | --- | --- |
-| `player` | whose action it is: the owner of `from`, else the owner of `to`, else (between zones nobody owns) the player of the turn in progress or the last one |
+| `player` | whose action it is: the owner of `from`, else the owner of `to`. Between zones nobody owns, the player of the occurrence the move happens inside (`by`; of a `phase`, the turn's player): who rotates a pile, trashes a card from the Supply (Lurker), puts Black Market's cards back. Absent when nobody acts: the Boons' or Hexes' discard pile shuffled into their deck |
 | `cards` | the cards, in the order they move |
 | `from`, `to` | zones |
 | `at` | where they arrive in an ordered `to`: `top` (absent), `bottom`, or under *n* cards |
@@ -879,7 +890,7 @@ moves inside the `shuffle`, after it.
 The Boons' and Hexes' discard piles are shuffled into their empty decks the same way:
 
 ```json
-{"seq":1117,"by":1114,"type":"shuffle","player":1,"cards":["The Mountain's Gift","The Earth's Gift","The Moon's Gift","The Sky's Gift","The Sun's Gift","The Field's Gift","The Forest's Gift","The Wind's Gift","The River's Gift"],"from":"boons/discard","to":"boons/deck","pos":[3,3,2,5,2,0,0,1,0]}
+{"seq":1117,"by":1114,"type":"shuffle","cards":["The Mountain's Gift","The Earth's Gift","The Moon's Gift","The Sky's Gift","The Sun's Gift","The Field's Gift","The Forest's Gift","The Wind's Gift","The River's Gift"],"from":"boons/discard","to":"boons/deck","pos":[3,3,2,5,2,0,0,1,0]}
 ```
 
 #### `take`
@@ -936,7 +947,9 @@ ordered `to` (so the last listed ends on top) or into a bag at its sorted place,
 down in a zone with faces.
 
 A pile joining during play is declared by a `pile` event first; its cards follow as
-`add`.
+`add`. A card is priced once it is in the game: the `derived` giving a name its first cost
+comes after the `add` (or `rename`) that brings in the first card of that name. A `pile`
+event comes before anything said of its pile: its counters and tokens.
 
 #### `rename`
 
@@ -954,13 +967,14 @@ replaces becomes the default one again, in the deck before it is shuffled. From
 ```jsonl
 {"seq":5,"type":"resolve","player":0,"card":"Inherited","when":"game-start"}
 {"seq":6,"by":5,"type":"topdeck","player":0,"cards":["Copper","Overgrown Estate","Copper","Copper","Necropolis"],"from":"0/hand","to":"0/deck"}
-{"seq":7,"by":5,"type":"derived","costs":{"Hovel":{"coins":1}}}
-{"seq":8,"by":5,"type":"rename","card":"Necropolis","name":"Hovel","zone":"0/deck"}
+{"seq":7,"by":5,"type":"rename","card":"Necropolis","name":"Hovel","zone":"0/deck"}
+{"seq":8,"by":5,"type":"derived","costs":{"Hovel":{"coins":1}}}
 {"seq":9,"by":5,"type":"shuffle","player":0,"cards":["Grotto","Copper","Copper","Copper","Copper","Copper","Copper","Copper","Hovel","Overgrown Estate"],"from":"0/deck","to":"0/deck","pos":[8,1,3,3,3,1,2,2,0,0]}
 ```
 
-When a rename leaves no card of the old name in the game, a `derived` event gives that
-name a `null` cost.
+The rename comes first, then the `derived` event pricing the new name. When a rename
+leaves no card of the old name in the game, that `derived` event gives the old name a
+`null` cost.
 
 ### The table's other changes
 
@@ -968,8 +982,9 @@ name a `null` cost.
 
 `counter`, `delta`, `value`: the counter changed by `delta` and is now `value`.
 
-**Fold:** refused unless the counter's old value plus `delta` is `value`. The counter is
-now `value` (left out of `counters` when 0).
+**Fold:** refused unless the counter's old value plus `delta` is `value`, and for a pile's
+counter unless the pile is in `piles`. The counter is now `value` (left out of `counters`
+when 0).
 
 A change sits between the same two card moves it happened between.
 
@@ -1090,8 +1105,8 @@ neither is given.
 cards follow as `add`.
 
 Divine Wind's removal of a pile is a `pile` event with `removed`, before the tokens
-leaving it. A pile given a role after it joined (a Young Witch joining during play, then
-its Bane chosen) gets a second `pile` event.
+leaving it and its counters going to 0. A pile given a role after it joined (a Young
+Witch joining during play, then its Bane chosen) gets a second `pile` event.
 
 #### `landscape`
 
@@ -1316,10 +1331,6 @@ Undo, clocks, chat and who is connected belong to whatever hosts a game, not to 
 - **Open causes in a snapshot.** A reader joining mid-game would need the occurrences
   still in progress; nothing carries them.
 - **Charm** keeps its spent effect until the end of the turn.
-- **`pass`** is in the model, but Masquerade's passes are written as `put`.
-- **The `end` phase** is in the model and no stream writes it.
-- **A move between zones nobody owns** (a pile rotated, the Boons shuffled) is given to the
-  player of the turn in progress or of the last turn.
 
 ## Example streams
 

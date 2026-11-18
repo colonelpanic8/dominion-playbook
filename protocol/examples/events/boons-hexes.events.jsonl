@@ -1116,7 +1116,7 @@
 {"seq":1114,"by":1113,"type":"play","player":1,"card":"Bard","from":"1/hand","to":"1/play"}
 {"seq":1115,"by":1114,"type":"counter","counter":"actions","delta":-1,"value":0}
 {"seq":1116,"by":1114,"type":"counter","counter":"coins","delta":2,"value":2}
-{"seq":1117,"by":1114,"type":"shuffle","player":1,"cards":["The Mountain's Gift","The Earth's Gift","The Moon's Gift","The Sky's Gift","The Sun's Gift","The Field's Gift","The Forest's Gift","The Wind's Gift","The River's Gift"],"from":"boons/discard","to":"boons/deck","pos":[3,3,2,5,2,0,0,1,0]}
+{"seq":1117,"by":1114,"type":"shuffle","cards":["The Mountain's Gift","The Earth's Gift","The Moon's Gift","The Sky's Gift","The Sun's Gift","The Field's Gift","The Forest's Gift","The Wind's Gift","The River's Gift"],"from":"boons/discard","to":"boons/deck","pos":[3,3,2,5,2,0,0,1,0]}
 {"seq":1118,"by":1114,"type":"take","player":1,"cards":["The Mountain's Gift"],"from":"boons/deck","to":"1/boons"}
 {"seq":1119,"by":1114,"type":"receive","player":1,"card":"The Mountain's Gift"}
 {"seq":1120,"by":1119,"type":"gain","player":1,"cards":["Silver"],"from":"pile/Silver","to":"1/discard"}
