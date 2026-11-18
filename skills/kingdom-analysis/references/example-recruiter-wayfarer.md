@@ -10,6 +10,85 @@ that kingdom gives the same reasons.
 Remodel, Develop, Bazaar, Destrier; Way of the Chameleon. No +Buy anywhere,
 no Colonies, no Shelters.
 
+The input, as the first view of one of the test games showed it to a seat
+(the players renamed):
+
+```text
+STATUS game g109, seat 0 of 2, opponents: 1 other seats
+GAME g109: turn 1, your turn, buy phase, actions 1, buys 1, coins 0
+
+YOU P1: Alice (3 VP)
+  hand 5 (4 Copper, Estate)
+  deck 5 (3 Copper, 2 Estate)
+  discard 0
+  owns 7 Copper, 3 Estate
+
+OPPONENT P2: Bob (3 VP)
+  hand 5 (2 Copper; 3 unknown)
+  deck 5 (2 Copper; 3 unknown)
+  discard 0
+  deck+hand hold 10 of: 7 Copper, 3 Estate
+  owns 7 Copper, 3 Estate
+
+SUPPLY
+  Copper $0 x46
+  Silver $3 x40
+  Gold $6 x30
+  Estate $2 x8
+  Duchy $5 x8
+  Province $8 x8
+  Curse $0 x10
+  Tide Pools $4 x10
+  Recruiter $5 x10
+  Page $2 x10
+  Scrying Pool $2P x10
+  Bishop $4 x10
+  Wayfarer $6 x10
+  Remodel $4 x10
+  Develop $3 x10
+  Bazaar $5 x10
+  Destrier $6 x10
+  Potion $4 x16
+
+NON-SUPPLY
+  Treasure Hunter $3 x5
+  Warrior $4 x5
+  Hero $5 x5
+  Champion $6 x5
+
+LANDSCAPES
+  Way of the Chameleon (way)
+TRASH empty
+LOG
+  0: Alice starts turn 1
+DECISION d1: Buy phase: choose a move
+  choose 1
+    0: Play Copper
+    1: Play Copper
+    2: Play Copper
+    3: Play Copper
+    4: Buy Copper ($0)
+    5: Buy Curse ($0)
+    6: End your Buy phase
+CARDS
+Bazaar | Action | $5 | Seaside +1 Card +2 Actions +$1
+Bishop | Action | $4 | Prosperity +$1 +1 VP Trash a card from your hand. +1 VP per $2 it costs (round down). Each other player may trash a card from their hand.
+Champion | Action - Duration | $6 | Adventures +1 Action For the rest of the game, when another player plays an Attack, it doesn't affect you, and when you play an Action card, you first get +1 Action. (This is not in the Supply.)
+Destrier | Action | $6 | Menagerie +2 Cards +1 Action --- During your turns, this costs $1 less per card you've gained this turn.
+Develop | Action | $3 | Hinterlands Trash a card from your hand. Gain two cards onto your deck, with one costing exactly $1 more than it, and one costing exactly $1 less than it, in either order.
+Hero | Action - Traveller | $5 | Adventures +$2 Gain a Treasure. --- When you discard this from play, you may exchange it for a Champion. (This is not in the Supply.)
+Page | Action - Traveller | $2 | Adventures +1 Card +1 Action --- When you discard this from play, you may exchange it for a Treasure Hunter.
+Potion | Treasure | $4 | Alchemy 1 Potion
+Recruiter | Action | $5 | Renaissance +2 Cards Trash a card from your hand. +1 Villager per $1 it costs.
+Remodel | Action | $4 | Base Trash a card from your hand. Gain a card costing up to $2 more than it.
+Scrying Pool | Action - Attack | $2P | Alchemy +1 Action Each player (including you) reveals the top card of their deck and either discards it or puts it back, your choice. Then reveal cards from your deck until revealing one that isn't an Action. Put all of the revealed cards into your hand.
+Tide Pools | Action - Duration | $4 | Seaside +3 Cards +1 Action At the start of your next turn, discard 2 cards.
+Treasure Hunter | Action - Traveller | $3 | Adventures +1 Action +$1 Gain a Silver per card the player to your right gained on their last turn. --- When you discard this from play, you may exchange it for a Warrior. (This is not in the Supply.)
+Warrior | Action - Attack - Traveller | $4 | Adventures +2 Cards Once per Traveller you have in play (including this), each other player discards the top card of their deck and trashes it if it costs $3 or $4. --- When you discard this from play, you may exchange it for a Hero. (This is not in the Supply.)
+Way of the Chameleon | Way | Menagerie Follow this card's instructions; each time that would give you +Cards this turn, you get +$ instead, and vice-versa.
+Wayfarer | Action | $6 | Menagerie +3 Cards You may gain a Silver. --- This has the same cost as the last other card gained this turn, if any.
+```
+
 **How it was tested:** about 25 two-player games between agents playing
 written plans, plus an expert's games against them. Money lost to the
 engine 1–3, and its one win came from a broken engine plan. The expert won
