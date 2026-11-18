@@ -68,6 +68,9 @@ result as a short game plan, about ten lines:
   your pace, key or contested piles), each with when it shows and the
   response.
 
+`skills/kingdom-analysis/references/example-recruiter-wayfarer.md` ends with a
+plan written in this spirit: ideas and trade-offs, not a list of rules.
+
 The plan is the only thing you carry between decisions. If the game is past
 its opening when you join, still write the plan, from the current view.
 
