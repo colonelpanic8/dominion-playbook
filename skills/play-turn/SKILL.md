@@ -170,10 +170,12 @@ Summarize the relevant points below, usually in two to four lines:
   deck, or a pile that decides the game. The plan gives direction, not a
   shopping list. Any card that gives the deck what it needs serves it,
   and a chance the plan didn't foresee can be worth taking: a price you
-  rarely hit, a pile about to run out, a card the opponent's play made
-  stronger. When the pick doesn't address what the deck needs, or
-  isn't what the plan would take, say why in a line. What to avoid is a
-  gain with no reason behind it, such as Silver by default, or a card
+  rarely hit, a pile about to run out, a key pile the opponent is also
+  taking (`context/strategy.md`, "How to build one"), a card the
+  opponent's play made stronger. When the pick doesn't address what the
+  deck needs, or isn't what the plan would take, say why in a line. What
+  to avoid is a gain with no reason behind it, such as Silver by default,
+  or a card
   that is good in general but does nothing for this deck. If no reason
   holds up, take what the plan says.
 

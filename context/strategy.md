@@ -561,6 +561,10 @@ Things that weaken an engine, to weigh rather than to rule it out:
   payload, and add payload once it draws itself reliably.
 - Don't overbuild past the payload ceiling. But when unsure whether to
   green, one more building turn usually costs less than it seems.
+- **Contested piles**: if you're both taking the only source of a key
+  piece (e.g. the only village), winning the split can justify a copy
+  over a slightly better card. Treat it as a tiebreaker once your deck
+  already works, not a reason to change plan.
 
 ### Building for one huge turn
 
