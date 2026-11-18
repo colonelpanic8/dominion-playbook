@@ -135,8 +135,9 @@ $6 card on a $2-3 hand.
 BUILDING (until the deck draws itself, usually by turns 7-9).
 - Keep pricing Wayfarer with Remodel whenever it would otherwise cost more than you
   have.
-- Build Recruiters and Wayfarers in step, about one Recruiter for every two Wayfarers.
-  Wayfarers bring the Silvers Recruiters eat and help find them; Recruiters' Villagers
+- Build Recruiters and Wayfarers in step, about one Recruiter for every two Wayfarers,
+  with the Recruiter usually coming first: a second Recruiter before your third
+  Wayfarer, say, though be flexible. Wayfarers bring the Silvers Recruiters eat and help find them; Recruiters' Villagers
   play the Wayfarers. Too few Recruiters and Wayfarers sit dead in hand for want of
   Actions; too many and Recruiters run short of food and eat Coppers for nothing or
   cards you need. Bazaars supply Actions too, so with several you need fewer Recruiters.
