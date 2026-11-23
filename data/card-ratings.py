@@ -34,9 +34,11 @@ for query in sys.argv[1:]:
         shown.add(id(r))
         print(f"| {r['name']} | {r['rating']:.1f} | {r['rank']}/{r['of']} | {r['kind']} | {r['edition']} |")
 print("\nAverages over all kingdoms, mostly 2-player: a prior, not a verdict. Cards")
-print("within about a point are tied; landscapes have their own scale. Where one")
-print("differs a lot from your view, ask what usually makes the card strong or weak")
-print("and what on this board changes that.")
+print("within about a point are tied; landscapes have their own scale. A high rating")
+print("never justifies over-buying past your deck's ratios or forcing a card onto a")
+print("board that breaks it, and a low rating never rules out a card that unlocks a")
+print("loop or fixes a bottleneck here. Where one differs a lot from your view, ask")
+print("what usually makes the card strong or weak and what on this board changes that.")
 if missing:
     print()
 for query in missing:

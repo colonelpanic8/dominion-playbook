@@ -200,15 +200,24 @@ the average makes every later hand better.
   deck gets more plays out of everything it adds, and that compounds.
 - **Draw finds draw.** In a thin deck a few draw cards play the whole
   deck, so thinning is what lets a deck reach "draws itself every turn".
-- **It's one of the strongest effects in the game.** Chapel costs $2 and
-  does nothing but trash, and it rates in the top tier. Don't pass up
-  strong trashing because a turn spent trashing looks empty.
+- **It's one of the strongest effects in the game, and the default whenever available.** Chapel costs $2 and
+  does nothing but trash, and it rates in the top tier — but thinning doesn't
+  need to be Chapel-fast to decide a game. Even one-card-per-turn trashing
+  (including non-terminal, Duration, or multi-mode cards that offer trashing
+  as one option) compounds over a whole game and usually beats skipping
+  thinning for extra economy. Don't pass up strong or steady trashing because
+  a turn spent trashing looks empty.
 
 In practice:
 
-- **Trashing** (Chapel, Sentry, Steward, …) is the usual way. With Chapel,
-  on turn 3 or 4 trash your whole hand, even if it's only Coppers. The
-  exception is a hand holding your other opener.
+- **Trashing** (Chapel, Sentry, Steward, …) is the usual way. With fast
+  multi-card trashing, on turn 3 or 4 trash your whole hand, even if it's
+  only Coppers (except a hand holding your other opener).
+- **If you buy a trasher, play it early.** A trasher only pays off when it
+  actually removes starting cards in the first few shuffles. Repeatedly
+  skipping or discarding your trasher for small short-term bonuses (a couple
+  of VP, a modest terminal play) leaves you with a bloated deck while an
+  opponent who thins pulls permanently ahead.
 - **Thinning stops paying once the deck draws itself.** The average-card
   argument holds while a hand is a sample of the deck. A deck that plays
   every card makes their sum, so removing a card that makes $ lowers
@@ -218,9 +227,10 @@ In practice:
   deck makes").
 - A trasher that goes dead late in the game has usually already paid for
   itself.
-- Thinning matters less where the deck wants many cards: Gardens and other
-  card-count VP, and slogs where junk arrives faster than you can remove
-  it.
+- Thinning matters less where the deck wants many cards (card-count VP),
+  where junk arrives faster than you can remove it, or where a board rule
+  puts trashed cards back into players' decks (which also weakens cards that
+  rely on a clean deck or drawing two specific cards together).
 - **Thinning without a trasher.** Anything that takes a card out of your
   deck for good thins it: Exile, a mat, or a card that turns one card into
   another (Remodel; Displace Exiles a card and gains one costing up to $2
@@ -328,9 +338,12 @@ leaves it.
   trashing a card that makes $ is paid once, and the $ is lost on every
   turn left. Dropping from a Province to a Duchy costs 3 VP a turn, so a
   trash that gains 3 VP and causes that drop is behind after two more
-  turns. It is right on the last turn or two, when the total still clears
-  the price afterwards, or when the same turn replaces the card. Check
-  too that the rest of the game will use what the trash pays for.
+  turns. The same holds for trashing a core draw or village card for points:
+  cannibalizing deck control before the finish is guaranteed can turn a
+  lead into a bricked final turn. Trashing a working piece is right on the
+  last turn or two, when the remaining deck still clears the price reliably
+  afterwards, or when the same turn replaces the card. Check too that the
+  rest of the game will use what the trash pays for.
 
 ### Gold, Treasure gainers and Coffers
 
@@ -561,10 +574,13 @@ Things that weaken an engine, to weigh rather than to rule it out:
   payload, and add payload once it draws itself reliably.
 - Don't overbuild past the payload ceiling. But when unsure whether to
   green, one more building turn usually costs less than it seems.
-- **Contested piles**: if you're both taking the only source of a key
-  piece (e.g. the only village), winning the split can justify a copy
-  over a slightly better card. Treat it as a tiebreaker once your deck
-  already works, not a reason to change plan.
+- **Contested piles**: when both players want the board's only source of a
+  bottleneck (the sole village, primary draw, or main VP scaler), start
+  contesting it early — waiting until the rest of your deck is built hands
+  the split away. Conversely, don't chase a single pile split past what
+  your deck's ratios can support: winning a split of terminal draw or extra
+  villages while starving on Actions, draw, or scaling payload stalls your
+  deck and concedes the board's other scarce piles.
 
 ### Building for one huge turn
 
@@ -763,8 +779,15 @@ cards out of it.
     junker would have shut down can become the best plan if they skip it.
   - You can ignore a junker only if your deck will draw itself before more
     than about one junk card per turn arrives.
-  - Trashing Curses as your main plan usually loses, unless the trasher is
-    very efficient. Lower your sights instead (Duchies).
+  - Don't ignore active junking when solid trashing or anti-gain defense is
+    available. A slow trasher alone won't outrun heavy junking if you stop
+    building, so pair trashing with draw — or, when no efficient answer
+    exists, lower your sights (Duchies / alternative VP).
+  - **Conditional attacks need real support**: an attack or payoff that only
+    fires under a condition (such as discarding multiple Actions, or pairing
+    two specific cards in hand) does nothing unless your *actual* deck
+    supplies that condition reliably and the board won't disrupt it. If you
+    pivot away from its support cards, stop buying it.
   - With a junker in play, the Curse pile will empty. Curses plus Duchies
     make two of the three piles, so a three-pile ending is the money
     player's main weapon against an engine. Curses that players give
@@ -841,10 +864,21 @@ how many shuffles are left and how much each hand needs every card.
     go to fewer turns.
 - **Check the opponent's whole next turn**, not just the Province pile:
   unused extra turns (Seize the Day), stored Coffers, Villagers or Favors,
-  cards on mats, and how many +Buys and Golds they have left this shuffle.
-- Three-pile endings are a real threat with +Buy and cheap piles. Count how
-  many gains each player can make to empty the piles. In mirrors, the
-  number of gains often matters more than money.
+  cards on mats, how many +Buys and Golds they have left this shuffle,
+  scaling or alternative VP they can score across one or two turns
+  (multipliers, card-count thresholds, VP-per-gain combos), and any
+  negative VP they can inflict on *you* (such as Curses given or Exiled)
+  before ending the game.
+- **Three-pile endings** are a real threat with +Buy, gainers, and cheap
+  piles. Count how many gains each player can make to empty the piles; in
+  mirrors, the number of gains often matters more than money.
+  - **$0 and cheap piles (especially Curses)** cost little or no $ — only
+    Buys, cursers, or gainers. A pile of 4 or 5 is not safe against an
+    opponent who already has active +Buys or multi-buy turns.
+  - **When behind, don't help empty piles.** Avoid dropping a contested
+    pile to 1 (handing away a second empty pile) or buying low-VP cards
+    from a shrinking pile while trailing an opponent who wants a three-pile
+    finish, unless you can win the three-pile yourself.
 - Colony games last longer and change who wants the game to end (see
   "Colony games").
 

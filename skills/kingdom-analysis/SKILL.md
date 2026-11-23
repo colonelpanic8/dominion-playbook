@@ -80,7 +80,11 @@ used as defined in "Payload and deck control" in `context/strategy.md`.
    What gives a spare Action: villages, including conditional ones,
    Actions that arrive at the start of the next turn, and Villagers?
 3. **Thinning**: what takes cards out of your deck (trashing, Exile, mats,
-   swapping a card for a better one), and how fast is it?
+   swapping a card for a better one), how fast is it, and does anything on
+   the board blunt it (such as forcing trashed cards back into decks)?
+   Whenever real thinning exists — even one card per play — treat it as a
+   default priority unless the board gives a specific reason to skip it
+   ("Thinning: addition by subtraction" in `context/strategy.md`).
 4. **+Buy and gaining**: where does +Buy come from (Kingdom cards, Events,
    tokens), and what gains cards or VP without a Buy? With none of these, a
    turn scores at most one card, so an engine can't outscore money (see
@@ -112,7 +116,9 @@ board is whether a deck here can draw itself, how soon, and how often.
 - **Reliability**: once built, how often does it draw its deck? Check what
   can stall it (see "Reliability" in `context/strategy.md`): copies of the
   key cards, Actions against terminals, spare draw, junk, and the
-  opponent's attacks.
+  opponent's attacks. For any card that requires pairing two specific cards
+  or meeting a hand/discard condition (such as Potion costs or conditional
+  attacks), check whether junking or board rules will break that condition.
 - **Resource loop**: when pieces feed each other (a card that gains what a
   trasher eats, Villagers that pay for terminal draw, tokens spent and
   earned each turn), write the loop with its rates: what each turn adds
@@ -214,8 +220,10 @@ If the sweep turns up a new loop, take it back through step 4.
 - **Openings**: the best opening for each split from step 1, with one line
   of reasoning each. If a split leaves nothing worth buying at one price,
   say so.
-- **Buy priorities** for the first two or three shuffles, and roughly when
-  to start greening.
+- **Buy priorities** for the first two or three shuffles (including when to
+  start contesting any sole bottleneck pile — only village, primary draw, or
+  main VP scaler — rather than waiting until the deck is built), and roughly
+  when to start greening.
 - **Ending**: which piles could empty, who benefits, and how the game ends.
 - **Challenge the pick**: take one more look at the rejected plan with the
   highest ceiling, with every fix the board offers. Most wrong calls come

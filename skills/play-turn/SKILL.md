@@ -51,7 +51,9 @@ be decided together.
 - Play draw first, so later choices are made with the most information.
   Play villages before terminals as needed to keep Actions.
 - Play cards that trash from your hand last, so you've seen the most
-  targets.
+  targets. While starting junk remains, don't repeatedly skip or discard
+  your early trasher for minor short-term bonuses (such as a couple of VP
+  or a modest terminal play): compounding thinness usually beats them.
 - Hold Throne Room or King's Court until you know what you lack. The best
   target is often another multiplier, or a card that produces what this
   turn still needs.
@@ -132,8 +134,11 @@ could change the decision.
   choose. Being behind on score while building is expected, and so is
   a stalled turn: it calls for more draw or Actions, not a switch to
   money. Change plan when you won't reach your payoff before the
-  opponent's clock runs out, or when the opponent's choices make another
-  plan better. A new plan starts from the deck you have.
+  opponent's clock runs out, or when the opponent's choices reveal a
+  stronger loop or reopen a better plan. If they are already contesting a
+  sole bottleneck pile (the only village, primary draw, or main VP scaler),
+  contest it now instead of waiting until the rest of your deck is built. A
+  new plan starts from the deck you have.
 
 Later gain checks (step 6) start from this assessment, updated for any
 cards gained or removed since it. Don't repeat the check-in at each prompt.
@@ -170,14 +175,14 @@ Summarize the relevant points below, usually in two to four lines:
   deck, or a pile that decides the game. The plan gives direction, not a
   shopping list. Any card that gives the deck what it needs serves it,
   and a chance the plan didn't foresee can be worth taking: a price you
-  rarely hit, a pile about to run out, a key pile the opponent is also
-  taking (`context/strategy.md`, "How to build one"), a card the
-  opponent's play made stronger. When the pick doesn't address what the
-  deck needs, or isn't what the plan would take, say why in a line. What
-  to avoid is a gain with no reason behind it, such as Silver by default,
-  or a card
-  that is good in general but does nothing for this deck. If no reason
-  holds up, take what the plan says.
+  rarely hit, a pile about to run out, a sole bottleneck pile the opponent
+  is contesting (`context/strategy.md`, "How to build one"), a card the
+  opponent's play made stronger. Equally, don't chase a single pile split
+  past your deck's Action or payload balance. When the pick doesn't address
+  what the deck needs, or isn't what the plan would take, say why in a
+  line. What to avoid is a gain with no reason behind it, such as Silver by
+  default, or a card that is good in general but does nothing for this
+  deck. If no reason holds up, take what the plan says.
 
 Choosing what to trash or Exile gets the same check in short form: what
 leaves, and what the deck needs after. Which way the doubt goes depends
@@ -222,9 +227,15 @@ Also:
   would need on their next turn to win. Then apply:
   - the Penultimate Province Rule and its exceptions, to those numbers;
   - the opponent's whole next turn: unused extra turns, stored Coffers,
-    Villagers or Favors, cards on mats, and the +Buys and Golds left in
-    their current shuffle;
-  - three-pile risk: how many gains each player needs to end the game.
+    Villagers or Favors, cards on mats, the +Buys (including active
+    Durations) and Golds left in their current shuffle, any scaling or
+    alternative VP they can burst across one or two turns, and any negative
+    VP they can inflict on *you* (such as Curses given or Exiled) before
+    ending the game;
+  - three-pile risk: how many gains each player needs to end the game,
+    treating $0 and cheap piles (especially Curses) as emptyable whenever
+    opponent's reachable Buys or gainers match the pile count, and avoiding
+    dropping or feeding low piles while trailing.
 - Decide whether to spend or keep Coffers and Villagers for a later price
   point or a bigger turn.
 

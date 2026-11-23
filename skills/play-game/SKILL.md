@@ -32,22 +32,24 @@ seats). Its result is your first full view.
 
 Before answering the first decision, do these in order, every game:
 
-1. Look up the ratings of every Kingdom card and landscape on the board, all
-   in one command:
-
-       python3 data/card-ratings.py "Card One" "Card Two" ...
-
-   If you can't run it, say so in the plan; don't guess ratings from memory.
-2. Read `context/strategy.md` whole and once if you haven't yet. Read
+1. Read `context/strategy.md` whole and once if you haven't yet. Read
    `context/rules.md` too if a card on the board turns on a rule you aren't
    sure of. Don't
    read them again later in the game unless a specific question sends you
    back to one.
-3. Run `kingdom-analysis` on the kingdom in the first view, every step of
-   it, the sweep of every card included, comparing your view with the
-   ratings from step 1 where the skill says to. The `CARDS` block has the
-   text of every card.
-4. Before the first decision, share a short game plan: the recommended
+2. Run `kingdom-analysis` on the kingdom in the first view, every step of
+   it — including its `interaction-spotting` pass (step 2) and the sweep of
+   every card. The `CARDS` block has the text of every card. Only at step 5
+   of `kingdom-analysis`, after forming your own view from card text and
+   interactions, look up the ratings of every Kingdom card and landscape on
+   the board in one command:
+
+       python3 data/card-ratings.py "Card One" "Card Two" ...
+
+   If you can't run it, say so in the plan; don't guess ratings from memory,
+   and don't let ratings override a worked board interaction or justify
+   forcing a card past your deck's ratios.
+3. Before the first decision, share a short game plan: the recommended
    strategy, opening, and the key game facts that support them.
 
 The first decision looks routine (a $3 or $4 buy), and that is when the
@@ -141,8 +143,10 @@ Check the plan against the view, in a line or two, at each of these moments:
 - the first turn after each of your reshuffles (`play-turn`, "Check in
   on the position");
 - the opponent's opening is visible (after their second turn), and whenever
-  they start buying something new: check whether their choices reopen a
-  plan the analysis rejected;
+  they start buying something outside your plan: don't dismiss it as a
+  mistake — check what loop or engine they are building, whether it beats
+  yours or reopens a rejected plan, and whether they are already taking a
+  scarce bottleneck pile you must contest now rather than later;
 - your deck starts drawing itself, so it is time to switch to payload;
 - the deck stalls or misses an important price: check whether this was
   an unlucky hand or a composition problem;
