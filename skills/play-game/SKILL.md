@@ -30,7 +30,12 @@ seats). Its result is your first full view.
 
 ## 2. Make the plan
 
-Before answering the first decision, do these in order, every game:
+When a clock is running, use the short opening in
+`skills/play-game/references/live-decisions.md`. If the runner supplies that
+reference, work from it directly. A plan provided by the game's creator takes
+precedence. Use the rest of the kingdom analysis as time permits.
+
+For a full opening analysis, do these in order:
 
 1. Read `context/strategy.md` whole and once if you haven't yet. Read
    `context/rules.md` too if a card on the board turns on a rule you aren't

@@ -235,7 +235,9 @@ Also:
   - three-pile risk: how many gains each player needs to end the game,
     treating $0 and cheap piles (especially Curses) as emptyable whenever
     opponent's reachable Buys or gainers match the pile count, and avoiding
-    dropping or feeding low piles while trailing.
+    dropping or feeding low piles while trailing. Before emptying the second
+    pile, use the “Pile endings” check in
+    `skills/play-game/references/live-decisions.md`, even when ahead.
 - Decide whether to spend or keep Coffers and Villagers for a later price
   point or a bigger turn.
 
