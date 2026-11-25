@@ -145,10 +145,10 @@ cards gained or removed since it. Don't repeat the check-in at each prompt.
 
 ## 5. Don't play everything
 
-Before ending Actions or Buys, check what remains of this turn's plan.
-Could one more legal play or gain reach a useful price, supply next
-turn's trash fodder, or score before the game ends? Count what it costs
-to trash or gain the card, then compare with passing.
+Before ending Actions or Buys, compare passing with one more legal play or
+gain. Could it reach the next useful price or score before the game ends?
+For mandatory trashing, use the “Ending a phase” check in
+`skills/play-game/references/live-decisions.md`.
 
 - Skip plays that hurt you, such as forced trashing of a card you need, or
   that help the opponent, such as a "steal or swap" attack while they hold a

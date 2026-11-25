@@ -15,6 +15,12 @@ already supplied. Revisit close calls on later turns as the clock permits.
 Plan a sequence once, then play its routine steps promptly. If the desired buy
 is offered directly and Treasure order is immaterial, select the buy.
 
+**Ending a phase.** Before passing, check unused Actions and Buys against the
+plan. Price one more play, including anything it must trash. If a recurring
+effect forces you to trash, name what the next hand can afford to lose. When
+fodder is scarce, spend a spare Buy on a cheap or free card if it can enter
+the next shuffle and protect something better. Otherwise leave it in the Supply.
+
 **Pile endings.** Before emptying the second pile in a two-player game, check
 who gets the next opportunity to end it. For their quickest third pile, count the cards left,
 Buys or gains needed, cost after discounts, and points gained by each seat. Compare those requirements with what their deck has shown it
