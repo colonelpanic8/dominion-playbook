@@ -145,6 +145,11 @@ cards gained or removed since it. Don't repeat the check-in at each prompt.
 
 ## 5. Don't play everything
 
+Before ending Actions or Buys, check what remains of this turn's plan.
+Could one more legal play or gain reach a useful price, supply next
+turn's trash fodder, or score before the game ends? Count what it costs
+to trash or gain the card, then compare with passing.
+
 - Skip plays that hurt you, such as forced trashing of a card you need, or
   that help the opponent, such as a "steal or swap" attack while they hold a
   Province, or effects that give them cards.
