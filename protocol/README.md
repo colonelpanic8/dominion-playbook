@@ -57,8 +57,8 @@ cards. Only the top card of a Supply pile can be bought or gained.
 ### Player views
 
 `index`, `name`, `vp`, and the zones `hand`, `inPlay`, `deck` (with `orderKnown: false`)
-and `discard`. `otherZones` holds the non-empty others by name: `setAside`, and mats
-(`tavern`, `island`, `nativeVillage`, `exile`). Also `owned`, `uncertain`, `unlocated`
+and `discard`. `otherZones` holds the non-empty others by name: `setAside`, `looking`
+(cards taken off a deck to look at or reveal), and mats (`tavern`, `island`, `nativeVillage`, `exile`). Also `owned`, `uncertain`, `unlocated`
 (below), `tokens` (`coffers`, `villagers`, `favors`, `debt`, `vpTokens`, `pirateShip`,
 `minusCard`, `minusCoin`, `journeyFaceUp`; zero and false values are left out),
 `adventureTokens` (token → the pile it is on, or `null`), `projects`, `states`, `boons`
@@ -67,7 +67,9 @@ kept until Clean-up, `artifacts` held, `turnsTaken`, and `counters`.
 ### Knowledge
 
 Every zone is `{count, known, unknown}`: `count` cards, of which `known` (by name, with
-how many) are identified; `unknown` are not. Deck order is never shown.
+how many) are identified; `unknown` are not. Deck order is never shown. A zone whose
+cards the seat sees where they lie may add `order`, their names in that order: `looking`
+gives them in the order they were looked at or revealed.
 
 Knowledge has **perfect recall**. A card you have seen stays known while you can follow
 it: a card revealed and put on an opponent's deck is known in their hand once they draw
